@@ -1,0 +1,113 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+
+    <!-- OttoCash -->
+    <style name="AppDialogFullScreen">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+    </style>
+
+    <style name="NoActionBarTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <!-- Font specs configuration -->
+    <!--<style name="BarlowBlack" parent="android:TextAppearance">-->
+        <!--<item name="fontPath">fonts/Barlow-Black.ttf</item>-->
+    <!--</style>-->
+
+    <!--<style name="BarlowBlackItalic" parent="android:TextAppearance">-->
+        <!--<item name="fontPath">fonts/Barlow-BlackItalic.ttf</item>-->
+    <!--</style>-->
+
+    <!--<style name="BarlowBold" parent="android:TextAppearance">-->
+        <!--<item name="fontPath">fonts/Barlow-Bold.ttf</item>-->
+    <!--</style>-->
+
+    <!--<style name="BarlowBoldItalic" parent="android:TextAppearance">-->
+        <!--<item name="fontPath">fonts/Barlow-BoldItalic.ttf</item>-->
+    <!--</style>-->
+
+    <!--<style name="ExtraBold" parent="android:TextAppearance">-->
+        <!--<item name="fontPath">fonts/Barlow-ExtraBold.ttf</item>-->
+    <!--</style>-->
+
+    <!--<style name="ExtraBoldItalic" parent="android:TextAppearance">-->
+        <!--<item name="fontPath">fonts/Barlow-ExtraBoldItalic.ttf</item>-->
+    <!--</style>-->
+
+    <!--<style name="ExtraLight" parent="android:TextAppearance">-->
+        <!--<item name="fontPath">fonts/Barlow-ExtraLight.ttf</item>-->
+    <!--</style>-->
+
+    <!--<style name="ExtraLightItalic" parent="android:TextAppearance">-->
+        <!--<item name="fontPath">fonts/Barlow-ExtraLightItalic.ttf</item>-->
+    <!--</style>-->
+
+    <!--<style name="BarlowItalic" parent="android:TextAppearance">-->
+        <!--<item name="fontPath">fonts/Barlow-Italic.ttf</item>-->
+    <!--</style>-->
+
+    <!--<style name="BarlowLight" parent="android:TextAppearance">-->
+        <!--<item name="fontPath">fonts/Barlow-Light.ttf</item>-->
+    <!--</style>-->
+
+    <!--<style name="BarlowLightItalic" parent="android:TextAppearance">-->
+        <!--<item name="fontPath">fonts/Barlow-LightItalic.ttf</item>-->
+    <!--</style>-->
+
+    <style name="BarlowMedium" parent="android:TextAppearance">
+        <item name="fontPath">fonts/Barlow-Medium.ttf</item>
+    </style>
+
+    <!--<style name="BarlowMediumItalic" parent="android:TextAppearance">-->
+        <!--<item name="fontPath">fonts/Barlow-MediumItalic.ttf</item>-->
+    <!--</style>-->
+
+    <style name="BarlowRegular" parent="android:TextAppearance">
+        <item name="fontPath">fonts/Barlow-Regular.ttf</item>
+    </style>
+
+    <style name="BarlowSemiBold" parent="android:TextAppearance">
+        <item name="fontPath">fonts/Barlow-SemiBold.ttf</item>
+    </style>
+
+    <!--<style name="BarlowSemiBoldItalic" parent="android:TextAppearance">-->
+        <!--<item name="fontPath">fonts/Barlow-SemiBoldItalic.ttf</item>-->
+    <!--</style>-->
+
+    <!--<style name="BarlowThin" parent="android:TextAppearance">-->
+        <!--<item name="fontPath">fonts/Barlow-Thin.ttf</item>-->
+    <!--</style>-->
+
+    <!--<style name="BarlowThinItalic" parent="android:TextAppearance">-->
+        <!--<item name="fontPath">fonts/Barlow-ThinItalic.ttf</item>-->
+    <!--</style>-->
+
+    <style name="RobotoBold" parent="android:TextAppearance">
+        <item name="fontPath">fonts/Roboto-Bold.ttf</item>
+    </style>
+
+    <style name="RobotoMedium" parent="android:TextAppearance">
+        <item name="fontPath">fonts/Roboto-Medium.ttf</item>
+    </style>
+
+    <style name="RobotoRegular" parent="android:TextAppearance">
+        <item name="fontPath">fonts/Roboto-Regular.ttf</item>
+    </style>
+
+
+
+</resources>

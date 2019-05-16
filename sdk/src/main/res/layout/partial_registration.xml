@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/no_hp"
+        android:textAppearance="@style/RobotoRegular"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/edtNoHp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/rounded_grey_input"
+        android:hint="@string/hp"
+        android:gravity="center_vertical"
+        android:inputType="phone"
+        android:paddingLeft="14dp"
+        android:textAppearance="@style/RobotoRegular"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/Grey_8b8b8b"
+        android:layout_marginTop="8dp"
+        android:text="@string/jika_ini_bukan"
+        android:textAppearance="@style/RobotoRegular"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:text="@string/nama_sesuai_ktp"
+        android:textAppearance="@style/RobotoRegular"
+        android:textSize="12sp" />
+
+
+    <EditText
+        android:id="@+id/edtNameKtp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/rounded_white_input"
+        android:inputType="textCapWords"
+        android:paddingLeft="14dp"
+        android:textAppearance="@style/RobotoRegular"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:text="@string/email_aktif"
+        android:textAppearance="@style/RobotoRegular"
+        android:textSize="12sp" />
+
+
+    <EditText
+        android:id="@+id/edtEmail"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/rounded_white_input"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="14dp"
+        android:textAppearance="@style/RobotoRegular"
+        android:textSize="12sp" />
+
+</LinearLayout>

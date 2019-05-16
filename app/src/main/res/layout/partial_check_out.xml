@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:gravity="center_vertical"
+                android:text="Sub Total"
+                android:textAppearance="@style/BarlowRegular"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center_vertical"
+                android:text="Shipping Fee"
+                android:textAppearance="@style/BarlowRegular"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/edtSubTotal"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@color/color_white"
+                android:gravity="center_vertical"
+                android:hint="125000"
+                android:inputType="number"
+                android:paddingEnd="5dp"
+                android:cursorVisible="false"
+                android:textAlignment="textEnd"
+                android:textAppearance="@style/BarlowRegular"
+                android:textSize="12sp"
+                tools:ignore="RtlCompat" />
+
+            <TextView
+                android:id="@+id/edtShippingFee"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center_vertical"
+                android:hint="Gratis"
+                android:inputType="number"
+                android:paddingEnd="5dp"
+                android:textAlignment="textEnd"
+                android:background="@color/white"
+                android:textAppearance="@style/BarlowRegular"
+                android:textSize="12sp"
+                tools:ignore="RtlCompat" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@color/Grey_e5e5e5"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12sp"
+            android:layout_marginTop="12sp"
+            android:layout_marginBottom="12sp"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:text="GRAND TOTAL"
+            android:textAppearance="@style/BarlowSemiBold"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvGrandTotal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12sp"
+            android:background="@color/Grey_e5e5e5"
+            android:layout_marginBottom="12sp"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:paddingEnd="5dp"
+            android:textAppearance="@style/BarlowSemiBold"
+            android:textColor="@color/Red_d04a55"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+</LinearLayout>

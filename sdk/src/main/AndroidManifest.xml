@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.otto.sdk">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application android:name=".OttoCashSdk">
+        <activity
+            android:name=".view.activities.SdkActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activities.account.PinLoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activities.features.DashboardActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activities.features.payment.CheckOutSuccessActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activities.features.payment.PinActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activities.features.payment.PinCheckOutActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activities.features.payment.ReviewCheckoutActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activities.account.registration.RegistrationSuccessActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activities.account.registration.OtpActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activities.account.OtpLoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activities.account.registration.SetPinActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activities.account.registration.RegistrationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activities.account.activation.ActivationSuccessActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activities.account.activation.ActivationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activities.features.payment.PaymentFailedActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activities.features.payment.PaymentSuccessActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activities.features.topup.TopUpActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activities.features.payment.PaymentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activities.features.payment.qr.PayWithQr"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activities.account.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activities.account.activation.ActivationBlockedActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activities.features.TermAndConditionActivity"
+            android:screenOrientation="portrait" />
+    </application>
+
+</manifest>

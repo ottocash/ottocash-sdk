@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.activities.account.LoginActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/Black_81868a">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Login"
+            android:textAppearance="@style/BarlowSemiBold"
+            android:textColor="@color/color_white"
+            android:textSize="14sp" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/img_header"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:background="@mipmap/ic_otto_cash" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:text="Masuk Akun"
+            android:textAppearance="@style/RobotoMedium"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="No Handphone"
+            android:textAppearance="@style/RobotoMedium"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/edt_phone"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/rounded_white_input"
+            android:inputType="phone"
+            android:paddingLeft="14dp"
+            android:textAppearance="@style/RobotoRegular"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="Kode PIN"
+            android:textAppearance="@style/RobotoMedium"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/edt_pin"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/rounded_white_input"
+            android:inputType="numberPassword"
+            android:paddingLeft="14dp"
+            android:textAppearance="@style/RobotoRegular"
+            android:textSize="12sp" />
+
+        <!--<TextView-->
+        <!--android:id="@+id/tv_lupa_pin"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:layout_marginBottom="25dp"-->
+        <!--android:text="Lupa Password"-->
+        <!--android:textAlignment="center"-->
+        <!--android:textAppearance="@style/RobotoRegular"-->
+        <!--android:textColor="@color/Red_d04a55"-->
+        <!--android:textSize="15sp" />-->
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@color/Red_d04a55"
+            android:gravity="center"
+            android:text="Masuk"
+            android:textAppearance="@style/RobotoBold"
+            android:textColor="@color/White_ffffff"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+
+</LinearLayout>
