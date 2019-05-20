@@ -13,7 +13,7 @@ import com.otto.sdk.model.db.User;
 import com.otto.sdk.presenter.dao.CheckPhoneNumberDao;
 import com.otto.sdk.view.activities.account.activation.ActivationActivity;
 import com.otto.sdk.view.activities.account.registration.RegistrationActivity;
-import com.otto.sdk.view.activities.features.DashboardActivity;
+import com.otto.sdk.view.activities.dashboard.DashboardActivity;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.base.BaseDao;
@@ -22,8 +22,6 @@ import app.beelabs.com.codebase.support.util.CacheUtil;
 import retrofit2.Response;
 
 public class SdkActivity extends BaseActivity {
-
-    public static String PackageName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,4 +1,4 @@
-package com.otto.sdk.support;
+package com.otto.sdk.view.component.support;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

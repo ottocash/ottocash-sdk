@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.otto.sdk.R;
-import com.otto.sdk.view.activities.features.DashboardActivity;
+import com.otto.sdk.view.activities.dashboard.DashboardActivity;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 

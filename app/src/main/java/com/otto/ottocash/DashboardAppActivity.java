@@ -41,7 +41,7 @@ public class DashboardAppActivity extends SdkActivity {
         OttoSDK.init(this, phoneNumber);*/
 
         PackageName = (this.getPackageName() + ".DashboardAppActivity");
-        CacheUtil.putPreferenceString(String.valueOf(IConfig.SESSION_PACKAGE_NAME), PackageName, DashboardAppActivity.this);
+        CacheUtil.putPreferenceString(IConfig.SESSION_PACKAGE_NAME, PackageName, DashboardAppActivity.this);
         setupAccount();
         EmoneyBalanceWidget();
         onCallApiCheckPhoneNumber();
@@ -96,6 +96,6 @@ public class DashboardAppActivity extends SdkActivity {
         Intent intent = new Intent(DashboardAppActivity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         DashboardAppActivity.this.startActivity(intent);
-
+        finish();
     }
 }

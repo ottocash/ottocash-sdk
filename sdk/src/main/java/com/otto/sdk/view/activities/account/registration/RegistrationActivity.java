@@ -16,9 +16,9 @@ import android.widget.Toast;
 
 import com.otto.sdk.IConfig;
 import com.otto.sdk.R;
-import com.otto.sdk.view.activities.Util;
+import com.otto.sdk.view.component.support.Util;
 import com.otto.sdk.view.activities.account.formValidation.FormValidation;
-import com.otto.sdk.view.activities.features.TermAndConditionActivity;
+import com.otto.sdk.view.activities.tac.TermAndConditionActivity;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.support.util.CacheUtil;
@@ -100,7 +100,7 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
 
 
     private void initContent() {
-        String phone = CacheUtil.getPreferenceString(String.valueOf(IConfig.SESSION_PHONE), RegistrationActivity.this);
+        String phone = CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, RegistrationActivity.this);
         edtNoHp.setText(phone);
     }
 

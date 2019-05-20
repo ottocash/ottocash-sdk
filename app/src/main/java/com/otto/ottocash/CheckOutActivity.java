@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.model.api.response.InquiryResponse;
 import com.otto.sdk.support.UiUtil;
-import com.otto.sdk.view.activities.features.payment.ReviewCheckoutActivity;
+import com.otto.sdk.view.activities.payment.ReviewCheckoutActivity;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.support.util.CacheUtil;
