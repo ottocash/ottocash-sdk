@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.R;
 import com.otto.sdk.view.activities.account.formValidation.FormValidation;
+import com.otto.sdk.view.activities.account.login.PinLoginActivity;
 import com.otto.sdk.view.activities.account.registration.SetPinActivity;
 import com.otto.sdk.view.component.support.Util;
 
@@ -67,7 +68,7 @@ public class ActivationActivity extends BaseActivity implements View.OnClickList
             public void onClick(View v) {
 
                 if (isFormValidationSuccess) {
-                    Intent intent = new Intent(ActivationActivity.this, SetPinActivity.class);
+                    Intent intent = new Intent(ActivationActivity.this, PinLoginActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     finish();
