@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">OttoSdk</string>
+    <string name="app_name">OttoCash-SDK</string>
     <string name="aktivasi_akun">Aktivasi Akun</string>
     <string name="desc_activation">Aktivasi Akun 081 6*** *4423  OttoCash Kamu di MITRAKU ? </string>
     <string name="call_cs_ilotte">Apabila Anda ingin menghubungkan akun OttoCash Anda dengan akun Mitraku silahkan klik tombol Aktifkan </string>
@@ -25,13 +25,13 @@
     <string name="selesai">Selesai</string>
     <string name="otentifikasi_akun">Otentifikasi Akun</string>
     <string name="masukkan_6_digit_kode_otp">Masukkan 6 Digit Kode OTP</string>
-    <string name="_6_digit_kode_otp">6 Digit kode OTP telah dikirimkan ke nomor 0812 xxxx xx23, Silahkan cek HP Anda</string>
+    <string name="_6_digit_kode_otp">6 Digit kode OTP telah dikirimkan ke nomor 0812 xxxx xx23, silahkan cek HP Anda</string>
     <string name="tidak_menerima">Tidak menerima kode verifikasi ? Anda bisa mencoba meminta OTP lagi setelah waktu habis</string>
     <string name="register_success">Registrasi Akun OttoCash berhasil</string>
     <string name="register_akun_berhasil">Registrasi Akun OttoCash berhasil</string>
     <string name="review_payment">Review Payment</string>
     <string name="silahkan_masukkan">Masukkan 6 digit pin OttoCash Anda</string>
-    <string name="masukkan_pin">Masukkan Pin Ottocash</string>
+    <string name="masukkan_pin">Masukkan Pin OttoCash</string>
     <string name="check_out_berhasil">Check Out Berhasil</string>
     <string name="cek_status_barang">Cek Status Barang</string>
     <string name="barang_kamu">Barang kamu akan segera kami kirim, harap bersabar. Anda bisa mengecek status barang Anda pada halaman MitraKu atau klik tombol dibawah</string>
@@ -63,7 +63,9 @@
     <string name="atm_2">2. Pilih menu transfer</string>
     <string name="atm_3">3. Pilih transfer ke bank lain</string>
     <string name="atm_4"><![CDATA[4. Masukkan kode Bank Ina Perdana <strong> <font color="#056fb6">&nbsp;(513)</font></strong>]]></string>
-    <string name="atm_5"><![CDATA[5. Masukkan nomor virtual account Kamu : <strong><font color="#056fb6">&nbsp; 9905508123456789</font></strong>]]></string>
+
+    <string name="atm_5">5. Masukkan nomor virtual account Kamu : </string>
+
     <string name="atm_6">6. Masukkan nominal yang diinginkan</string>
     <string name="atm_7">7. Konfirmasi transaksi telah berhasil.</string>
 
@@ -72,10 +74,12 @@
     <string name="mbank_2">2. Pilih menu transfer antar Bank/Bank lain</string>
     <string name="mbank_3"><![CDATA[3. Pilih <strong> <font color="#056fb6">&nbsp;Bank Ina Perdana</font></strong> sebagai bank tujuan transfer]]></string>
     <string name="mbank_4">4. Pilih menu transfer online antar Bank / Bank lain</string>
-    <string name="mbank_5"><![CDATA[5. Masukkan nomor virtual account Kamu : <strong> <font color="#056fb6">&nbsp;9905508123456789</font></strong>]]></string>
+
+    <string name="mbank_5">5. Masukkan nomor virtual account Kamu : </string>
+
     <string name="mbank_6">6. Masukkan nominal yang diinginkan</string>
     <string name="mbank_7">7. Konfirmasi transaksi telah berhasil.</string>
-    <string name="otp_resend">Tidak menerima kode verifikasi? </string>
+    <string name="otp_resend">Tidak menerima kode verifikasi ?</string>
     <string name="req_money">Request\nMoney</string>
     <string name="tf_teman">Transfer\nTeman</string>
     <string name="sell_pay">Pembelian/\nPembayaran</string>
@@ -88,9 +92,9 @@
         ketentuan yang berlaku</string>
 
     <string name="dialog_title">Khusus Pengguna OttoCash Plus</string>
-    <string name="dialog_msg">Fitur ini hanya tersedia bagi pengguna Ottocash Plus. Lakukan upgrade di aplikasi OttoCash</string>
+    <string name="dialog_msg">Fitur ini hanya tersedia bagi pengguna OttoCash Plus. Lakukan upgrade di aplikasi OttoCash</string>
     <string name="dialog_btn_close">Tutup</string>
-    <string name="kirim_ulang"><u>Kirim Ulang</u></string>
+    <string name="kirim_ulang"><u> Kirim Ulang</u></string>
 
     <string name="server_error">Tidak dapat terhubung ke server. Silahkan Coba lagi</string>
     <string name="close">Tutup</string>

@@ -190,7 +190,7 @@ public class DashboardActivity extends BaseActivity {
     public void onBackPressed() {
         try {
 
-            String PackageName = CacheUtil.getPreferenceString(String.valueOf(IConfig.SESSION_PACKAGE_NAME),
+            String PackageName = CacheUtil.getPreferenceString(IConfig.SESSION_PACKAGE_NAME,
                     DashboardActivity.this);
 
             Intent intent = new Intent(DashboardActivity.this, Class.forName(PackageName));

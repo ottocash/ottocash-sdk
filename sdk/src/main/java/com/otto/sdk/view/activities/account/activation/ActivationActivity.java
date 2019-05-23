@@ -53,7 +53,7 @@ public class ActivationActivity extends BaseActivity implements View.OnClickList
 
     private void initContent() {
 
-        phone = CacheUtil.getPreferenceString(String.valueOf(IConfig.SESSION_PHONE), ActivationActivity.this);
+        phone = CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, ActivationActivity.this);
         tvDesc.setText("Aktivasi Akun " + phone + " OttoCash Kamu di MITRAKU ?");
 
         ivBack.setOnClickListener(new View.OnClickListener() {

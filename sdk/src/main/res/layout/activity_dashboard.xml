@@ -11,13 +11,14 @@
         android:layout_gravity="top"
         android:background="@color/Black_81868a">
 
-        <ImageView
+        <ImageButton
             android:id="@+id/ivBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="20dp"
-            android:background="@mipmap/ic_back" />
+            android:background="@mipmap/ic_back"
+            android:padding="9dp" />
 
         <TextView
             android:id="@+id/title"
@@ -25,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="16dp"
-            android:text="OttoCash Plus"
+            android:text="OttoCash Reguler"
             android:textAppearance="@style/BarlowSemiBold"
             android:textColor="@color/White_ffffff"
             android:textSize="14sp" />
@@ -326,7 +327,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Senin-Jumat 08.00 - 09.00"
+                                android:text="Senin-Jumat 08:00 - 09:00"
                                 android:textAppearance="@style/BarlowMedium"
                                 android:textColor="@color/Black_484848"
                                 android:textSize="12sp" />
