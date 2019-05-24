@@ -13,13 +13,10 @@ import com.otto.sdk.model.api.request.CreateTokenRequest;
 import com.otto.sdk.model.api.response.CheckPhoneNumberResponse;
 import com.otto.sdk.model.api.response.ClientsResponse;
 import com.otto.sdk.model.api.response.CreateTokenResponse;
-import com.otto.sdk.model.db.User;
 import com.otto.sdk.presenter.dao.CheckPhoneNumberDao;
-import com.otto.sdk.presenter.dao.SecurityDao;
 import com.otto.sdk.view.activities.account.activation.ActivationActivity;
 import com.otto.sdk.view.activities.account.registration.RegistrationActivity;
 import com.otto.sdk.view.activities.dashboard.DashboardActivity;
-import com.otto.sdk.view.activities.payment.PinActivity;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.base.BaseDao;
