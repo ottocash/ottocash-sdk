@@ -1,6 +1,7 @@
 package com.otto.sdk.model.api.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import app.beelabs.com.codebase.base.response.BaseResponse;
 
@@ -39,6 +40,7 @@ public class CreateTokenResponse extends BaseResponse {
 
         @JsonIgnoreProperties(ignoreUnknown = true)
         public class Client {
+            @JsonProperty("access_token")
             private String accessToken;
             private int createdAt;
             private String tokenType;

@@ -1,16 +1,13 @@
 package com.otto.sdk.presenter.dao;
 
-import android.content.Context;
-
 import com.otto.sdk.model.api.Api;
 import com.otto.sdk.model.api.request.CheckPhoneNumberRequest;
-import com.otto.sdk.model.db.User;
+import com.otto.sdk.model.api.request.ClientsRequest;
+import com.otto.sdk.model.api.request.CreateTokenRequest;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.base.BaseDao;
 import retrofit2.Callback;
-
-import static com.otto.sdk.presenter.dao.AppDao.Database.setupRealm;
 
 public class CheckPhoneNumberDao extends BaseDao {
     public CheckPhoneNumberDao(Object obj) {
@@ -21,26 +18,14 @@ public class CheckPhoneNumberDao extends BaseDao {
         Api.onCheckPhoneNumber(model, ac, callback);
     }
 
-    public static User save(User user, Context context) {
 
-        setupRealm(context);
-        AppDao.Database.deleteRealm(User.class);
-
-        AppDao.Database.saveToRealm(user);
-
-        return user;
-
+    public void onClients(ClientsRequest model, BaseActivity ac, Callback callback) {
+        Api.onClients(model, ac, callback);
     }
 
-    public static User getUserExisting(Context context) {
-        setupRealm(context);
-        User user;
-        try {
-            user = (User) AppDao.Database.getCollectionRealm(User.class).get(0);
-        } catch (Exception e) {
-            user = null;
-        }
-        return user;
+    public void onCreateToken(CreateTokenRequest model, BaseActivity ac, Callback callback) {
+        Api.onCreateToken(model, ac, callback);
     }
+
 
 }

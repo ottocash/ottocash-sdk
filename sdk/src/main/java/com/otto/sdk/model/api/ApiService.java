@@ -53,11 +53,11 @@ public interface ApiService {
                                          @Body OtpRequest otpRequest);
 
     @POST("v1/payment/journal")
-    Call<ReviewCheckOutResponse> callApiReviewCheckOut(@HeaderMap Map<String, String> headers,
+    Call<ReviewCheckOutResponse> callApiReviewCheckOut(@HeaderMap Map<String, Object> headers,
                                                        @Body ReviewCheckOutRequest reviewCheckOutRequest);
 
     @POST("v1/payment/validate")
-    Call<PaymentValidateResponse> callApiPaymentValidate(@HeaderMap Map<String, String> headers,
+    Call<PaymentValidateResponse> callApiPaymentValidate(@HeaderMap Map<String, Object> headers,
                                                          @Body PaymentValidateRequest paymentValidateRequest);
 
 

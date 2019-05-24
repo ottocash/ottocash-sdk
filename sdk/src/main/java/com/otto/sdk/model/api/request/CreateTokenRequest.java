@@ -15,6 +15,10 @@ public class CreateTokenRequest {
         this.clientSecret = clientSecret;
     }
 
+    public CreateTokenRequest() {
+
+    }
+
     public void setGrantType(String grantType) {
         this.grantType = grantType;
     }

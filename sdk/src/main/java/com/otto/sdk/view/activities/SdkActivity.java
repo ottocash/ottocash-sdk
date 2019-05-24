@@ -8,12 +8,18 @@ import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCashSdk;
 import com.otto.sdk.R;
 import com.otto.sdk.model.api.request.CheckPhoneNumberRequest;
+import com.otto.sdk.model.api.request.ClientsRequest;
+import com.otto.sdk.model.api.request.CreateTokenRequest;
 import com.otto.sdk.model.api.response.CheckPhoneNumberResponse;
+import com.otto.sdk.model.api.response.ClientsResponse;
+import com.otto.sdk.model.api.response.CreateTokenResponse;
 import com.otto.sdk.model.db.User;
 import com.otto.sdk.presenter.dao.CheckPhoneNumberDao;
+import com.otto.sdk.presenter.dao.SecurityDao;
 import com.otto.sdk.view.activities.account.activation.ActivationActivity;
 import com.otto.sdk.view.activities.account.registration.RegistrationActivity;
 import com.otto.sdk.view.activities.dashboard.DashboardActivity;
+import com.otto.sdk.view.activities.payment.PinActivity;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.base.BaseDao;
@@ -31,24 +37,27 @@ public class SdkActivity extends BaseActivity {
     }
 
 
-    public void onCallApiCheckPhoneNumber() {
+    public void initializeSDK() {
+
         final CheckPhoneNumberDao dao = new CheckPhoneNumberDao(this);
         final CheckPhoneNumberRequest model = new CheckPhoneNumberRequest();
+        final ClientsRequest clients = new ClientsRequest();
 
-        String phone = CacheUtil.getPreferenceString(String.valueOf(IConfig.SESSION_PHONE), SdkActivity.this);
+        String phone = CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, SdkActivity.this);
         model.setPhone(phone);
-
-        User user = new User(model.getPhone());
-        CheckPhoneNumberDao.save(user, getBaseContext());
+        clients.setEmail("ardi@clappingape.com");
 
         showApiProgressDialog(OttoCashSdk.getAppComponent(), new CheckPhoneNumberDao(this) {
             @Override
             public void call() {
                 dao.onCheckPhoneNumber(model, SdkActivity.this, BaseDao.getInstance(SdkActivity.this,
                         IConfig.KEY_API_CHECK_PHONE_NUMBER).callback);
+                dao.onClients(clients, SdkActivity.this, BaseDao.getInstance(SdkActivity.this,
+                        IConfig.KEY_API_CLIENTS).callback);
             }
         });
     }
+
 
 
     @Override
@@ -68,8 +77,55 @@ public class SdkActivity extends BaseActivity {
                             Toast.LENGTH_LONG).show();
                 }
             }
+            if (responseCode == IConfig.KEY_API_CLIENTS) {
+                ClientsResponse clientData = (ClientsResponse) br;
+                if (clientData.getMeta().getCode() == 200) {
+
+                    String id = clientData.getData().getClient().getId();
+                    CacheUtil.putPreferenceString(IConfig.SESSION_ID, id, SdkActivity.this);
+                    String secret = clientData.getData().getClient().getSecret();
+                    CacheUtil.putPreferenceString(IConfig.SESSION_SECRET, secret, SdkActivity.this);
+
+                    onCreateToken();
+
+                } else {
+                    Toast.makeText(this, clientData.getMeta().getCode() + ":" + clientData.getMeta().getMessage(),
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+            if (responseCode == IConfig.KEY_API_TOKEN) {
+                CreateTokenResponse createToken = (CreateTokenResponse) br;
+                if (createToken.getMeta().getCode() == 200) {
+
+                    String accessToken = createToken.getData().getClient().getAccessToken();
+                    CacheUtil.putPreferenceString(IConfig.SESSION_ACCESS_TOKEN, accessToken, SdkActivity.this);
+                } else {
+                    Toast.makeText(this, createToken.getMeta().getCode() + ":" + createToken.getMeta().getMessage(),
+                            Toast.LENGTH_LONG).show();
+                }
+            }
         }
     }
+
+    public void onCreateToken() {
+        final CheckPhoneNumberDao dao = new CheckPhoneNumberDao(this);
+        final CreateTokenRequest token = new CreateTokenRequest();
+
+        token.setGrantType("client_credentials");
+        String id = CacheUtil.getPreferenceString(IConfig.SESSION_ID, SdkActivity.this);
+        token.setClientId(id);
+        String secret = CacheUtil.getPreferenceString(IConfig.SESSION_SECRET, SdkActivity.this);
+        token.setClientSecret(secret);
+
+        showApiProgressDialog(OttoCashSdk.getAppComponent(), new CheckPhoneNumberDao(this) {
+            @Override
+            public void call() {
+                dao.onCreateToken(token, SdkActivity.this, BaseDao.getInstance(SdkActivity.this,
+                        IConfig.KEY_API_TOKEN).callback);
+            }
+        });
+    }
+
 
     public void goDashboardSDK() {
         Intent intent = new Intent(SdkActivity.this, DashboardActivity.class);

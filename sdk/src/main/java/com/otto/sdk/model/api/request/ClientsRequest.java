@@ -7,7 +7,11 @@ public class ClientsRequest {
 		this.email = email;
 	}
 
-	public void setEmail(String email){
+    public ClientsRequest() {
+
+    }
+
+    public void setEmail(String email){
 		this.email = email;
 	}
 

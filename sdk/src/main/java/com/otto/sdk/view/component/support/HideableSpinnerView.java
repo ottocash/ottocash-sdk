@@ -15,9 +15,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.otto.sdk.R;
-import com.otto.sdk.model.api.adapter.SpinnerAdapter;
+import com.otto.sdk.view.adapter.SpinnerAdapter;
 import com.otto.sdk.model.api.misc.SecurityQuestionsItem;
-import com.otto.sdk.view.component.support.Util;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
 

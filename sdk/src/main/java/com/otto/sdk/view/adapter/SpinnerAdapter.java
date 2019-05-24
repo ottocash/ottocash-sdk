@@ -1,4 +1,4 @@
-package com.otto.sdk.model.api.adapter;
+package com.otto.sdk.view.adapter;
 
 import android.content.Context;
 

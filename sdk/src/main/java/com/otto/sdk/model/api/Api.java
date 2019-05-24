@@ -42,16 +42,25 @@ public class Api extends BaseApi {
         return map;
     }
 
-    private static Map<String, String> initHeaderPartner(Context context) {
-        Map<String, String> map = new HashMap<>();
-        map.put("Authorization", "Bearer" + CacheUtil.getPreferenceString(IConfig.SESSION_ACCESS_TOKEN, OttoCashSdk.getContext()));
-        map.put("Cache-Control", "no-store");
+    private static Map<String, Object> initHeaderForRequest(Context context) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("Authorization", "Bearer " + CacheUtil.getPreferenceString(IConfig.SESSION_ACCESS_TOKEN, context));
+        map.put("Accept", "application/json");
         map.put("Content-Type", "application/json");
-        map.put("Institution-ID", "OTTOCASH");
-        map.put("Partner-ID", "MRMONTIR");
 
         return map;
     }
+
+//    private static Map<String, String> initHeaderPartner(Context context) {
+//        Map<String, String> map = new HashMap<>();
+//        map.put("Authorization", "Bearer " + CacheUtil.getPreferenceString(IConfig.SESSION_ACCESS_TOKEN, context));
+//        map.put("Cache-Control", "no-store");
+//        map.put("Content-Type", "application/json");
+//        map.put("Institution-ID", "OTTOCASH");
+//        map.put("Partner-ID", "MRMONTIR");
+//
+//        return map;
+//    }
 
     private static ApiService initApiDomain(Context context) {
         getInstance().setApiDomain(IConfig.API_BASE_URL);
@@ -81,11 +90,11 @@ public class Api extends BaseApi {
     }
 
     synchronized public static void onReviewCheckOut(ReviewCheckOutRequest reviewCheckOutRequest, Context context, Callback callback) {
-        initApiDomain(context).callApiReviewCheckOut(initHeader(context), reviewCheckOutRequest).enqueue((Callback<ReviewCheckOutResponse>) callback);
+        initApiDomain(context).callApiReviewCheckOut(initHeaderForRequest(context), reviewCheckOutRequest).enqueue((Callback<ReviewCheckOutResponse>) callback);
     }
 
     synchronized public static void onPaymentValidate(PaymentValidateRequest paymentValidateRequest, Context context, Callback callback) {
-        initApiDomain(context).callApiPaymentValidate(initHeader(context), paymentValidateRequest).enqueue((Callback<PaymentValidateResponse>) callback);
+        initApiDomain(context).callApiPaymentValidate(initHeaderForRequest(context), paymentValidateRequest).enqueue((Callback<PaymentValidateResponse>) callback);
     }
 
     synchronized public static void onCheckPhoneNumber(CheckPhoneNumberRequest checkPhoneNumberRequest, Context context, Callback callback) {

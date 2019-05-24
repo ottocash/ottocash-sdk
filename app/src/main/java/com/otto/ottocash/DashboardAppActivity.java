@@ -44,7 +44,7 @@ public class DashboardAppActivity extends SdkActivity {
         CacheUtil.putPreferenceString(IConfig.SESSION_PACKAGE_NAME, PackageName, DashboardAppActivity.this);
         setupAccount();
         EmoneyBalanceWidget();
-        onCallApiCheckPhoneNumber();
+        initializeSDK();
     }
 
     private void EmoneyBalanceWidget() {
