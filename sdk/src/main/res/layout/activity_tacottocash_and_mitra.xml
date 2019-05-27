@@ -23,7 +23,7 @@
             android:layout_gravity="center"
             android:layout_margin="16dp"
             android:gravity="center"
-            android:text="Syarat Dan Ketentuan Dengan OttoCash dan Mitra"
+            android:text="TAC OttoCash dan Mitra"
             android:textAppearance="@style/BarlowSemiBold"
             android:textColor="@color/White_ffffff"
             android:textSize="14sp" />
