@@ -16,6 +16,7 @@ import com.otto.sdk.model.api.response.InquiryResponse;
 import com.otto.sdk.presenter.dao.InquiryDao;
 import com.otto.sdk.support.UiUtil;
 import com.otto.sdk.view.activities.tac.TACOttoCashActivity;
+import com.otto.sdk.view.activities.tac.TACOttocashAndMitraActivity;
 import com.otto.sdk.view.component.dialog.CustomDialog;
 import com.otto.sdk.view.component.support.Util;
 import com.otto.sdk.view.activities.payment.qr.PayWithQr;
@@ -98,7 +99,7 @@ public class DashboardActivity extends BaseActivity {
         webView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DashboardActivity.this, TACOttoCashActivity.class);
+                Intent intent = new Intent(DashboardActivity.this, TACOttocashAndMitraActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 DashboardActivity.this.startActivity(intent);
             }

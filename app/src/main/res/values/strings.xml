@@ -80,7 +80,7 @@
     <string name="tf_teman">Transfer\nTeman</string>
     <string name="sell_pay">Pembelian/\nPembayaran</string>
     <string name="history_transaction">History\nTransaksi</string>
-    <string name="syarat_ketentuan"><![CDATA[<u><font color="#d04a55">&nbsp;Syarat dan Ketentuan</font></u>]]></string>
+    <string name="syarat_ketentuan"><![CDATA[<u><font color="#056fb6">&nbsp;Syarat dan Ketentuan</font></u>]]></string>
 
     <string name="title_activity_term_and_condition">Syarat dan Ketentuan</string>
 

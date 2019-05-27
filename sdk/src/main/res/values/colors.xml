@@ -6,6 +6,7 @@
     
     
     //Black
+    <color name="Black_000000">#000000</color>
     <color name="Black_54585b">#54585b</color>
     <color name="Black_81868a">#81868a</color>
     <color name="Black_484848">#484848</color>

@@ -1,18 +1,21 @@
 package com.otto.sdk.view.activities.topup;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.bottomappbar.BottomAppBar;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
 import android.view.View;
 import android.widget.TextView;
 
 import com.otto.sdk.IConfig;
 import com.otto.sdk.R;
-import com.otto.sdk.view.activities.account.activation.ActivationActivity;
-import com.otto.sdk.view.component.support.Util;
 import com.otto.sdk.view.activities.dashboard.DashboardActivity;
+import com.otto.sdk.view.component.support.Util;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.support.util.CacheUtil;
@@ -25,8 +28,6 @@ public class TopUpActivity extends BaseActivity {
     TextView tvAtm4;
     TextView tvAtm5;
 
-    Context context;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,21 +39,28 @@ public class TopUpActivity extends BaseActivity {
 
     private void initComponent() {
 
-        String phone = CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, TopUpActivity.this);
-
-
         btnBottom = findViewById(R.id.btnBottom);
         tvAtm4 = findViewById(R.id.tvAtm4);
         tvAtm5 = findViewById(R.id.tvAtm5);
-
         tvMbank3 = findViewById(R.id.tvMbank3);
         tvMbank5 = findViewById(R.id.tvMbank5);
-
         tvAtm4.setText(Util.getHTMLContent(getString(R.string.atm_4)));
-        tvAtm5.setText((getString(R.string.atm_5) + phone));
         tvMbank3.setText(Util.getHTMLContent(getString(R.string.mbank_3)));
 
-        tvMbank5.setText((getString(R.string.mbank_5) + phone));
+        String phone = CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, TopUpActivity.this);
+        SpannableStringBuilder builder = new SpannableStringBuilder();
+
+        String black = "5. Masukkan nomor virtual account Kamu : ";
+        SpannableString blackSpannable = new SpannableString(black);
+        blackSpannable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.Black_000000)), 0, black.length(), 0);
+        builder.append(blackSpannable);
+
+        SpannableString blueSpannable = new SpannableString(phone);
+        blueSpannable.setSpan(new StyleSpan(Typeface.BOLD), 0, phone.length(), 0);
+        blueSpannable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.Blue_056fb6)), 0, phone.length(), 0);
+        builder.append(blueSpannable);
+        tvAtm5.setText(builder, TextView.BufferType.SPANNABLE);
+        tvMbank5.setText(builder, TextView.BufferType.SPANNABLE);
     }
 
     private void initContent() {

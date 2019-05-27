@@ -15,6 +15,9 @@ import com.otto.sdk.IConfig;
 import com.otto.sdk.R;
 import com.otto.sdk.view.activities.account.formValidation.FormValidation;
 import com.otto.sdk.view.activities.account.login.PinLoginActivity;
+import com.otto.sdk.view.activities.account.registration.RegistrationActivity;
+import com.otto.sdk.view.activities.tac.TACMitraActivity;
+import com.otto.sdk.view.activities.tac.TACOttoCashActivity;
 import com.otto.sdk.view.component.support.Util;
 
 import app.beelabs.com.codebase.base.BaseActivity;
@@ -60,6 +63,24 @@ public class ActivationActivity extends BaseActivity implements View.OnClickList
 
         phone = CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, ActivationActivity.this);
         tvDesc.setText("Aktivasi Akun " + phone + " OttoCash Kamu di MITRAKU ?");
+
+        tvTACOttoCash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ActivationActivity.this, TACOttoCashActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+        });
+
+        tvTACMitra.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ActivationActivity.this, TACMitraActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+        });
 
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
