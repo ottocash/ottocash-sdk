@@ -59,12 +59,6 @@ public class SetPinActivity extends BaseActivity {
     private boolean isFormValidationSuccess = false;
     private RegisterRequest model;
 
-    //Clients
-    private ClientsRequest model_client;
-
-    //CreateToken
-    private CreateTokenRequest model_token;
-
     //Security
     private boolean isSelectedSecurity;
 
@@ -76,8 +70,7 @@ public class SetPinActivity extends BaseActivity {
         initComponent();
         initContent();
 
-        //Client
-        onCallApiClients();
+        onCallApiSecurityQuestion();
     }
 
     private void initComponent() {
@@ -146,47 +139,10 @@ public class SetPinActivity extends BaseActivity {
         });
     }
 
-    //Client
-    private void onCallApiClients() {
-        final ClientsDao dao = new ClientsDao(this);
-        model_client = new ClientsRequest(CacheUtil.getPreferenceString(IConfig.SESSION_EMAIL, SetPinActivity.this));
 
-        showApiProgressDialog(OttoCashSdk.getAppComponent(), new ClientsDao(this) {
-            @Override
-            public void call() {
-                dao.onClients(model_client, SetPinActivity.this, BaseDao.getInstance(SetPinActivity.this,
-                        IConfig.KEY_API_CLIENTS).callback);
-            }
-        });
-
-    }
-
-    //CreateToken
-    private void onCallApiCreateToken() {
-
-        final CreateTokenDao dao = new CreateTokenDao(this);
-        model_token = new CreateTokenRequest(
-                CacheUtil.getPreferenceString(SESSION_ID, SetPinActivity.this),
-                CacheUtil.getPreferenceString(SESSION_SECRET, SetPinActivity.this));
-
-        model_token.setGrantType("client_credentials");
-
-        showApiProgressDialog(OttoCashSdk.getAppComponent(), new CreateTokenDao(this) {
-            @Override
-            public void call() {
-                dao.onCreateToken(model_token, SetPinActivity.this, BaseDao.getInstance(SetPinActivity.this,
-                        IConfig.KEY_API_TOKEN).callback);
-            }
-        });
-
-
-    }
-
-    //SecurityQuestion
     private void onCallApiSecurityQuestion() {
         final SecurityDao dao = new SecurityDao(this);
         dao.securityQuestionDAO(BaseDao.getInstance(this, 200).callback);
-        ProgressDialogComponent.showProgressDialog(this, "Loading", false);
     }
 
 
@@ -195,44 +151,12 @@ public class SetPinActivity extends BaseActivity {
         super.onApiResponseCallback(br, responseCode, response);
         if (response.isSuccessful()) {
 
-            //Clients
-            if (responseCode == IConfig.KEY_API_CLIENTS) {
-                ClientsResponse data = (ClientsResponse) br;
-                if (data.getMeta().getCode() == 200) {
-                    String email = data.getData().getClient().getEmail();
-                    String id = data.getData().getClient().getId();
-                    String secret = data.getData().getClient().getSecret();
-                    CacheUtil.putPreferenceString(IConfig.SESSION_EMAIL, email, SetPinActivity.this);
-                    CacheUtil.putPreferenceString(IConfig.SESSION_ID, id, SetPinActivity.this);
-                    CacheUtil.putPreferenceString(IConfig.SESSION_SECRET, secret, SetPinActivity.this);
 
-                    onCallApiCreateToken();
-
-                }
-
-            }
-
-            //CreateToken
-            if (responseCode == IConfig.KEY_API_TOKEN) {
-                CreateTokenResponse data = (CreateTokenResponse) br;
-                if (data.getMeta().getCode() == 200) {
-                    String access_token = data.getData().getClient().getAccessToken();
-                    String token_type = data.getData().getClient().getTokenType();
-                    int expire_in = data.getData().getClient().getExpiresIn();
-                    int created_at = data.getData().getClient().getCreatedAt();
-
-                    CacheUtil.putPreferenceString(IConfig.SESSION_ACCESS_TOKEN, access_token, SetPinActivity.this);
-                    onCallApiSecurityQuestion();
-                }
-            }
-
-            //SecurityQuestion
             if (responseCode == IConfig.KEY_API_SECURITY) {
                 List<SecurityQuestionsItem> questionsItems;
                 SecurityQuestionResponse data = (SecurityQuestionResponse) br;
                 if (data.getMeta().getCode() == 200) {
                     questionsItems = ((SecurityQuestionResponse) br).getData().getSecurityQuestions();
-
 
                 }
             }

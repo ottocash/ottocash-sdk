@@ -15,7 +15,6 @@ import com.otto.sdk.IConfig;
 import com.otto.sdk.R;
 import com.otto.sdk.view.activities.account.formValidation.FormValidation;
 import com.otto.sdk.view.activities.account.login.PinLoginActivity;
-import com.otto.sdk.view.activities.account.registration.SetPinActivity;
 import com.otto.sdk.view.component.support.Util;
 
 import app.beelabs.com.codebase.base.BaseActivity;
@@ -23,8 +22,10 @@ import app.beelabs.com.codebase.support.util.CacheUtil;
 
 public class ActivationActivity extends BaseActivity implements View.OnClickListener {
 
-    CheckBox cboxPrivation;
-    AppCompatTextView tvTac;
+    CheckBox cboxTACOttoCash;
+    CheckBox cboxTACMitra;
+    AppCompatTextView tvTACOttoCash;
+    AppCompatTextView tvTACMitra;
     Button btnBottom;
     TextView tvDesc;
     ImageView ivBack;
@@ -42,11 +43,15 @@ public class ActivationActivity extends BaseActivity implements View.OnClickList
     }
 
     private void initComponent() {
-        cboxPrivation = findViewById(R.id.cboxPrivation);
-        cboxPrivation.setOnClickListener(this);
-        tvTac = findViewById(R.id.tvTac);
+        cboxTACOttoCash = findViewById(R.id.cboxTACOttocash);
+        cboxTACMitra = findViewById(R.id.cboxTACMitra);
+        cboxTACOttoCash.setOnClickListener(this);
+        cboxTACMitra.setOnClickListener(this);
+        tvTACOttoCash = findViewById(R.id.tvTACOttocash);
+        tvTACMitra = findViewById(R.id.tvTACMitra);
         btnBottom = findViewById(R.id.btnBottom);
-        tvTac.setText(Util.getHTMLContent(getString(R.string.sign_up_label_tac_link)));
+        tvTACOttoCash.setText(Util.getHTMLContent(getString(R.string.sign_up_label_tac_link)));
+        tvTACMitra.setText(Util.getHTMLContent(getString(R.string.sign_up_label_tac_link_mitra)));
         tvDesc = findViewById(R.id.tvDesc);
         ivBack = findViewById(R.id.ivBack);
     }
@@ -73,7 +78,7 @@ public class ActivationActivity extends BaseActivity implements View.OnClickList
                     startActivity(intent);
                     finish();
                 } else {
-                    Toast.makeText(ActivationActivity.this, "Checklist Box", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ActivationActivity.this, "Checklist Box TAC", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -83,17 +88,19 @@ public class ActivationActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        int id = v.getId();
-        if (id == cboxPrivation.getId()) {
-            validateCbocTAC();
+        int TACOttoCash = cboxTACOttoCash.getId();
+        int TACMitra = cboxTACMitra.getId();
+        if (TACOttoCash == cboxTACOttoCash.getId() && TACMitra == cboxTACMitra.getId()) {
+            validateCboxTAC();
         }
 
     }
 
-    private void validateCbocTAC() {
-        boolean agreed = cboxPrivation.isChecked();
+    private void validateCboxTAC() {
+        boolean TACOttoCash = cboxTACOttoCash.isChecked();
+        boolean TACMitra = cboxTACMitra.isChecked();
 
-        if (FormValidation.required(phone) && agreed) {
+        if (FormValidation.required(phone) && TACOttoCash && TACMitra) {
             isFormValidationSuccess = true;
             btnBottom.setBackground(ContextCompat.getDrawable(this, R.drawable.button_primary_selector));
         } else {

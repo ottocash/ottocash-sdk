@@ -7,8 +7,7 @@ import com.otto.sdk.R;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 
-public class TermAndConditionActivity extends BaseActivity {
-
+public class TACOttoCashActivity extends BaseActivity {
 
 
     WebView webView;
@@ -16,7 +15,7 @@ public class TermAndConditionActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_term_and_condition);
+        setContentView(R.layout.activity_tac_ottocash);
         initView();
         displayTAC();
     }

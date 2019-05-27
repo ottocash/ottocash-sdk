@@ -16,9 +16,10 @@ import android.widget.Toast;
 
 import com.otto.sdk.IConfig;
 import com.otto.sdk.R;
+import com.otto.sdk.view.activities.tac.TACMitraActivity;
 import com.otto.sdk.view.component.support.Util;
 import com.otto.sdk.view.activities.account.formValidation.FormValidation;
-import com.otto.sdk.view.activities.tac.TermAndConditionActivity;
+import com.otto.sdk.view.activities.tac.TACOttoCashActivity;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.support.util.CacheUtil;
@@ -29,9 +30,11 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
     TextView edtNoHp;
     EditText edtNameKtp;
     EditText edtEmail;
-    CheckBox cboxPrivation;
+    CheckBox cbTACOttoCash;
+    CheckBox cbTACMitra;
     Button btnBottom;
-    AppCompatTextView tvTac;
+    AppCompatTextView tvTACOttoCash;
+    AppCompatTextView tvTACMitra;
 
     private boolean isSignUpFormEnable = true;
     private boolean isFormValidationSuccess = false;
@@ -51,16 +54,21 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
         edtNoHp = findViewById(R.id.edtNoHp);
         edtNameKtp = findViewById(R.id.edtNameKtp);
         edtEmail = findViewById(R.id.edtEmail);
-        cboxPrivation = findViewById(R.id.cboxPrivation);
         btnBottom = findViewById(R.id.btnBottom);
-        tvTac = findViewById(R.id.tvTac);
-        tvTac.setText(Util.getHTMLContent(getString(R.string.sign_up_label_tac_link)));
+        cbTACOttoCash = findViewById(R.id.cbTACOttoCash);
+        cbTACMitra = findViewById(R.id.cbTACMitra);
+        tvTACOttoCash = findViewById(R.id.tvTACOttoCash);
+        tvTACMitra = findViewById(R.id.tvTACMitra);
+        tvTACOttoCash.setText(Util.getHTMLContent(getString(R.string.sign_up_label_tac_link)));
+        tvTACMitra.setText(Util.getHTMLContent(getString(R.string.sign_up_label_tac_link_mitra)));
 
         addTextWatcher(edtNameKtp);
         addTextWatcher(edtEmail);
 
-        cboxPrivation.setOnClickListener(this);
-        tvTac.setOnClickListener(this);
+        cbTACOttoCash.setOnClickListener(this);
+        cbTACMitra.setOnClickListener(this);
+        tvTACOttoCash.setOnClickListener(this);
+        tvTACMitra.setOnClickListener(this);
         btnBottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,14 +90,24 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
             }
         });
 
-        tvTac.setOnClickListener(new View.OnClickListener() {
+        tvTACOttoCash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RegistrationActivity.this, TermAndConditionActivity.class);
+                Intent intent = new Intent(RegistrationActivity.this, TACOttoCashActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                RegistrationActivity.this.startActivity(intent);
+                startActivity(intent);
             }
         });
+
+        tvTACMitra.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegistrationActivity.this, TACMitraActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+        });
+
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,8 +125,9 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        int id = v.getId();
-        if (id == cboxPrivation.getId()) {
+        int TACOttoCash = cbTACOttoCash.getId();
+        int TACMitra = cbTACMitra.getId();
+        if (TACOttoCash == cbTACOttoCash.getId() && TACMitra == cbTACMitra.getId()) {
             validateRegisterForm();
         }
 
@@ -117,11 +136,12 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
     private void validateRegisterForm() {
         String name = edtNameKtp.getText().toString();
         String email = edtEmail.getText().toString();
-        boolean agreed = cboxPrivation.isChecked();
+        boolean TACOttoCash = cbTACOttoCash.isChecked();
+        boolean TACMitra = cbTACMitra.isChecked();
 
 
         if (FormValidation.required(name) && FormValidation.validName(name)
-                && FormValidation.required(email) && FormValidation.validEmail(email) && agreed) {
+                && FormValidation.required(email) && FormValidation.validEmail(email) && TACOttoCash && TACMitra) {
             isFormValidationSuccess = true;
             btnBottom.setBackground(ContextCompat.getDrawable(this, R.drawable.button_primary_selector));
         } else {
