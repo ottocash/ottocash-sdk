@@ -40,7 +40,7 @@
     <!--<string name="rp_388_000">Rp 388.000</string>-->
     <!--<string name="bayar">Bayar</string>-->
     <!--<string name="sign_up_label_tac_link"><![CDATA[ Saya telah setuju dengan <u><font color="#d04a55">syarat dan-->
-        <!--ketentuan</font></u> yang berlaku.]]></string>-->
+    <!--ketentuan</font></u> yang berlaku.]]></string>-->
 
     <!--<string name="pembayaran_kamu_ke_toko">Pembayaran kamu ke Toko Ucok tidak berhasil kami proses, mohon mengulang proses pembayaran kembali</string>-->
     <!--<string name="melalui_mbanking"><![CDATA[MELALUI INTERNET BANKING & MOBILE BANKING]]></string>-->
@@ -85,7 +85,7 @@
     <!--<string name="title_activity_term_and_condition">Syarat dan Ketentuan</string>-->
 
     <!--<string name="investment_form_data_label_tac">Saya telah setuju dengan syarat dan-->
-        <!--ketentuan yang berlaku</string>-->
+    <!--ketentuan yang berlaku</string>-->
 
     <!--<string name="dialog_title">Khusus Pengguna OttoCash Plus</string>-->
     <!--<string name="dialog_msg">Fitur ini hanya tersedia bagi pengguna Ottocash Plus. Lakukan upgrade di aplikasi OttoCash</string>-->
