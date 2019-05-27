@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="14dp"
-            android:text="Masukkan PIN Ottocash Kamu"
+            android:text="Masukkan PIN OttoCash Kamu"
             android:textAppearance="@style/RobotoMedium"
             android:textSize="14sp" />
 

@@ -49,7 +49,7 @@
     <string name="m_banking"><![CDATA[MELALUI INTERNET BANKING & MOBILE BANKING]]></string>
     <string name="call_service_blokir">Hubungi call center OttoCash untuk membuka blokir akun Anda Email : halo@ottocash.id\n No telp : (021) 5020 0909\n Senin - Jumat ( 08.00 - 20.00 )\n Website : ottocash.id</string>
     <string name="back_blocked">Kembali ke Halaman Utama</string>
-    <string name="masukkan_checkout">Silahkan masukkan 6 digit Ottocash kamuuntuk membayara transaksi ini menggunakan OttoCash</string>
+    <string name="masukkan_checkout">Silahkan masukkan 6 digit Ottocash kamu untuk membayar transaksi ini menggunakan OttoCash</string>
     <string name="resend_otp"><![CDATA[Tidak menerima kode verifikasi? <u><font color="#d04a55"> Kirim Ulang</font></u>.]]></string>
 
     <string name="dialog_tittle_plus">Khusus Pengguna OttoCash Plus</string>
