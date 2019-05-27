@@ -53,7 +53,7 @@ public class OtpActivity extends BaseActivity {
 
         Bundle extras = getIntent().getExtras();
         phone = extras.getString(SESSION_PHONE);
-        tvNoHpOtp.setText("6 Digit kode OTP telah dikirimkan ke nomor " + phone + ", Silahkan cek HP Anda");
+        tvNoHpOtp.setText("6 Digit kode OTP telah dikirimkan ke nomor " + phone + ", silahkan cek HP Anda");
     }
 
 
