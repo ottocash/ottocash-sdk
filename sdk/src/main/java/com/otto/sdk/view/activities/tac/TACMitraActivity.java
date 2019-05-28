@@ -27,7 +27,7 @@ public class TACMitraActivity extends BaseActivity {
 
     private void displayTAC() {
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.loadUrl("");
+        webView.loadUrl("https://ottocash.id/syarat-dan-ketentuan-otorisasi-layanan-dengan-mitra");
     }
 
 }
