@@ -55,7 +55,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="14dp"
             android:gravity="center"
-            android:text="Aktivasi akun OttoCash kamu sudah berhasil. "
+            android:text="@string/aktivasi_akun_ottocash_kamu_sudah_berhasil"
             android:textColor="@color/Grey_8b8b8b" />
     </LinearLayout>
 

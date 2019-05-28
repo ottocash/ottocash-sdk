@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Masukkan Pin"
+            android:text="@string/masukkan_pin"
             android:textAppearance="@style/BarlowSemiBold"
             android:textColor="@color/color_white"
             android:textSize="14sp" />
@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="14dp"
-            android:text="@string/masukkan_pin"
+            android:text="@string/masukkan_pin_ottocash"
             android:textAppearance="@style/RobotoMedium"
             android:textSize="14sp" />
 

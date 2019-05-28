@@ -31,7 +31,7 @@
     <string name="register_akun_berhasil">Registrasi Akun OttoCash berhasil</string>
     <string name="review_payment">Review Payment</string>
     <string name="silahkan_masukkan">Masukkan 6 digit pin OttoCash Anda</string>
-    <string name="masukkan_pin">Masukkan Pin OttoCash</string>
+    <string name="masukkan_pin_ottocash">Masukkan Pin OttoCash</string>
     <string name="check_out_berhasil">Check Out Berhasil</string>
     <string name="cek_status_barang">Cek Status Barang</string>
     <string name="barang_kamu">Barang kamu akan segera kami kirim, harap bersabar. Anda bisa mengecek status barang Anda pada halaman MitraKu atau klik tombol dibawah</string>
@@ -109,6 +109,20 @@
     <string name="dialog_btn_back">Kembali</string>
     <string name="dialog_tittle_saldo">SALDO ANDA TIDAK MENCUKUPI</string>
     <string name="dialog_message_saldo">Saldo Ottocash Anda kurang untuk melanjutkan transaksi ini, Isi ulang saldo OttoCash Anda.</string>
+    <string name="masukkan_pin">Masukkan Pin</string>
+    <string name="aktivasi_akun_ottocash_kamu_sudah_berhasil">Aktivasi akun OttoCash kamu sudah berhasil.</string>
+    <string name="akun_anda_terblokir">Akun Anda Terblokir</string>
+    <string name="check_out_berhasil_">CHECK OUT BERHASIL</string>
+    <string name="ottocash_reguler">OttoCash Reguler</string>
+    <string name="hubungi_ottocash_di">Hubungi OttoCash di</string>
+    <string name="halo_ottocash_id">halo@ottocash.id</string>
+    <string name="email">Email</string>
+    <string name="nomor_telepon">Nomor telepon</string>
+    <string name="_021_5020_0909">021 5020 0909</string>
+    <string name="website">Website</string>
+    <string name="ottocash_id">OttoCash.id</string>
+    <string name="waktu_operational">Waktu Operational</string>
+    <string name="senin_jumat_08_00_09_00">Senin-Jumat 08:00 - 09:00</string>
 
 
 </resources>

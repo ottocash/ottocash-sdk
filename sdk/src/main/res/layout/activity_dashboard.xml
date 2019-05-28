@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="16dp"
-            android:text="OttoCash Reguler"
+            android:text="@string/ottocash_reguler"
             android:textAppearance="@style/BarlowSemiBold"
             android:textColor="@color/White_ffffff"
             android:textSize="14sp" />
@@ -116,7 +116,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Hubungi OttoCash di"
+                    android:text="@string/hubungi_ottocash_di"
                     android:textAppearance="@style/BarlowRegular"
                     android:textColor="@color/Black_484848"
                     android:textSize="12sp" />
@@ -157,7 +157,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Email"
+                                android:text="@string/email"
                                 android:textAppearance="@style/BarlowRegular"
                                 android:textColor="@color/Grey_8b8b8b"
                                 android:textSize="10sp" />
@@ -165,7 +165,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="halo@ottocash.id"
+                                android:text="@string/halo_ottocash_id"
                                 android:textAppearance="@style/BarlowMedium"
                                 android:textColor="@color/Black_484848"
                                 android:textSize="12sp" />
@@ -212,7 +212,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Nomor telepon"
+                                android:text="@string/nomor_telepon"
                                 android:textAppearance="@style/BarlowRegular"
                                 android:textColor="@color/Grey_8b8b8b"
                                 android:textSize="10sp" />
@@ -220,7 +220,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="021 5020 0909"
+                                android:text="@string/_021_5020_0909"
                                 android:textAppearance="@style/BarlowMedium"
                                 android:textColor="@color/Black_484848"
                                 android:textSize="12sp" />
@@ -265,7 +265,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Website"
+                                android:text="@string/website"
                                 android:textAppearance="@style/BarlowRegular"
                                 android:textColor="@color/Grey_8b8b8b"
                                 android:textSize="10sp" />
@@ -273,7 +273,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="OttoCash.id"
+                                android:text="@string/ottocash_id"
                                 android:textAppearance="@style/BarlowMedium"
                                 android:textColor="@color/Black_484848"
                                 android:textSize="12sp" />
@@ -319,7 +319,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Waktu Operational"
+                                android:text="@string/waktu_operational"
                                 android:textAppearance="@style/BarlowRegular"
                                 android:textColor="@color/Grey_8b8b8b"
                                 android:textSize="10sp" />
@@ -327,7 +327,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Senin-Jumat 08:00 - 09:00"
+                                android:text="@string/senin_jumat_08_00_09_00"
                                 android:textAppearance="@style/BarlowMedium"
                                 android:textColor="@color/Black_484848"
                                 android:textSize="12sp" />

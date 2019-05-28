@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="14dp"
-            android:text="CHECK OUT BERHASIL"
+            android:text="@string/check_out_berhasil_"
             android:textAppearance="@style/RobotoMedium"
             android:textSize="14sp" />
 
