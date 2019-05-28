@@ -150,7 +150,7 @@ public class DashboardActivity extends BaseActivity {
                     CacheUtil.putPreferenceInteger(IConfig.SESSION_EMONEY_BALANCE, Integer.parseInt(emoneyBalance), DashboardActivity.this);
 
                     tvSaldoOttoCash.setText(UiUtil.formatMoneyIDR(Long.parseLong(data.getData().getEmoneyBalance())));
-                    tvName.setText("Hi " + data.getData().getName() + ", Saldo OttoCash Reguler Kamu");
+                    tvName.setText("Hi " + data.getData().getName() + ". Saldo OttoCash Reguler Kamu");
 
 
                 } else {
