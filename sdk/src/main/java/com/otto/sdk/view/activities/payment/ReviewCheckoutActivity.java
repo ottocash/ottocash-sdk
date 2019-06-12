@@ -107,11 +107,10 @@ public class ReviewCheckoutActivity extends BaseActivity {
         model.setFee(0);
         model.setProductName("Pembayaran");
         model.setBillerId("PURCHASE_ELEVENIA");
-//        model.setCustomerReferenceNumber("UPN000000458");
         model.setProductCode("PYMNT");
         model.setPartnerCode("P000001");
 
-        model.setCustomerReferenceNumber(generateRandom(12) + "");
+        model.setCustomerReferenceNumber("UPN"+generateRandom(9) + "");
 
         int total = (model.getAmount() + model.getFee());
         CacheUtil.putPreferenceInteger(IConfig.SESSION_TOTAL, total, ReviewCheckoutActivity.this);
