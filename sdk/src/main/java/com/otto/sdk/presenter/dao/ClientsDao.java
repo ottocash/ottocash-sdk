@@ -13,7 +13,7 @@ public class ClientsDao extends BaseDao {
         super(obj);
     }
 
-    public void onClients(ClientsRequest model, BaseActivity ac, Callback callback) {
-        Api.onClients(model, ac, callback);
-    }
+//    public void onClients(ClientsRequest model, BaseActivity ac, Callback callback) {
+//        Api.onClients(model, ac, callback);
+//    }
 }

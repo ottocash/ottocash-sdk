@@ -19,9 +19,9 @@ public class CheckPhoneNumberDao extends BaseDao {
     }
 
 
-    public void onClients(ClientsRequest model, BaseActivity ac, Callback callback) {
-        Api.onClients(model, ac, callback);
-    }
+//    public void onClients(ClientsRequest model, BaseActivity ac, Callback callback) {
+//        Api.onClients(model, ac, callback);
+//    }
 
     public void onCreateToken(CreateTokenRequest model, BaseActivity ac, Callback callback) {
         Api.onCreateToken(model, ac, callback);

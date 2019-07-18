@@ -42,7 +42,7 @@ public interface IConfig {
     int KEY_API_REVIEW_CHECK_OUT = 16;
     int KEY_API_PAYMENT_VALIDATE = 17;
     int KEY_API_CHECK_PHONE_NUMBER = 18;
-    int KEY_API_CLIENTS = 19;
+//    int KEY_API_CLIENTS = 19;
     int KEY_API_TOKEN = 20;
     int KEY_API_SECURITY = 21;
 

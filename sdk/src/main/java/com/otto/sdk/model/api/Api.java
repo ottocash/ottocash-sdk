@@ -71,8 +71,9 @@ public class Api extends BaseApi {
         initApiDomain(context).callApiRegister(initHeader(context), registerRequest).enqueue((Callback<RegisterResponse>) callback);
     }
 
+
     synchronized public static void onInquiry(InquiryRequest inquiryRequest, Context context, Callback callback) {
-        initApiDomain(context).callApiInquiry(initHeader(context), inquiryRequest).enqueue((Callback<InquiryResponse>) callback);
+        initApiDomain(context).callApiInquiry(initHeaderForRequest(context), inquiryRequest).enqueue((Callback<InquiryResponse>) callback);
     }
 
     synchronized public static void onLogin(LoginRequest loginRequest, Context context, Callback callback) {
@@ -101,9 +102,9 @@ public class Api extends BaseApi {
         initApiDomain(context).callApiCheckPhoneNumber(initHeader(context), checkPhoneNumberRequest).enqueue((Callback<CheckPhoneNumberResponse>) callback);
     }
 
-    synchronized public static void onClients(ClientsRequest clientsRequest, Context context, Callback callback) {
-        initApiDomain(context).callApiClients(initHeader(context), clientsRequest).enqueue((Callback<ClientsResponse>) callback);
-    }
+//    synchronized public static void onClients(ClientsRequest clientsRequest, Context context, Callback callback) {
+//        initApiDomain(context).callApiClients(initHeader(context), clientsRequest).enqueue((Callback<ClientsResponse>) callback);
+//    }
 
     synchronized public static void onCreateToken(CreateTokenRequest createTokenRequest, Context context, Callback callback) {
         initApiDomain(context).callApiCreateToken(initHeader(context), createTokenRequest).enqueue((Callback<CreateTokenResponse>) callback);
