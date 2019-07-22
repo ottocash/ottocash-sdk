@@ -7,7 +7,11 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application android:name=".OttoCashSdk">
-        <activity android:name=".view.activities.tac.TACOttocashAndMitraActivity"></activity>
+        <activity
+            android:name=".view.activities.payment.HistoryActivity"
+            android:label="@string/title_activity_history"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".view.activities.tac.TACOttocashAndMitraActivity" />
         <activity android:name=".view.activities.tac.TACMitraActivity" />
         <activity
             android:name=".view.activities.SdkActivity"

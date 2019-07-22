@@ -15,6 +15,7 @@ import com.otto.sdk.model.api.request.InquiryRequest;
 import com.otto.sdk.model.api.response.InquiryResponse;
 import com.otto.sdk.presenter.dao.InquiryDao;
 import com.otto.sdk.support.UiUtil;
+import com.otto.sdk.view.activities.payment.HistoryActivity;
 import com.otto.sdk.view.activities.tac.TACOttoCashActivity;
 import com.otto.sdk.view.activities.tac.TACOttocashAndMitraActivity;
 import com.otto.sdk.view.component.dialog.CustomDialog;
@@ -40,6 +41,7 @@ public class DashboardActivity extends BaseActivity {
     CardView cdReqMoney;
     TextView webView;
     CardView cdTransfer;
+    CardView cdHistory;
 
     private InquiryRequest model;
     String emoneyBalance;
@@ -66,6 +68,7 @@ public class DashboardActivity extends BaseActivity {
         webView = findViewById(R.id.webview);
         cdTransfer = findViewById(R.id.card_transfer);
         cdReqMoney = findViewById(R.id.card_req_money);
+        cdHistory = findViewById(R.id.card_history);
 
         webView.setText(Util.getHTMLContent(getString(R.string.syarat_ketentuan)));
     }
@@ -86,6 +89,14 @@ public class DashboardActivity extends BaseActivity {
                 Intent intent = new Intent(DashboardActivity.this, TopUpActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 DashboardActivity.this.startActivity(intent);
+            }
+        });
+
+        cdHistory.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashboardActivity.this, HistoryActivity.class);
+                startActivity(intent);
             }
         });
 

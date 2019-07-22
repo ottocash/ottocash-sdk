@@ -44,6 +44,7 @@ public class MainActivity extends BaseActivity {
             String phone = edt_phone.getText().toString();
             CacheUtil.putPreferenceString(IConfig.SESSION_PHONE, phone, MainActivity.this);
             Intent intent = new Intent(MainActivity.this, DashboardAppActivity.class);
+            CacheUtil.putPreferenceString(IConfig.);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             MainActivity.this.startActivity(intent);
         }

@@ -14,6 +14,7 @@ import com.otto.sdk.model.api.request.OtpVerificationRequest;
 import com.otto.sdk.model.api.request.PaymentValidateRequest;
 import com.otto.sdk.model.api.request.RegisterRequest;
 import com.otto.sdk.model.api.request.ReviewCheckOutRequest;
+import com.otto.sdk.model.api.request.TransactionHistoryRequest;
 import com.otto.sdk.model.api.response.CheckPhoneNumberResponse;
 import com.otto.sdk.model.api.response.ClientsResponse;
 import com.otto.sdk.model.api.response.CreateTokenResponse;
@@ -23,6 +24,7 @@ import com.otto.sdk.model.api.response.PaymentValidateResponse;
 import com.otto.sdk.model.api.response.RegisterResponse;
 import com.otto.sdk.model.api.response.ReviewCheckOutResponse;
 import com.otto.sdk.model.api.response.SecurityQuestionResponse;
+import com.otto.sdk.model.api.response.TransactionHistoryResponse;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -111,6 +113,10 @@ public class Api extends BaseApi {
 
     synchronized public static void onSecurityQuestion(Context context, Callback callback) {
         initApiDomain(context).callSecurityQuestion().enqueue((Callback<SecurityQuestionResponse>) callback);
+    }
+
+    synchronized public static void onGetHistories(Context context, TransactionHistoryRequest request,Callback callback){
+        initApiDomain(context).callApiGetHistories(initHeader(context),request).enqueue((Callback<TransactionHistoryResponse>) callback);
     }
 
 

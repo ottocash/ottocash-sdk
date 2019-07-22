@@ -114,6 +114,7 @@
     <string name="akun_anda_terblokir">Akun Anda Terblokir</string>
     <string name="check_out_berhasil_">CHECK OUT BERHASIL</string>
     <string name="ottocash_reguler">OttoCash Reguler</string>
+    <string name="ottocash_title_history">Riwayat Transaksi</string>
     <string name="hubungi_ottocash_di">Hubungi OttoCash di</string>
     <string name="halo_ottocash_id">halo@ottocash.id</string>
     <string name="email">Email</string>
@@ -123,6 +124,7 @@
     <string name="ottocash_id">OttoCash.id</string>
     <string name="waktu_operational">Waktu Operational</string>
     <string name="senin_jumat_08_00_09_00">Senin-Jumat 08:00 - 09:00</string>
+    <string name="title_activity_history">HistoryActivity</string>
 
 
 </resources>

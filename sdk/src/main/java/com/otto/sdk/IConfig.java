@@ -45,6 +45,7 @@ public interface IConfig {
     int KEY_API_CLIENTS = 19;
     int KEY_API_TOKEN = 20;
     int KEY_API_SECURITY = 21;
+    int KEY_API_HISTORIES=22;
 
 
 }

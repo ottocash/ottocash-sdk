@@ -10,6 +10,7 @@ import com.otto.sdk.model.api.request.OtpVerificationRequest;
 import com.otto.sdk.model.api.request.PaymentValidateRequest;
 import com.otto.sdk.model.api.request.RegisterRequest;
 import com.otto.sdk.model.api.request.ReviewCheckOutRequest;
+import com.otto.sdk.model.api.request.TransactionHistoryRequest;
 import com.otto.sdk.model.api.response.CheckPhoneNumberResponse;
 import com.otto.sdk.model.api.response.ClientsResponse;
 import com.otto.sdk.model.api.response.CreateTokenResponse;
@@ -19,6 +20,7 @@ import com.otto.sdk.model.api.response.PaymentValidateResponse;
 import com.otto.sdk.model.api.response.RegisterResponse;
 import com.otto.sdk.model.api.response.ReviewCheckOutResponse;
 import com.otto.sdk.model.api.response.SecurityQuestionResponse;
+import com.otto.sdk.model.api.response.TransactionHistoryResponse;
 
 import java.util.Map;
 
@@ -76,4 +78,8 @@ public interface ApiService {
     @POST("v1/auth/check-phone")
     Call<CheckPhoneNumberResponse> callApiCheckPhoneNumber(@HeaderMap Map<String, String> headers,
                                                            @Body CheckPhoneNumberRequest checkPhoneNumberRequest);
+
+    @POST("v1/account/")
+    Call<TransactionHistoryResponse> callApiGetHistories(@HeaderMap Map<String,String> headers,
+                                                         @Body TransactionHistoryRequest model);
 }
