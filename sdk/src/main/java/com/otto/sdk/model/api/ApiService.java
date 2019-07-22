@@ -43,7 +43,7 @@ public interface ApiService {
 
 
     @POST("v1/account")
-    Call<InquiryResponse> callApiInquiry(@HeaderMap Map<String, String> headers,
+    Call<InquiryResponse> callApiInquiry(@HeaderMap Map<String, Object> headers,
                                          @Body InquiryRequest inquiryRequest);
 
     @POST("v1/auth/otp-verification")
@@ -66,9 +66,9 @@ public interface ApiService {
     @GET("v1/security-questions")
     Call<SecurityQuestionResponse> callSecurityQuestion();
 
-    @POST("v1/clients")
-    Call<ClientsResponse> callApiClients(@HeaderMap Map<String, String> headers,
-                                         @Body ClientsRequest clientsRequest);
+//    @POST("v1/clients")
+//    Call<ClientsResponse> callApiClients(@HeaderMap Map<String, String> headers,
+//                                         @Body ClientsRequest clientsRequest);
 
     @POST("oauth/token")
     Call<CreateTokenResponse> callApiCreateToken(@HeaderMap Map<String, String> headers,

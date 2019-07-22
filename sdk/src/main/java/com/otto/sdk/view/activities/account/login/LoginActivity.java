@@ -26,19 +26,11 @@ public class LoginActivity extends BaseActivity {
     EditText edt_phone;
     EditText edt_pin;
     Button btn_login;
-//    TextView tv_lupa_pin;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-
-//        if (SessionManager.isLogin(this)) {
-//            Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
-//            startActivity(intent);
-//        }
 
         initComponent();
         initContent();
@@ -46,11 +38,9 @@ public class LoginActivity extends BaseActivity {
 
     private void initComponent() {
 
-        edt_phone = (EditText) findViewById(R.id.edt_phone);
-        edt_pin = (EditText) findViewById(R.id.edt_pin);
-        btn_login = (Button) findViewById(R.id.btn_login);
-//        tv_lupa_pin = (TextView) findViewById(R.id.tv_lupa_pin);
-
+        edt_phone = findViewById(R.id.edt_phone);
+        edt_pin = findViewById(R.id.edt_pin);
+        btn_login = findViewById(R.id.btn_login);
     }
 
     private void initContent() {

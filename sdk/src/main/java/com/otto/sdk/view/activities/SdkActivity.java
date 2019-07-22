@@ -38,19 +38,19 @@ public class SdkActivity extends BaseActivity {
 
         final CheckPhoneNumberDao dao = new CheckPhoneNumberDao(this);
         final CheckPhoneNumberRequest model = new CheckPhoneNumberRequest();
-        final ClientsRequest clients = new ClientsRequest();
+//        final ClientsRequest clients = new ClientsRequest();
 
         String phone = CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, SdkActivity.this);
         model.setPhone(phone);
-        clients.setEmail("ardi@clappingape.com");
+//        clients.setEmail("ardi@clappingape.com");
 
         showApiProgressDialog(OttoCashSdk.getAppComponent(), new CheckPhoneNumberDao(this) {
             @Override
             public void call() {
                 dao.onCheckPhoneNumber(model, SdkActivity.this, BaseDao.getInstance(SdkActivity.this,
                         IConfig.KEY_API_CHECK_PHONE_NUMBER).callback);
-                dao.onClients(clients, SdkActivity.this, BaseDao.getInstance(SdkActivity.this,
-                        IConfig.KEY_API_CLIENTS).callback);
+//                dao.onClients(clients, SdkActivity.this, BaseDao.getInstance(SdkActivity.this,
+//                        IConfig.KEY_API_CLIENTS).callback);
             }
         });
     }
@@ -69,27 +69,29 @@ public class SdkActivity extends BaseActivity {
                     CacheUtil.putPreferenceBoolean(String.valueOf(Boolean.valueOf(IConfig.SESSION_CHECK_PHONE_NUMBER)),
                             is_existing, SdkActivity.this);
 
+                    onCreateToken();
+
                 } else {
                     Toast.makeText(this, data.getMeta().getCode() + ":" + data.getMeta().getMessage(),
                             Toast.LENGTH_LONG).show();
                 }
             }
-            if (responseCode == IConfig.KEY_API_CLIENTS) {
-                ClientsResponse clientData = (ClientsResponse) br;
-                if (clientData.getMeta().getCode() == 200) {
-
-                    String id = clientData.getData().getClient().getId();
-                    CacheUtil.putPreferenceString(IConfig.SESSION_ID, id, SdkActivity.this);
-                    String secret = clientData.getData().getClient().getSecret();
-                    CacheUtil.putPreferenceString(IConfig.SESSION_SECRET, secret, SdkActivity.this);
-
-                    onCreateToken();
-
-                } else {
-                    Toast.makeText(this, clientData.getMeta().getCode() + ":" + clientData.getMeta().getMessage(),
-                            Toast.LENGTH_LONG).show();
-                }
-            }
+//            if (responseCode == IConfig.KEY_API_CLIENTS) {
+//                ClientsResponse clientData = (ClientsResponse) br;
+//                if (clientData.getMeta().getCode() == 200) {
+//
+//                    String id = clientData.getData().getClient().getId();
+//                    CacheUtil.putPreferenceString(IConfig.SESSION_ID, id, SdkActivity.this);
+//                    String secret = clientData.getData().getClient().getSecret();
+//                    CacheUtil.putPreferenceString(IConfig.SESSION_SECRET, secret, SdkActivity.this);
+//
+//                    onCreateToken();
+//
+//                } else {
+//                    Toast.makeText(this, clientData.getMeta().getCode() + ":" + clientData.getMeta().getMessage(),
+//                            Toast.LENGTH_LONG).show();
+//                }
+//            }
             if (responseCode == IConfig.KEY_API_TOKEN) {
                 CreateTokenResponse createToken = (CreateTokenResponse) br;
                 if (createToken.getMeta().getCode() == 200) {
