@@ -117,7 +117,7 @@ public class Api extends BaseApi {
     }
 
     synchronized public static void onGetHistories(Context context, TransactionHistoryRequest request,Callback callback){
-        initApiDomain(context).callApiGetHistories(initHeader(context),request).enqueue((Callback<TransactionHistoryResponse>) callback);
+        initApiDomain(context).callApiGetHistories(initHeaderForRequest(context),request).enqueue((Callback<TransactionHistoryResponse>) callback);
     }
 
 

@@ -79,7 +79,7 @@ public interface ApiService {
     Call<CheckPhoneNumberResponse> callApiCheckPhoneNumber(@HeaderMap Map<String, String> headers,
                                                            @Body CheckPhoneNumberRequest checkPhoneNumberRequest);
 
-    @POST("v1/account/")
-    Call<TransactionHistoryResponse> callApiGetHistories(@HeaderMap Map<String,String> headers,
+    @POST("v1/account/history")
+    Call<TransactionHistoryResponse> callApiGetHistories(@HeaderMap Map<String,Object> headers,
                                                          @Body TransactionHistoryRequest model);
 }

@@ -9,6 +9,7 @@ import android.widget.EditText;
 import com.crashlytics.android.Crashlytics;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.view.activities.SdkActivity;
+import com.otto.sdk.view.activities.payment.HistoryActivity;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.support.util.CacheUtil;
@@ -31,6 +32,9 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+//        Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//        MainActivity.this.startActivity(intent);
         initClientSendCredentialstoSDK();
     }
 
@@ -54,7 +58,6 @@ public class MainActivity extends BaseActivity {
             String phone = edt_phone.getText().toString();
             CacheUtil.putPreferenceString(IConfig.SESSION_PHONE, phone, MainActivity.this);
             Intent intent = new Intent(MainActivity.this, DashboardAppActivity.class);
-            CacheUtil.putPreferenceString(IConfig.);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             MainActivity.this.startActivity(intent);
         }

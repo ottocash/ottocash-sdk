@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.otto.sdk.R;
 import com.otto.sdk.model.api.response.TransactionHistoryResponse;
 import com.otto.sdk.support.UiUtil;
+import com.otto.sdk.view.component.support.DateUtil;
 
 import org.w3c.dom.Text;
 
@@ -50,8 +51,12 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyViewHo
 
                 break;
         }
+
         holder.tvOderId.setText(data.getId());
-        holder.tvDate.setText(data.getValueDate());
+        holder.tvDate.setText(DateUtil.formatDateToString(data.getValueDate(),
+                "dd MM yyyy hh:mm:ss","dd/MM/yyyy"));
+        holder.tvTime.setText(DateUtil.formatDateToString(data.getValueDate(),
+                "dd MM yyyy hh:mm:ss","hh:mm:ss"));
         holder.tvPrice.setText(UiUtil.formatMoneyIDR(Long.valueOf(data.getAmount())));
         holder.tvDesc.setText(data.getDescription());
     }
@@ -74,7 +79,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyViewHo
 
             ivIcon = (ImageView) itemView.findViewById(R.id.ivIcon);
             tvPrice = (TextView) itemView.findViewById(R.id.tvPrice);
-            tvDesc = (TextView) itemView.findViewById(R.id.tvDesc);
+            tvDesc = (TextView) itemView.findViewById(R.id.tvDescription);
             tvDate = (TextView) itemView.findViewById(R.id.tvDate);
             tvOderId = (TextView) itemView.findViewById(R.id.tvOrderID);
             tvTime = (TextView) itemView.findViewById(R.id.tvTime);
