@@ -9,7 +9,7 @@ import app.beelabs.com.codebase.di.component.AppComponent;
 import app.beelabs.com.codebase.di.component.DaggerAppComponent;
 import io.fabric.sdk.android.Fabric;
 
-public class OttoCashApp extends BaseApp {
+public class DemoApp extends BaseApp {
 
     private static Context context;
 

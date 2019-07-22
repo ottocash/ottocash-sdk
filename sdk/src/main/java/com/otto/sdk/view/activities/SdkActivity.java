@@ -112,9 +112,9 @@ public class SdkActivity extends BaseActivity {
 
         token.setGrantType("client_credentials");
         String id = CacheUtil.getPreferenceString(IConfig.SESSION_ID, SdkActivity.this);
-        token.setClientId("31199fb491883361aab49e9e1210b6f0847d9bee83bce849062eeef234f12621");
+        token.setClientId(id);
         String secret = CacheUtil.getPreferenceString(IConfig.SESSION_SECRET, SdkActivity.this);
-        token.setClientSecret("9ef53ece2353a5ae9497910a1de0c483608bdb75ede462407d78ad08ec4da49a");
+        token.setClientSecret(secret);
 
         showApiProgressDialog(OttoCashSdk.getAppComponent(), new CheckPhoneNumberDao(this) {
             @Override
