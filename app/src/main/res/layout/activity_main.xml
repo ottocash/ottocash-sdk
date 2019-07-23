@@ -51,7 +51,7 @@
         android:layout_gravity="bottom"
         android:layout_margin="20dp"
         android:gravity="bottom"
-        android:text="ottocash-sdk | versi 1.0.0" />
+        android:text="ottocash-sdk | versi 1.0.4" />
 
 
 </LinearLayout>
