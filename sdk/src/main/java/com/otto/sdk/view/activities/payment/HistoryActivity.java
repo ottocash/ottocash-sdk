@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCashSdk;
@@ -75,7 +76,15 @@ public class HistoryActivity extends BaseActivity {
         if (responseCode == KEY_API_HISTORIES) {
             if (response.code() == 200) {
                 TransactionHistoryResponse data = (TransactionHistoryResponse) br;
-                adapter.setData(data.getData().getTransaction().getHistories());
+                if(data.getMeta().getCode()==200){
+                    if (data.getData() != null) {
+                        if (data.getData().getTransaction() != null ) {
+                            adapter.setData(data.getData().getTransaction().getHistories());
+                        }
+                    }
+                }else{
+                    Toast.makeText(this,data.getMeta().getMessage(),Toast.LENGTH_LONG).show();
+                }
             }
         }
     }
