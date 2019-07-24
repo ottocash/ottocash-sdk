@@ -8,12 +8,6 @@
 
     <application android:name=".OttoCashSdk">
         <activity
-            android:name=".view.activities.payment.HistoryActivity"
-            android:label="@string/title_activity_history"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".view.activities.tac.TACOttocashAndMitraActivity" />
-        <activity android:name=".view.activities.tac.TACMitraActivity" />
-        <activity
             android:name=".view.activities.SdkActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -78,6 +72,17 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".view.activities.tac.TACOttoCashActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activities.payment.HistoryActivity"
+            android:label="@string/title_activity_history"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.activities.tac.TACOttocashAndMitraActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activities.tac.TACMitraActivity"
             android:screenOrientation="portrait" />
     </application>
 
