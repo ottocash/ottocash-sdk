@@ -31,10 +31,6 @@ public class MainActivity extends BaseActivity {
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
-//        Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//        MainActivity.this.startActivity(intent);
         initClientSendCredentialstoSDK();
     }
 
