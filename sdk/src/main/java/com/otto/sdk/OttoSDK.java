@@ -1,6 +1,6 @@
 package com.otto.sdk;
 
-import com.otto.sdk.view.activities.SdkActivity;
+import com.otto.sdk.ui.activities.SdkActivity;
 
 import java.util.Calendar;
 

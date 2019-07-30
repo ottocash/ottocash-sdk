@@ -8,8 +8,6 @@ import android.widget.EditText;
 
 import com.crashlytics.android.Crashlytics;
 import com.otto.sdk.IConfig;
-import com.otto.sdk.view.activities.SdkActivity;
-import com.otto.sdk.view.activities.payment.HistoryActivity;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.support.util.CacheUtil;

@@ -40,7 +40,7 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 
     //Third Party
-    implementation 'com.github.acan12:coconut:1.0.26'
+    implementation 'com.github.acan12:coconut:2.0.13'
     implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
     implementation 'com.github.iwgang:countdownview:2.1.6'
     implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'

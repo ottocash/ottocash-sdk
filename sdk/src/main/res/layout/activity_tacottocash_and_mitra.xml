@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".view.activities.tac.TACOttocashAndMitraActivity"
+    tools:context=".ui.activities.tac.TACOttocashAndMitraActivity"
     tools:ignore="MissingPrefix">
 
     <FrameLayout

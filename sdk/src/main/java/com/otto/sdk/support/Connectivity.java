@@ -4,7 +4,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 
 import com.otto.sdk.R;
-import com.otto.sdk.view.component.dialog.CustomDialog;
+import com.otto.sdk.ui.component.dialog.CustomDialog;
 
 public class Connectivity {
 

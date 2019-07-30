@@ -1,11 +1,9 @@
 package com.otto.sdk.model.api.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-import app.beelabs.com.codebase.base.response.BaseMetaResponse;
 import app.beelabs.com.codebase.base.response.BaseResponse;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -16,16 +14,9 @@ public class TransactionHistoryResponse extends BaseResponse {
      * data : {"transaction":{"histories":[{"transactionType":"D","amount":-5000,"referenceNumber":"931600001553","description":"FEE BAYAR Pembayaran OTTOCASH.UPN000000430","id":"931600001553","valueDate":"16 04 2019 11:59:00","status":"Sukses"},{"transactionType":"D","amount":-100000,"referenceNumber":"931600001553","description":"Pembayaran","id":"931600001553","valueDate":"16 04 2019 11:59:00","status":"Sukses"},{"transactionType":"D","amount":-500,"referenceNumber":"931600000709","description":"FEE BAYAR Pembayaran OTTOCASH.UPN000000434","id":"931600000709","valueDate":"16 04 2019 10:36:00","status":"Sukses"}],"count":3,"total_amount":"-105.500,00"}}
      */
 
-    private BaseMetaResponse meta;
+
     private DataBean data;
 
-    public BaseMetaResponse getMeta() {
-        return meta;
-    }
-
-    public void setMeta(BaseMetaResponse meta) {
-        this.meta = meta;
-    }
 
     public DataBean getData() {
         return data;
