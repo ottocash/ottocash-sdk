@@ -10,17 +10,15 @@ import com.otto.sdk.model.api.request.InquiryRequest;
 import com.otto.sdk.model.api.request.LoginRequest;
 import com.otto.sdk.model.api.request.OtpRequest;
 import com.otto.sdk.model.api.request.OtpVerificationRequest;
-import com.otto.sdk.model.api.request.PaymentValidateRequest;
 import com.otto.sdk.model.api.request.RegisterRequest;
-import com.otto.sdk.model.api.request.ReviewCheckOutRequest;
 import com.otto.sdk.model.api.request.TransactionHistoryRequest;
 import com.otto.sdk.model.api.response.CheckPhoneNumberResponse;
 import com.otto.sdk.model.api.response.CreateTokenResponse;
 import com.otto.sdk.model.api.response.InquiryResponse;
 import com.otto.sdk.model.api.response.LoginResponse;
-import com.otto.sdk.model.api.response.PaymentValidateResponse;
+import com.otto.sdk.model.api.response.OtpResponse;
+import com.otto.sdk.model.api.response.OtpVerificationResponse;
 import com.otto.sdk.model.api.response.RegisterResponse;
-import com.otto.sdk.model.api.response.ReviewCheckOutResponse;
 import com.otto.sdk.model.api.response.SecurityQuestionResponse;
 import com.otto.sdk.model.api.response.TransactionHistoryResponse;
 
@@ -28,11 +26,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import app.beelabs.com.codebase.base.BaseApi;
-import app.beelabs.com.codebase.base.response.BaseResponse;
 import app.beelabs.com.codebase.support.util.CacheUtil;
 import retrofit2.Callback;
 
 public class Api extends BaseApi {
+
 
     private static Map<String, String> initHeader() {
         Map<String, String> map = new HashMap<>();
@@ -77,7 +75,7 @@ public class Api extends BaseApi {
     }
 
 
-    synchronized public static void onRegister(RegisterRequest registerRequest, Context context, Callback callback) {
+    synchronized public static void onRegister(RegisterRequest registerRequest, Callback callback) {
         initApiDomain().callApiRegister(initHeader(), registerRequest).enqueue((Callback<RegisterResponse>) callback);
     }
 
@@ -86,27 +84,27 @@ public class Api extends BaseApi {
         initApiDomain().callApiInquiry(initHeaderForRequest(context), inquiryRequest).enqueue((Callback<InquiryResponse>) callback);
     }
 
-    synchronized public static void onLogin(LoginRequest loginRequest, Context context, Callback callback) {
+    synchronized public static void onLogin(LoginRequest loginRequest, Callback callback) {
         initApiDomain().callApiLogin(initHeader(), loginRequest).enqueue((Callback<LoginResponse>) callback);
     }
 
     //OTP VERIFICATION
-    synchronized public static void onOtpVerification(OtpVerificationRequest otpVerificationRequest, Context context, Callback callback) {
-        initApiDomain().callApiOtpVerification(initHeader(), otpVerificationRequest).enqueue((Callback<BaseResponse>) callback);
+    synchronized public static void onOtpVerification(OtpVerificationRequest otpVerificationRequest, Callback callback) {
+        initApiDomain().callApiOtpVerification(initHeader(), otpVerificationRequest).enqueue((Callback<OtpVerificationResponse>) callback);
     }
 
     //OTP REQUEST
-    synchronized public static void onOtpRequest(OtpRequest otpRequest, Context context, Callback callback) {
-        initApiDomain().callApiOtpRequest(initHeader(), otpRequest).enqueue((Callback<BaseResponse>) callback);
+    synchronized public static void onOtpRequest(OtpRequest otpRequest, Callback callback) {
+        initApiDomain().callApiOtpRequest(initHeader(), otpRequest).enqueue((Callback<OtpResponse>) callback);
     }
 
-    synchronized public static void onReviewCheckOut(ReviewCheckOutRequest reviewCheckOutRequest, Context context, Callback callback) {
-        initApiDomain().callApiReviewCheckOut(initHeaderForRequest(context), reviewCheckOutRequest).enqueue((Callback<ReviewCheckOutResponse>) callback);
-    }
+//    synchronized public static void onReviewCheckOut(ReviewCheckOutRequest reviewCheckOutRequest, Context context, Callback callback) {
+//        initApiDomain().callApiReviewCheckOut(initHeaderForRequest(context), reviewCheckOutRequest).enqueue((Callback<ReviewCheckOutResponse>) callback);
+//    }
 
-    synchronized public static void onPaymentValidate(PaymentValidateRequest paymentValidateRequest, Context context, Callback callback) {
-        initApiDomain().callApiPaymentValidate(initHeaderForRequest(context), paymentValidateRequest).enqueue((Callback<PaymentValidateResponse>) callback);
-    }
+//    synchronized public static void onPaymentValidate(PaymentValidateRequest paymentValidateRequest, Context context, Callback callback) {
+//        initApiDomain().callApiPaymentValidate(initHeaderForRequest(context), paymentValidateRequest).enqueue((Callback<PaymentValidateResponse>) callback);
+//    }
 
     synchronized public static void onCheckPhoneNumber(CheckPhoneNumberRequest checkPhoneNumberRequest, Callback callback) {
         initApiDomain().callApiCheckPhoneNumber(initHeader(), checkPhoneNumberRequest).enqueue((Callback<CheckPhoneNumberResponse>) callback);

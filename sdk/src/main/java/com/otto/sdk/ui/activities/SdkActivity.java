@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import com.otto.sdk.IConfig;
 import com.otto.sdk.R;
+import com.otto.sdk.interfaces.ISdkView;
 import com.otto.sdk.model.api.request.CheckPhoneNumberRequest;
 import com.otto.sdk.model.api.request.ClientsRequest;
 import com.otto.sdk.model.api.request.CreateTokenRequest;
@@ -13,7 +14,9 @@ import com.otto.sdk.model.api.response.CheckPhoneNumberResponse;
 import com.otto.sdk.model.api.response.CreateTokenResponse;
 import com.otto.sdk.presenter.SdkResourcePresenter;
 //import com.otto.sdk.ui.activities.account.activation.ActivationActivity;
+import com.otto.sdk.ui.activities.account.activation.ActivationActivity;
 import com.otto.sdk.ui.activities.account.registration.RegistrationActivity;
+import com.otto.sdk.ui.activities.dashboard.DashboardActivity;
 //import com.otto.sdk.ui.activities.dashboard.DashboardActivity;
 
 import app.beelabs.com.codebase.base.BaseActivity;
@@ -130,17 +133,17 @@ public class SdkActivity extends BaseActivity implements ISdkView {
     }
 
 
-//    public void goDashboardSDK() {
-//        Intent intent = new Intent(SdkActivity.this, DashboardActivity.class);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//        startActivity(intent);
-//    }
-//
-//    public void goActivation() {
-//        Intent intent = new Intent(SdkActivity.this, ActivationActivity.class);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//        SdkActivity.this.startActivity(intent);
-//    }
+    public void goDashboardSDK() {
+        Intent intent = new Intent(SdkActivity.this, DashboardActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+
+    public void goActivation() {
+        Intent intent = new Intent(SdkActivity.this, ActivationActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        SdkActivity.this.startActivity(intent);
+    }
 
     public void goRegistration() {
         Intent intent = new Intent(SdkActivity.this, RegistrationActivity.class);
@@ -156,7 +159,7 @@ public class SdkActivity extends BaseActivity implements ISdkView {
             CacheUtil.putPreferenceBoolean(String.valueOf(Boolean.valueOf(IConfig.SESSION_CHECK_PHONE_NUMBER)),
                     is_existing, SdkActivity.this);
 
-            Toast.makeText(this, "is Exist: "+is_existing, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "is Exist: " + is_existing, Toast.LENGTH_SHORT).show();
             onCreateToken();
         } else {
             Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
@@ -171,7 +174,7 @@ public class SdkActivity extends BaseActivity implements ISdkView {
 
             String accessToken = model.getData().getClient().getAccessToken();
             CacheUtil.putPreferenceString(IConfig.SESSION_ACCESS_TOKEN, accessToken, SdkActivity.this);
-            Toast.makeText(this, "Token: "+accessToken, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Token: " + accessToken, Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
                     Toast.LENGTH_LONG).show();

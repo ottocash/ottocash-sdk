@@ -55,7 +55,7 @@ public class DashboardAppActivity extends SdkActivity {
             lyWidgetSdk.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    goDashboardSDK();
+                    goDashboardSDK();
                 }
             });
         }
@@ -66,12 +66,12 @@ public class DashboardAppActivity extends SdkActivity {
                 IConfig.SESSION_CHECK_PHONE_NUMBER), DashboardAppActivity.this)));
 
         if (hasPhoneNumber) {
-//            lyWidgetSdk.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    goActivation();
-//                }
-//            });
+            lyWidgetSdk.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    goActivation();
+                }
+            });
         } else {
             lyWidgetSdk.setOnClickListener(new View.OnClickListener() {
                 @Override

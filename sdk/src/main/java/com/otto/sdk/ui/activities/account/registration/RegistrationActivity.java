@@ -80,10 +80,10 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
                     CacheUtil.putPreferenceString(IConfig.SESSION_NAME, name, RegistrationActivity.this);
                     CacheUtil.putPreferenceString(IConfig.SESSION_EMAIL, email, RegistrationActivity.this);
 
-//                    Intent intent = new Intent(RegistrationActivity.this, SetPinActivity.class);
-//                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                    startActivity(intent);
-//                    finish();
+                    Intent intent = new Intent(RegistrationActivity.this, SetPinActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    finish();
                 } else {
                     Toast.makeText(RegistrationActivity.this, "Data Anda Belum Benar", Toast.LENGTH_SHORT).show();
                 }

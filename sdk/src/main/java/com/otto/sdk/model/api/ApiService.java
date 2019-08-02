@@ -16,6 +16,8 @@ import com.otto.sdk.model.api.response.ClientsResponse;
 import com.otto.sdk.model.api.response.CreateTokenResponse;
 import com.otto.sdk.model.api.response.InquiryResponse;
 import com.otto.sdk.model.api.response.LoginResponse;
+import com.otto.sdk.model.api.response.OtpResponse;
+import com.otto.sdk.model.api.response.OtpVerificationResponse;
 import com.otto.sdk.model.api.response.PaymentValidateResponse;
 import com.otto.sdk.model.api.response.RegisterResponse;
 import com.otto.sdk.model.api.response.ReviewCheckOutResponse;
@@ -47,12 +49,12 @@ public interface ApiService {
                                          @Body InquiryRequest inquiryRequest);
 
     @POST("v1/auth/otp-verification")
-    Call<BaseResponse> callApiOtpVerification(@HeaderMap Map<String, String> headers,
-                                              @Body OtpVerificationRequest otpVerificationRequest);
+    Call<OtpVerificationResponse> callApiOtpVerification(@HeaderMap Map<String, String> headers,
+                                                         @Body OtpVerificationRequest otpVerificationRequest);
 
     @POST("v1/auth/otp-request")
-    Call<BaseResponse> callApiOtpRequest(@HeaderMap Map<String, String> headers,
-                                         @Body OtpRequest otpRequest);
+    Call<OtpResponse> callApiOtpRequest(@HeaderMap Map<String, String> headers,
+                                        @Body OtpRequest otpRequest);
 
     @POST("v1/payment/journal")
     Call<ReviewCheckOutResponse> callApiReviewCheckOut(@HeaderMap Map<String, Object> headers,

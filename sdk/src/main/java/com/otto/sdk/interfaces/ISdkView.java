@@ -1,4 +1,4 @@
-package com.otto.sdk.ui.activities;
+package com.otto.sdk.interfaces;
 
 import com.otto.sdk.model.api.response.CheckPhoneNumberResponse;
 import com.otto.sdk.model.api.response.ClientsResponse;

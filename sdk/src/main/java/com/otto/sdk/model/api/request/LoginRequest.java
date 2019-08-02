@@ -10,12 +10,9 @@ public class LoginRequest{
 	private String latitude;
 	private String longitude;
 
-    public LoginRequest(String phone) {
+    public LoginRequest(String phone, String pin) {
     	this.phone = phone;
-    }
-
-    public LoginRequest() {
-
+		this.pin = pin;
     }
 
 	public void setPin(String pin){

@@ -16,6 +16,7 @@ public class TransactionHistoryResponse extends BaseResponse {
 
 
     private DataBean data;
+    private Meta meta;
 
 
     public DataBean getData() {
@@ -24,6 +25,45 @@ public class TransactionHistoryResponse extends BaseResponse {
 
     public void setData(DataBean data) {
         this.data = data;
+    }
+
+    public Meta getMeta() {
+        return meta;
+    }
+
+    public void setMeta(Meta meta) {
+        this.meta = meta;
+    }
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public class Meta {
+        private int code;
+        private String message;
+        private boolean status;
+
+        public int getCode() {
+            return code;
+        }
+
+        public void setCode(int code) {
+            this.code = code;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+
+        public void setMessage(String message) {
+            this.message = message;
+        }
+
+        public boolean isStatus() {
+            return status;
+        }
+
+        public void setStatus(boolean status) {
+            this.status = status;
+        }
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)

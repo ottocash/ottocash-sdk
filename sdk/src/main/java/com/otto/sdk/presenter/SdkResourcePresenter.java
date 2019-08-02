@@ -7,7 +7,7 @@ import com.otto.sdk.model.api.request.CreateTokenRequest;
 import com.otto.sdk.model.api.response.CheckPhoneNumberResponse;
 import com.otto.sdk.model.api.response.CreateTokenResponse;
 import com.otto.sdk.model.dao.CheckPhoneNumberDao;
-import com.otto.sdk.ui.activities.ISdkView;
+import com.otto.sdk.interfaces.ISdkView;
 
 import app.beelabs.com.codebase.base.BasePresenter;
 import app.beelabs.com.codebase.base.IView;
