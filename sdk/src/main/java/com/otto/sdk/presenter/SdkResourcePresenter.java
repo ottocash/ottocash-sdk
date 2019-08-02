@@ -23,6 +23,7 @@ public class SdkResourcePresenter extends BasePresenter implements CheckPhoneNum
 
     @Override
     public void getCheckPhone(CheckPhoneNumberRequest requestModel) {
+        BasePresenter.getInstance(sdkView, SdkResourcePresenter.class);
         new CheckPhoneNumberDao(this, new OnPresenterResponseCallback() {
             @Override
             public void call(BaseResponse br) {
@@ -30,7 +31,6 @@ public class SdkResourcePresenter extends BasePresenter implements CheckPhoneNum
                 sdkView.handleCheckPhoneNumber(model);
             }
         }).onCheckPhoneNumber(requestModel);
-
     }
 
     @Override
