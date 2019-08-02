@@ -31,28 +31,7 @@ public class AuthPresenter extends BasePresenter implements AuthDao.ILoginDao {
             @Override
             public void call(BaseResponse br) {
                 LoginResponse model = (LoginResponse) br;
-//
-                if (model.getMeta().getCode() == 200) {
-                    SessionManager.putSessionLogin(true, getContext());
-
-                    int user_id = model.getData().getId();
-                    String account_number = model.getData().getAccountNumber();
-                    String name = model.getData().getName();
-                    String phone = model.getData().getPhone();
-
-                    boolean isLogin = model.getMeta().isStatus();
-                    CacheUtil.putPreferenceBoolean(String.valueOf(Boolean.valueOf(IConfig.SESSION_IS_LOGIN)),
-                            isLogin, getContext());
-
-                    CacheUtil.putPreferenceInteger(IConfig.SESSION_USER_ID, user_id, getContext());
-                    CacheUtil.putPreferenceString(IConfig.SESSION_ACCOUNT_NUMBER, account_number, getContext());
-                    CacheUtil.putPreferenceString(IConfig.SESSION_NAME, name, getContext());
-                    CacheUtil.putPreferenceString(IConfig.SESSION_PHONE, phone, getContext());
-                    authView.handleLogin(model);
-                } else {
-                    Toast.makeText(getContext(), model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
-                            Toast.LENGTH_LONG).show();
-                }
+                authView.handleLogin(model);
             }
         }).onLogin(requestModel);
     }

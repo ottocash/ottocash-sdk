@@ -4,20 +4,22 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.otto.sdk.IConfig;
+import com.otto.sdk.OttoCashSdk;
 import com.otto.sdk.R;
 import com.otto.sdk.interfaces.IAuthView;
 import com.otto.sdk.model.api.request.LoginRequest;
 import com.otto.sdk.model.api.response.LoginResponse;
 import com.otto.sdk.model.api.response.RegisterResponse;
 import com.otto.sdk.presenter.AuthPresenter;
+import com.otto.sdk.presenter.manager.SessionManager;
+import com.otto.sdk.ui.activities.dashboard.DashboardActivity;
 import com.poovam.pinedittextfield.LinePinField;
 
 import app.beelabs.com.codebase.base.BaseActivity;
-import app.beelabs.com.codebase.base.BasePresenter;
 import app.beelabs.com.codebase.support.util.CacheUtil;
 
 public class PinLoginActivity extends BaseActivity implements IAuthView {
@@ -50,10 +52,16 @@ public class PinLoginActivity extends BaseActivity implements IAuthView {
                 IConfig.SESSION_PHONE, this)), pin);
         model.setPhone(phone);
         model.setPin(pin);
-        Log.d("123456789", String.valueOf(model));
 
-        authPresenter = ((AuthPresenter) BasePresenter.getInstance(this, AuthPresenter.class));
-        authPresenter.getLogin(model);
+//        authPresenter = ((AuthPresenter) BasePresenter.getInstance(this, AuthPresenter.class));
+//        authPresenter.getLogin(model);
+
+        showApiProgressDialog(OttoCashSdk.getAppComponent(), new AuthPresenter(this) {
+            @Override
+            public void call() {
+                getLogin(model);
+            }
+        }, "Loading");
 
 //        showApiProgressDialog(OttoCashSdk.getAppComponent(), new AuthDao(this) {
 //            @Override
@@ -104,37 +112,32 @@ public class PinLoginActivity extends BaseActivity implements IAuthView {
 
     @Override
     public void handleLogin(LoginResponse data) {
-        Intent intent = new Intent(this, OtpLoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        intent.putExtra(IConfig.SESSION_PHONE, phone);
-        startActivity(intent);
-        finish();
-//        if (data.getMeta().getCode() == 200) {
-//            SessionManager.putSessionLogin(true, PinLoginActivity.this);
-//
-//            int user_id = data.getData().getId();
-//            String account_number = data.getData().getAccountNumber();
-//            String name = data.getData().getName();
-//            String phone = data.getData().getPhone();
-//
-//            boolean isLogin = data.getMeta().isStatus();
-//            CacheUtil.putPreferenceBoolean(String.valueOf(Boolean.valueOf(IConfig.SESSION_IS_LOGIN)),
-//                    isLogin, PinLoginActivity.this);
-//
-//            CacheUtil.putPreferenceInteger(IConfig.SESSION_USER_ID, user_id, PinLoginActivity.this);
-//            CacheUtil.putPreferenceString(IConfig.SESSION_ACCOUNT_NUMBER, account_number, PinLoginActivity.this);
-//            CacheUtil.putPreferenceString(IConfig.SESSION_NAME, name, PinLoginActivity.this);
-//            CacheUtil.putPreferenceString(IConfig.SESSION_PHONE, phone, PinLoginActivity.this);
-//
-//            Intent intent = new Intent(PinLoginActivity.this, OtpLoginActivity.class);
-//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//            intent.putExtra(IConfig.SESSION_PHONE, phone);
-//            startActivity(intent);
-//            finish();
-//        } else {
-//            Toast.makeText(this, data.getMeta().getCode() + ":" + data.getMeta().getMessage(),
-//                    Toast.LENGTH_LONG).show();
-//        }
+        if (data.getMeta().getCode() == 200) {
+            SessionManager.putSessionLogin(true, PinLoginActivity.this);
+
+            int user_id = data.getData().getId();
+            String account_number = data.getData().getAccountNumber();
+            String name = data.getData().getName();
+            String phone = data.getData().getPhone();
+
+            boolean isLogin = data.getMeta().isStatus();
+            CacheUtil.putPreferenceBoolean(String.valueOf(Boolean.valueOf(IConfig.SESSION_IS_LOGIN)),
+                    isLogin, PinLoginActivity.this);
+
+            CacheUtil.putPreferenceInteger(IConfig.SESSION_USER_ID, user_id, PinLoginActivity.this);
+            CacheUtil.putPreferenceString(IConfig.SESSION_ACCOUNT_NUMBER, account_number, PinLoginActivity.this);
+            CacheUtil.putPreferenceString(IConfig.SESSION_NAME, name, PinLoginActivity.this);
+            CacheUtil.putPreferenceString(IConfig.SESSION_PHONE, phone, PinLoginActivity.this);
+
+            Intent intent = new Intent(PinLoginActivity.this, OtpLoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.putExtra(IConfig.SESSION_PHONE, phone);
+            startActivity(intent);
+            finish();
+        } else {
+            Toast.makeText(this, data.getMeta().getCode() + ":" + data.getMeta().getMessage(),
+                    Toast.LENGTH_LONG).show();
+        }
     }
 
 

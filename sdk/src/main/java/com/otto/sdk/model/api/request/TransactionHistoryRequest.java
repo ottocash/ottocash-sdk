@@ -4,6 +4,10 @@ public class TransactionHistoryRequest {
 
     private String account_number;
 
+    public TransactionHistoryRequest(String account_number) {
+        this.account_number = account_number;
+    }
+
     public String getAccount_number() {
         return account_number;
     }

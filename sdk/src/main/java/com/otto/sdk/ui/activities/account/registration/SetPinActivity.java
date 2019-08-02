@@ -22,6 +22,7 @@ import com.otto.sdk.model.api.response.SecurityQuestionResponse;
 import com.otto.sdk.model.dao.AuthDao;
 import com.otto.sdk.model.dao.SecurityDao;
 import com.otto.sdk.presenter.AuthPresenter;
+import com.otto.sdk.presenter.HistoryTransactionPresenter;
 import com.otto.sdk.ui.activities.account.formValidation.FormValidation;
 
 import java.util.ArrayList;
@@ -125,7 +126,16 @@ public class SetPinActivity extends BaseActivity {
         model.setAnswer(edtAnswer.getText().toString());
         model.setPlatform("android");
 
-        authPresenter.getRegister(model);
+
+        showApiProgressDialog(OttoCashSdk.getAppComponent(), new AuthPresenter(this) {
+            @Override
+            public void call() {
+                getRegister(model);
+
+            }
+        }, "Loading");
+
+
 
 //        showApiProgressDialog(OttoCashSdk.getAppComponent(), new AuthDao(this) {
 //            @Override

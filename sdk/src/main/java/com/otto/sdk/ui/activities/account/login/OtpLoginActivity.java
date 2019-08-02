@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.otto.sdk.IConfig;
+import com.otto.sdk.OttoCashSdk;
 import com.otto.sdk.R;
 import com.otto.sdk.interfaces.IOtpView;
 import com.otto.sdk.model.api.request.OtpRequest;
@@ -50,7 +51,6 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp);
 
-        otpPresenter = ((OtpPresenter) BasePresenter.getInstance(this, OtpPresenter.class));
 
         initComponent();
         setupCountdownview();
@@ -109,8 +109,16 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
         modelOtpVerification = new OtpVerificationRequest(CacheUtil.getPreferenceInteger(IConfig.SESSION_USER_ID, OtpLoginActivity.this));
         modelOtpVerification.setOtpCode(lineField.getText().toString());
 
-        otpPresenter = ((OtpPresenter) BasePresenter.getInstance(this, OtpPresenter.class));
-        otpPresenter.getOtpVerification(modelOtpVerification);
+//        otpPresenter = ((OtpPresenter) BasePresenter.getInstance(this, OtpPresenter.class));
+//        otpPresenter.getOtpVerification(modelOtpVerification);
+
+        showApiProgressDialog(OttoCashSdk.getAppComponent(), new OtpPresenter(this) {
+            @Override
+            public void call() {
+                getOtpVerification(modelOtpVerification);
+
+            }
+        }, "Loading");
 
 //        showApiProgressDialog(OttoCashSdk.getAppComponent(), new AuthDao(this) {
 //            @Override
@@ -125,8 +133,18 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
 //        final OtpDao dao = new OtpDao(this);
         modelOtpRequest = new OtpRequest(CacheUtil.getPreferenceString(SESSION_PHONE, OtpLoginActivity.this));
 
-        otpPresenter = ((OtpPresenter) BasePresenter.getInstance(this, OtpPresenter.class));
-        otpPresenter.getOtpRequest(modelOtpRequest);
+//        otpPresenter = ((OtpPresenter) BasePresenter.getInstance(this, OtpPresenter.class));
+//        otpPresenter.getOtpRequest(modelOtpRequest);
+
+        showApiProgressDialog(OttoCashSdk.getAppComponent(), new OtpPresenter(this) {
+            @Override
+            public void call() {
+                getOtpRequest(modelOtpRequest);
+
+            }
+        }, "Loading");
+
+
 //        showApiProgressDialog(OttoCashSdk.getAppComponent(), new AuthDao(this) {
 //            @Override
 //            public void call() {

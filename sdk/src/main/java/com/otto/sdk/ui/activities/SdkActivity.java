@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.otto.sdk.IConfig;
+import com.otto.sdk.OttoCashSdk;
 import com.otto.sdk.R;
 import com.otto.sdk.interfaces.ISdkView;
 import com.otto.sdk.model.api.request.CheckPhoneNumberRequest;
@@ -13,11 +14,10 @@ import com.otto.sdk.model.api.request.CreateTokenRequest;
 import com.otto.sdk.model.api.response.CheckPhoneNumberResponse;
 import com.otto.sdk.model.api.response.CreateTokenResponse;
 import com.otto.sdk.presenter.SdkResourcePresenter;
-//import com.otto.sdk.ui.activities.account.activation.ActivationActivity;
 import com.otto.sdk.ui.activities.account.activation.ActivationActivity;
 import com.otto.sdk.ui.activities.account.registration.RegistrationActivity;
 import com.otto.sdk.ui.activities.dashboard.DashboardActivity;
-//import com.otto.sdk.ui.activities.dashboard.DashboardActivity;
+
 
 import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.base.BasePresenter;
@@ -45,10 +45,13 @@ public class SdkActivity extends BaseActivity implements ISdkView {
         String phone = CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, SdkActivity.this);
         model.setPhone(phone);
 
+        showApiProgressDialog(OttoCashSdk.getAppComponent(), new SdkResourcePresenter(this) {
+            @Override
+            public void call() {
+                getCheckPhone(model);
 
-        presenterSDK = ((SdkResourcePresenter) BasePresenter.getInstance(this, SdkResourcePresenter.class));
-        presenterSDK.getCheckPhone(model);
-
+            }
+        }, "Loading...");
 
 //        showApiCustomProgressDialog(OttoCashSdk.getAppComponent(), new CheckPhoneNumberDao(this) {
 //            @Override
@@ -121,7 +124,18 @@ public class SdkActivity extends BaseActivity implements ISdkView {
         String secret = CacheUtil.getPreferenceString(IConfig.SESSION_SECRET, SdkActivity.this);
         token.setClientSecret(secret);
 
+        presenterSDK = ((SdkResourcePresenter) BasePresenter.getInstance(this, SdkResourcePresenter.class));
         presenterSDK.doCreateToken(token);
+
+
+//        showApiProgressDialog(OttoCashSdk.getAppComponent(), new SdkResourcePresenter(this) {
+//            @Override
+//            public void call() {
+//                doCreateToken(token);
+//
+//            }
+//        }, "Create Token");
+
 
 //        showApiProgressDialog(OttoCashSdk.getAppComponent(), new CheckPhoneNumberDao(this) {
 //            @Override
@@ -159,7 +173,7 @@ public class SdkActivity extends BaseActivity implements ISdkView {
             CacheUtil.putPreferenceBoolean(String.valueOf(Boolean.valueOf(IConfig.SESSION_CHECK_PHONE_NUMBER)),
                     is_existing, SdkActivity.this);
 
-            Toast.makeText(this, "is Exist: " + is_existing, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "is Exist: "+is_existing, Toast.LENGTH_SHORT).show();
             onCreateToken();
         } else {
             Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
@@ -174,7 +188,7 @@ public class SdkActivity extends BaseActivity implements ISdkView {
 
             String accessToken = model.getData().getClient().getAccessToken();
             CacheUtil.putPreferenceString(IConfig.SESSION_ACCESS_TOKEN, accessToken, SdkActivity.this);
-            Toast.makeText(this, "Token: " + accessToken, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Token: "+accessToken, Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
                     Toast.LENGTH_LONG).show();

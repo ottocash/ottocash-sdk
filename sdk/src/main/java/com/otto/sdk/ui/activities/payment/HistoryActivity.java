@@ -7,16 +7,20 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.otto.sdk.IConfig;
+import com.otto.sdk.OttoCashSdk;
 import com.otto.sdk.R;
 import com.otto.sdk.interfaces.IHistoryView;
 import com.otto.sdk.model.api.request.TransactionHistoryRequest;
 import com.otto.sdk.model.api.response.TransactionHistoryResponse;
 import com.otto.sdk.presenter.HistoryTransactionPresenter;
+import com.otto.sdk.presenter.InquiryPresenter;
 import com.otto.sdk.ui.adapter.HistoryAdapter;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.base.BasePresenter;
 import app.beelabs.com.codebase.support.util.CacheUtil;
+
+import static com.otto.sdk.IConfig.SESSION_PHONE;
 
 public class HistoryActivity extends BaseActivity implements IHistoryView {
     private RecyclerView rvHistory;
@@ -51,10 +55,17 @@ public class HistoryActivity extends BaseActivity implements IHistoryView {
 
     private void callApiGetHistories() {
 //        final TransactionHistoryRequest model = new TransactionHistoryRequest();
-        model.setAccount_number(CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, HistoryActivity.this));
 
-        historyTransactionPresenter = ((HistoryTransactionPresenter) BasePresenter.getInstance(this, HistoryTransactionPresenter.class));
-        historyTransactionPresenter.getHistories(model);
+        model = new TransactionHistoryRequest(
+                CacheUtil.getPreferenceString(SESSION_PHONE, HistoryActivity.this));
+
+        showApiProgressDialog(OttoCashSdk.getAppComponent(), new HistoryTransactionPresenter(this) {
+            @Override
+            public void call() {
+                getHistories(model);
+
+            }
+        }, "Loading...");
 
 
         //        showApiProgressDialog(OttoCashSdk.getAppComponent(), new TransactionDao(HistoryActivity.this) {

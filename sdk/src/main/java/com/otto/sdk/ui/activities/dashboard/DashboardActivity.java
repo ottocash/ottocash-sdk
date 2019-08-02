@@ -14,7 +14,6 @@ import com.otto.sdk.R;
 import com.otto.sdk.interfaces.IInquiryView;
 import com.otto.sdk.model.api.request.InquiryRequest;
 import com.otto.sdk.model.api.response.InquiryResponse;
-import com.otto.sdk.model.dao.InquiryDao;
 import com.otto.sdk.presenter.InquiryPresenter;
 import com.otto.sdk.support.UiUtil;
 import com.otto.sdk.ui.activities.payment.HistoryActivity;
@@ -25,11 +24,7 @@ import com.otto.sdk.ui.component.dialog.CustomDialog;
 import com.otto.sdk.ui.component.support.Util;
 
 import app.beelabs.com.codebase.base.BaseActivity;
-import app.beelabs.com.codebase.base.BaseDao;
-import app.beelabs.com.codebase.base.BasePresenter;
-import app.beelabs.com.codebase.base.response.BaseResponse;
 import app.beelabs.com.codebase.support.util.CacheUtil;
-import retrofit2.Response;
 
 public class DashboardActivity extends BaseActivity implements IInquiryView {
 
@@ -143,8 +138,16 @@ public class DashboardActivity extends BaseActivity implements IInquiryView {
         model = new InquiryRequest(String.valueOf(CacheUtil.getPreferenceString(
                 IConfig.SESSION_PHONE, DashboardActivity.this)));
 
-        inquiryPresenter = ((InquiryPresenter) BasePresenter.getInstance(this, InquiryPresenter.class));
-        inquiryPresenter.getInquiry(model);
+//        inquiryPresenter = ((InquiryPresenter) BasePresenter.getInstance(this, InquiryPresenter.class));
+//        inquiryPresenter.getInquiry(model);
+
+        showApiProgressDialog(OttoCashSdk.getAppComponent(), new InquiryPresenter(this) {
+            @Override
+            public void call() {
+                getInquiry(model);
+
+            }
+        }, "Loading");
 
 //        showApiProgressDialog(OttoCashSdk.getAppComponent(), new InquiryDao(this) {
 //            @Override
