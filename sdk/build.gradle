@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'realm-android'
+//apply plugin: 'realm-android'
 
 android {
     compileSdkVersion 28
@@ -25,9 +25,9 @@ android {
             jcenter()
 
         }
-        dependencies {
-            classpath "io.realm:realm-gradle-plugin:5.10.0"
-        }
+//        dependencies {
+//            classpath "io.realm:realm-gradle-plugin:5.10.0"
+//        }
     }
 
 }
