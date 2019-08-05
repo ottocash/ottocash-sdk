@@ -37,6 +37,6 @@ public class HistoryTransactionPresenter extends BasePresenter implements Transa
 
     @Override
     public Context getContext() {
-        return iHistoryView.getCurrentActivity();
+        return iHistoryView.getBaseActivity();
     }
 }

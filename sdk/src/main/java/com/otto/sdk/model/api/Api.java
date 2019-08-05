@@ -74,7 +74,7 @@ public class Api extends BaseApi {
                 .setupApiDomain(IConfig.API_BASE_URL, OttoCashSdk.getAppComponent(),
                         ApiService.class,
                         true,
-                        app.beelabs.com.codebase.IConfig.TIMEOUT_SHORT_INSECOND, true);
+                        app.beelabs.com.codebase.IConfig.TIMEOUT_SHORT_INSECOND);
 
     }
 

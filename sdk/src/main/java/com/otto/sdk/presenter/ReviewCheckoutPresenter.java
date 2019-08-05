@@ -51,6 +51,6 @@ public class ReviewCheckoutPresenter extends BasePresenter implements PaymentDao
 
     @Override
     public Context getContext() {
-        return iReviewCheckoutView.getCurrentActivity();
+        return iReviewCheckoutView.getBaseActivity();
     }
 }

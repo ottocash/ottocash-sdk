@@ -54,6 +54,6 @@ public class AuthPresenter extends BasePresenter implements AuthDao.ILoginDao {
 
     @Override
     public Context getContext() {
-        return authView.getCurrentActivity();
+        return authView.getBaseActivity();
     }
 }

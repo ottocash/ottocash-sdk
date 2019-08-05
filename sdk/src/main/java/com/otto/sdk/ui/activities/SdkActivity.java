@@ -62,7 +62,7 @@ public class SdkActivity extends BaseActivity implements ISdkView {
         String secret = CacheUtil.getPreferenceString(IConfig.SESSION_SECRET, SdkActivity.this);
         token.setClientSecret(secret);
 
-        presenterSDK = ((SdkResourcePresenter) BasePresenter.getInstance(this, SdkResourcePresenter.class));
+        presenterSDK = ((SdkResourcePresenter) BasePresenter.getInstance(this, new SdkResourcePresenter(this)));
         presenterSDK.doCreateToken(token);
     }
 
