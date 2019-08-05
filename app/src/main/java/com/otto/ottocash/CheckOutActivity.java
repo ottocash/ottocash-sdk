@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.model.api.response.InquiryResponse;
 import com.otto.sdk.support.UiUtil;
-//import com.otto.sdk.ui.activities.payment.ReviewCheckoutActivity;
+import com.otto.sdk.ui.activities.payment.ReviewCheckoutActivity;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.support.util.CacheUtil;
@@ -55,19 +55,17 @@ public class CheckOutActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-                boolean isEmptyFields = false;
                 String inputSubTotal = edtSubTotal.getText().toString();
 
                 if (TextUtils.isEmpty(inputSubTotal)) {
-                    isEmptyFields = true;
                     edtSubTotal.setError("Input Sample Sub Total");
                 } else {
                     String grandTotal = edtSubTotal.getText().toString();
-//                    Intent intent = new Intent(CheckOutActivity.this, ReviewCheckoutActivity.class);
-//                    intent.putExtra(SESSION_GRAND_TOTAL, grandTotal);
-//                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                    startActivity(intent);
-//                    finish();
+                    Intent intent = new Intent(CheckOutActivity.this, ReviewCheckoutActivity.class);
+                    intent.putExtra(SESSION_GRAND_TOTAL, grandTotal);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    finish();
                 }
             }
         });

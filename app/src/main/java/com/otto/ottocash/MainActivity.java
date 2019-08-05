@@ -30,9 +30,6 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-//        Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//        MainActivity.this.startActivity(intent);
         initClientSendCredentialstoSDK();
     }
 
@@ -46,11 +43,9 @@ public class MainActivity extends BaseActivity {
     @OnClick(R.id.btnNextWidget)
     public void onNumberPhone() {
 
-        boolean isEmptyFields = false;
         String inputSubTotal = edt_phone.getText().toString();
 
         if (TextUtils.isEmpty(inputSubTotal)) {
-            isEmptyFields = true;
             edt_phone.setError("Input Phone Number");
         } else {
             String phone = edt_phone.getText().toString();

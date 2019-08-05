@@ -37,9 +37,6 @@ public class DashboardAppActivity extends SdkActivity {
         setContentView(R.layout.activity_beranda_app);
         ButterKnife.bind(this);
 
-        /*String phoneNumber = CacheUtil.getPreferenceString(String.valueOf(IConfig.SESSION_PHONE), this);
-        OttoSDK.init(this, phoneNumber);*/
-
         PackageName = (this.getPackageName() + ".DashboardAppActivity");
         CacheUtil.putPreferenceString(IConfig.SESSION_PACKAGE_NAME, PackageName, DashboardAppActivity.this);
         setupAccount();

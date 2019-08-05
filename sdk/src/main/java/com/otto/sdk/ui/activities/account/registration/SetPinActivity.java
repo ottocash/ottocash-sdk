@@ -15,14 +15,11 @@ import android.widget.Toast;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCashSdk;
 import com.otto.sdk.R;
-import com.otto.sdk.model.api.misc.SecurityQuestionsItem;
+import com.otto.sdk.interfaces.IAuthView;
 import com.otto.sdk.model.api.request.RegisterRequest;
+import com.otto.sdk.model.api.response.LoginResponse;
 import com.otto.sdk.model.api.response.RegisterResponse;
-import com.otto.sdk.model.api.response.SecurityQuestionResponse;
-import com.otto.sdk.model.dao.AuthDao;
-import com.otto.sdk.model.dao.SecurityDao;
 import com.otto.sdk.presenter.AuthPresenter;
-import com.otto.sdk.presenter.HistoryTransactionPresenter;
 import com.otto.sdk.ui.activities.account.formValidation.FormValidation;
 
 import java.util.ArrayList;
@@ -30,32 +27,23 @@ import java.util.Arrays;
 import java.util.List;
 
 import app.beelabs.com.codebase.base.BaseActivity;
-import app.beelabs.com.codebase.base.BaseDao;
-import app.beelabs.com.codebase.base.BasePresenter;
-import app.beelabs.com.codebase.base.response.BaseResponse;
 import app.beelabs.com.codebase.support.util.CacheUtil;
-import retrofit2.Response;
 
 import static com.otto.sdk.IConfig.SESSION_EMAIL;
 import static com.otto.sdk.IConfig.SESSION_NAME;
 import static com.otto.sdk.IConfig.SESSION_PHONE;
 
-public class SetPinActivity extends BaseActivity {
+public class SetPinActivity extends BaseActivity implements IAuthView {
 
     EditText edtPin;
     EditText edtConfirmPin;
     EditText edtAnswer;
     Button btnSelesai;
-
-    //Spinner
     Spinner spinner;
 
     private boolean isFormValidationSuccess = false;
     private RegisterRequest model;
-
-    //Security
     private boolean isSelectedSecurity;
-
     private AuthPresenter authPresenter;
 
     @Override
@@ -74,8 +62,6 @@ public class SetPinActivity extends BaseActivity {
         edtConfirmPin = findViewById(R.id.edtConfirmPin);
         edtAnswer = findViewById(R.id.edtAnswer);
         btnSelesai = findViewById(R.id.btnSelesai);
-
-        //Spinner
         spinner = findViewById(R.id.spinner);
 
         String[] question = new String[]{
@@ -114,8 +100,6 @@ public class SetPinActivity extends BaseActivity {
     }
 
     private void onCallApiSetPin() {
-//        final AuthDao dao = new AuthDao(this);
-
         model = new RegisterRequest(
                 CacheUtil.getPreferenceString(SESSION_PHONE, SetPinActivity.this),
                 CacheUtil.getPreferenceString(SESSION_NAME, SetPinActivity.this),
@@ -134,16 +118,6 @@ public class SetPinActivity extends BaseActivity {
 
             }
         }, "Loading");
-
-
-
-//        showApiProgressDialog(OttoCashSdk.getAppComponent(), new AuthDao(this) {
-//            @Override
-//            public void call() {
-//                dao.onRegister(model, SetPinActivity.this, BaseDao.getInstance(SetPinActivity.this,
-//                        IConfig.KEY_API_REGISTER).callback);
-//            }
-//        });
     }
 
 
@@ -167,36 +141,6 @@ public class SetPinActivity extends BaseActivity {
 //
 //                }
 //            }
-//
-//
-//            if (responseCode == IConfig.KEY_API_REGISTER) {
-//                RegisterResponse data = (RegisterResponse) br;
-//                if (data.getMeta().getCode() == 200) {
-//
-//                    int user_id = data.getData().getId();
-//                    String phone = data.getData().getPhone();
-//                    String account_number = data.getData().getAccountNumber();
-//                    String name = data.getData().getName();
-//                    String email = data.getData().getEmail();
-//
-//                    CacheUtil.putPreferenceInteger(IConfig.SESSION_USER_ID, user_id, SetPinActivity.this);
-//                    CacheUtil.putPreferenceString(IConfig.SESSION_PHONE, phone, SetPinActivity.this);
-//                    CacheUtil.putPreferenceString(IConfig.SESSION_ACCOUNT_NUMBER, account_number, SetPinActivity.this);
-//                    CacheUtil.putPreferenceString(IConfig.SESSION_NAME, name, SetPinActivity.this);
-//                    CacheUtil.putPreferenceString(IConfig.SESSION_EMAIL, email, SetPinActivity.this);
-//
-//
-//                    Intent intent = new Intent(SetPinActivity.this, OtpActivity.class);
-//                    intent.putExtra(IConfig.SESSION_PHONE, phone);
-//                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                    startActivity(intent);
-//                    finish();
-//                } else {
-//                    Toast.makeText(this, data.getMeta().getCode() + ":" + data.getMeta().getMessage(),
-//                            Toast.LENGTH_LONG).show();
-//                }
-//            }
-//
 //
 //        }
 //    }
@@ -237,4 +181,36 @@ public class SetPinActivity extends BaseActivity {
     }
 
 
+    @Override
+    public void handleLogin(LoginResponse model) {
+
+    }
+
+    @Override
+    public void handleRegister(RegisterResponse model) {
+        if (model.getMeta().getCode() == 200) {
+
+            int user_id = model.getData().getId();
+            String phone = model.getData().getPhone();
+            String account_number = model.getData().getAccountNumber();
+            String name = model.getData().getName();
+            String email = model.getData().getEmail();
+
+            CacheUtil.putPreferenceInteger(IConfig.SESSION_USER_ID, user_id, SetPinActivity.this);
+            CacheUtil.putPreferenceString(IConfig.SESSION_PHONE, phone, SetPinActivity.this);
+            CacheUtil.putPreferenceString(IConfig.SESSION_ACCOUNT_NUMBER, account_number, SetPinActivity.this);
+            CacheUtil.putPreferenceString(IConfig.SESSION_NAME, name, SetPinActivity.this);
+            CacheUtil.putPreferenceString(IConfig.SESSION_EMAIL, email, SetPinActivity.this);
+
+
+            Intent intent = new Intent(SetPinActivity.this, OtpActivity.class);
+            intent.putExtra(IConfig.SESSION_PHONE, phone);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        } else {
+            Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
+                    Toast.LENGTH_LONG).show();
+        }
+    }
 }

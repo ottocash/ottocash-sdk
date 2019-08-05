@@ -133,13 +133,9 @@ public class DashboardActivity extends BaseActivity implements IInquiryView {
 
 
     private void onCallApiInquiry() {
-//        final InquiryDao dao = new InquiryDao(this);
 
         model = new InquiryRequest(String.valueOf(CacheUtil.getPreferenceString(
                 IConfig.SESSION_PHONE, DashboardActivity.this)));
-
-//        inquiryPresenter = ((InquiryPresenter) BasePresenter.getInstance(this, InquiryPresenter.class));
-//        inquiryPresenter.getInquiry(model);
 
         showApiProgressDialog(OttoCashSdk.getAppComponent(), new InquiryPresenter(this) {
             @Override
@@ -148,39 +144,8 @@ public class DashboardActivity extends BaseActivity implements IInquiryView {
 
             }
         }, "Loading");
-
-//        showApiProgressDialog(OttoCashSdk.getAppComponent(), new InquiryDao(this) {
-//            @Override
-//            public void call() {
-//                dao.onInquiry(model, DashboardActivity.this, BaseDao.getInstance(DashboardActivity.this,
-//                        IConfig.KEY_API_INQUIRY).callback);
-//            }
-//        });
     }
 
-
-//    @Override
-//    protected void onApiResponseCallback(BaseResponse br, int responseCode, Response response) {
-//        super.onApiResponseCallback(br, responseCode, response);
-//        if (response.isSuccessful()) {
-//            if (responseCode == IConfig.KEY_API_INQUIRY) {
-//                InquiryResponse data = (InquiryResponse) br;
-//                if (data.getMeta().getCode() == 201 || data.getMeta().getCode() == 200) {
-//
-//                    emoneyBalance = data.getData().getEmoneyBalance();
-//                    CacheUtil.putPreferenceInteger(IConfig.SESSION_EMONEY_BALANCE, Integer.parseInt(emoneyBalance), DashboardActivity.this);
-//
-//                    tvSaldoOttoCash.setText(UiUtil.formatMoneyIDR(Long.parseLong(data.getData().getEmoneyBalance())));
-//                    tvName.setText("Hi " + data.getData().getName() + ". Saldo OttoCash Reguler Kamu");
-//
-//
-//                } else {
-//                    Toast.makeText(this, data.getMeta().getCode() + ":" + data.getMeta().getMessage(),
-//                            Toast.LENGTH_LONG).show();
-//                }
-//            }
-//        }
-//    }
 
     protected void popUpDialogPlus() {
         String title = getString(R.string.dialog_title);

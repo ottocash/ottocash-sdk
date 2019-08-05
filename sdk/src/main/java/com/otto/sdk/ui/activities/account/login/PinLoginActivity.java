@@ -16,7 +16,6 @@ import com.otto.sdk.model.api.response.LoginResponse;
 import com.otto.sdk.model.api.response.RegisterResponse;
 import com.otto.sdk.presenter.AuthPresenter;
 import com.otto.sdk.presenter.manager.SessionManager;
-import com.otto.sdk.ui.activities.dashboard.DashboardActivity;
 import com.poovam.pinedittextfield.LinePinField;
 
 import app.beelabs.com.codebase.base.BaseActivity;
@@ -45,16 +44,12 @@ public class PinLoginActivity extends BaseActivity implements IAuthView {
     }
 
     private void onCallApiSetPin(final String pin) {
-//        final AuthDao dao = new AuthDao(this);
-
         phone = CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, PinLoginActivity.this);
         model = new LoginRequest(String.valueOf(CacheUtil.getPreferenceString(
                 IConfig.SESSION_PHONE, this)), pin);
         model.setPhone(phone);
         model.setPin(pin);
 
-//        authPresenter = ((AuthPresenter) BasePresenter.getInstance(this, AuthPresenter.class));
-//        authPresenter.getLogin(model);
 
         showApiProgressDialog(OttoCashSdk.getAppComponent(), new AuthPresenter(this) {
             @Override
@@ -62,52 +57,7 @@ public class PinLoginActivity extends BaseActivity implements IAuthView {
                 getLogin(model);
             }
         }, "Loading");
-
-//        showApiProgressDialog(OttoCashSdk.getAppComponent(), new AuthDao(this) {
-//            @Override
-//            public void call() {
-//                dao.onLogin(model, PinLoginActivity.this, BaseDao.getInstance(PinLoginActivity.this,
-//                        IConfig.KEY_API_LOGIN).callback);
-//            }
-//        });
     }
-
-//    @Override
-//    protected void onApiResponseCallback(BaseResponse br, int responseCode, Response response) {
-//        super.onApiResponseCallback(br, responseCode, response);
-//        if (response.isSuccessful()) {
-//            if (responseCode == IConfig.KEY_API_LOGIN) {
-//                LoginResponse data = (LoginResponse) br;
-//                if (data.getMeta().getCode() == 201 || data.getMeta().getCode() == 200) {
-//
-//                    SessionManager.putSessionLogin(true, PinLoginActivity.this);
-//
-//                    int user_id = data.getData().getId();
-//                    String account_number = data.getData().getAccountNumber();
-//                    String name = data.getData().getName();
-//                    String phone = data.getData().getPhone();
-//
-//                    boolean isLogin = data.getMeta().isStatus();
-//                    CacheUtil.putPreferenceBoolean(String.valueOf(Boolean.valueOf(IConfig.SESSION_IS_LOGIN)),
-//                            isLogin, PinLoginActivity.this);
-//
-//                    CacheUtil.putPreferenceInteger(IConfig.SESSION_USER_ID, user_id, PinLoginActivity.this);
-//                    CacheUtil.putPreferenceString(IConfig.SESSION_ACCOUNT_NUMBER, account_number, PinLoginActivity.this);
-//                    CacheUtil.putPreferenceString(IConfig.SESSION_NAME, name, PinLoginActivity.this);
-//                    CacheUtil.putPreferenceString(IConfig.SESSION_PHONE, phone, PinLoginActivity.this);
-//
-//                    Intent intent = new Intent(PinLoginActivity.this, OtpLoginActivity.class);
-//                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                    intent.putExtra(IConfig.SESSION_PHONE, phone);
-//                    startActivity(intent);
-//                    finish();
-//                } else {
-//                    Toast.makeText(this, data.getMeta().getCode() + ":" + data.getMeta().getMessage(),
-//                            Toast.LENGTH_LONG).show();
-//                }
-//            }
-//        }
-//    }
 
 
     @Override
@@ -168,6 +118,4 @@ public class PinLoginActivity extends BaseActivity implements IAuthView {
 
         });
     }
-
-
 }

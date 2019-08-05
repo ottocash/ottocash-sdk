@@ -14,7 +14,6 @@ import android.widget.Toast;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.R;
 import com.otto.sdk.ui.activities.account.formValidation.FormValidation;
-//import com.otto.sdk.ui.activities.account.login.PinLoginActivity;
 import com.otto.sdk.ui.activities.account.login.PinLoginActivity;
 import com.otto.sdk.ui.activities.tac.TACMitraActivity;
 import com.otto.sdk.ui.activities.tac.TACOttoCashActivity;
