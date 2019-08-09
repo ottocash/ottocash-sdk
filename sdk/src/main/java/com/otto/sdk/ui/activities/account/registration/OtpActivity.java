@@ -115,7 +115,7 @@ public class OtpActivity extends BaseActivity implements IOtpView {
     private void onCallApiOTPRequest() {
         modelOtpRequest = new OtpRequest(CacheUtil.getPreferenceString(SESSION_PHONE, OtpActivity.this));
 
-        showApiProgressDialog(OttoCashSdk.getAppComponent(), new OtpPresenter(this) {
+        showApiProgressDialog(OttoCashSdk.getAppComponent(), new OtpPresenter(OtpActivity.this) {
             @Override
             public void call() {
                 getOtpRequest(modelOtpRequest);

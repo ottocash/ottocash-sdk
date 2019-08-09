@@ -44,7 +44,7 @@ public class SdkActivity extends BaseActivity implements ISdkView {
         String phone = CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, SdkActivity.this);
         model.setPhone(phone);
 
-        showApiProgressDialog(OttoCashSdk.getAppComponent(), new SdkResourcePresenter(this) {
+        showApiProgressDialog(OttoCashSdk.getAppComponent(), new SdkResourcePresenter(SdkActivity.this) {
             @Override
             public void call() {
                 getCheckPhone(model);
@@ -62,7 +62,7 @@ public class SdkActivity extends BaseActivity implements ISdkView {
         String secret = CacheUtil.getPreferenceString(IConfig.SESSION_SECRET, SdkActivity.this);
         token.setClientSecret(secret);
 
-        presenterSDK = ((SdkResourcePresenter) BasePresenter.getInstance(this, new SdkResourcePresenter(this)));
+        presenterSDK = ((SdkResourcePresenter) BasePresenter.getInstance(SdkActivity.this, new SdkResourcePresenter(SdkActivity.this)));
         presenterSDK.doCreateToken(token);
     }
 

@@ -105,7 +105,7 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
         modelOtpVerification = new OtpVerificationRequest(CacheUtil.getPreferenceInteger(IConfig.SESSION_USER_ID, OtpLoginActivity.this));
         modelOtpVerification.setOtpCode(lineField.getText().toString());
 
-        showApiProgressDialog(OttoCashSdk.getAppComponent(), new OtpPresenter(this) {
+        showApiProgressDialog(OttoCashSdk.getAppComponent(), new OtpPresenter(OtpLoginActivity.this) {
             @Override
             public void call() {
                 getOtpVerification(modelOtpVerification);
@@ -117,7 +117,7 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
     private void onCallApiOTPRequest() {
         modelOtpRequest = new OtpRequest(CacheUtil.getPreferenceString(SESSION_PHONE, OtpLoginActivity.this));
 
-        showApiProgressDialog(OttoCashSdk.getAppComponent(), new OtpPresenter(this) {
+        showApiProgressDialog(OttoCashSdk.getAppComponent(), new OtpPresenter(OtpLoginActivity.this) {
             @Override
             public void call() {
                 getOtpRequest(modelOtpRequest);

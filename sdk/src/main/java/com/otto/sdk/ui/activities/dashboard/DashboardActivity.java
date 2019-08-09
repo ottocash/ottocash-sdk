@@ -137,7 +137,7 @@ public class DashboardActivity extends BaseActivity implements IInquiryView {
         model = new InquiryRequest(String.valueOf(CacheUtil.getPreferenceString(
                 IConfig.SESSION_PHONE, DashboardActivity.this)));
 
-        showApiProgressDialog(OttoCashSdk.getAppComponent(), new InquiryPresenter(this) {
+        showApiProgressDialog(OttoCashSdk.getAppComponent(), new InquiryPresenter(DashboardActivity.this) {
             @Override
             public void call() {
                 getInquiry(model);
