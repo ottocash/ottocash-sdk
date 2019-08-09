@@ -44,13 +44,16 @@ public class SdkActivity extends BaseActivity implements ISdkView {
         String phone = CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, SdkActivity.this);
         model.setPhone(phone);
 
-        showApiProgressDialog(OttoCashSdk.getAppComponent(), new SdkResourcePresenter(SdkActivity.this) {
-            @Override
-            public void call() {
-                getCheckPhone(model);
+        presenterSDK = ((SdkResourcePresenter) BasePresenter.getInstance(SdkActivity.this, new SdkResourcePresenter(SdkActivity.this)));
+        presenterSDK.getCheckPhone(model);
 
-            }
-        }, "Loading...");
+//        showApiProgressDialog(OttoCashSdk.getAppComponent(), new SdkResourcePresenter(SdkActivity.this) {
+//            @Override
+//            public void call() {
+//                getCheckPhone(model);
+//
+//            }
+//        }, "Loading...");
     }
 
     public void onCreateToken() {
