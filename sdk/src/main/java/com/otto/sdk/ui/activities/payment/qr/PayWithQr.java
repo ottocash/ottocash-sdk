@@ -12,8 +12,9 @@ import android.widget.Toast;
 
 import com.google.zxing.Result;
 import com.otto.sdk.R;
+import com.otto.sdk.base.BaseActivity;
 
-import app.beelabs.com.codebase.base.BaseActivity;
+
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 import static android.Manifest.permission.CAMERA;

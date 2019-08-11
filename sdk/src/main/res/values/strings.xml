@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">OttoCash-SDK</string>
+    <string name="coconut_internet_fail_message">Internet fail</string>
+    <string name="coconut_reply_action_label">Reply</string>
     <string name="aktivasi_akun">Aktivasi Akun</string>
     <string name="desc_activation">Aktivasi Akun 081 6*** *4423  OttoCash Kamu di MITRAKU ? </string>
     <string name="call_cs_ilotte">Apabila Anda ingin menghubungkan akun OttoCash Anda dengan akun Mitraku silahkan klik tombol Aktifkan </string>

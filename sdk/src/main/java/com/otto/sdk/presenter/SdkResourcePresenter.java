@@ -2,6 +2,9 @@ package com.otto.sdk.presenter;
 
 import android.content.Context;
 
+import com.otto.sdk.base.BasePresenter;
+import com.otto.sdk.base.IView;
+import com.otto.sdk.base.response.BaseResponse;
 import com.otto.sdk.model.api.request.CheckPhoneNumberRequest;
 import com.otto.sdk.model.api.request.CreateTokenRequest;
 import com.otto.sdk.model.api.response.CheckPhoneNumberResponse;
@@ -9,9 +12,6 @@ import com.otto.sdk.model.api.response.CreateTokenResponse;
 import com.otto.sdk.model.dao.CheckPhoneNumberDao;
 import com.otto.sdk.interfaces.ISdkView;
 
-import app.beelabs.com.codebase.base.BasePresenter;
-import app.beelabs.com.codebase.base.IView;
-import app.beelabs.com.codebase.base.response.BaseResponse;
 
 public class SdkResourcePresenter extends BasePresenter implements CheckPhoneNumberDao.ICheckPhoneDao {
 

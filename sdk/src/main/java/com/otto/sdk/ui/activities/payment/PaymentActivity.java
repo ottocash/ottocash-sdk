@@ -6,8 +6,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.otto.sdk.R;
-
-import app.beelabs.com.codebase.base.BaseActivity;
+import com.otto.sdk.base.BaseActivity;
 
 public class PaymentActivity extends BaseActivity {
 

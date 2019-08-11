@@ -15,6 +15,8 @@ import android.widget.Toast;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCashSdk;
 import com.otto.sdk.R;
+import com.otto.sdk.base.BaseActivity;
+import com.otto.sdk.base.support.util.CacheUtil;
 import com.otto.sdk.interfaces.IAuthView;
 import com.otto.sdk.model.api.request.RegisterRequest;
 import com.otto.sdk.model.api.response.LoginResponse;
@@ -26,8 +28,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import app.beelabs.com.codebase.base.BaseActivity;
-import app.beelabs.com.codebase.support.util.CacheUtil;
 
 import static com.otto.sdk.IConfig.SESSION_EMAIL;
 import static com.otto.sdk.IConfig.SESSION_NAME;

@@ -4,6 +4,9 @@ public interface IConfig {
 
     String API_BASE_URL = "https://ottocash-sdk.clappingape.com/";
 
+    String DEFAULT_LOADING = "Loading";
+    int TIMEOUT_SHORT_INSECOND = 15;
+    int TIMEOUT_LONG_INSECOND = 120;
 
     //Session
     String SESSION_LOGIN_KEY = "session_login";

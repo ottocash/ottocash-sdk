@@ -3,8 +3,8 @@ package com.otto.sdk.presenter.manager;
 import android.content.Context;
 
 import com.otto.sdk.IConfig;
+import com.otto.sdk.base.support.util.CacheUtil;
 
-import app.beelabs.com.codebase.support.util.CacheUtil;
 
 public class SessionManager {
 

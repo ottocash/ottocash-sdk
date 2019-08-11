@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.webkit.WebView;
 
 import com.otto.sdk.R;
+import com.otto.sdk.base.BaseActivity;
 
-import app.beelabs.com.codebase.base.BaseActivity;
 
 public class TACMitraActivity extends BaseActivity {
 

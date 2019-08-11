@@ -9,16 +9,14 @@ import android.widget.ImageView;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCashSdk;
 import com.otto.sdk.R;
+import com.otto.sdk.base.BaseActivity;
+import com.otto.sdk.base.support.util.CacheUtil;
 import com.otto.sdk.interfaces.IHistoryView;
 import com.otto.sdk.model.api.request.TransactionHistoryRequest;
 import com.otto.sdk.model.api.response.TransactionHistoryResponse;
 import com.otto.sdk.presenter.HistoryTransactionPresenter;
-import com.otto.sdk.presenter.InquiryPresenter;
 import com.otto.sdk.ui.adapter.HistoryAdapter;
 
-import app.beelabs.com.codebase.base.BaseActivity;
-import app.beelabs.com.codebase.base.BasePresenter;
-import app.beelabs.com.codebase.support.util.CacheUtil;
 
 import static com.otto.sdk.IConfig.SESSION_PHONE;
 

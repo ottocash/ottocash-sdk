@@ -2,14 +2,15 @@ package com.otto.sdk.presenter;
 
 import android.content.Context;
 
+import com.otto.sdk.base.BasePresenter;
+import com.otto.sdk.base.IView;
+import com.otto.sdk.base.response.BaseResponse;
 import com.otto.sdk.interfaces.IHistoryView;
 import com.otto.sdk.model.api.request.TransactionHistoryRequest;
 import com.otto.sdk.model.api.response.TransactionHistoryResponse;
 import com.otto.sdk.model.dao.TransactionDao;
 
-import app.beelabs.com.codebase.base.BasePresenter;
-import app.beelabs.com.codebase.base.IView;
-import app.beelabs.com.codebase.base.response.BaseResponse;
+
 
 public class HistoryTransactionPresenter extends BasePresenter implements TransactionDao.IHistoryDao {
 

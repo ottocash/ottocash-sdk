@@ -11,6 +11,8 @@ import android.widget.Toast;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCashSdk;
 import com.otto.sdk.R;
+import com.otto.sdk.base.BaseActivity;
+import com.otto.sdk.base.support.util.CacheUtil;
 import com.otto.sdk.interfaces.IInquiryView;
 import com.otto.sdk.model.api.request.InquiryRequest;
 import com.otto.sdk.model.api.response.InquiryResponse;
@@ -23,8 +25,6 @@ import com.otto.sdk.ui.activities.topup.TopUpActivity;
 import com.otto.sdk.ui.component.dialog.CustomDialog;
 import com.otto.sdk.ui.component.support.Util;
 
-import app.beelabs.com.codebase.base.BaseActivity;
-import app.beelabs.com.codebase.support.util.CacheUtil;
 
 public class DashboardActivity extends BaseActivity implements IInquiryView {
 

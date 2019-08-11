@@ -1,9 +1,7 @@
 package com.otto.sdk.model.api.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import app.beelabs.com.codebase.base.response.BaseResponse;
+import com.otto.sdk.base.response.BaseResponse;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CheckPhoneNumberResponse extends BaseResponse {

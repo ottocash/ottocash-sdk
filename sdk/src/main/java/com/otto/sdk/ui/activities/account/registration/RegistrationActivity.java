@@ -16,13 +16,12 @@ import android.widget.Toast;
 
 import com.otto.sdk.IConfig;
 import com.otto.sdk.R;
+import com.otto.sdk.base.BaseActivity;
+import com.otto.sdk.base.support.util.CacheUtil;
 import com.otto.sdk.ui.activities.tac.TACMitraActivity;
 import com.otto.sdk.ui.component.support.Util;
 import com.otto.sdk.ui.activities.account.formValidation.FormValidation;
 import com.otto.sdk.ui.activities.tac.TACOttoCashActivity;
-
-import app.beelabs.com.codebase.base.BaseActivity;
-import app.beelabs.com.codebase.support.util.CacheUtil;
 
 public class RegistrationActivity extends BaseActivity implements View.OnClickListener {
 

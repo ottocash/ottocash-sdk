@@ -2,6 +2,9 @@ package com.otto.sdk.presenter;
 
 import android.content.Context;
 
+import com.otto.sdk.base.BasePresenter;
+import com.otto.sdk.base.IView;
+import com.otto.sdk.base.response.BaseResponse;
 import com.otto.sdk.interfaces.IOtpView;
 import com.otto.sdk.model.api.request.OtpRequest;
 import com.otto.sdk.model.api.request.OtpVerificationRequest;
@@ -9,9 +12,6 @@ import com.otto.sdk.model.api.response.OtpResponse;
 import com.otto.sdk.model.api.response.OtpVerificationResponse;
 import com.otto.sdk.model.dao.OtpDao;
 
-import app.beelabs.com.codebase.base.BasePresenter;
-import app.beelabs.com.codebase.base.IView;
-import app.beelabs.com.codebase.base.response.BaseResponse;
 
 public class OtpPresenter extends BasePresenter implements OtpDao.IOtpDao {
 
@@ -23,7 +23,7 @@ public class OtpPresenter extends BasePresenter implements OtpDao.IOtpDao {
 
     @Override
     public void getOtpRequest(OtpRequest requestModel) {
-        new OtpDao(this, new OnPresenterResponseCallback() {
+        new OtpDao(this, new BasePresenter.OnPresenterResponseCallback() {
             @Override
             public void call(BaseResponse br) {
                 OtpResponse model = (OtpResponse) br;

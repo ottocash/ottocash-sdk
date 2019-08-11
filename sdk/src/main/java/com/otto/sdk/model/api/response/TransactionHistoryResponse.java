@@ -1,10 +1,9 @@
 package com.otto.sdk.model.api.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.otto.sdk.base.response.BaseResponse;
 
 import java.util.List;
-
-import app.beelabs.com.codebase.base.response.BaseResponse;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TransactionHistoryResponse extends BaseResponse {

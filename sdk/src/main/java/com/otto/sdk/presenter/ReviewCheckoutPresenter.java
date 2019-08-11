@@ -2,6 +2,9 @@ package com.otto.sdk.presenter;
 
 import android.content.Context;
 
+import com.otto.sdk.base.BasePresenter;
+import com.otto.sdk.base.IView;
+import com.otto.sdk.base.response.BaseResponse;
 import com.otto.sdk.interfaces.IReviewCheckoutView;
 import com.otto.sdk.model.api.request.PaymentValidateRequest;
 import com.otto.sdk.model.api.request.ReviewCheckOutRequest;
@@ -9,9 +12,7 @@ import com.otto.sdk.model.api.response.PaymentValidateResponse;
 import com.otto.sdk.model.api.response.ReviewCheckOutResponse;
 import com.otto.sdk.model.dao.PaymentDao;
 
-import app.beelabs.com.codebase.base.BasePresenter;
-import app.beelabs.com.codebase.base.IView;
-import app.beelabs.com.codebase.base.response.BaseResponse;
+
 
 public class ReviewCheckoutPresenter extends BasePresenter implements PaymentDao.IReviewCheckoutDao {
 

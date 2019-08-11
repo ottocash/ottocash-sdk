@@ -1,7 +1,8 @@
 package com.otto.sdk.model.dao;
 
-import app.beelabs.com.codebase.base.BaseDao;
-import app.beelabs.com.codebase.base.IDao;
+
+import com.otto.sdk.base.BaseDao;
+import com.otto.sdk.base.IDao;
 
 public class ClientsDao extends BaseDao {
     public ClientsDao(IDao obj) {

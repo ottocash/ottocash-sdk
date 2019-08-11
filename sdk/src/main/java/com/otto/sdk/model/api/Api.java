@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCashSdk;
+import com.otto.sdk.base.BaseApi;
+import com.otto.sdk.base.support.util.CacheUtil;
 import com.otto.sdk.model.api.request.CheckPhoneNumberRequest;
 import com.otto.sdk.model.api.request.CreateTokenRequest;
 import com.otto.sdk.model.api.request.InquiryRequest;
@@ -29,8 +31,6 @@ import com.otto.sdk.model.api.response.TransactionHistoryResponse;
 import java.util.HashMap;
 import java.util.Map;
 
-import app.beelabs.com.codebase.base.BaseApi;
-import app.beelabs.com.codebase.support.util.CacheUtil;
 import retrofit2.Callback;
 
 public class Api extends BaseApi {
@@ -74,7 +74,7 @@ public class Api extends BaseApi {
                 .setupApiDomain(IConfig.API_BASE_URL, OttoCashSdk.getAppComponent(),
                         ApiService.class,
                         true,
-                        app.beelabs.com.codebase.IConfig.TIMEOUT_SHORT_INSECOND);
+                        IConfig.TIMEOUT_SHORT_INSECOND);
 
     }
 

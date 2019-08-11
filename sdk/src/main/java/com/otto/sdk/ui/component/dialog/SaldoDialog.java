@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.otto.sdk.R;
+import com.otto.sdk.base.BaseDialog;
 
-import app.beelabs.com.codebase.base.BaseDialog;
 
 public class SaldoDialog extends BaseDialog {
 

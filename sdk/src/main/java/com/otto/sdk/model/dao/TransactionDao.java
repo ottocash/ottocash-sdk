@@ -3,15 +3,15 @@ package com.otto.sdk.model.dao;
 import android.content.Context;
 
 import com.otto.sdk.IConfig;
+import com.otto.sdk.base.BaseDao;
+import com.otto.sdk.base.IDao;
+import com.otto.sdk.base.IDaoPresenter;
+import com.otto.sdk.base.response.BaseResponse;
 import com.otto.sdk.model.api.Api;
 import com.otto.sdk.model.api.request.TransactionHistoryRequest;
 import com.otto.sdk.model.api.response.TransactionHistoryResponse;
 import com.otto.sdk.presenter.HistoryTransactionPresenter;
 
-import app.beelabs.com.codebase.base.BaseDao;
-import app.beelabs.com.codebase.base.IDao;
-import app.beelabs.com.codebase.base.IDaoPresenter;
-import app.beelabs.com.codebase.base.response.BaseResponse;
 import retrofit2.Response;
 
 public class TransactionDao extends BaseDao {

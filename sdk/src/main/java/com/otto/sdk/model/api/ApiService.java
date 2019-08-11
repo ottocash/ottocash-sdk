@@ -1,7 +1,6 @@
 package com.otto.sdk.model.api;
 
 import com.otto.sdk.model.api.request.CheckPhoneNumberRequest;
-import com.otto.sdk.model.api.request.ClientsRequest;
 import com.otto.sdk.model.api.request.CreateTokenRequest;
 import com.otto.sdk.model.api.request.InquiryRequest;
 import com.otto.sdk.model.api.request.LoginRequest;
@@ -12,7 +11,6 @@ import com.otto.sdk.model.api.request.RegisterRequest;
 import com.otto.sdk.model.api.request.ReviewCheckOutRequest;
 import com.otto.sdk.model.api.request.TransactionHistoryRequest;
 import com.otto.sdk.model.api.response.CheckPhoneNumberResponse;
-import com.otto.sdk.model.api.response.ClientsResponse;
 import com.otto.sdk.model.api.response.CreateTokenResponse;
 import com.otto.sdk.model.api.response.InquiryResponse;
 import com.otto.sdk.model.api.response.LoginResponse;
@@ -26,7 +24,6 @@ import com.otto.sdk.model.api.response.TransactionHistoryResponse;
 
 import java.util.Map;
 
-import app.beelabs.com.codebase.base.response.BaseResponse;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;

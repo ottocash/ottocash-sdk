@@ -2,9 +2,9 @@ package com.otto.sdk;
 
 import android.content.Context;
 
-import app.beelabs.com.codebase.base.BaseApp;
-import app.beelabs.com.codebase.di.component.AppComponent;
-import app.beelabs.com.codebase.di.component.DaggerAppComponent;
+import com.otto.sdk.base.BaseApp;
+import com.otto.sdk.base.AppComponent;
+import com.otto.sdk.base.DaggerAppComponent;
 
 public class OttoCashSdk extends BaseApp {
 
@@ -21,9 +21,9 @@ public class OttoCashSdk extends BaseApp {
     }
 
     public static AppComponent getAppComponent() {
-        if (context == null) return null;
         return getComponent();
     }
+
 
     public static Context getContext() {
         return context;

@@ -1,6 +1,10 @@
 package com.otto.sdk.model.dao;
 
 import com.otto.sdk.IConfig;
+import com.otto.sdk.base.BaseDao;
+import com.otto.sdk.base.IDao;
+import com.otto.sdk.base.IDaoPresenter;
+import com.otto.sdk.base.response.BaseResponse;
 import com.otto.sdk.model.api.Api;
 import com.otto.sdk.model.api.request.OtpRequest;
 import com.otto.sdk.model.api.request.OtpVerificationRequest;
@@ -9,10 +13,7 @@ import com.otto.sdk.model.api.response.OtpVerificationResponse;
 import com.otto.sdk.presenter.AuthPresenter;
 import com.otto.sdk.presenter.OtpPresenter;
 
-import app.beelabs.com.codebase.base.BaseDao;
-import app.beelabs.com.codebase.base.IDao;
-import app.beelabs.com.codebase.base.IDaoPresenter;
-import app.beelabs.com.codebase.base.response.BaseResponse;
+
 import retrofit2.Response;
 
 public class OtpDao extends BaseDao {

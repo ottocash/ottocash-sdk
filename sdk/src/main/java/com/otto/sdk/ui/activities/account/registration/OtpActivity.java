@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCashSdk;
 import com.otto.sdk.R;
+import com.otto.sdk.base.BaseActivity;
+import com.otto.sdk.base.support.util.CacheUtil;
 import com.otto.sdk.interfaces.IOtpView;
 import com.otto.sdk.model.api.request.OtpRequest;
 import com.otto.sdk.model.api.request.OtpVerificationRequest;
@@ -21,8 +23,7 @@ import com.otto.sdk.model.api.response.OtpVerificationResponse;
 import com.otto.sdk.presenter.OtpPresenter;
 import com.poovam.pinedittextfield.LinePinField;
 
-import app.beelabs.com.codebase.base.BaseActivity;
-import app.beelabs.com.codebase.support.util.CacheUtil;
+
 import cn.iwgang.countdownview.CountdownView;
 
 import static com.otto.sdk.IConfig.SESSION_PHONE;

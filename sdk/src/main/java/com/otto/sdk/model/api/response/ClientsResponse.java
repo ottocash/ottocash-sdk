@@ -1,8 +1,8 @@
 package com.otto.sdk.model.api.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.otto.sdk.base.response.BaseResponse;
 
-import app.beelabs.com.codebase.base.response.BaseResponse;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ClientsResponse extends BaseResponse {

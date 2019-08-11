@@ -1,11 +1,10 @@
 package com.otto.sdk.model.api.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.otto.sdk.base.response.BaseResponse;
 import com.otto.sdk.model.api.misc.SecurityQuestionsItem;
 
 import java.util.List;
-
-import app.beelabs.com.codebase.base.response.BaseResponse;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SecurityQuestionResponse extends BaseResponse {

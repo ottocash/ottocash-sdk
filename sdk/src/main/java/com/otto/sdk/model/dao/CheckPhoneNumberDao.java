@@ -1,6 +1,10 @@
 package com.otto.sdk.model.dao;
 
 import com.otto.sdk.IConfig;
+import com.otto.sdk.base.BaseDao;
+import com.otto.sdk.base.IDao;
+import com.otto.sdk.base.IDaoPresenter;
+import com.otto.sdk.base.response.BaseResponse;
 import com.otto.sdk.model.api.Api;
 import com.otto.sdk.model.api.request.CheckPhoneNumberRequest;
 import com.otto.sdk.model.api.request.CreateTokenRequest;
@@ -8,10 +12,7 @@ import com.otto.sdk.model.api.response.CheckPhoneNumberResponse;
 import com.otto.sdk.model.api.response.CreateTokenResponse;
 import com.otto.sdk.presenter.SdkResourcePresenter;
 
-import app.beelabs.com.codebase.base.BaseDao;
-import app.beelabs.com.codebase.base.IDao;
-import app.beelabs.com.codebase.base.IDaoPresenter;
-import app.beelabs.com.codebase.base.response.BaseResponse;
+
 import retrofit2.Response;
 
 public class CheckPhoneNumberDao extends BaseDao {

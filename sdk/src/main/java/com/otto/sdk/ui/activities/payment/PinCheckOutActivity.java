@@ -3,8 +3,8 @@ package com.otto.sdk.ui.activities.payment;
 import android.os.Bundle;
 
 import com.otto.sdk.R;
+import com.otto.sdk.base.BaseActivity;
 
-import app.beelabs.com.codebase.base.BaseActivity;
 
 public class PinCheckOutActivity extends BaseActivity {
 

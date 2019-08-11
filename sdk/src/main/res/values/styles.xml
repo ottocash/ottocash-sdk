@@ -8,6 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="CoconutDialogFullScreen">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+    </style>
+
     <style name="checkbox" parent="@style/Widget.AppCompat.CompoundButton.CheckBox">
         <item name="colorControlNormal">@color/Grey_e5e5e5</item>
         <item name="colorControlActivated">@color/Red_d04a55</item>
