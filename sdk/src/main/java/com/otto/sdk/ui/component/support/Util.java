@@ -4,7 +4,7 @@ import android.text.Html;
 import android.text.Spanned;
 import android.util.DisplayMetrics;
 
-import com.otto.sdk.OttoCashSdk;
+import com.otto.sdk.OttoCashSDK;
 
 public class Util {
 
@@ -29,7 +29,7 @@ public class Util {
     }
 
     public static int dpToPx(int dp) {
-        DisplayMetrics displayMetrics = OttoCashSdk.getContext().getResources().getDisplayMetrics();
+        DisplayMetrics displayMetrics = OttoCashSDK.getContext().getResources().getDisplayMetrics();
         return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
     }
 }

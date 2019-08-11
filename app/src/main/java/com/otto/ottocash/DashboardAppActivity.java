@@ -7,17 +7,17 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.otto.sdk.IConfig;
+import com.otto.sdk.IConfigSDK;
 import com.otto.sdk.presenter.manager.SessionManager;
 import com.otto.sdk.support.UiUtil;
-import com.otto.sdk.ui.activities.SdkActivity;
+import com.otto.sdk.ui.activities.SdkActivitySDK;
 
 import app.beelabs.com.codebase.support.util.CacheUtil;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class DashboardAppActivity extends SdkActivity {
+public class DashboardAppActivity extends SdkActivitySDK {
 
     @BindView(R.id.tvSaldoOttoCash)
     TextView tvSaldoOttoCash;
@@ -38,7 +38,7 @@ public class DashboardAppActivity extends SdkActivity {
         ButterKnife.bind(this);
 
         PackageName = (this.getPackageName() + ".DashboardAppActivity");
-        CacheUtil.putPreferenceString(IConfig.SESSION_PACKAGE_NAME, PackageName, DashboardAppActivity.this);
+        CacheUtil.putPreferenceString(IConfigSDK.SESSION_PACKAGE_NAME, PackageName, DashboardAppActivity.this);
         setupAccount();
         EmoneyBalanceWidget();
         initializeSDK();
@@ -60,7 +60,7 @@ public class DashboardAppActivity extends SdkActivity {
 
     private void setupAccount() {
         boolean hasPhoneNumber = Boolean.parseBoolean(String.valueOf(CacheUtil.getPreferenceBoolean(String.valueOf(
-                IConfig.SESSION_CHECK_PHONE_NUMBER), DashboardAppActivity.this)));
+                IConfigSDK.SESSION_CHECK_PHONE_NUMBER), DashboardAppActivity.this)));
 
         if (hasPhoneNumber) {
             lyWidgetSdk.setOnClickListener(new View.OnClickListener() {

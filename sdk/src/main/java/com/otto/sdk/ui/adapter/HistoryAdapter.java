@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.otto.sdk.R;
-import com.otto.sdk.model.api.response.TransactionHistoryResponse;
+import com.otto.sdk.model.api.response.TransactionHistoryResponseSDK;
 import com.otto.sdk.support.UiUtil;
 import com.otto.sdk.ui.component.support.DateUtil;
 
@@ -19,7 +19,7 @@ import java.util.List;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyViewHolder> {
     private Context context;
-    private List<TransactionHistoryResponse.DataBean.TransactionBean.HistoriesBean> listOfData = new ArrayList<TransactionHistoryResponse.DataBean.TransactionBean.HistoriesBean>();
+    private List<TransactionHistoryResponseSDK.DataBean.TransactionBean.HistoriesBean> listOfData = new ArrayList<>();
 
     public HistoryAdapter(Context context) {
         this.context = context;
@@ -34,7 +34,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int i) {
-        TransactionHistoryResponse.DataBean.TransactionBean.HistoriesBean data = listOfData.get(i);
+        TransactionHistoryResponseSDK.DataBean.TransactionBean.HistoriesBean data = listOfData.get(i);
 
         switch (data.getTransactionType()){
             case "D":
@@ -82,7 +82,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyViewHo
         }
     }
 
-    public void setData(List<TransactionHistoryResponse.DataBean.TransactionBean.HistoriesBean> data) {
+    public void setData(List<TransactionHistoryResponseSDK.DataBean.TransactionBean.HistoriesBean> data) {
         listOfData.clear();
         listOfData = data;
         notifyDataSetChanged();

@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.otto.sdk.model.api.response.RegisterResponse;
+import com.otto.sdk.model.api.response.RegisterResponseSDK;
 
 public class Preferences {
 
@@ -59,7 +59,7 @@ public class Preferences {
      * Save User Data
      * @param registerResponse
      */
-    public void saveUserData(RegisterResponse registerResponse) {
+    public void saveUserData(RegisterResponseSDK registerResponse) {
         SharedPreferences.Editor e = mSharedPreferences.edit();
         e.putString(Preferences.USER_DATA, new Gson().toJson(registerResponse));
         e.apply();
@@ -69,9 +69,9 @@ public class Preferences {
      * Get User Data
      * @return userData
      */
-    public RegisterResponse registerResponse(){
+    public RegisterResponseSDK registerResponse(){
         String  userDataJSON = mSharedPreferences.getString(Preferences.USER_DATA, "");
-        return new Gson().fromJson(userDataJSON, RegisterResponse.class);
+        return new Gson().fromJson(userDataJSON, RegisterResponseSDK.class);
     }
 
 }

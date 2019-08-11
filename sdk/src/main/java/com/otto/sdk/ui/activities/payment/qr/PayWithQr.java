@@ -12,14 +12,14 @@ import android.widget.Toast;
 
 import com.google.zxing.Result;
 import com.otto.sdk.R;
-import com.otto.sdk.base.BaseActivity;
+import com.otto.sdk.base.BaseActivitySDK;
 
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 import static android.Manifest.permission.CAMERA;
 
-public class PayWithQr extends BaseActivity implements ZXingScannerView.ResultHandler {
+public class PayWithQr extends BaseActivitySDK implements ZXingScannerView.ResultHandler {
 
 
     private static final int REQUEST_CAMERA = 1;

@@ -2,16 +2,16 @@
 //
 //import android.content.Context;
 //
-//import app.beelabs.com.codebase.base.BaseDao;
-//import app.beelabs.com.codebase.base.IDao;
+//import app.beelabs.com.codebase.base.BaseDaoSDKSDK;
+//import app.beelabs.com.codebase.base.IDaoSDK;
 //import app.beelabs.com.codebase.support.util.DeviceUtil;
 //import io.realm.Realm;
 //import io.realm.RealmConfiguration;
 //import io.realm.RealmObject;
 //import io.realm.RealmResults;
 //
-//public class AppDao extends BaseDao {
-//    public AppDao(IDao obj) {
+//public class AppDao extends BaseDaoSDKSDK {
+//    public AppDao(IDaoSDK obj) {
 //        super(obj);
 //    }
 //

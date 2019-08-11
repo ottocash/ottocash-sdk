@@ -10,10 +10,10 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.otto.sdk.IConfig;
-import com.otto.sdk.model.api.response.InquiryResponse;
+import com.otto.sdk.IConfigSDK;
+import com.otto.sdk.model.api.response.InquiryResponseSDK;
 import com.otto.sdk.support.UiUtil;
-import com.otto.sdk.ui.activities.payment.ReviewCheckoutActivity;
+import com.otto.sdk.ui.activities.payment.ReviewCheckoutActivitySDK;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.support.util.CacheUtil;
@@ -24,7 +24,7 @@ public class CheckOutActivity extends BaseActivity {
 
     private String SESSION_GRAND_TOTAL = "total";
     private boolean isFormValidationSuccess = false;
-    private InquiryResponse data;
+    private InquiryResponseSDK data;
 
     private String emoney;
 
@@ -61,7 +61,7 @@ public class CheckOutActivity extends BaseActivity {
                     edtSubTotal.setError("Input Sample Sub Total");
                 } else {
                     String grandTotal = edtSubTotal.getText().toString();
-                    Intent intent = new Intent(CheckOutActivity.this, ReviewCheckoutActivity.class);
+                    Intent intent = new Intent(CheckOutActivity.this, ReviewCheckoutActivitySDK.class);
                     intent.putExtra(SESSION_GRAND_TOTAL, grandTotal);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
@@ -72,7 +72,7 @@ public class CheckOutActivity extends BaseActivity {
     }
 
     private void initContent() {
-        String emoney = String.valueOf(CacheUtil.getPreferenceInteger(IConfig.SESSION_EMONEY_BALANCE, CheckOutActivity.this));
+        String emoney = String.valueOf(CacheUtil.getPreferenceInteger(IConfigSDK.SESSION_EMONEY_BALANCE, CheckOutActivity.this));
         tvSaldoOttoCash.setText(UiUtil.formatMoneyIDR(Long.parseLong(emoney)));
     }
 

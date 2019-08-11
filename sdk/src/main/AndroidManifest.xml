@@ -6,78 +6,78 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-    <application android:name=".OttoCashSdk">
+    <application android:name=".OttoCashSDK">
         <activity
-            android:name=".ui.activities.payment.HistoryActivity"
+            android:name=".ui.activities.payment.HistoryActivitySDK"
             android:label="@string/title_activity_history"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".ui.activities.tac.TACOttocashAndMitraActivity" />
-        <activity android:name=".ui.activities.tac.TACMitraActivity" />
+        <activity android:name=".ui.activities.tac.TACOttocashAndMitraActivitySDK" />
+        <activity android:name=".ui.activities.tac.TACMitraActivitySDK" />
         <activity
-            android:name=".ui.activities.SdkActivity"
+            android:name=".ui.activities.SdkActivitySDK"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activities.account.login.PinLoginActivity"
+            android:name=".ui.activities.account.login.PinLoginActivitySDK"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activities.dashboard.DashboardActivity"
+            android:name=".ui.activities.dashboard.DashboardActivitySDK"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activities.payment.CheckOutSuccessActivity"
+            android:name=".ui.activities.payment.CheckOutSuccessActivitySDK"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activities.payment.PinActivity"
+            android:name=".ui.activities.payment.PinActivitySDK"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activities.payment.PinCheckOutActivity"
+            android:name=".ui.activities.payment.PinCheckOutActivitySDK"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activities.payment.ReviewCheckoutActivity"
+            android:name=".ui.activities.payment.ReviewCheckoutActivitySDK"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activities.account.registration.RegistrationSuccessActivity"
+            android:name=".ui.activities.account.registration.RegistrationSuccessActivitySDK"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activities.account.registration.OtpActivity"
+            android:name=".ui.activities.account.registration.OtpActivitySDK"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activities.account.login.OtpLoginActivity"
+            android:name=".ui.activities.account.login.OtpLoginActivitySDK"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activities.account.registration.SetPinActivity"
+            android:name=".ui.activities.account.registration.SetPinActivitySDK"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activities.account.registration.RegistrationActivity"
+            android:name=".ui.activities.account.registration.RegistrationActivitySDK"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activities.account.activation.ActivationSuccessActivity"
+            android:name=".ui.activities.account.activation.ActivationSuccessActivitySDK"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activities.account.activation.ActivationActivity"
+            android:name=".ui.activities.account.activation.ActivationActivitySDK"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activities.payment.PaymentFailedActivity"
+            android:name=".ui.activities.payment.PaymentFailedActivitySDK"
+            android:screenOrientation="portrait" />
+        <!--<activity-->
+            <!--android:name=".ui.activities.payment.PaymentSuccessActivity"-->
+            <!--android:screenOrientation="portrait" />-->
+        <activity
+            android:name=".ui.activities.topup.TopUpActivitySDK"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activities.payment.PaymentSuccessActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activities.topup.TopUpActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activities.payment.PaymentActivity"
+            android:name=".ui.activities.payment.PaymentActivitySDK"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activities.payment.qr.PayWithQr"
             android:screenOrientation="portrait" />
+        <!--<activity-->
+            <!--android:name=".ui.activities.account.login.LoginActivity"-->
+            <!--android:screenOrientation="portrait" />-->
         <activity
-            android:name=".ui.activities.account.login.LoginActivity"
+            android:name=".ui.activities.account.activation.ActivationBlockedActivitySDK"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activities.account.activation.ActivationBlockedActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activities.tac.TACOttoCashActivity"
+            android:name=".ui.activities.tac.TACOttoCashActivitySDK"
             android:screenOrientation="portrait" />
     </application>
 

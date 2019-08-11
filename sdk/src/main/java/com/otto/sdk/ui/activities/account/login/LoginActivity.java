@@ -7,21 +7,21 @@
 //import android.widget.EditText;
 //import android.widget.Toast;
 //
-//import com.otto.sdk.IConfig;
-//import com.otto.sdk.OttoCashSdk;
+//import com.otto.sdk.IConfigSDK;
+//import com.otto.sdk.OttoCashSDK;
 //import com.otto.sdk.R;
+//import com.otto.sdk.base.BaseActivitySDK;
+//import com.otto.sdk.base.BaseDaoSDKSDK;
+//import com.otto.sdk.base.response.BaseResponseSDK;
 //import com.otto.sdk.model.api.request.LoginRequest;
-//import com.otto.sdk.model.api.response.LoginResponse;
-//import com.otto.sdk.model.dao.AuthDao;
+//import com.otto.sdk.model.api.response.LoginResponseSDK;
+//import com.otto.sdk.model.dao.AuthDaoSDK;
 //import com.otto.sdk.presenter.manager.SessionManager;
 //
-//import app.beelabs.com.codebase.base.BaseActivity;
-//import app.beelabs.com.codebase.base.BaseDao;
-//import app.beelabs.com.codebase.base.response.BaseResponse;
-//import app.beelabs.com.codebase.support.util.CacheUtil;
+//
 //import retrofit2.Response;
 //
-//public class LoginActivity extends BaseActivity {
+//public class LoginActivity extends BaseActivitySDK {
 //
 //    EditText edt_phone;
 //    EditText edt_pin;
@@ -53,26 +53,26 @@
 //    }
 //
 //    private void onCallApiLogin() {
-//        final AuthDao dao = new AuthDao(this);
+//        final AuthDaoSDK dao = new AuthDaoSDK(this);
 //        final LoginRequest model = new LoginRequest();
 //        model.setPhone(edt_phone.getText().toString());
 //        model.setPin(edt_pin.getText().toString());
-//        showApiProgressDialog(OttoCashSdk.getAppComponent(), new AuthDao(this) {
+//        showApiProgressDialog(OttoCashSDK.getAppComponent(), new AuthDaoSDK(this) {
 //            @Override
 //            public void call() {
-//                dao.onLogin(model, LoginActivity.this, BaseDao.getInstance(LoginActivity.this,
-//                        IConfig.KEY_API_LOGIN).callback);
+//                dao.onLogin(model, LoginActivity.this, BaseDaoSDKSDK.getInstance(LoginActivity.this,
+//                        IConfigSDK.KEY_API_LOGIN).callback);
 //            }
 //        });
 //    }
 //
 //
 //    @Override
-//    protected void onApiResponseCallback(BaseResponse br, int responseCode, Response response) {
+//    protected void onApiResponseCallback(BaseResponseSDK br, int responseCode, Response response) {
 //        super.onApiResponseCallback(br, responseCode, response);
 //        if (response.isSuccessful()) {
-//            if (responseCode == IConfig.KEY_API_LOGIN) {
-//                LoginResponse data = (LoginResponse) br;
+//            if (responseCode == IConfigSDK.KEY_API_LOGIN) {
+//                LoginResponseSDK data = (LoginResponseSDK) br;
 //                if (data.getMeta().getCode() == 201 || data.getMeta().getCode() == 200) {
 //
 //                    SessionManager.putSessionLogin(true, LoginActivity.this);
@@ -82,13 +82,13 @@
 //                    String name = data.getData().getName();
 //                    String phone = data.getData().getPhone();
 //
-//                    CacheUtil.putPreferenceInteger(IConfig.SESSION_USER_ID, user_id, LoginActivity.this);
-//                    CacheUtil.putPreferenceString(IConfig.SESSION_ACCOUNT_NUMBER, account_number, LoginActivity.this);
-//                    CacheUtil.putPreferenceString(IConfig.SESSION_NAME, name, LoginActivity.this);
-//                    CacheUtil.putPreferenceString(IConfig.SESSION_PHONE, phone, LoginActivity.this);
+//                    CacheUtil.putPreferenceInteger(IConfigSDK.SESSION_USER_ID, user_id, LoginActivity.this);
+//                    CacheUtil.putPreferenceString(IConfigSDK.SESSION_ACCOUNT_NUMBER, account_number, LoginActivity.this);
+//                    CacheUtil.putPreferenceString(IConfigSDK.SESSION_NAME, name, LoginActivity.this);
+//                    CacheUtil.putPreferenceString(IConfigSDK.SESSION_PHONE, phone, LoginActivity.this);
 //
-//                    Intent intent = new Intent(LoginActivity.this, OtpLoginActivity.class);
-//                    intent.putExtra(IConfig.SESSION_PHONE, phone);
+//                    Intent intent = new Intent(LoginActivity.this, OtpLoginActivitySDK.class);
+//                    intent.putExtra(IConfigSDK.SESSION_PHONE, phone);
 //                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 //                    startActivity(intent);
 //                    finish();

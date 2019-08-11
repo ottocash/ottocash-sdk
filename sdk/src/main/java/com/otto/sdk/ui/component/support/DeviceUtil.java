@@ -2,7 +2,7 @@ package com.otto.sdk.ui.component.support;
 
 import android.util.DisplayMetrics;
 
-import com.otto.sdk.OttoCashSdk;
+import com.otto.sdk.OttoCashSDK;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -11,12 +11,12 @@ public class DeviceUtil {
 
 
     public static int dpToPx(int dp) {
-        DisplayMetrics displayMetrics = OttoCashSdk.getContext().getResources().getDisplayMetrics();
+        DisplayMetrics displayMetrics = OttoCashSDK.getContext().getResources().getDisplayMetrics();
         return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
     }
 
     public static int pxToDp(int px) {
-        DisplayMetrics displayMetrics = OttoCashSdk.getContext().getResources().getDisplayMetrics();
+        DisplayMetrics displayMetrics = OttoCashSDK.getContext().getResources().getDisplayMetrics();
         return Math.round(px / (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
     }
 
