@@ -70,22 +70,22 @@
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
-    <android.support.design.bottomappbar.BottomAppBar
+    <LinearLayout
         android:id="@+id/btnBottom"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:layout_alignParentBottom="true"
-        android:backgroundTint="@color/Blue_1f204c"
+        android:background="@color/Blue_1f204c"
         tools:ignore="BottomAppBar">
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="center"
             android:text="Kembali"
             android:textAppearance="@style/RobotoBold"
             android:textColor="@color/White_ffffff"
             android:textSize="14sp" />
-    </android.support.design.bottomappbar.BottomAppBar>
+    </LinearLayout>
 
 </RelativeLayout>

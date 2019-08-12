@@ -9,6 +9,7 @@ import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.otto.sdk.IConfig;
@@ -21,7 +22,7 @@ import app.beelabs.com.codebase.support.util.CacheUtil;
 
 public class TopUpActivity extends BaseActivity {
 
-    BottomAppBar btnBottom;
+    LinearLayout btnBottom;
     TextView tvMbank3;
     TextView tvMbank5;
     TextView tvAtm4;
