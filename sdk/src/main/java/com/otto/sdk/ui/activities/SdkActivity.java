@@ -2,6 +2,7 @@ package com.otto.sdk.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.otto.sdk.IConfig;
@@ -21,6 +22,7 @@ import com.otto.sdk.ui.activities.dashboard.DashboardActivity;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.base.BasePresenter;
+import app.beelabs.com.codebase.di.component.AppComponent;
 import app.beelabs.com.codebase.support.util.CacheUtil;
 
 public class SdkActivity extends BaseActivity implements ISdkView {
@@ -44,16 +46,18 @@ public class SdkActivity extends BaseActivity implements ISdkView {
         String phone = CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, SdkActivity.this);
         model.setPhone(phone);
 
-        presenterSDK = ((SdkResourcePresenter) BasePresenter.getInstance(SdkActivity.this, new SdkResourcePresenter(SdkActivity.this)));
-        presenterSDK.getCheckPhone(model);
+//        presenterSDK = ((SdkResourcePresenter) BasePresenter.getInstance(SdkActivity.this, new SdkResourcePresenter(SdkActivity.this)));
+//        presenterSDK.getCheckPhone(model);
+        AppComponent appComponent = OttoCashSdk.getAppComponent();
+        Log.d("", "");
 
-//        showApiProgressDialog(OttoCashSdk.getAppComponent(), new SdkResourcePresenter(SdkActivity.this) {
-//            @Override
-//            public void call() {
-//                getCheckPhone(model);
-//
-//            }
-//        }, "Loading...");
+        showApiProgressDialog(OttoCashSdk.getAppComponent(), new SdkResourcePresenter(SdkActivity.this) {
+            @Override
+            public void call() {
+                getCheckPhone(model);
+
+            }
+        }, "Loading...");
     }
 
     public void onCreateToken() {
