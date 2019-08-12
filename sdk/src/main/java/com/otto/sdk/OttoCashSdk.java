@@ -10,9 +10,7 @@ public class OttoCashSdk extends BaseApp {
 
     private static Context context;
     private static AppComponent appComponent;
-
-
-
+    
     @Override
     public void onCreate() {
         super.onCreate();
