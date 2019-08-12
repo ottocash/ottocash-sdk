@@ -29,15 +29,15 @@ public class BaseApiSDK {
 
 
     public Object setupApi(AppComponentSDK appComponentSDK, Class clazz, boolean allowUntrusted, int timeout) {
-        IApiSDK api = appComponentSDK.getApi();
+        IApiSDK api = appComponentSDK.getApiSDK();
 
-        return api.initApiService(getApiDomain(), allowUntrusted, clazz, timeout);
+        return api.initApiServiceSDK(getApiDomain(), allowUntrusted, clazz, timeout);
     }
 
 
     public Object setupApiDomain(String domain, AppComponentSDK appComponentSDK, Class clazz, boolean allowUntrusted, int timeout){
         this.apiDomain = domain;
-        return appComponentSDK.getApi().initApiService(domain, allowUntrusted, clazz, timeout);
+        return appComponentSDK.getApiSDK().initApiServiceSDK(domain, allowUntrusted, clazz, timeout);
     }
 }
 

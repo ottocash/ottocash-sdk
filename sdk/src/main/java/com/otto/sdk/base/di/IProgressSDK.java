@@ -6,8 +6,8 @@ import com.otto.sdk.base.LoadingDialogComponentSDK;
 
 
 public interface IProgressSDK {
-    void showProgressDialog(Context context, String message, boolean isCanceledOnTouch);
+    void showProgressDialogSDK(Context context, String message, boolean isCanceledOnTouch);
 
-    void showLoadingDialog(LoadingDialogComponentSDK dialog);
+    void showLoadingDialogSDK(LoadingDialogComponentSDK dialog);
 }
 

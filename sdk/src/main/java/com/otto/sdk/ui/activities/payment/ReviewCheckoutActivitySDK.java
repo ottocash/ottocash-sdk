@@ -113,7 +113,7 @@ public class ReviewCheckoutActivitySDK extends BaseActivitySDK implements IRevie
         if (emoney < total) {
             saldoDialog();
         } else {
-            showApiProgressDialog(OttoCashSDK.getAppComponent(), new ReviewCheckoutPresenterSDK(this) {
+            showApiProgressDialogSDK(OttoCashSDK.getAppComponentSDK(), new ReviewCheckoutPresenterSDK(this) {
                 @Override
                 public void call() {
                     getReviewCheckout(reviewCheckOutRequest);

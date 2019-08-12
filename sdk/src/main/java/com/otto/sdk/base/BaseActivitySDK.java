@@ -84,26 +84,26 @@ public class BaseActivitySDK extends AppCompatActivity implements IViewSDK, Comp
 
 
     // handle progress dialog
-    protected void showApiProgressDialog(AppComponentSDK appComponentSDK, BasePresenterSDKSDK presenter) {
-        showApiProgressDialog(appComponentSDK, presenter, null);
+    protected void showApiProgressDialogSDK(AppComponentSDK appComponentSDK, BasePresenterSDKSDK presenter) {
+        showApiProgressDialogSDK(appComponentSDK, presenter, null);
     }
 
-    protected void showApiProgressDialog(AppComponentSDK appComponentSDK, BasePresenterSDKSDK presenter, String message) {
-        IProgressSDK progress = appComponentSDK.getProgressDialog();
-        progress.showProgressDialog(this, message, false);
+    protected void showApiProgressDialogSDK(AppComponentSDK appComponentSDK, BasePresenterSDKSDK presenter, String message) {
+        IProgressSDK progress = appComponentSDK.getProgressDialogSDK();
+        progress.showProgressDialogSDK(this, message, false);
         presenter.call();
     }
 
-    protected void showApiProgressDialog(AppComponentSDK appComponentSDK, BasePresenterSDKSDK presenter, String message, boolean isCanceledOnTouch) {
-        IProgressSDK progress = appComponentSDK.getProgressDialog();
-        progress.showProgressDialog(this, message, isCanceledOnTouch);
+    protected void showApiProgressDialogSDK(AppComponentSDK appComponentSDK, BasePresenterSDKSDK presenter, String message, boolean isCanceledOnTouch) {
+        IProgressSDK progress = appComponentSDK.getProgressDialogSDK();
+        progress.showProgressDialogSDK(this, message, isCanceledOnTouch);
         presenter.call();
     }
 
 
     protected void showApiCustomProgressDialog(AppComponentSDK appComponentSDK, BasePresenterSDKSDK presenter, String message) {
-        IProgressSDK progress = appComponentSDK.getProgressDialog();
-        progress.showLoadingDialog(new LoadingDialogComponentSDK(message, this, R.style.CoconutDialogFullScreen));
+        IProgressSDK progress = appComponentSDK.getProgressDialogSDK();
+        progress.showLoadingDialogSDK(new LoadingDialogComponentSDK(message, this, R.style.CoconutDialogFullScreen));
         presenter.call();
 
     }

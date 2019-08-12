@@ -12,8 +12,8 @@ import dagger.Component;
 @Component(modules = {AppModuleSDK.class, ApiServiceModuleSDK.class})
 public interface AppComponentSDK {
 
-    IApiSDK getApi();
+    IApiSDK getApiSDK();
 
-    IProgressSDK getProgressDialog();
+    IProgressSDK getProgressDialogSDK();
 
 }

@@ -44,7 +44,7 @@ public class PinActivitySDK extends BaseActivitySDK implements IReviewCheckoutVi
                 IConfigSDK.SESSION_PHONE, PinActivitySDK.this)));
         model.setPin(lineField.getText().toString());
 
-        showApiProgressDialog(OttoCashSDK.getAppComponent(), new ReviewCheckoutPresenterSDK(this) {
+        showApiProgressDialogSDK(OttoCashSDK.getAppComponentSDK(), new ReviewCheckoutPresenterSDK(this) {
             @Override
             public void call() {
                 getPaymentValidate(model);

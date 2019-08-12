@@ -10,12 +10,12 @@ import com.otto.sdk.base.di.IProgressSDK;
 
 public class ProgressManagerSDK implements IProgressSDK {
     @Override
-    public void showProgressDialog(Context context, String message, boolean isCanceledOnTouch) {
+    public void showProgressDialogSDK(Context context, String message, boolean isCanceledOnTouch) {
         ProgressDialogComponentSDK.showProgressDialog(context, message, isCanceledOnTouch);
     }
 
     @Override
-    public void showLoadingDialog(LoadingDialogComponentSDK dialog) {
+    public void showLoadingDialogSDK(LoadingDialogComponentSDK dialog) {
         dialog.show();
     }
 

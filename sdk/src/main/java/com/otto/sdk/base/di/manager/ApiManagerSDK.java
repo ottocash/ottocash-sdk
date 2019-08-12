@@ -14,7 +14,7 @@ public class ApiManagerSDK extends BaseManagerSDK implements IApiSDK {
     private String apiDomain = "";
 
     @Override
-    public Object initApiService(String apiDomain, boolean allowUntrusted, Class<IApiServiceSDK> clazz, int timeout) {
+    public Object initApiServiceSDK(String apiDomain, boolean allowUntrusted, Class<IApiServiceSDK> clazz, int timeout) {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(apiDomain)

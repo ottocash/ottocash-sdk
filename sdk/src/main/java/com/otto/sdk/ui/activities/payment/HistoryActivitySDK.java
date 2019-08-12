@@ -56,7 +56,7 @@ public class HistoryActivitySDK extends BaseActivitySDK implements IHistoryViewS
         model = new TransactionHistoryRequest(
                 CacheUtil.getPreferenceString(SESSION_PHONE, HistoryActivitySDK.this));
 
-        showApiProgressDialog(OttoCashSDK.getAppComponent(), new HistoryTransactionPresenterSDK(this) {
+        showApiProgressDialogSDK(OttoCashSDK.getAppComponentSDK(), new HistoryTransactionPresenterSDK(this) {
             @Override
             public void call() {
                 getHistories(model);
@@ -65,7 +65,7 @@ public class HistoryActivitySDK extends BaseActivitySDK implements IHistoryViewS
         }, "Loading...");
 
 
-        //        showApiProgressDialog(OttoCashSDK.getAppComponent(), new TransactionDaoSDK(HistoryActivitySDK.this) {
+        //        showApiProgressDialogSDK(OttoCashSDK.getAppComponentSDK(), new TransactionDaoSDK(HistoryActivitySDK.this) {
 //            @Override
 //            public void call() {
 //                this.onGetHistories(HistoryActivitySDK.this, model,

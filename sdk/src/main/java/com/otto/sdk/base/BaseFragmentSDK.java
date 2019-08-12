@@ -14,20 +14,20 @@ public abstract class BaseFragmentSDK extends Fragment implements IViewSDK {
     }
 
     protected void showApiProgressDialog(AppComponentSDK appComponentSDK, BasePresenterSDKSDK presenter, String message) {
-        IProgressSDK progress = appComponentSDK.getProgressDialog();
-        progress.showProgressDialog(getActivity(), message, true);
+        IProgressSDK progress = appComponentSDK.getProgressDialogSDK();
+        progress.showProgressDialogSDK(getActivity(), message, true);
         presenter.call();
     }
 
     protected void showApiProgressDialog(AppComponentSDK appComponentSDK, BasePresenterSDKSDK presenter, String message, boolean isCanceledOnTouch) {
-        IProgressSDK progress = appComponentSDK.getProgressDialog();
-        progress.showProgressDialog(getActivity(), message, isCanceledOnTouch);
+        IProgressSDK progress = appComponentSDK.getProgressDialogSDK();
+        progress.showProgressDialogSDK(getActivity(), message, isCanceledOnTouch);
         presenter.call();
     }
 
     protected void showLoadingDialog(AppComponentSDK appComponentSDK, BasePresenterSDKSDK presenter, String message) {
-        IProgressSDK progress = appComponentSDK.getProgressDialog();
-        progress.showLoadingDialog(new LoadingDialogComponentSDK(message, getActivity(), R.style.CoconutDialogFullScreen));
+        IProgressSDK progress = appComponentSDK.getProgressDialogSDK();
+        progress.showLoadingDialogSDK(new LoadingDialogComponentSDK(message, getActivity(), R.style.CoconutDialogFullScreen));
         presenter.call();
     }
 

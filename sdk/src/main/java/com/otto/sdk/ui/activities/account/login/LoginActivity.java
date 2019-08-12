@@ -57,7 +57,7 @@
 //        final LoginRequest model = new LoginRequest();
 //        model.setPhone(edt_phone.getText().toString());
 //        model.setPin(edt_pin.getText().toString());
-//        showApiProgressDialog(OttoCashSDK.getAppComponent(), new AuthDaoSDK(this) {
+//        showApiProgressDialogSDK(OttoCashSDK.getAppComponentSDK(), new AuthDaoSDK(this) {
 //            @Override
 //            public void call() {
 //                dao.onLogin(model, LoginActivity.this, BaseDaoSDKSDK.getInstance(LoginActivity.this,

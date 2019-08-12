@@ -45,7 +45,7 @@ public class SdkActivitySDK extends BaseActivitySDK implements ISdkViewSDK {
         presenterSDK = ((SdkResourcePresenterSDK) BasePresenterSDKSDK.getInstance(SdkActivitySDK.this, new SdkResourcePresenterSDK(SdkActivitySDK.this)));
         presenterSDK.getCheckPhone(model);
 
-//        showApiProgressDialog(OttoCashSDK.getAppComponent(), new SdkResourcePresenterSDK(SdkActivitySDK.this) {
+//        showApiProgressDialogSDK(OttoCashSDK.getAppComponentSDK(), new SdkResourcePresenterSDK(SdkActivitySDK.this) {
 //            @Override
 //            public void call() {
 //                getCheckPhone(model);

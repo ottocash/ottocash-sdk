@@ -2,8 +2,8 @@ package com.otto.sdk;
 
 import android.content.Context;
 
-import com.otto.sdk.base.BaseAppSDK;
 import com.otto.sdk.base.AppComponentSDK;
+import com.otto.sdk.base.BaseAppSDK;
 import com.otto.sdk.base.DaggerAppComponentSDK;
 
 public class OttoCashSDK extends BaseAppSDK {
@@ -20,7 +20,7 @@ public class OttoCashSDK extends BaseAppSDK {
         setupDefaultFont("fonts/Barlow-Regular.ttf");
     }
 
-    public static AppComponentSDK getAppComponent() {
+    public static AppComponentSDK getAppComponentSDK() {
         return getComponent();
     }
 

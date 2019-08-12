@@ -66,12 +66,12 @@ public class ApiSDK extends BaseApiSDK {
 
 //    private static ApiServiceSDK initApiDomain() {
 //        getInstance().setApiDomain(IConfigSDK.API_BASE_URL);
-//        return (ApiServiceSDK) getInstance().setupApi(OttoCashSDK.getAppComponent(), ApiServiceSDK.class, true, 60);
+//        return (ApiServiceSDK) getInstance().setupApi(OttoCashSDK.getAppComponentSDK(), ApiServiceSDK.class, true, 60);
 //    }
 
     synchronized private static ApiServiceSDK initApiDomain() {
         return (ApiServiceSDK) getInstance()
-                .setupApiDomain(IConfigSDK.API_BASE_URL, OttoCashSDK.getAppComponent(),
+                .setupApiDomain(IConfigSDK.API_BASE_URL, OttoCashSDK.getAppComponentSDK(),
                         ApiServiceSDK.class,
                         true,
                         IConfigSDK.TIMEOUT_SHORT_INSECOND);

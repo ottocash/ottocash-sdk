@@ -51,7 +51,7 @@ public class PinLoginActivitySDK extends BaseActivitySDK implements IAuthViewSDK
         model.setPin(pin);
 
 
-        showApiProgressDialog(OttoCashSDK.getAppComponent(), new AuthPresenterSDK(PinLoginActivitySDK.this) {
+        showApiProgressDialogSDK(OttoCashSDK.getAppComponentSDK(), new AuthPresenterSDK(PinLoginActivitySDK.this) {
             @Override
             public void call() {
                 getLogin(model);

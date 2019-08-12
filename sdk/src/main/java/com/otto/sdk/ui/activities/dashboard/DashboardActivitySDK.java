@@ -137,7 +137,7 @@ public class DashboardActivitySDK extends BaseActivitySDK implements IInquiryVie
         model = new InquiryRequest(String.valueOf(CacheUtil.getPreferenceString(
                 IConfigSDK.SESSION_PHONE, DashboardActivitySDK.this)));
 
-        showApiProgressDialog(OttoCashSDK.getAppComponent(), new InquiryPresenterSDK(DashboardActivitySDK.this) {
+        showApiProgressDialogSDK(OttoCashSDK.getAppComponentSDK(), new InquiryPresenterSDK(DashboardActivitySDK.this) {
             @Override
             public void call() {
                 getInquiry(model);

@@ -111,7 +111,7 @@ public class SetPinActivitySDK extends BaseActivitySDK implements IAuthViewSDK {
         model.setPlatform("android");
 
 
-        showApiProgressDialog(OttoCashSDK.getAppComponent(), new AuthPresenterSDK(SetPinActivitySDK.this) {
+        showApiProgressDialogSDK(OttoCashSDK.getAppComponentSDK(), new AuthPresenterSDK(SetPinActivitySDK.this) {
             @Override
             public void call() {
                 getRegister(model);
