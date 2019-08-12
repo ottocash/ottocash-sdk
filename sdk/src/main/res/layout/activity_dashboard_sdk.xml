@@ -352,7 +352,7 @@
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
-    <android.support.design.bottomappbar.BottomAppBar
+    <LinearLayout
         android:id="@+id/btnBottom"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
@@ -363,13 +363,13 @@
         <TextView
             android:id="@+id/webview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="center"
             android:text="@string/syarat_ketentuan"
             android:textAppearance="@style/BarlowSemiBold"
             android:textColor="@color/Blue_056fb6"
             android:textSize="12sp" />
-    </android.support.design.bottomappbar.BottomAppBar>
+    </LinearLayout>
 
 
 </RelativeLayout>
