@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.otto.sdk.R;
-import com.otto.sdk.ui.activities.dashboard.DashboardActivity;
+import com.otto.sdk.ui.activities.dashboard.DashboardSDKActivity;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 
@@ -28,7 +28,7 @@ public class ActivationSuccessActivity extends BaseActivity {
         btnBottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ActivationSuccessActivity.this, DashboardActivity.class);
+                Intent intent = new Intent(ActivationSuccessActivity.this, DashboardSDKActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 ActivationSuccessActivity.this.startActivity(intent);
                 finish();

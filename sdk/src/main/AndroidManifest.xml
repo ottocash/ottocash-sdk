@@ -20,7 +20,7 @@
             android:name=".ui.activities.account.login.PinLoginActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activities.dashboard.DashboardActivity"
+            android:name=".ui.activities.dashboard.DashboardSDKActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activities.payment.CheckOutSuccessActivity"
@@ -58,9 +58,9 @@
         <activity
             android:name=".ui.activities.payment.PaymentFailedActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activities.payment.PaymentSuccessActivity"
-            android:screenOrientation="portrait" />
+        <!--<activity-->
+        <!--android:name=".ui.activities.payment.PaymentSuccessActivity"-->
+        <!--android:screenOrientation="portrait" />-->
         <activity
             android:name=".ui.activities.topup.TopUpActivity"
             android:screenOrientation="portrait" />
@@ -70,9 +70,9 @@
         <activity
             android:name=".ui.activities.payment.qr.PayWithQr"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activities.account.login.LoginActivity"
-            android:screenOrientation="portrait" />
+        <!--<activity-->
+        <!--android:name=".ui.activities.account.login.LoginActivity"-->
+        <!--android:screenOrientation="portrait" />-->
         <activity
             android:name=".ui.activities.account.activation.ActivationBlockedActivity"
             android:screenOrientation="portrait" />

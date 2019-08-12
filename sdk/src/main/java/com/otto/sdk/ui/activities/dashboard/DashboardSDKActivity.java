@@ -27,7 +27,7 @@ import com.otto.sdk.ui.component.support.Util;
 import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.support.util.CacheUtil;
 
-public class DashboardActivity extends BaseActivity implements IInquiryView {
+public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
 
     ImageView ivBack;
     TextView tvSaldoOttoCash;
@@ -78,25 +78,25 @@ public class DashboardActivity extends BaseActivity implements IInquiryView {
         cdPayments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DashboardActivity.this, PayWithQr.class);
+                Intent intent = new Intent(DashboardSDKActivity.this, PayWithQr.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                DashboardActivity.this.startActivity(intent);
+                DashboardSDKActivity.this.startActivity(intent);
             }
         });
 
         cdTopUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DashboardActivity.this, TopUpActivity.class);
+                Intent intent = new Intent(DashboardSDKActivity.this, TopUpActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                DashboardActivity.this.startActivity(intent);
+                DashboardSDKActivity.this.startActivity(intent);
             }
         });
 
         cdHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DashboardActivity.this, HistoryActivity.class);
+                Intent intent = new Intent(DashboardSDKActivity.this, HistoryActivity.class);
                 startActivity(intent);
             }
         });
@@ -111,9 +111,9 @@ public class DashboardActivity extends BaseActivity implements IInquiryView {
         webView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DashboardActivity.this, TACOttocashAndMitraActivity.class);
+                Intent intent = new Intent(DashboardSDKActivity.this, TACOttocashAndMitraActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                DashboardActivity.this.startActivity(intent);
+                DashboardSDKActivity.this.startActivity(intent);
             }
         });
 
@@ -137,9 +137,9 @@ public class DashboardActivity extends BaseActivity implements IInquiryView {
     private void onCallApiInquiry() {
 
         model = new InquiryRequest(String.valueOf(CacheUtil.getPreferenceString(
-                IConfig.SESSION_PHONE, DashboardActivity.this)));
+                IConfig.SESSION_PHONE, DashboardSDKActivity.this)));
 
-        showApiProgressDialog(OttoCashSdk.getAppComponent(), new InquiryPresenter(DashboardActivity.this) {
+        showApiProgressDialog(OttoCashSdk.getAppComponent(), new InquiryPresenter(DashboardSDKActivity.this) {
             @Override
             public void call() {
                 getInquiry(model);
@@ -180,9 +180,9 @@ public class DashboardActivity extends BaseActivity implements IInquiryView {
         try {
 
             String PackageName = CacheUtil.getPreferenceString(IConfig.SESSION_PACKAGE_NAME,
-                    DashboardActivity.this);
+                    DashboardSDKActivity.this);
 
-            Intent intent = new Intent(DashboardActivity.this, Class.forName(PackageName));
+            Intent intent = new Intent(DashboardSDKActivity.this, Class.forName(PackageName));
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             intent.putExtra("EMONEY", emoneyBalance);
             startActivity(intent);
@@ -198,10 +198,10 @@ public class DashboardActivity extends BaseActivity implements IInquiryView {
         if (model.getMeta().getCode() == 200) {
 
             emoneyBalance = model.getData().getEmoneyBalance();
-            CacheUtil.putPreferenceInteger(IConfig.SESSION_EMONEY_BALANCE, Integer.parseInt(emoneyBalance), DashboardActivity.this);
+            CacheUtil.putPreferenceInteger(IConfig.SESSION_EMONEY_BALANCE, Integer.parseInt(emoneyBalance), DashboardSDKActivity.this);
 
             name = model.getData().getName();
-            CacheUtil.putPreferenceString(IConfig.SESSION_NAME, name, DashboardActivity.this);
+            CacheUtil.putPreferenceString(IConfig.SESSION_NAME, name, DashboardSDKActivity.this);
 
             tvSaldoOttoCash.setText(UiUtil.formatMoneyIDR(Long.parseLong(model.getData().getEmoneyBalance())));
             tvNameSDK.setText("Hai " + name + ". Saldo OttoCash Reguler Kamu");

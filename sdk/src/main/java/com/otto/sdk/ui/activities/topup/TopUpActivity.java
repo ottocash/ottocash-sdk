@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.otto.sdk.IConfig;
 import com.otto.sdk.R;
-import com.otto.sdk.ui.activities.dashboard.DashboardActivity;
+import com.otto.sdk.ui.activities.dashboard.DashboardSDKActivity;
 import com.otto.sdk.ui.component.support.Util;
 
 import app.beelabs.com.codebase.base.BaseActivity;
@@ -66,7 +66,7 @@ public class TopUpActivity extends BaseActivity {
         btnBottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(TopUpActivity.this, DashboardActivity.class);
+                Intent intent = new Intent(TopUpActivity.this, DashboardSDKActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 TopUpActivity.this.startActivity(intent);
             }

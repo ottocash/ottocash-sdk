@@ -17,7 +17,7 @@ import com.otto.sdk.model.api.response.CreateTokenResponse;
 import com.otto.sdk.presenter.SdkResourcePresenter;
 import com.otto.sdk.ui.activities.account.activation.ActivationActivity;
 import com.otto.sdk.ui.activities.account.registration.RegistrationActivity;
-import com.otto.sdk.ui.activities.dashboard.DashboardActivity;
+import com.otto.sdk.ui.activities.dashboard.DashboardSDKActivity;
 
 
 import app.beelabs.com.codebase.base.BaseActivity;
@@ -75,7 +75,7 @@ public class SdkActivity extends BaseActivity implements ISdkView {
 
 
     public void goDashboardSDK() {
-        Intent intent = new Intent(SdkActivity.this, DashboardActivity.class);
+        Intent intent = new Intent(SdkActivity.this, DashboardSDKActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
