@@ -179,13 +179,13 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
         if (model.getMeta().getCode() == 200) {
 
             emoneyBalance = model.getData().getEmoneyBalance();
-            CacheUtil.putPreferenceInteger(IConfig.SESSION_EMONEY_BALANCE, Integer.parseInt(emoneyBalance), DashboardSDKActivity.this);
+            CacheUtil.putPreferenceString(IConfig.SESSION_EMONEY_BALANCE, emoneyBalance, DashboardSDKActivity.this);
 
             name = model.getData().getName();
             CacheUtil.putPreferenceString(IConfig.SESSION_NAME, name, DashboardSDKActivity.this);
 
             tvNameSDK.setText("Hai " + name + ". Saldo OttoCash Reguler Kamu");
-            tvSaldoOttoCash.setText(UiUtil.formatMoneyIDR(Long.parseLong(model.getData().getEmoneyBalance())));
+            tvSaldoOttoCash.setText(UiUtil.formatMoneyIDR(Long.parseLong(emoneyBalance)));
 
         } else {
             Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
