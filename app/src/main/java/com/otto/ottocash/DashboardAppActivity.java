@@ -44,7 +44,7 @@ public class DashboardAppActivity extends SdkActivity {
         initializeSDK();
     }
 
-    private void EmoneyBalanceWidget() {
+    public void EmoneyBalanceWidget() {
         if (getIntent().getExtras() != null) {
             Bundle extras = getIntent().getExtras();
             String emoney = extras.getString(KEY_EMONEY_BALANCE);
@@ -58,7 +58,7 @@ public class DashboardAppActivity extends SdkActivity {
         }
     }
 
-    private void setupAccount() {
+    public void setupAccount() {
         boolean hasPhoneNumber = Boolean.parseBoolean(String.valueOf(CacheUtil.getPreferenceBoolean(String.valueOf(
                 IConfig.SESSION_CHECK_PHONE_NUMBER), DashboardAppActivity.this)));
 

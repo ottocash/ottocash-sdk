@@ -1,5 +1,6 @@
 package com.otto.sdk.ui.activities.dashboard;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -30,7 +31,7 @@ public class DashboardActivity extends BaseActivity implements IInquiryView {
 
     ImageView ivBack;
     TextView tvSaldoOttoCash;
-    TextView tvName;
+    TextView tvNameSDK;
     ImageView imgPayments;
     ImageView imgTopUp;
     CardView cdPayments;
@@ -44,6 +45,7 @@ public class DashboardActivity extends BaseActivity implements IInquiryView {
 
     private InquiryRequest model;
     String emoneyBalance;
+    String name;
 
 
     @Override
@@ -59,7 +61,7 @@ public class DashboardActivity extends BaseActivity implements IInquiryView {
     private void initComponent() {
         ivBack = findViewById(R.id.ivBack);
         tvSaldoOttoCash = findViewById(R.id.tvSaldoOttoCash);
-        tvName = findViewById(R.id.tvName);
+        tvNameSDK = findViewById(R.id.tvNameSDK);
         imgPayments = findViewById(R.id.imgPayments);
         imgTopUp = findViewById(R.id.imgTopUp);
         cdPayments = findViewById(R.id.card_payment);
@@ -91,7 +93,7 @@ public class DashboardActivity extends BaseActivity implements IInquiryView {
             }
         });
 
-        cdHistory.setOnClickListener(new View.OnClickListener(){
+        cdHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DashboardActivity.this, HistoryActivity.class);
@@ -190,6 +192,7 @@ public class DashboardActivity extends BaseActivity implements IInquiryView {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void handleInquiry(InquiryResponse model) {
         if (model.getMeta().getCode() == 200) {
@@ -197,9 +200,11 @@ public class DashboardActivity extends BaseActivity implements IInquiryView {
             emoneyBalance = model.getData().getEmoneyBalance();
             CacheUtil.putPreferenceInteger(IConfig.SESSION_EMONEY_BALANCE, Integer.parseInt(emoneyBalance), DashboardActivity.this);
 
-            tvSaldoOttoCash.setText(UiUtil.formatMoneyIDR(Long.parseLong(model.getData().getEmoneyBalance())));
-            tvName.setText("Hi " + model.getData().getName() + ". Saldo OttoCash Reguler Kamu");
+            name = model.getData().getName();
+            CacheUtil.putPreferenceString(IConfig.SESSION_NAME, name, DashboardActivity.this);
 
+            tvSaldoOttoCash.setText(UiUtil.formatMoneyIDR(Long.parseLong(model.getData().getEmoneyBalance())));
+            tvNameSDK.setText("Hai " + name + ". Saldo OttoCash Reguler Kamu");
 
         } else {
             Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
