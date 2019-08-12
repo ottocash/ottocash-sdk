@@ -1,6 +1,5 @@
 package com.otto.sdk.ui.activities.dashboard;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -58,7 +57,7 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
         onCallApiInquiry();
     }
 
-    private void initComponent() {
+    public void initComponent() {
         ivBack = findViewById(R.id.ivBack);
         tvSaldoOttoCash = findViewById(R.id.tvSaldoOttoCash);
         tvNameSDK = findViewById(R.id.tvNameSDK);
@@ -74,7 +73,7 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
         webView.setText(Util.getHTMLContent(getString(R.string.syarat_ketentuan)));
     }
 
-    private void initContent() {
+    public void initContent() {
         cdPayments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -175,6 +174,25 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
 
     }
 
+
+    public void handleInquiry(InquiryResponse model) {
+        if (model.getMeta().getCode() == 200) {
+
+            emoneyBalance = model.getData().getEmoneyBalance();
+            CacheUtil.putPreferenceInteger(IConfig.SESSION_EMONEY_BALANCE, Integer.parseInt(emoneyBalance), DashboardSDKActivity.this);
+
+            name = model.getData().getName();
+            CacheUtil.putPreferenceString(IConfig.SESSION_NAME, name, DashboardSDKActivity.this);
+
+            tvNameSDK.setText("Hai " + name + ". Saldo OttoCash Reguler Kamu");
+            tvSaldoOttoCash.setText(UiUtil.formatMoneyIDR(Long.parseLong(model.getData().getEmoneyBalance())));
+
+        } else {
+            Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
+                    Toast.LENGTH_LONG).show();
+        }
+    }
+
     @Override
     public void onBackPressed() {
         try {
@@ -189,26 +207,6 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
             finish();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-        }
-    }
-
-    @SuppressLint("SetTextI18n")
-    @Override
-    public void handleInquiry(InquiryResponse model) {
-        if (model.getMeta().getCode() == 200) {
-
-            emoneyBalance = model.getData().getEmoneyBalance();
-            CacheUtil.putPreferenceInteger(IConfig.SESSION_EMONEY_BALANCE, Integer.parseInt(emoneyBalance), DashboardSDKActivity.this);
-
-            name = model.getData().getName();
-            CacheUtil.putPreferenceString(IConfig.SESSION_NAME, name, DashboardSDKActivity.this);
-
-            tvSaldoOttoCash.setText(UiUtil.formatMoneyIDR(Long.parseLong(model.getData().getEmoneyBalance())));
-            tvNameSDK.setText("Hai " + name + ". Saldo OttoCash Reguler Kamu");
-
-        } else {
-            Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
-                    Toast.LENGTH_LONG).show();
         }
     }
 }
