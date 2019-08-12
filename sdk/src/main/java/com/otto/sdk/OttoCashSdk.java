@@ -9,20 +9,25 @@ import app.beelabs.com.codebase.di.component.DaggerAppComponent;
 public class OttoCashSdk extends BaseApp {
 
     private static Context context;
+    private static AppComponent appComponent;
+
+
 
     @Override
     public void onCreate() {
         super.onCreate();
-//        Fabric.with(this, new Crashlytics());
 
         context = getApplicationContext();
         setupBuilder(DaggerAppComponent.builder(), this);
         setupDefaultFont("fonts/Barlow-Regular.ttf");
     }
 
+    public static void setupComponent(AppComponent component){
+        appComponent = component;
+    }
+
     public static AppComponent getAppComponent() {
-        if (context == null) return null;
-        return getComponent();
+        return appComponent;
     }
 
     public static Context getContext() {
