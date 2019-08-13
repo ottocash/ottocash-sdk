@@ -39,26 +39,12 @@ public class DashboardAppActivity extends SdkActivity {
 
         PackageName = (this.getPackageName() + ".DashboardAppActivity");
         CacheUtil.putPreferenceString(IConfig.SESSION_PACKAGE_NAME, PackageName, DashboardAppActivity.this);
-        setupAccount();
-        EmoneyBalanceWidget();
+        onSetupAccountClick();
+        onEmoneyBalanceWidget();
         initializeSDK();
     }
 
-    public void EmoneyBalanceWidget() {
-        if (getIntent().getExtras() != null) {
-            Bundle extras = getIntent().getExtras();
-            String emoney = extras.getString(KEY_EMONEY_BALANCE);
-            tvSaldoOttoCash.setText(UiUtil.formatMoneyIDR(Long.parseLong(emoney)));
-            lyWidgetSdk.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    goDashboardSDK();
-                }
-            });
-        }
-    }
-
-    public void setupAccount() {
+    public void onSetupAccountClick() {
         boolean hasPhoneNumber = Boolean.parseBoolean(String.valueOf(CacheUtil.getPreferenceBoolean(String.valueOf(
                 IConfig.SESSION_CHECK_PHONE_NUMBER), DashboardAppActivity.this)));
 
@@ -74,6 +60,21 @@ public class DashboardAppActivity extends SdkActivity {
                 @Override
                 public void onClick(View v) {
                     goRegistration();
+                }
+            });
+        }
+    }
+
+
+    public void onEmoneyBalanceWidget() {
+        if (getIntent().getExtras() != null) {
+            Bundle extras = getIntent().getExtras();
+            String emoney = extras.getString(KEY_EMONEY_BALANCE);
+            tvSaldoOttoCash.setText(UiUtil.formatMoneyIDR(Long.parseLong(emoney)));
+            lyWidgetSdk.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    goDashboardSDK();
                 }
             });
         }

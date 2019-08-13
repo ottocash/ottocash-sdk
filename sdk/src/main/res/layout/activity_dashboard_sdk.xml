@@ -74,6 +74,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
+                    android:text="Hai,"
                     android:textAppearance="@style/BarlowRegular"
                     android:textSize="12sp" />
 
@@ -81,6 +82,7 @@
                     android:id="@+id/tvSaldoOttoCash"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="Rp 0"
                     android:textAppearance="@style/BarlowSemiBold"
                     android:textColor="@color/Blue_1f204c"
                     android:textSize="24sp" />
