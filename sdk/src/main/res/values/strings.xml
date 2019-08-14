@@ -6,6 +6,11 @@
     <string name="title_ottocash">OttoCash</string>
 
 
+    <!--TAC-->
+    <string name="snk_ottocash">SNK OttoCash</string>
+    <string name="snk_ottocash_mitra">SNK OttoCash dan Mitra</string>
+
+
     <!--REGISTRATION-->
     <string name="hai">Hai!</string>
     <string name="desc_registration">Anda belum memiliki akun di OttoCash. Isi data dibawah dengan lengkap dan benar dan langsung aktifkan akun OttoCash Anda.</string>
