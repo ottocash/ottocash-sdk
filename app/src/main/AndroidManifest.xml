@@ -19,7 +19,7 @@
 
         <activity android:name=".DashboardAppActivity"></activity>
         <activity android:name=".CheckOutActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

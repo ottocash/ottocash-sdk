@@ -91,7 +91,7 @@ public class DashboardAppActivity extends SdkActivity {
     @OnClick(R.id.btnClearCache)
     public void onClearCache() {
         SessionManager.getSessionLogin(false, DashboardAppActivity.this);
-        Intent intent = new Intent(DashboardAppActivity.this, MainActivity.class);
+        Intent intent = new Intent(DashboardAppActivity.this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         DashboardAppActivity.this.startActivity(intent);
         finish();

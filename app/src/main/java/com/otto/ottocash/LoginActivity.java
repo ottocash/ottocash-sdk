@@ -16,7 +16,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.fabric.sdk.android.Fabric;
 
-public class MainActivity extends BaseActivity {
+public class LoginActivity extends BaseActivity {
 
     @BindView(R.id.btnNextWidget)
     Button btnNextWidget;
@@ -35,9 +35,9 @@ public class MainActivity extends BaseActivity {
 
     private void initClientSendCredentialstoSDK() {
         String id = "31199fb491883361aab49e9e1210b6f0847d9bee83bce849062eeef234f12621";
-        CacheUtil.putPreferenceString(IConfig.SESSION_ID, id, MainActivity.this);
+        CacheUtil.putPreferenceString(IConfig.SESSION_ID, id, LoginActivity.this);
         String secret = "9ef53ece2353a5ae9497910a1de0c483608bdb75ede462407d78ad08ec4da49a";
-        CacheUtil.putPreferenceString(IConfig.SESSION_SECRET, secret, MainActivity.this);
+        CacheUtil.putPreferenceString(IConfig.SESSION_SECRET, secret, LoginActivity.this);
     }
 
     @OnClick(R.id.btnNextWidget)
@@ -49,10 +49,10 @@ public class MainActivity extends BaseActivity {
             edt_phone.setError("Input Phone Number");
         } else {
             String phone = edt_phone.getText().toString();
-            CacheUtil.putPreferenceString(IConfig.SESSION_PHONE, phone, MainActivity.this);
-            Intent intent = new Intent(MainActivity.this, DashboardAppActivity.class);
+            CacheUtil.putPreferenceString(IConfig.SESSION_PHONE, phone, LoginActivity.this);
+            Intent intent = new Intent(LoginActivity.this, DashboardAppActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            MainActivity.this.startActivity(intent);
+            LoginActivity.this.startActivity(intent);
         }
     }
 
