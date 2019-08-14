@@ -25,7 +25,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@mipmap/img_header"
+        android:background="@drawable/img_header"
         android:orientation="horizontal">
 
         <include layout="@layout/partial_payment" />
@@ -90,7 +90,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="20dp"
-            android:background="@mipmap/ic_secure_payment" />
+            android:background="@drawable/ic_secure_payment" />
 
         <LinearLayout
             android:id="@+id/bottomActivation"

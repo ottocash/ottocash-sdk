@@ -52,7 +52,7 @@
                         android:id="@+id/head"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@mipmap/img_header"
+                        android:background="@drawable/img_header"
                         android:orientation="vertical">
 
                         <ImageView
@@ -60,7 +60,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="15dp"
                             android:layout_marginTop="20dp"
-                            android:background="@mipmap/ic_otto_cash" />
+                            android:background="@drawable/ic_otto_cash" />
                     </LinearLayout>
                 </LinearLayout>
 

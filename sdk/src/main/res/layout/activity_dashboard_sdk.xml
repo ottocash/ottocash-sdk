@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="20dp"
-            android:background="@mipmap/ic_back"
+            android:background="@drawable/ic_back"
             android:padding="9dp" />
 
         <TextView
@@ -49,7 +49,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@mipmap/img_header"
+                android:background="@drawable/img_header"
                 android:orientation="vertical">
 
                 <ImageView
@@ -58,7 +58,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="39dp"
-                    android:background="@mipmap/ic_otto_cash"
+                    android:background="@drawable/ic_otto_cash"
                     tools:ignore="ContentDescription" />
             </LinearLayout>
 
@@ -139,7 +139,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:src="@mipmap/ic_mail" />
+                            android:src="@drawable/ic_mail" />
 
                         <FrameLayout
                             android:layout_width="2dp"
@@ -194,7 +194,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:src="@mipmap/ic_group_call" />
+                            android:src="@drawable/ic_group_call" />
 
                         <FrameLayout
                             android:layout_width="2dp"
@@ -247,7 +247,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:src="@mipmap/ic_web" />
+                            android:src="@drawable/ic_web" />
 
                         <FrameLayout
                             android:layout_width="2dp"
@@ -301,7 +301,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:src="@mipmap/ic_clock" />
+                            android:src="@drawable/ic_clock" />
 
                         <FrameLayout
                             android:layout_width="2dp"

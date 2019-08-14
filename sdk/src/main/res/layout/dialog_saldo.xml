@@ -23,7 +23,7 @@
             <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:background="@mipmap/ic_info" />
+                android:background="@drawable/ic_info" />
         </LinearLayout>
 
         <LinearLayout

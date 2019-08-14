@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@mipmap/ic_otto_cash" />
+            android:background="@drawable/ic_otto_cash" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="20dp"
-            android:background="@mipmap/ic_secure_payment" />
+            android:background="@drawable/ic_secure_payment" />
     </LinearLayout>
 
 </LinearLayout>

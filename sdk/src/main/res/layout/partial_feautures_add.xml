@@ -42,7 +42,7 @@
                         android:id="@+id/imgTransfer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@mipmap/ic_transfer"
+                        android:background="@drawable/ic_transfer"
                         tools:ignore="ContentDescription" />
 
                     <TextView
@@ -81,7 +81,7 @@
                         android:id="@+id/imgPay"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@mipmap/ic_payment_method"
+                        android:background="@drawable/ic_payment_method"
                         tools:ignore="ContentDescription" />
 
                     <TextView
@@ -123,7 +123,7 @@
                         android:id="@+id/imgHistory"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@mipmap/ic_history"
+                        android:background="@drawable/ic_history"
                         tools:ignore="ContentDescription" />
 
                     <TextView

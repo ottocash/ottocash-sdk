@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".ui.activities.account.registration.RegistrationActivity"
+    tools:ignore="MissingPrefix"
+    tools:showIn="@layout/activity_registration">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:id="@+id/form_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                android:orientation="vertical">
+
+                <include layout="@layout/partial_banner_ottocash" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hai"
+                    android:textAppearance="@style/BarlowSemiBold"
+                    android:textColor="@color/Black_484848"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/desc_registration"
+                    android:textAppearance="@style/BarlowRegular"
+                    android:textColor="@color/Grey_8b8b8b"
+                    android:textSize="12sp" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:text="@string/nama_sesuai_ktp"
+                    android:textAppearance="@style/RobotoRegular"
+                    android:textColor="@color/Black_484848"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/edtNoHp"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/rounded_grey_input"
+                    android:gravity="center_vertical"
+                    android:hint="@string/hp"
+                    android:inputType="phone"
+                    android:paddingLeft="14dp"
+                    android:textAppearance="@style/RobotoRegular"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/jika_ini_bukan"
+                    android:textAppearance="@style/RobotoRegular"
+                    android:textColor="@color/Grey_8b8b8b"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:text="@string/nama_sesuai_ktp"
+                    android:textAppearance="@style/RobotoRegular"
+                    android:textColor="@color/Black_484848"
+                    android:textSize="12sp" />
+
+
+                <EditText
+                    android:id="@+id/edtNameKtp"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/rounded_white_input"
+                    android:inputType="textCapWords"
+                    android:paddingLeft="14dp"
+                    android:textAppearance="@style/RobotoRegular"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:text="@string/email_aktif"
+                    android:textAppearance="@style/RobotoRegular"
+                    android:textSize="12sp" />
+
+
+                <EditText
+                    android:id="@+id/edtEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/rounded_white_input"
+                    android:inputType="textEmailAddress"
+                    android:paddingLeft="14dp"
+                    android:textAppearance="@style/RobotoRegular"
+                    android:textColor="@color/Black_484848"
+                    android:textSize="12sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/cbTACOttoCash"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/checkboxBlue" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tvTACOttoCash"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:autoLink="all"
+                        android:gravity="center_vertical"
+                        android:linksClickable="true"
+                        android:padding="5dp"
+                        android:text="@string/sign_up_label_tac_link"
+                        android:textAppearance="@style/BarlowMedium"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="50dp"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/cbTACMitra"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/checkboxBlue" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tvTACMitra"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:autoLink="all"
+                        android:gravity="center_vertical"
+                        android:linksClickable="true"
+                        android:padding="5dp"
+                        android:text="@string/sign_up_label_tac_link_mitra"
+                        android:textAppearance="@style/BarlowMedium"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/bottom_layout"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnBottom"
+            fontPath="fonts/SemiBold.otf"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="@color/Grey_C4C4C4"
+            android:text="@string/aktifkan"
+            android:textAllCaps="false"
+            android:textColor="@color/White_ffffff"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+
+</RelativeLayout>

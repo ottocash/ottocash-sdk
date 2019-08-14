@@ -25,47 +25,47 @@
 
     <!-- Font specs configuration -->
     <!--<style name="BarlowBlack" parent="android:TextAppearance">-->
-        <!--<item name="fontPath">fonts/Barlow-Black.ttf</item>-->
+    <!--<item name="fontPath">fonts/Barlow-Black.ttf</item>-->
     <!--</style>-->
 
     <!--<style name="BarlowBlackItalic" parent="android:TextAppearance">-->
-        <!--<item name="fontPath">fonts/Barlow-BlackItalic.ttf</item>-->
+    <!--<item name="fontPath">fonts/Barlow-BlackItalic.ttf</item>-->
     <!--</style>-->
 
     <!--<style name="BarlowBold" parent="android:TextAppearance">-->
-        <!--<item name="fontPath">fonts/Barlow-Bold.ttf</item>-->
+    <!--<item name="fontPath">fonts/Barlow-Bold.ttf</item>-->
     <!--</style>-->
 
     <!--<style name="BarlowBoldItalic" parent="android:TextAppearance">-->
-        <!--<item name="fontPath">fonts/Barlow-BoldItalic.ttf</item>-->
+    <!--<item name="fontPath">fonts/Barlow-BoldItalic.ttf</item>-->
     <!--</style>-->
 
     <!--<style name="ExtraBold" parent="android:TextAppearance">-->
-        <!--<item name="fontPath">fonts/Barlow-ExtraBold.ttf</item>-->
+    <!--<item name="fontPath">fonts/Barlow-ExtraBold.ttf</item>-->
     <!--</style>-->
 
     <!--<style name="ExtraBoldItalic" parent="android:TextAppearance">-->
-        <!--<item name="fontPath">fonts/Barlow-ExtraBoldItalic.ttf</item>-->
+    <!--<item name="fontPath">fonts/Barlow-ExtraBoldItalic.ttf</item>-->
     <!--</style>-->
 
     <!--<style name="ExtraLight" parent="android:TextAppearance">-->
-        <!--<item name="fontPath">fonts/Barlow-ExtraLight.ttf</item>-->
+    <!--<item name="fontPath">fonts/Barlow-ExtraLight.ttf</item>-->
     <!--</style>-->
 
     <!--<style name="ExtraLightItalic" parent="android:TextAppearance">-->
-        <!--<item name="fontPath">fonts/Barlow-ExtraLightItalic.ttf</item>-->
+    <!--<item name="fontPath">fonts/Barlow-ExtraLightItalic.ttf</item>-->
     <!--</style>-->
 
     <!--<style name="BarlowItalic" parent="android:TextAppearance">-->
-        <!--<item name="fontPath">fonts/Barlow-Italic.ttf</item>-->
+    <!--<item name="fontPath">fonts/Barlow-Italic.ttf</item>-->
     <!--</style>-->
 
     <!--<style name="BarlowLight" parent="android:TextAppearance">-->
-        <!--<item name="fontPath">fonts/Barlow-Light.ttf</item>-->
+    <!--<item name="fontPath">fonts/Barlow-Light.ttf</item>-->
     <!--</style>-->
 
     <!--<style name="BarlowLightItalic" parent="android:TextAppearance">-->
-        <!--<item name="fontPath">fonts/Barlow-LightItalic.ttf</item>-->
+    <!--<item name="fontPath">fonts/Barlow-LightItalic.ttf</item>-->
     <!--</style>-->
 
     <style name="BarlowMedium" parent="android:TextAppearance">
@@ -73,7 +73,7 @@
     </style>
 
     <!--<style name="BarlowMediumItalic" parent="android:TextAppearance">-->
-        <!--<item name="fontPath">fonts/Barlow-MediumItalic.ttf</item>-->
+    <!--<item name="fontPath">fonts/Barlow-MediumItalic.ttf</item>-->
     <!--</style>-->
 
     <style name="BarlowRegular" parent="android:TextAppearance">
@@ -85,15 +85,15 @@
     </style>
 
     <!--<style name="BarlowSemiBoldItalic" parent="android:TextAppearance">-->
-        <!--<item name="fontPath">fonts/Barlow-SemiBoldItalic.ttf</item>-->
+    <!--<item name="fontPath">fonts/Barlow-SemiBoldItalic.ttf</item>-->
     <!--</style>-->
 
     <!--<style name="BarlowThin" parent="android:TextAppearance">-->
-        <!--<item name="fontPath">fonts/Barlow-Thin.ttf</item>-->
+    <!--<item name="fontPath">fonts/Barlow-Thin.ttf</item>-->
     <!--</style>-->
 
     <!--<style name="BarlowThinItalic" parent="android:TextAppearance">-->
-        <!--<item name="fontPath">fonts/Barlow-ThinItalic.ttf</item>-->
+    <!--<item name="fontPath">fonts/Barlow-ThinItalic.ttf</item>-->
     <!--</style>-->
 
     <style name="RobotoBold" parent="android:TextAppearance">

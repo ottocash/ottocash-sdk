@@ -19,7 +19,7 @@
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:background="@mipmap/ic_otto_cash" />
+                android:background="@drawable/ic_otto_cash" />
         </LinearLayout>
 
         <LinearLayout
@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="10dp"
-                android:background="@mipmap/ic_next" />
+                android:background="@drawable/ic_next" />
 
         </LinearLayout>
 

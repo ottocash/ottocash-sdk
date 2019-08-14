@@ -1,22 +1,40 @@
 <resources>
     <string name="app_name">OttoCash-SDK</string>
+
+
+    <!--TITLE-->
+    <string name="title_ottocash">OttoCash</string>
+
+
+    <!--REGISTRATION-->
+    <string name="hai">Hai!</string>
+    <string name="desc_registration">Anda belum memiliki akun di OttoCash. Isi data dibawah dengan lengkap dan benar dan langsung aktifkan akun OttoCash Anda.</string>
+    <string name="no_hp">Nomor HP</string>
+    <string name="hp">0812 8**** *123</string>
+    <string name="jika_ini_bukan">Jika ini bukan nomor kamu, segera kembali &amp; perbaiki data kamu di Mitraku</string>
+    <string name="nama_sesuai_ktp">Nama Sesuai KTP</string>
+    <string name="email_aktif">Email Aktif</string>
+    <string name="sign_up_label_tac_link"><![CDATA[ Saya telah setuju dengan <u><font color="#d04a55">syarat dan
+        ketentuan</font></u> yang berlaku.]]></string>
+    <string name="sign_up_label_tac_link_mitra"><![CDATA[ Saya telah setuju dengan <u><font color="#d04a55">syarat dan
+        ketentuan otorisasi layanan OttoCash dan Mitra</font></u>]]></string>
+    <string name="aktifkan">Aktifkan</string>
+
+
+
     <string name="aktivasi_akun">Aktivasi Akun</string>
     <string name="desc_activation">Aktivasi Akun 081 6*** *4423  OttoCash Kamu di MITRAKU ? </string>
     <string name="call_cs_ilotte">Apabila Anda ingin menghubungkan akun OttoCash Anda dengan akun Mitraku silahkan klik tombol Aktifkan </string>
     <string name="privasi">Saya telah setuju dengan syarat dan ketentuan yang berlaku.</string>
-    <string name="aktifkan">Aktifkan</string>
+
     <string name="aktivasi_berhasil">Aktivasi Berhasil</string>
     <string name="akun_berhasil_di_aktifkan">Akun Berhasil diaktifkan</string>
-    <string name="hai">Aktivasi akun OttoCash kamu sudah berhasil. </string>
+
     <string name="mengerti">Mengerti</string>
     <string name="registrasi_ottocash">Registrasi OttoCash</string>
     <string name="hi_somebody">Hi Somebody,</string>
     <string name="question_account">Kamu belum memiliki akun di OttoCash. Isi data dibawah dengan lengkap dan benar dan langsung aktifkan akun OttoCash kamu.</string>
-    <string name="no_hp">No Hp</string>
-    <string name="hp">0812 8**** *123</string>
-    <string name="jika_ini_bukan"><![CDATA[Jika ini bukan nomor kamu, segera kembali & perbaiki data kamu di Mitraku]]></string>
-    <string name="nama_sesuai_ktp">Nama Sesuai KTP</string>
-    <string name="email_aktif">Email Aktif</string>
+
     <string name="set_pin_ottocash">Set Pin OttoCash</string>
     <string name="set_pin_kamu">Set PIN Kamu</string>
     <string name="set_pin">Set pin kamu untuk kemudahan bertransaksi di MitraKu menggunakan OttoCash</string>
@@ -39,10 +57,7 @@
     <string name="saldo_ottocash">Hi Fajar, Saldo OttoCash Reguler kamu</string>
     <string name="rp_388_000">Rp 388.000</string>
     <string name="bayar">Bayar</string>
-    <string name="sign_up_label_tac_link"><![CDATA[ Saya telah setuju dengan <u><font color="#d04a55">syarat dan
-        ketentuan</font></u> yang berlaku.]]></string>
-    <string name="sign_up_label_tac_link_mitra"><![CDATA[ Saya telah setuju dengan <u><font color="#d04a55">syarat dan
-        ketentuan otorisasi layanan OttoCash dan Mitra</font></u>]]></string>
+
 
     <string name="pembayaran_kamu_ke_toko">Pembayaran kamu ke Toko Ucok tidak berhasil kami proses, mohon mengulang proses pembayaran kembali</string>
     <string name="melalui_mbanking"><![CDATA[MELALUI INTERNET BANKING & MOBILE BANKING]]></string>
@@ -91,7 +106,7 @@
     <string name="title_activity_term_and_condition">Syarat dan Ketentuan</string>
 
     <string name="investment_form_data_label_tac">Saya telah setuju dengan syarat dan
-        ketentuan yang berlaku</string>
+    ketentuan yang berlaku</string>
 
     <string name="dialog_title">Khusus Pengguna OttoCash Plus</string>
     <string name="dialog_msg">Fitur ini hanya tersedia bagi pengguna OttoCash Plus. Lakukan upgrade di aplikasi OttoCash</string>

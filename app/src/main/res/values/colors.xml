@@ -3,8 +3,8 @@
     <color name="colorPrimary">#81868a</color>
     <color name="colorPrimaryDark">#54585b</color>
     <color name="colorAccent">#d04a55</color>
-    
-    
+
+
     //Black
     <color name="Black_54585b">#54585b</color>
     <color name="Black_81868a">#81868a</color>
@@ -15,12 +15,12 @@
 
     //Red
     <color name="Red_d04a55">#d04a55</color>
-    
+
     //Blue
     <color name="Blue_0671b6">#0671b6</color>
     <color name="Blue_1f204c">#1f204c</color>
 
     //White
     <color name="White_ffffff">#ffffff</color>
-    
+
 </resources>

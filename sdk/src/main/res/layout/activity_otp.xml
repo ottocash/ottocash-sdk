@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:padding="20dp"
-            android:src="@mipmap/ic_back" />
+            android:src="@drawable/ic_back" />
 
         <TextView
             android:id="@+id/title"
@@ -46,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@mipmap/ic_otto_cash" />
+            android:background="@drawable/ic_otto_cash" />
 
         <TextView
             android:layout_width="wrap_content"

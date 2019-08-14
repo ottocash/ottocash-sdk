@@ -43,7 +43,7 @@
                         android:id="@+id/imgPayments"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@mipmap/ic_bayar"
+                        android:background="@drawable/ic_bayar"
                         tools:ignore="ContentDescription" />
 
                     <TextView
@@ -82,7 +82,7 @@
                         android:id="@+id/imgTopUp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@mipmap/ic_top_up"
+                        android:background="@drawable/ic_top_up"
                         tools:ignore="ContentDescription" />
 
                     <TextView
@@ -124,7 +124,7 @@
                         android:id="@+id/imgReqMoney"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@mipmap/ic_req_money"
+                        android:background="@drawable/ic_req_money"
                         tools:ignore="ContentDescription" />
 
                     <TextView

@@ -70,7 +70,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@mipmap/ic_otto_cash" />
+            android:background="@drawable/ic_otto_cash" />
     </LinearLayout>
 
 </LinearLayout>

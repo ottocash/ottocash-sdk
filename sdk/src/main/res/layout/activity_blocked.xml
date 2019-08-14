@@ -15,7 +15,7 @@
             android:id="@+id/ivBack"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@mipmap/ic_back" />
+            android:background="@drawable/ic_back" />
 
         <TextView
             android:layout_width="match_parent"
@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@mipmap/ic_otto_cash" />
+            android:background="@drawable/ic_otto_cash" />
 
         <TextView
             android:layout_width="wrap_content"
