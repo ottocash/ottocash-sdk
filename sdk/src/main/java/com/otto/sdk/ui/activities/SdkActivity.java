@@ -2,30 +2,31 @@ package com.otto.sdk.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCashSdk;
 import com.otto.sdk.R;
+import com.otto.sdk.interfaces.IInquiryView;
 import com.otto.sdk.interfaces.ISdkView;
 import com.otto.sdk.model.api.request.CheckPhoneNumberRequest;
 import com.otto.sdk.model.api.request.ClientsRequest;
 import com.otto.sdk.model.api.request.CreateTokenRequest;
+import com.otto.sdk.model.api.request.InquiryRequest;
 import com.otto.sdk.model.api.response.CheckPhoneNumberResponse;
 import com.otto.sdk.model.api.response.CreateTokenResponse;
+import com.otto.sdk.model.api.response.InquiryResponse;
+import com.otto.sdk.presenter.InquiryPresenter;
 import com.otto.sdk.presenter.SdkResourcePresenter;
 import com.otto.sdk.ui.activities.account.activation.ActivationActivity;
 import com.otto.sdk.ui.activities.account.registration.RegistrationActivity;
 import com.otto.sdk.ui.activities.dashboard.DashboardSDKActivity;
 
-
 import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.base.BasePresenter;
-import app.beelabs.com.codebase.di.component.AppComponent;
 import app.beelabs.com.codebase.support.util.CacheUtil;
 
-public class SdkActivity extends BaseActivity implements ISdkView {
+public class SdkActivity extends BaseActivity implements ISdkView, IInquiryView {
 
     private SdkResourcePresenter presenterSDK;
 
@@ -46,11 +47,15 @@ public class SdkActivity extends BaseActivity implements ISdkView {
         String phone = CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, SdkActivity.this);
         model.setPhone(phone);
 
-//        presenterSDK = ((SdkResourcePresenter) BasePresenter.getInstance(SdkActivity.this, new SdkResourcePresenter(SdkActivity.this)));
-//        presenterSDK.getCheckPhone(model);
-        AppComponent appComponent = OttoCashSdk.getAppComponent();
-        Log.d("", "");
+//        showApiProgressDialog(OttoCashSdk.getAppComponent(), new InquiryPresenter(DashboardSDKActivity.this) {
+//            @Override
+//            public void call() {
+//                getInquiry(model);
+//
+//            }
+//        }, "Loading");
 
+        new InquiryPresenter(this).getInquiry(new InquiryRequest(phone));
         showApiProgressDialog(OttoCashSdk.getAppComponent(), new SdkResourcePresenter(SdkActivity.this) {
             @Override
             public void call() {
@@ -113,6 +118,18 @@ public class SdkActivity extends BaseActivity implements ISdkView {
 
             String accessToken = model.getData().getClient().getAccessToken();
             CacheUtil.putPreferenceString(IConfig.SESSION_ACCESS_TOKEN, accessToken, SdkActivity.this);
+
+        } else {
+            Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
+                    Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public void handleInquiry(InquiryResponse model) {
+        if (model.getMeta().getCode() == 200) {
+
+            CacheUtil.putPreferenceString(IConfig.SESSION_EMONEY_BALANCE, model.getData().getEmoneyBalance(), this);
 
         } else {
             Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
