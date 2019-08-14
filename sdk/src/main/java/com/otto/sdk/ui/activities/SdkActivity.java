@@ -47,14 +47,6 @@ public class SdkActivity extends BaseActivity implements ISdkView, IInquiryView 
         String phone = CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, SdkActivity.this);
         model.setPhone(phone);
 
-//        showApiProgressDialog(OttoCashSdk.getAppComponent(), new InquiryPresenter(DashboardSDKActivity.this) {
-//            @Override
-//            public void call() {
-//                getInquiry(model);
-//
-//            }
-//        }, "Loading");
-
         new InquiryPresenter(this).getInquiry(new InquiryRequest(phone));
         showApiProgressDialog(OttoCashSdk.getAppComponent(), new SdkResourcePresenter(SdkActivity.this) {
             @Override
