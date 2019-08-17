@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.activities.payment.PinActivity">
+    tools:context=".ui.activities.payment.PinPaymentActivity">
 
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
@@ -57,7 +57,7 @@
             android:textColor="@color/Grey_8b8b8b"
             android:textSize="12sp" />
 
-        <include layout="@layout/partial_pin" />
+        <include layout="@layout/partial_pin_otp" />
     </LinearLayout>
 
     <LinearLayout

@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/White_ffffff"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".ui.activities.tac.TACMitraActivity"
+    tools:context=".ui.activities.tac.TACOttocashAndMitraActivity"
     tools:ignore="MissingPrefix">
 
     <LinearLayout
@@ -48,9 +49,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="@string/snk_ottocash_mitra"
+                    android:text="@string/snk_gabungan"
                     android:textAppearance="@style/BarlowRegular"
-                    android:textColor="@color/White_ffffff" />
+                    android:textColor="@color/White_ffffff"
+                    android:textSize="14sp" />
             </RelativeLayout>
 
 

@@ -9,6 +9,7 @@
     <!--TAC-->
     <string name="snk_ottocash">SNK OttoCash</string>
     <string name="snk_ottocash_mitra">SNK OttoCash dan Mitra</string>
+    <string name="snk_gabungan">SNK Gabungan</string>
 
 
     <!--REGISTRATION-->
@@ -25,6 +26,48 @@
         ketentuan otorisasi layanan OttoCash dan Mitra</font></u>]]></string>
     <string name="aktifkan">Aktifkan</string>
 
+
+    <!--SET PIN-->
+    <string name="title_set_pin">Set PIN Anda</string>
+    <string name="input_pin_old">Masukkan PIN lama Anda</string>
+    <string name="input_pin_new">Masukkan PIN baru Anda</string>
+    <string name="desc_pin_ottocash">Set PIN Anda untuk kemudahan bertransaksi</string>
+    <string name="pin_ottocash">PIN OttoCash</string>
+    <string name="confirm_pin_ottocash">Konfirmasi PIN OttoCash</string>
+    <string name="save_ottocash">Simpan</string>
+
+
+    <!--OTP-->
+    <string name="input_otp_ottocash">Masukkan 6 Digit Kode OTP</string>
+    <string name="describe_otp_ottocash">6 Digit kode OTP telah dikirimkan ke nomor 0812 xxxx xx23, Silahkan cek HP Anda</string>
+    <string name="describe_qa_otp">Tidak menerima kode verifikasi ? Anda bisa mencoba meminta OTP lagi setelah waktu habis</string>
+    <string name="resend_otp"><![CDATA[Tidak menerima kode verifikasi ? <u><font color="#d04a55"> Kirim Ulang</font></u>]]></string>
+
+
+    <!--REGISTRATION SUCCESS-->
+    <string name="registration_success"> Registrasi Akun OttoCash berhasil</string>
+    <string name="desc_registration_success">Registrasi dan Aktivasi akun OttoCash kamu sudah berhasil.</string>
+    <string name="registration_finish">Selesai</string>
+
+    <!--ACTIVATION ACCOUNT-->
+    <string name="activation_account">Aktivasi Akun 081 6*** *4423 OttoCash Kamu di MITRAKU ? </string>
+    <string name="desc_activation_account">Apabila Anda ingin menghubungkan akun OttoCash Anda dengan akun Mitraku silahkan klik tombol Aktifkan</string>
+
+
+    <!--ACTIVATION SUCCESS-->
+    <string name="activation_success">Akun Berhasil diaktifkan</string>
+    <string name="desc_activation_success">Aktivasi akun OttoCash kamu sudah berhasil.</string>
+    <string name="activation">Aktifkan</string>
+
+    <!--ACTIVATION BLOCK-->
+    <string name="account_block">Akun Anda Terblokir</string>
+    <string name="describe_account_block">Hubungi call center OttoCash untuk membuka blokir akun Anda\n Email : halo@ottocash.id\n No telp : (021) 5020 0909\n Senin - Jumat ( 08.00 - 20.00 )\n Website : ottocash.id\n</string>
+
+
+    <!--PIN LOGIN-->
+    <string name="pin_login">Masukkan PIN OttoCash</string>
+    <string name="desc_pin_login">Masukkan 6 digit PIN OttoCash Anda</string>
+    <string name="invalid_pin">PIN tidak Valid</string>
 
 
     <string name="aktivasi_akun">Aktivasi Akun</string>
@@ -43,9 +86,9 @@
     <string name="set_pin_ottocash">Set Pin OttoCash</string>
     <string name="set_pin_kamu">Set PIN Kamu</string>
     <string name="set_pin">Set pin kamu untuk kemudahan bertransaksi di MitraKu menggunakan OttoCash</string>
-    <string name="pin_ottocash">PIN Ottocash</string>
+    <!--<string name="pin_ottocash">PIN Ottocash</string>-->
     <string name="konfirmasi_pin_ottocash">Konfirmasi PIN OttoCash</string>
-    <string name="selesai">Selesai</string>
+    <!--<string name="selesai">Selesai</string>-->
     <string name="otentifikasi_akun">Otentifikasi Akun</string>
     <string name="masukkan_6_digit_kode_otp">Masukkan 6 Digit Kode OTP</string>
     <string name="_6_digit_kode_otp">6 Digit kode OTP telah dikirimkan ke nomor 0812 xxxx xx23, silahkan cek HP Anda</string>
@@ -70,7 +113,7 @@
     <string name="call_service_blokir">Hubungi call center OttoCash untuk membuka blokir akun Anda Email : halo@ottocash.id\n No telp : (021) 5020 0909\n Senin - Jumat ( 08.00 - 20.00 )\n Website : ottocash.id</string>
     <string name="back_blocked">Kembali ke Halaman Utama</string>
     <string name="masukkan_checkout">Silahkan masukkan 6 digit Ottocash kamu untuk membayar transaksi ini menggunakan OttoCash</string>
-    <string name="resend_otp"><![CDATA[Tidak menerima kode verifikasi? <u><font color="#d04a55"> Kirim Ulang</font></u>.]]></string>
+    <!--<string name="resend_otp"><![CDATA[Tidak menerima kode verifikasi? <u><font color="#d04a55"> Kirim Ulang</font></u>.]]></string>-->
 
     <string name="dialog_tittle_plus">Khusus Pengguna OttoCash Plus</string>
     <string name="dialog_message_plus">Fitur ini hanya tersedia bagi pengguna Ottocash Plus. Lakukan upgrade di aplikasi OttoCash</string>

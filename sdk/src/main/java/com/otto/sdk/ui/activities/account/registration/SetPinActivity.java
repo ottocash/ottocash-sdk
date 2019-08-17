@@ -6,10 +6,9 @@ import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.otto.sdk.IConfig;
@@ -20,11 +19,7 @@ import com.otto.sdk.model.api.request.RegisterRequest;
 import com.otto.sdk.model.api.response.LoginResponse;
 import com.otto.sdk.model.api.response.RegisterResponse;
 import com.otto.sdk.presenter.AuthPresenter;
-import com.otto.sdk.ui.activities.account.formValidation.FormValidation;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import com.otto.sdk.ui.component.support.FormValidation;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.support.util.CacheUtil;
@@ -37,13 +32,11 @@ public class SetPinActivity extends BaseActivity implements IAuthView {
 
     EditText edtPin;
     EditText edtConfirmPin;
-    EditText edtAnswer;
-    Button btnSelesai;
-    Spinner spinner;
+    Button btnSave;
+    ImageView ivBack;
 
     private boolean isFormValidationSuccess = false;
     private RegisterRequest model;
-    private boolean isSelectedSecurity;
     private AuthPresenter authPresenter;
 
     @Override
@@ -53,33 +46,13 @@ public class SetPinActivity extends BaseActivity implements IAuthView {
 
         initComponent();
         initContent();
-
-//        onCallApiSecurityQuestion();
     }
 
     private void initComponent() {
         edtPin = findViewById(R.id.edtPin);
         edtConfirmPin = findViewById(R.id.edtConfirmPin);
-        edtAnswer = findViewById(R.id.edtAnswer);
-        btnSelesai = findViewById(R.id.btnSelesai);
-        spinner = findViewById(R.id.spinner);
-
-        String[] question = new String[]{
-                "Nama kota dimana ayah anda dilahirkan",
-                "Nama ibu anda",
-                "Nama sekolah anda saat Sekolah Menengah Pertama (SMP)",
-                "Nama perusahaan dimana anda bekerja pertama kali",
-                "Nama tim sepak bola favorit anda",
-                "Nama sahabat anda"
-        };
-
-        final List<String> questionList = new ArrayList<>(Arrays.asList(question));
-
-        final ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
-                this, R.layout.item_question, questionList);
-
-        spinnerArrayAdapter.setDropDownViewResource(R.layout.item_question);
-        spinner.setAdapter(spinnerArrayAdapter);
+        btnSave = findViewById(R.id.btnSave);
+        ivBack = findViewById(R.id.ivBack);
 
     }
 
@@ -87,7 +60,7 @@ public class SetPinActivity extends BaseActivity implements IAuthView {
         addTextWatcher(edtPin);
         addTextWatcher(edtConfirmPin);
 
-        btnSelesai.setOnClickListener(new View.OnClickListener() {
+        btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (isFormValidationSuccess) {
@@ -95,6 +68,13 @@ public class SetPinActivity extends BaseActivity implements IAuthView {
                 } else {
                     Toast.makeText(SetPinActivity.this, "Pin Tidak Sama", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
     }
@@ -107,7 +87,7 @@ public class SetPinActivity extends BaseActivity implements IAuthView {
 
         model.setPin(edtPin.getText().toString());
         model.setSecurityQuestionId("1");
-        model.setAnswer(edtAnswer.getText().toString());
+        model.setAnswer("ˆ˜ÎØÅÒÒˆ");
         model.setPlatform("android");
 
 
@@ -121,30 +101,6 @@ public class SetPinActivity extends BaseActivity implements IAuthView {
     }
 
 
-//    private void onCallApiSecurityQuestion() {
-//        final SecurityDao dao = new SecurityDao(this);
-//        dao.securityQuestionDAO(BaseDao.getInstance(this, 200).callback);
-//    }
-
-
-//    @Override
-//    protected void onApiResponseCallback(BaseResponse br, int responseCode, Response response) {
-//        super.onApiResponseCallback(br, responseCode, response);
-//        if (response.isSuccessful()) {
-//
-//
-//            if (responseCode == IConfig.KEY_API_SECURITY) {
-//                List<SecurityQuestionsItem> questionsItems;
-//                SecurityQuestionResponse data = (SecurityQuestionResponse) br;
-//                if (data.getMeta().getCode() == 200) {
-//                    questionsItems = ((SecurityQuestionResponse) br).getData().getSecurityQuestions();
-//
-//                }
-//            }
-//
-//        }
-//    }
-
     private void validateForm() {
         String pin = edtPin.getText().toString();
         String pin2 = edtConfirmPin.getText().toString();
@@ -152,10 +108,10 @@ public class SetPinActivity extends BaseActivity implements IAuthView {
         if (FormValidation.required(pin) && FormValidation.validPin(pin)
                 && FormValidation.required(pin2) && FormValidation.validPin(pin2) && (pin.equals(pin2))) {
             isFormValidationSuccess = true;
-            btnSelesai.setBackground(ContextCompat.getDrawable(this, R.drawable.button_primary_selector));
+            btnSave.setBackground(ContextCompat.getDrawable(this, R.drawable.button_primary_selector));
         } else {
             isFormValidationSuccess = false;
-            btnSelesai.setBackground(ContextCompat.getDrawable(this, R.drawable.button_primary_selected_bg));
+            btnSave.setBackground(ContextCompat.getDrawable(this, R.drawable.button_primary_selected_bg));
         }
     }
 
@@ -203,8 +159,7 @@ public class SetPinActivity extends BaseActivity implements IAuthView {
             CacheUtil.putPreferenceString(IConfig.SESSION_EMAIL, email, SetPinActivity.this);
 
 
-            Intent intent = new Intent(SetPinActivity.this, OtpActivity.class);
-            intent.putExtra(IConfig.SESSION_PHONE, phone);
+            Intent intent = new Intent(SetPinActivity.this, OtpRegistrationActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();

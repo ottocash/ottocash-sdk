@@ -1,10 +1,14 @@
-package com.otto.sdk.ui.activities.account.login;
+package com.otto.sdk.ui.activities.account.activation;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.otto.sdk.IConfig;
@@ -16,6 +20,7 @@ import com.otto.sdk.model.api.response.LoginResponse;
 import com.otto.sdk.model.api.response.RegisterResponse;
 import com.otto.sdk.presenter.AuthPresenter;
 import com.otto.sdk.presenter.manager.SessionManager;
+import com.otto.sdk.ui.activities.account.registration.OtpRegistrationActivity;
 import com.poovam.pinedittextfield.LinePinField;
 
 import app.beelabs.com.codebase.base.BaseActivity;
@@ -23,11 +28,14 @@ import app.beelabs.com.codebase.support.util.CacheUtil;
 
 public class PinLoginActivity extends BaseActivity implements IAuthView {
 
+    ImageView ivBack;
+    TextView errorMessage;
     LinePinField lineField;
     private LoginRequest model;
 
     private String phone;
-
+    private String errorMessagePin = "Invalid Token";
+    private String messagePIN;
     private AuthPresenter authPresenter;
 
     @Override
@@ -40,8 +48,18 @@ public class PinLoginActivity extends BaseActivity implements IAuthView {
     }
 
     private void initComponent() {
+        ivBack = findViewById(R.id.ivBack);
+        errorMessage = findViewById(R.id.errorMessage);
         lineField = findViewById(R.id.lineField);
+
+        ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
+
 
     private void onCallApiSetPin(final String pin) {
         phone = CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, PinLoginActivity.this);
@@ -69,6 +87,8 @@ public class PinLoginActivity extends BaseActivity implements IAuthView {
             String account_number = data.getData().getAccountNumber();
             String name = data.getData().getName();
             String phone = data.getData().getPhone();
+            messagePIN = data.getMeta().getMessage();
+
 
             boolean isLogin = data.getMeta().isStatus();
             CacheUtil.putPreferenceBoolean(String.valueOf(Boolean.valueOf(IConfig.SESSION_IS_LOGIN)),
@@ -84,10 +104,18 @@ public class PinLoginActivity extends BaseActivity implements IAuthView {
             intent.putExtra(IConfig.SESSION_PHONE, phone);
             startActivity(intent);
             finish();
+        } else if (messagePIN.equals(errorMessagePin)) {
+            initErrorInvalid();
         } else {
             Toast.makeText(this, data.getMeta().getCode() + ":" + data.getMeta().getMessage(),
                     Toast.LENGTH_LONG).show();
         }
+    }
+
+
+    private void initErrorInvalid() {
+        errorMessage.setText(getString(R.string.invalid_pin));
+        errorMessage.setTextColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
     }
 
 

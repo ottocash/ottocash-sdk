@@ -7,21 +7,11 @@ public interface IConfig {
 
     //Session
     String SESSION_LOGIN_KEY = "session_login";
-    String SESSION_LOGIN_PROVIDER_KEY = "session_login_provider";
-    String SESSION_INSTITUTION_ID = "Institution-ID";
-
     String SESSION_USER_ID = "user_id";
     String SESSION_ACCOUNT_NUMBER = "account_number";
     String SESSION_EMONEY_BALANCE = "emoney_balance";
     String SESSION_TOTAL = "total";
-
-
-    final boolean SESSION_CHECK_PHONE_NUMBER = false;
-    final boolean SESSION_IS_LOGIN = false;
-    final boolean SESSION_LOG_OUT = false;
-
     String SESSION_PHONE = "phone";
-    String SESSION_EMONEY = "emoney";
     String SESSION_PACKAGE_NAME = "package_name";
     String SESSION_NAME = "name";
     String SESSION_EMAIL = "email";
@@ -29,8 +19,9 @@ public interface IConfig {
     String SESSION_SECRET = "secret";
     String SESSION_ACCESS_TOKEN = "access_token";
 
-    //Login
-    int SOCMED_MANUAL = 4;
+
+    final boolean SESSION_CHECK_PHONE_NUMBER = false;
+    final boolean SESSION_IS_LOGIN = false;
 
 
     //API 11 - ?
@@ -42,10 +33,8 @@ public interface IConfig {
     int KEY_API_REVIEW_CHECK_OUT = 16;
     int KEY_API_PAYMENT_VALIDATE = 17;
     int KEY_API_CHECK_PHONE_NUMBER = 18;
-//    int KEY_API_CLIENTS = 19;
-    int KEY_API_TOKEN = 20;
-    int KEY_API_SECURITY = 21;
-    int KEY_API_HISTORIES=22;
+    int KEY_API_TOKEN = 19;
+    int KEY_API_HISTORIES = 20;
 
 
 }

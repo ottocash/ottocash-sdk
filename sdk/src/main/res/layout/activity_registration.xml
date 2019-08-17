@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@color/White_ffffff"
     tools:context=".ui.activities.account.registration.RegistrationActivity"
     tools:ignore="MissingPrefix"
     android:orientation="vertical">
@@ -48,6 +49,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
+                    android:textSize="14sp"
                     android:textAppearance="@style/BarlowRegular"
                     android:text="@string/title_ottocash"
                     android:textColor="@color/White_ffffff" />

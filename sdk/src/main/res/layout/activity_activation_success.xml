@@ -1,80 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".ui.activities.account.activation.ActivationSuccessActivity">
-
-    <android.support.v7.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/Black_81868a">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/aktivasi_berhasil"
-            android:textAppearance="@style/BarlowSemiBold"
-            android:textColor="@color/color_white"
-            android:textSize="14sp" />
-
-    </android.support.v7.widget.Toolbar>
-
-
-    <LinearLayout
-        android:id="@+id/top"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="90dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="26dp"
-        android:orientation="vertical">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/ic_success" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="14dp"
-            android:text="@string/akun_berhasil_di_aktifkan"
-            android:textAppearance="@style/RobotoMedium"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/tvDesc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="14dp"
-            android:gravity="center"
-            android:text="@string/aktivasi_akun_ottocash_kamu_sudah_berhasil"
-            android:textColor="@color/Grey_8b8b8b" />
-    </LinearLayout>
+    android:background="@color/White_ffffff"
+    tools:context=".ui.activities.account.activation.ActivationSuccessActivity"
+    tools:ignore="MissingPrefix">
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.NoActionBar">
 
-        <Button
-            android:id="@+id/btnBottom"
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"
-            android:background="@color/Red_d04a55"
-            android:gravity="center"
-            android:text="@string/mengerti"
-            android:textAppearance="@style/RobotoBold"
-            android:textColor="@color/White_ffffff"
-            android:textSize="14sp" />
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/Blue_1f204c"
+            android:contentInsetStart="0dp"
+            android:contentInsetLeft="0dp"
+            android:contentInsetEnd="0dp"
+            android:contentInsetRight="0dp"
+            app:contentInsetEnd="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetStart="0dp"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:theme="@style/ToolBarStyle">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/title_ottocash"
+                    android:textAppearance="@style/BarlowRegular"
+                    android:textColor="@color/White_ffffff"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+        </android.support.v7.widget.Toolbar>
     </LinearLayout>
+
+    <include layout="@layout/content_activation_success" />
+
+
 </LinearLayout>

@@ -1,89 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/White_ffffff"
     android:orientation="vertical"
-    tools:context=".ui.activities.account.activation.ActivationActivity">
-
-    <android.support.v7.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/Black_81868a">
-
-        <ImageView
-            android:id="@+id/ivBack"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@drawable/ic_back" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/aktivasi_akun"
-            android:textAppearance="@style/BarlowSemiBold"
-            android:textColor="@color/color_white"
-            android:textSize="14sp" />
-
-    </android.support.v7.widget.Toolbar>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <include layout="@layout/partial_header" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/ic_otto_cash" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginRight="20dp"
-            android:gravity="center"
-            android:text="@string/akun_anda_terblokir"
-            android:textAppearance="@style/RobotoMedium"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="20dp"
-            android:gravity="center"
-            android:text="@string/call_service_blokir"
-            android:textAppearance="@style/RobotoRegular"
-            android:textColor="@color/Black_484848"
-            android:textSize="12sp" />
-    </LinearLayout>
+    tools:context=".ui.activities.account.activation.ActivationBlockedActivity"
+    tools:ignore="MissingPrefix">
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.NoActionBar">
 
-        <Button
-            android:id="@+id/btnBottom"
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"
-            android:background="@color/Red_d04a55"
-            android:gravity="center"
-            android:text="@string/back_blocked"
-            android:textAppearance="@style/RobotoBold"
-            android:textColor="@color/White_ffffff"
-            android:textSize="14sp" />
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/Blue_1f204c"
+            android:contentInsetStart="0dp"
+            android:contentInsetLeft="0dp"
+            android:contentInsetEnd="0dp"
+            android:contentInsetRight="0dp"
+            app:contentInsetEnd="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetStart="0dp"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:theme="@style/ToolBarStyle">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/title_ottocash"
+                    android:textAppearance="@style/BarlowRegular"
+                    android:textColor="@color/White_ffffff"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+        </android.support.v7.widget.Toolbar>
     </LinearLayout>
+
+    <include layout="@layout/content_activation_block" />
+
+
 </LinearLayout>

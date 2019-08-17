@@ -18,7 +18,7 @@ import com.otto.sdk.IConfig;
 import com.otto.sdk.R;
 import com.otto.sdk.ui.activities.tac.TACMitraActivity;
 import com.otto.sdk.ui.component.support.Util;
-import com.otto.sdk.ui.activities.account.formValidation.FormValidation;
+import com.otto.sdk.ui.component.support.FormValidation;
 import com.otto.sdk.ui.activities.tac.TACOttoCashActivity;
 
 import app.beelabs.com.codebase.base.BaseActivity;
@@ -47,7 +47,6 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
         initComponent();
         initContent();
     }
-
 
     private void initComponent() {
         ivBack = findViewById(R.id.ivBack);

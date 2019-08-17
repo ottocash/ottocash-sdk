@@ -137,7 +137,7 @@ public class ReviewCheckoutActivity extends BaseActivity implements IReviewCheck
             int total = (reviewCheckOutRequest.getAmount() + reviewCheckOutRequest.getFee());
             CacheUtil.putPreferenceInteger(IConfig.SESSION_TOTAL, total, ReviewCheckoutActivity.this);
 
-            Intent intent = new Intent(ReviewCheckoutActivity.this, PinActivity.class);
+            Intent intent = new Intent(ReviewCheckoutActivity.this, PinPaymentActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();

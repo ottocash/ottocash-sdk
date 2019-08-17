@@ -10,14 +10,12 @@
         <activity
             android:name=".ui.activities.payment.HistoryActivity"
             android:label="@string/title_activity_history"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".ui.activities.tac.TACOttocashAndMitraActivity" />
-        <activity android:name=".ui.activities.tac.TACMitraActivity" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.activities.SdkActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activities.account.login.PinLoginActivity"
+            android:name=".ui.activities.account.activation.PinLoginActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activities.dashboard.DashboardSDKActivity"
@@ -26,10 +24,7 @@
             android:name=".ui.activities.payment.CheckOutSuccessActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activities.payment.PinActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activities.payment.PinCheckOutActivity"
+            android:name=".ui.activities.payment.PinPaymentActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activities.payment.ReviewCheckoutActivity"
@@ -38,10 +33,10 @@
             android:name=".ui.activities.account.registration.RegistrationSuccessActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activities.account.registration.OtpActivity"
+            android:name=".ui.activities.account.registration.OtpRegistrationActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activities.account.login.OtpLoginActivity"
+            android:name=".ui.activities.account.activation.OtpLoginActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activities.account.registration.SetPinActivity"
@@ -56,28 +51,22 @@
             android:name=".ui.activities.account.activation.ActivationActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activities.payment.PaymentFailedActivity"
-            android:screenOrientation="portrait" />
-        <!--<activity-->
-        <!--android:name=".ui.activities.payment.PaymentSuccessActivity"-->
-        <!--android:screenOrientation="portrait" />-->
-        <activity
             android:name=".ui.activities.topup.TopUpActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activities.payment.PaymentActivity"
+            android:name=".ui.activities.payment.PayWithQr"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activities.payment.qr.PayWithQr"
-            android:screenOrientation="portrait" />
-        <!--<activity-->
-        <!--android:name=".ui.activities.account.login.LoginActivity"-->
-        <!--android:screenOrientation="portrait" />-->
         <activity
             android:name=".ui.activities.account.activation.ActivationBlockedActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activities.tac.TACOttoCashActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activities.tac.TACOttocashAndMitraActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activities.tac.TACMitraActivity"
             android:screenOrientation="portrait" />
     </application>
 

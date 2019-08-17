@@ -1,17 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="16dp"
-    android:background="@drawable/rounded_white_input"
-    android:orientation="vertical">
+    android:background="@color/white"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".ui.activities.account.registration.SetPinActivity"
+    tools:ignore="MissingPrefix"
+    tools:showIn="@layout/activity_set_pin">
 
-    <Spinner
-        android:id="@+id/spinner"
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="wrap_content">
 
-    </Spinner>
+        <LinearLayout
+            android:id="@+id/parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
 
-</LinearLayout>
+            <LinearLayout
+                android:id="@+id/form_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                android:orientation="vertical">
+
+                <include layout="@layout/partial_banner_ottocash" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/title_set_pin"
+                    android:textAppearance="@style/RobotoMedium"
+                    android:textColor="@color/Black_484848"
+                    android:textSize="14sp" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/desc_pin_ottocash"
+                    android:textAppearance="@style/BarlowRegular"
+                    android:textColor="@color/Grey_8b8b8b"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:text="@string/pin_ottocash"
+                    android:textAppearance="@style/RobotoRegular"
+                    android:textColor="@color/Black_484848"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/edtPin"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/rectangle_input"
+                    android:inputType="number"
+                    android:paddingLeft="14dp"
+                    android:textAppearance="@style/RobotoRegular"
+                    android:textColor="@color/Black_484848" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:text="@string/confirm_pin_ottocash"
+                    android:textAppearance="@style/RobotoRegular"
+                    android:textColor="@color/Black_484848"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/edtConfirmPin"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/rectangle_input"
+                    android:inputType="number"
+                    android:paddingLeft="14dp"
+                    android:textAppearance="@style/RobotoRegular"
+                    android:textColor="@color/Black_484848" />
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="bottom">
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="?android:actionBarSize"
+            android:background="@color/Grey_C4C4C4"
+            android:text="@string/save_ottocash"
+            android:textAllCaps="false"
+            android:textAppearance="@style/RobotoRegular"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

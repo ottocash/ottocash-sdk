@@ -17,7 +17,7 @@ import com.otto.sdk.model.api.response.InquiryResponse;
 import com.otto.sdk.presenter.InquiryPresenter;
 import com.otto.sdk.support.UiUtil;
 import com.otto.sdk.ui.activities.payment.HistoryActivity;
-import com.otto.sdk.ui.activities.payment.qr.PayWithQr;
+import com.otto.sdk.ui.activities.payment.PayWithQr;
 import com.otto.sdk.ui.activities.tac.TACOttocashAndMitraActivity;
 import com.otto.sdk.ui.activities.topup.TopUpActivity;
 import com.otto.sdk.ui.component.dialog.CustomDialog;

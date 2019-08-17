@@ -1,4 +1,4 @@
-package com.otto.sdk.ui.activities.account.registration;
+package com.otto.sdk.ui.activities.account.activation;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +19,7 @@ import com.otto.sdk.model.api.request.OtpVerificationRequest;
 import com.otto.sdk.model.api.response.OtpResponse;
 import com.otto.sdk.model.api.response.OtpVerificationResponse;
 import com.otto.sdk.presenter.OtpPresenter;
+import com.otto.sdk.ui.component.support.Util;
 import com.poovam.pinedittextfield.LinePinField;
 
 import app.beelabs.com.codebase.base.BaseActivity;
@@ -27,7 +28,7 @@ import cn.iwgang.countdownview.CountdownView;
 
 import static com.otto.sdk.IConfig.SESSION_PHONE;
 
-public class OtpActivity extends BaseActivity implements IOtpView {
+public class OtpLoginActivity extends BaseActivity implements IOtpView {
 
     ImageView ivBack;
     CountdownView countdownView;
@@ -38,7 +39,6 @@ public class OtpActivity extends BaseActivity implements IOtpView {
     private OtpVerificationRequest model;
     private OtpRequest modelOtpRequest;
     private boolean isCountdownFinish = false;
-
     private String phone;
 
     @Override
@@ -50,9 +50,8 @@ public class OtpActivity extends BaseActivity implements IOtpView {
         setupCountdownview();
         addTextWatcher(lineField);
 
-        Bundle extras = getIntent().getExtras();
-        phone = extras.getString(SESSION_PHONE);
-        tvNoHpOtp.setText("6 Digit kode OTP telah dikirimkan ke nomor " + phone + ", silahkan cek HP Anda");
+        phone = CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, OtpLoginActivity.this);
+        tvNoHpOtp.setText("6 Digit kode OTP telah dikirimkan ke nomor " + phone + ", Silahkan cek HP Anda");
     }
 
 
@@ -66,7 +65,7 @@ public class OtpActivity extends BaseActivity implements IOtpView {
 
 
     private void setupCountdownview() {
-        int otpDuration = 150000;
+        int otpDuration = 180000;
         countdownView.start(otpDuration);
         countdownView.setOnCountdownEndListener(new CountdownView.OnCountdownEndListener() {
             @Override
@@ -80,9 +79,12 @@ public class OtpActivity extends BaseActivity implements IOtpView {
     private void updateCountdownview() {
         countdownView.setVisibility(View.GONE);
         countdownView.setVisibility(View.VISIBLE);
+        initEnableClickResendOtp();
+
         tvResend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                initDisableClickResendOtp();
                 setupCountdownview();
                 onCallApiOTPRequest();
             }
@@ -97,10 +99,20 @@ public class OtpActivity extends BaseActivity implements IOtpView {
 
     }
 
+    private void initEnableClickResendOtp() {
+        tvResend.setEnabled(true);
+        tvResend.setText(Util.getHTMLContent(getString(R.string.resend_otp)));
+    }
+
+    private void initDisableClickResendOtp() {
+        tvResend.setEnabled(false);
+        tvResend.setText(Util.getHTMLContent(getString(R.string.describe_qa_otp)));
+    }
+
 
     private void onCallApiOTP(final String otp) {
 
-        model = new OtpVerificationRequest(CacheUtil.getPreferenceInteger(IConfig.SESSION_USER_ID, OtpActivity.this));
+        model = new OtpVerificationRequest(CacheUtil.getPreferenceInteger(IConfig.SESSION_USER_ID, OtpLoginActivity.this));
         model.setOtpCode(lineField.getText().toString());
 
         showApiProgressDialog(OttoCashSdk.getAppComponent(), new OtpPresenter(this) {
@@ -113,9 +125,9 @@ public class OtpActivity extends BaseActivity implements IOtpView {
     }
 
     private void onCallApiOTPRequest() {
-        modelOtpRequest = new OtpRequest(CacheUtil.getPreferenceString(SESSION_PHONE, OtpActivity.this));
+        modelOtpRequest = new OtpRequest(CacheUtil.getPreferenceString(SESSION_PHONE, OtpLoginActivity.this));
 
-        showApiProgressDialog(OttoCashSdk.getAppComponent(), new OtpPresenter(OtpActivity.this) {
+        showApiProgressDialog(OttoCashSdk.getAppComponent(), new OtpPresenter(OtpLoginActivity.this) {
             @Override
             public void call() {
                 getOtpRequest(modelOtpRequest);
@@ -156,7 +168,7 @@ public class OtpActivity extends BaseActivity implements IOtpView {
     @Override
     public void handleVerificationOtp(OtpVerificationResponse model) {
         if (model.getBaseMeta().getCode() == 200) {
-            Intent intent = new Intent(OtpActivity.this, RegistrationSuccessActivity.class);
+            Intent intent = new Intent(OtpLoginActivity.this, ActivationSuccessActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();

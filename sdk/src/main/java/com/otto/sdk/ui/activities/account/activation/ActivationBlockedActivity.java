@@ -9,6 +9,7 @@ import app.beelabs.com.codebase.base.BaseActivity;
 
 public class ActivationBlockedActivity extends BaseActivity {
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -1,4 +1,4 @@
-package com.otto.sdk.ui.activities.account.formValidation;
+package com.otto.sdk.ui.component.support;
 
 
 public class FormValidation {

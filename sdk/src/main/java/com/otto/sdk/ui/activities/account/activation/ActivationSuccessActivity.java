@@ -12,7 +12,7 @@ import app.beelabs.com.codebase.base.BaseActivity;
 
 public class ActivationSuccessActivity extends BaseActivity {
 
-    Button btnBottom;
+    Button btnFinish;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,10 +22,9 @@ public class ActivationSuccessActivity extends BaseActivity {
         initComponent();
     }
 
-
     private void initComponent() {
-        btnBottom = findViewById(R.id.btnBottom);
-        btnBottom.setOnClickListener(new View.OnClickListener() {
+        btnFinish = findViewById(R.id.btnBottom);
+        btnFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ActivationSuccessActivity.this, DashboardSDKActivity.class);

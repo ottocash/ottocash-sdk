@@ -20,7 +20,7 @@ import com.poovam.pinedittextfield.LinePinField;
 import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.support.util.CacheUtil;
 
-public class PinActivity extends BaseActivity implements IReviewCheckoutView {
+public class PinPaymentActivity extends BaseActivity implements IReviewCheckoutView {
 
     LinePinField lineField;
     private PaymentValidateRequest model;
@@ -28,7 +28,7 @@ public class PinActivity extends BaseActivity implements IReviewCheckoutView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pin);
+        setContentView(R.layout.activity_pin_payment);
 
         initComponent();
         addTextWatcher(lineField);
@@ -41,7 +41,7 @@ public class PinActivity extends BaseActivity implements IReviewCheckoutView {
     private void onCallApiSetPin(final String pin) {
 
         model = new PaymentValidateRequest(String.valueOf(CacheUtil.getPreferenceString(
-                IConfig.SESSION_PHONE, PinActivity.this)));
+                IConfig.SESSION_PHONE, PinPaymentActivity.this)));
         model.setPin(lineField.getText().toString());
 
         showApiProgressDialog(OttoCashSdk.getAppComponent(), new ReviewCheckoutPresenter(this) {
@@ -86,13 +86,13 @@ public class PinActivity extends BaseActivity implements IReviewCheckoutView {
     public void handlePaymentValidate(PaymentValidateResponse model) {
         if (model.getMeta().getCode() == 200) {
 
-            int emoney = CacheUtil.getPreferenceInteger(IConfig.SESSION_EMONEY_BALANCE, PinActivity.this);
-            int total = CacheUtil.getPreferenceInteger(IConfig.SESSION_TOTAL, PinActivity.this);
+            int emoney = CacheUtil.getPreferenceInteger(IConfig.SESSION_EMONEY_BALANCE, PinPaymentActivity.this);
+            int total = CacheUtil.getPreferenceInteger(IConfig.SESSION_TOTAL, PinPaymentActivity.this);
 
             int emoneyBalance = emoney - total;
-            CacheUtil.putPreferenceInteger(IConfig.SESSION_EMONEY_BALANCE, emoneyBalance, PinActivity.this);
+            CacheUtil.putPreferenceInteger(IConfig.SESSION_EMONEY_BALANCE, emoneyBalance, PinPaymentActivity.this);
 
-            Intent intent = new Intent(PinActivity.this, CheckOutSuccessActivity.class);
+            Intent intent = new Intent(PinPaymentActivity.this, CheckOutSuccessActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();

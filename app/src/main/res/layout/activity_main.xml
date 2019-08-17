@@ -50,6 +50,8 @@
         android:layout_height="match_parent"
         android:layout_gravity="bottom"
         android:layout_margin="20dp"
+        android:textColor="@color/Black_484848"
+        android:textAppearance="@style/RobotoRegular"
         android:gravity="bottom"
         android:text="ottocash-sdk | versi 1.0.4" />
 

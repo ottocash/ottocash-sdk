@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".ui.activities.payment.PinPaymentActivity">
 
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
@@ -14,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Pembayaran Berhasil"
+            android:text="Masukkan Pin"
             android:textAppearance="@style/BarlowSemiBold"
             android:textColor="@color/color_white"
             android:textSize="14sp" />
@@ -34,44 +35,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@drawable/ic_success" />
+            android:background="@drawable/ic_otto_cash" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="14dp"
-            android:text="PEMBAYARAN BERHASIL"
+            android:text="@string/masukkan_pin_ottocash"
             android:textAppearance="@style/RobotoMedium"
             android:textSize="14sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="14dp"
             android:gravity="center"
-            android:text="DETAIL PEMBAYARAN" />
+            android:text="@string/silahkan_masukkan"
+            android:textAppearance="@style/RobotoRegular"
+            android:textColor="@color/Grey_8b8b8b"
+            android:textSize="12sp" />
 
-        <include layout="@layout/partial_detail_payment" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btnBottom"
-            android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"
-            android:background="@color/Blue_1f204c"
-            android:gravity="center"
-            android:text="Halaman Beranda OttoCash"
-            android:textAppearance="@style/RobotoBold"
-            android:textColor="@color/White_ffffff"
-            android:textSize="14sp" />
+        <include layout="@layout/partial_pin_otp" />
     </LinearLayout>
 
 </LinearLayout>

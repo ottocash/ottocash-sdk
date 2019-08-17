@@ -1,4 +1,4 @@
-package com.otto.sdk.ui.activities.payment.qr;
+package com.otto.sdk.ui.activities.payment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;

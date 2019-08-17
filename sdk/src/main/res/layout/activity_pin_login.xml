@@ -1,63 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/White_ffffff"
     android:orientation="vertical"
-    tools:context=".ui.activities.payment.PinActivity">
+    tools:context=".ui.activities.account.activation.PinLoginActivity"
+    tools:ignore="MissingPrefix">
 
-    <android.support.v7.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/Black_81868a">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/masukkan_pin"
-            android:textAppearance="@style/BarlowSemiBold"
-            android:textColor="@color/color_white"
-            android:textSize="14sp" />
-    </android.support.v7.widget.Toolbar>
 
     <LinearLayout
-        android:id="@+id/top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="90dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="26dp"
-        android:orientation="vertical">
+        android:theme="@style/AppTheme.NoActionBar">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/ic_otto_cash" />
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/Blue_1f204c"
+            android:contentInsetStart="0dp"
+            android:contentInsetLeft="0dp"
+            android:contentInsetEnd="0dp"
+            android:contentInsetRight="0dp"
+            app:contentInsetEnd="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetStart="0dp"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:theme="@style/ToolBarStyle">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="14dp"
-            android:text="@string/masukkan_pin_ottocash"
-            android:textAppearance="@style/RobotoMedium"
-            android:textSize="14sp" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="14dp"
-            android:gravity="center"
-            android:text="@string/silahkan_masukkan"
-            android:textAppearance="@style/RobotoRegular"
-            android:textColor="@color/Grey_8b8b8b"
-            android:textSize="12sp" />
+                <ImageView
+                    android:id="@+id/ivBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:padding="16dp"
+                    android:src="@drawable/ic_back" />
 
-        <include layout="@layout/partial_pin" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/title_ottocash"
+                    android:textAppearance="@style/BarlowRegular"
+                    android:textColor="@color/White_ffffff"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+        </android.support.v7.widget.Toolbar>
     </LinearLayout>
+
+    <include layout="@layout/content_pin_login" />
+
 
 </LinearLayout>

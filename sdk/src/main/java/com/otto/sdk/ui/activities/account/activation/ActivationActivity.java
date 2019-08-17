@@ -13,8 +13,7 @@ import android.widget.Toast;
 
 import com.otto.sdk.IConfig;
 import com.otto.sdk.R;
-import com.otto.sdk.ui.activities.account.formValidation.FormValidation;
-import com.otto.sdk.ui.activities.account.login.PinLoginActivity;
+import com.otto.sdk.ui.component.support.FormValidation;
 import com.otto.sdk.ui.activities.tac.TACMitraActivity;
 import com.otto.sdk.ui.activities.tac.TACOttoCashActivity;
 import com.otto.sdk.ui.component.support.Util;
@@ -28,7 +27,7 @@ public class ActivationActivity extends BaseActivity implements View.OnClickList
     CheckBox cboxTACMitra;
     AppCompatTextView tvTACOttoCash;
     AppCompatTextView tvTACMitra;
-    Button btnBottom;
+    Button btnAktifkan;
     TextView tvDesc;
     ImageView ivBack;
 
@@ -51,7 +50,7 @@ public class ActivationActivity extends BaseActivity implements View.OnClickList
         cboxTACMitra.setOnClickListener(this);
         tvTACOttoCash = findViewById(R.id.tvTACOttocash);
         tvTACMitra = findViewById(R.id.tvTACMitra);
-        btnBottom = findViewById(R.id.btnBottom);
+        btnAktifkan = findViewById(R.id.btnAktifkan);
         tvTACOttoCash.setText(Util.getHTMLContent(getString(R.string.sign_up_label_tac_link)));
         tvTACMitra.setText(Util.getHTMLContent(getString(R.string.sign_up_label_tac_link_mitra)));
         tvDesc = findViewById(R.id.tvDesc);
@@ -88,7 +87,7 @@ public class ActivationActivity extends BaseActivity implements View.OnClickList
             }
         });
 
-        btnBottom.setOnClickListener(new View.OnClickListener() {
+        btnAktifkan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -122,10 +121,10 @@ public class ActivationActivity extends BaseActivity implements View.OnClickList
 
         if (FormValidation.required(phone) && TACOttoCash && TACMitra) {
             isFormValidationSuccess = true;
-            btnBottom.setBackground(ContextCompat.getDrawable(this, R.drawable.button_primary_selector));
+            btnAktifkan.setBackground(ContextCompat.getDrawable(this, R.drawable.button_primary_selector));
         } else {
             isFormValidationSuccess = false;
-            btnBottom.setBackground(ContextCompat.getDrawable(this, R.drawable.button_primary_selected_bg));
+            btnAktifkan.setBackground(ContextCompat.getDrawable(this, R.drawable.button_primary_selected_bg));
         }
     }
 }
