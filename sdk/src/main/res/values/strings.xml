@@ -69,6 +69,29 @@
     <string name="desc_pin_login">Masukkan 6 digit PIN OttoCash Anda</string>
     <string name="invalid_pin">PIN tidak Valid</string>
 
+    <!--PIN PAYMENT-->
+    <string name="bill_payment">Biaya Tertagih</string>
+
+
+    <!--SALDO MINUS-->
+    <string name="saldo_minus">Saldo Anda tidak mencukupi</string>
+    <string name="describe_saldo_minus">Saldo OttoCash Anda kurang untuk melanjutknan transaksi ini. Isi ulang saldo OttoCash Anda.</string>
+
+
+    <!--DASHBOARD SDK-->
+    <string name="set_pin_ottocash"><![CDATA[<u><font color="#D04A55">Pengaturan Pin</font></u> ]]></string>
+    <string name="tac_ottocash"><![CDATA[<u><font color="#D04A55">Syarat dan Ketentuan</font></u> ]]></string>
+    <string name="saldo_ottocash_reguler">Saldo OttoCash Reguler</string>
+    <string name="call_center_ottocash">Hubungi OttoCash di</string>
+    <string name="email_ottocash">Email</string>
+    <string name="desc_email_ottocash">halo@ottocash.id</string>
+    <string name="telp_ottocash">Nomor telepon</string>
+    <string name="desc_telp_ottocash">021 5020 0909</string>
+    <string name="web_ottocash">Website</string>
+    <string name="desc_web_ottocash">ottocash.id</string>
+    <string name="clock_ottocash">Waktu Operational</string>
+    <string name="desc_clock_ottocash">Senin-Jumat 08.00 - 09.00</string>
+
 
     <string name="aktivasi_akun">Aktivasi Akun</string>
     <string name="desc_activation">Aktivasi Akun 081 6*** *4423  OttoCash Kamu di MITRAKU ? </string>
@@ -83,7 +106,7 @@
     <string name="hi_somebody">Hi Somebody,</string>
     <string name="question_account">Kamu belum memiliki akun di OttoCash. Isi data dibawah dengan lengkap dan benar dan langsung aktifkan akun OttoCash kamu.</string>
 
-    <string name="set_pin_ottocash">Set Pin OttoCash</string>
+    <!--<string name="set_pin_ottocash">Set Pin OttoCash</string>-->
     <string name="set_pin_kamu">Set PIN Kamu</string>
     <string name="set_pin">Set pin kamu untuk kemudahan bertransaksi di MitraKu menggunakan OttoCash</string>
     <!--<string name="pin_ottocash">PIN Ottocash</string>-->

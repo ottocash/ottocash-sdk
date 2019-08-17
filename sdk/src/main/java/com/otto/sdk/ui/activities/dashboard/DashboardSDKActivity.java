@@ -2,7 +2,9 @@ package com.otto.sdk.ui.activities.dashboard;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
+import android.os.Handler;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,14 +16,19 @@ import com.otto.sdk.R;
 import com.otto.sdk.interfaces.IInquiryView;
 import com.otto.sdk.model.api.request.InquiryRequest;
 import com.otto.sdk.model.api.response.InquiryResponse;
+import com.otto.sdk.model.general.MainMenuModel;
 import com.otto.sdk.presenter.InquiryPresenter;
 import com.otto.sdk.support.UiUtil;
 import com.otto.sdk.ui.activities.payment.HistoryActivity;
 import com.otto.sdk.ui.activities.payment.PayWithQr;
-import com.otto.sdk.ui.activities.tac.TACOttocashAndMitraActivity;
 import com.otto.sdk.ui.activities.topup.TopUpActivity;
+import com.otto.sdk.ui.adapter.MainMenuAdapter;
 import com.otto.sdk.ui.component.dialog.CustomDialog;
+import com.otto.sdk.ui.component.support.ItemClickSupport;
 import com.otto.sdk.ui.component.support.Util;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.support.util.CacheUtil;
@@ -29,16 +36,11 @@ import app.beelabs.com.codebase.support.util.CacheUtil;
 public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
 
     ImageView ivBack;
-    TextView tvSaldoOttoCash;
-    TextView tvNameSDK;
-    ImageView imgPayments;
-    ImageView imgTopUp;
-    CardView cdPayments;
-    CardView cdTopUp;
-    CardView cdReqMoney;
-    TextView webView;
-    CardView cdTransfer;
-    CardView cdHistory;
+    TextView tvTitleOttoCash;
+    TextView tvEmoneyBalance;
+    RecyclerView rvMainMenu;
+    TextView tvSetPinOttocash;
+    TextView tvTacOttocash;
 
     private InquiryPresenter inquiryPresenter;
 
@@ -53,52 +55,21 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
         setContentView(R.layout.activity_dashboard_sdk);
 
         initComponent();
-        initContent();
+        initRecyclerView();
+        displayMainMenu();
         onCallApiInquiry();
     }
 
     public void initComponent() {
         ivBack = findViewById(R.id.ivBack);
-        tvSaldoOttoCash = findViewById(R.id.tvSaldoOttoCash);
-        tvNameSDK = findViewById(R.id.tvNameSDK);
-        imgPayments = findViewById(R.id.imgPayments);
-        imgTopUp = findViewById(R.id.imgTopUp);
-        cdPayments = findViewById(R.id.card_payment);
-        cdTopUp = findViewById(R.id.card_top_up);
-        webView = findViewById(R.id.webview);
-        cdTransfer = findViewById(R.id.card_transfer);
-        cdReqMoney = findViewById(R.id.card_req_money);
-        cdHistory = findViewById(R.id.card_history);
+        tvTitleOttoCash = findViewById(R.id.tvTitleOttoCash);
+        tvEmoneyBalance = findViewById(R.id.tvEmoneyBalance);
+        rvMainMenu = findViewById(R.id.rvMainMenu);
+        tvSetPinOttocash = findViewById(R.id.tvSetPinOttocash);
+        tvTacOttocash = findViewById(R.id.tvTacOttocash);
 
-        webView.setText(Util.getHTMLContent(getString(R.string.syarat_ketentuan)));
-    }
-
-    public void initContent() {
-        cdPayments.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DashboardSDKActivity.this, PayWithQr.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                DashboardSDKActivity.this.startActivity(intent);
-            }
-        });
-
-        cdTopUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DashboardSDKActivity.this, TopUpActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                DashboardSDKActivity.this.startActivity(intent);
-            }
-        });
-
-        cdHistory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DashboardSDKActivity.this, HistoryActivity.class);
-                startActivity(intent);
-            }
-        });
+        tvSetPinOttocash.setText(Util.getHTMLContent(getString(R.string.set_pin_ottocash)));
+        tvTacOttocash.setText(Util.getHTMLContent(getString(R.string.tac_ottocash)));
 
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,30 +77,99 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
                 onBackPressed();
             }
         });
+    }
 
-        webView.setOnClickListener(new View.OnClickListener() {
+    private void initRecyclerView() {
+        rvMainMenu.setHasFixedSize(true);
+        rvMainMenu.setNestedScrollingEnabled(false);
+        final GridLayoutManager mainMenuLayoutManager = new GridLayoutManager(this, 4);
+        rvMainMenu.setLayoutManager(mainMenuLayoutManager);
+    }
+
+    private void displayMainMenu() {
+        final List<MainMenuModel> mainMenuList = getMainMenuList();
+
+        MainMenuAdapter adapter = new MainMenuAdapter(this, mainMenuList, R.layout.item_main_menu_ottocash);
+        rvMainMenu.setAdapter(adapter);
+
+        ItemClickSupport.addTo(rvMainMenu).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DashboardSDKActivity.this, TACOttocashAndMitraActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                DashboardSDKActivity.this.startActivity(intent);
+            public void onItemClicked(RecyclerView recyclerView, final int position, View v) {
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mainMenuSelected(mainMenuList.get(position));
+                    }
+                }, 300);
             }
         });
+    }
 
-        cdTransfer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showPopUpDialogPlus();
-            }
-        });
+    private List<MainMenuModel> getMainMenuList() {
 
-        cdReqMoney.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showPopUpDialogEmoney();
-            }
-        });
+        String[] mainMenus;
+        String[] mainMenuCodes;
+        Integer[] menuIcons;
 
+        mainMenus = getResources().getStringArray(R.array.otto_cash_main_menu);
+        mainMenuCodes = getResources().getStringArray(R.array.otto_cash_menu_code);
+
+        menuIcons = new Integer[]{
+                R.drawable.ic_bayar,
+                R.drawable.ic_merchant,
+                R.drawable.ic_top_up,
+                R.drawable.ic_history,
+                R.drawable.ic_gift,
+                R.drawable.ic_tarik_duit,
+                R.drawable.ic_req_money,
+                R.drawable.ic_transfer,
+        };
+
+        List<MainMenuModel> mainMenuList = new ArrayList<>();
+        for (int i = 0; i < mainMenus.length; i++) {
+            MainMenuModel mainMenu = new MainMenuModel();
+            mainMenu.setCode(mainMenuCodes[i]);
+            mainMenu.setName(mainMenus[i]);
+            mainMenu.setIcon(menuIcons[i]);
+            mainMenuList.add(mainMenu);
+        }
+
+        return mainMenuList;
+    }
+
+    private void mainMenuSelected(MainMenuModel mainMenu) {
+        switch (mainMenu.getCode()) {
+            case "mm_1":
+                Intent intent = new Intent(this, PayWithQr.class);
+                startActivity(intent);
+                break;
+            case "mm_2":
+                dialogComingSoon();
+                break;
+            case "mm_3":
+                intent = new Intent(this, TopUpActivity.class);
+                startActivity(intent);
+                break;
+            case "mm_4":
+                intent = new Intent(this, HistoryActivity.class);
+                startActivity(intent);
+                break;
+            case "mm_5":
+                dialogComingSoon();
+                break;
+            case "mm_6":
+                dialogComingSoon();
+                break;
+            case "mm_7":
+                dialogComingSoon();
+                break;
+            case "mm_8":
+                dialogComingSoon();
+                break;
+            default:
+                break;
+        }
     }
 
 
@@ -148,24 +188,7 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
     }
 
 
-    protected void popUpDialogPlus() {
-        String title = getString(R.string.dialog_title);
-        String message = getString(R.string.dialog_msg);
-        String btnLabel = getString(R.string.dialog_btn_close);
-
-        CustomDialog.alertDialog(this, title, message, btnLabel, false);
-    }
-
-    public void showPopUpDialogPlus() {
-        popUpDialogPlus();
-    }
-
-    public void showPopUpDialogEmoney() {
-        popUpDialogEmoney();
-
-    }
-
-    protected void popUpDialogEmoney() {
+    protected void dialogComingSoon() {
         String title = getString(R.string.dialog_tittle_coming_soon);
         String message = getString(R.string.dialog_message_coming_soon);
         String btnLabel = getString(R.string.dialog_button_coming_soon);
@@ -184,8 +207,8 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
             name = model.getData().getName();
             CacheUtil.putPreferenceString(IConfig.SESSION_NAME, name, DashboardSDKActivity.this);
 
-            tvNameSDK.setText("Hai " + name + ". Saldo OttoCash Reguler Kamu");
-            tvSaldoOttoCash.setText(UiUtil.formatMoneyIDR(Long.parseLong(emoneyBalance)));
+            tvTitleOttoCash.setText("Hai " + name + ". Saldo OttoCash Reguler Kamu");
+            tvEmoneyBalance.setText(UiUtil.formatMoneyIDR(Long.parseLong(emoneyBalance)));
 
         } else {
             Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),

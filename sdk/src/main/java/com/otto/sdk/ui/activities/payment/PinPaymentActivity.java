@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.otto.sdk.IConfig;
@@ -15,6 +16,7 @@ import com.otto.sdk.model.api.request.PaymentValidateRequest;
 import com.otto.sdk.model.api.response.PaymentValidateResponse;
 import com.otto.sdk.model.api.response.ReviewCheckOutResponse;
 import com.otto.sdk.presenter.ReviewCheckoutPresenter;
+import com.otto.sdk.support.UiUtil;
 import com.poovam.pinedittextfield.LinePinField;
 
 import app.beelabs.com.codebase.base.BaseActivity;
@@ -22,8 +24,13 @@ import app.beelabs.com.codebase.support.util.CacheUtil;
 
 public class PinPaymentActivity extends BaseActivity implements IReviewCheckoutView {
 
+    TextView tvPaymentValue;
     LinePinField lineField;
     private PaymentValidateRequest model;
+
+    int emoneyBalance;
+    int total;
+    int paymentValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +42,7 @@ public class PinPaymentActivity extends BaseActivity implements IReviewCheckoutV
     }
 
     private void initComponent() {
+        tvPaymentValue = findViewById(R.id.tvPaymentValue);
         lineField = findViewById(R.id.lineField);
     }
 
@@ -86,11 +94,11 @@ public class PinPaymentActivity extends BaseActivity implements IReviewCheckoutV
     public void handlePaymentValidate(PaymentValidateResponse model) {
         if (model.getMeta().getCode() == 200) {
 
-            int emoney = CacheUtil.getPreferenceInteger(IConfig.SESSION_EMONEY_BALANCE, PinPaymentActivity.this);
-            int total = CacheUtil.getPreferenceInteger(IConfig.SESSION_TOTAL, PinPaymentActivity.this);
+            emoneyBalance = CacheUtil.getPreferenceInteger(IConfig.SESSION_EMONEY_BALANCE, PinPaymentActivity.this);
+            total = CacheUtil.getPreferenceInteger(IConfig.SESSION_TOTAL, PinPaymentActivity.this);
+            tvPaymentValue.setText(UiUtil.formatMoneyIDR(Long.parseLong(String.valueOf(total))));
 
-            int emoneyBalance = emoney - total;
-            CacheUtil.putPreferenceInteger(IConfig.SESSION_EMONEY_BALANCE, emoneyBalance, PinPaymentActivity.this);
+            paymentValue = emoneyBalance - total;
 
             Intent intent = new Intent(PinPaymentActivity.this, CheckOutSuccessActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);

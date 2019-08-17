@@ -60,6 +60,9 @@
             android:name=".ui.activities.account.activation.ActivationBlockedActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ui.activities.payment.PaymentSaldoMinusActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.activities.tac.TACOttoCashActivity"
             android:screenOrientation="portrait" />
         <activity

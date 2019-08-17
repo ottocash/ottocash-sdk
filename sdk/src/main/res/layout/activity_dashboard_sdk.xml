@@ -1,376 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <FrameLayout
-        android:id="@+id/fm"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_gravity="top"
-        android:background="@color/Black_81868a">
-
-        <ImageButton
-            android:id="@+id/ivBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="20dp"
-            android:background="@drawable/ic_back"
-            android:padding="9dp" />
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="16dp"
-            android:text="@string/ottocash_reguler"
-            android:textAppearance="@style/BarlowSemiBold"
-            android:textColor="@color/White_ffffff"
-            android:textSize="14sp" />
-
-    </FrameLayout>
-
-    <android.support.v4.widget.NestedScrollView
-        android:id="@+id/nested"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/btnBottom"
-        android:layout_below="@+id/fm"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/img_header"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/imgLogo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="39dp"
-                    android:background="@drawable/ic_otto_cash"
-                    tools:ignore="ContentDescription" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tvNameSDK"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="Hai,"
-                    android:textAppearance="@style/BarlowRegular"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:id="@+id/tvSaldoOttoCash"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Rp 0"
-                    android:textAppearance="@style/BarlowSemiBold"
-                    android:textColor="@color/Blue_1f204c"
-                    android:textSize="24sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:gravity="center">
-
-                <include layout="@layout/partial_feautures" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center">
-
-                <include layout="@layout/partial_feautures_add" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/hubungi_ottocash_di"
-                    android:textAppearance="@style/BarlowRegular"
-                    android:textColor="@color/Black_484848"
-                    android:textSize="12sp" />
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:src="@drawable/ic_mail" />
-
-                        <FrameLayout
-                            android:layout_width="2dp"
-                            android:layout_height="30dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@color/Grey_e5e5e5">
-
-                        </FrameLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/email"
-                                android:textAppearance="@style/BarlowRegular"
-                                android:textColor="@color/Grey_8b8b8b"
-                                android:textSize="10sp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/halo_ottocash_id"
-                                android:textAppearance="@style/BarlowMedium"
-                                android:textColor="@color/Black_484848"
-                                android:textSize="12sp" />
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginBottom="5dp"
-                        android:background="@color/Grey_e5e5e5">
-
-                    </FrameLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:src="@drawable/ic_group_call" />
-
-                        <FrameLayout
-                            android:layout_width="2dp"
-                            android:layout_height="30dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@color/Grey_e5e5e5">
-
-                        </FrameLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/nomor_telepon"
-                                android:textAppearance="@style/BarlowRegular"
-                                android:textColor="@color/Grey_8b8b8b"
-                                android:textSize="10sp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/_021_5020_0909"
-                                android:textAppearance="@style/BarlowMedium"
-                                android:textColor="@color/Black_484848"
-                                android:textSize="12sp" />
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginBottom="5dp"
-                        android:background="@color/Grey_e5e5e5">
-
-                    </FrameLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:src="@drawable/ic_web" />
-
-                        <FrameLayout
-                            android:layout_width="2dp"
-                            android:layout_height="30dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@color/Grey_e5e5e5">
-
-                        </FrameLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/website"
-                                android:textAppearance="@style/BarlowRegular"
-                                android:textColor="@color/Grey_8b8b8b"
-                                android:textSize="10sp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/ottocash_id"
-                                android:textAppearance="@style/BarlowMedium"
-                                android:textColor="@color/Black_484848"
-                                android:textSize="12sp" />
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginBottom="5dp"
-                        android:background="@color/Grey_e5e5e5">
-
-                    </FrameLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:src="@drawable/ic_clock" />
-
-                        <FrameLayout
-                            android:layout_width="2dp"
-                            android:layout_height="30dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@color/Grey_e5e5e5">
-
-                        </FrameLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/waktu_operational"
-                                android:textAppearance="@style/BarlowRegular"
-                                android:textColor="@color/Grey_8b8b8b"
-                                android:textSize="10sp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/senin_jumat_08_00_09_00"
-                                android:textAppearance="@style/BarlowMedium"
-                                android:textColor="@color/Black_484848"
-                                android:textSize="12sp" />
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginBottom="5dp"
-                        android:background="@color/Grey_e5e5e5">
-
-                    </FrameLayout>
-
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
+    android:layout_height="match_parent"
+    android:background="@color/White_ffffff"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".ui.activities.dashboard.DashboardSDKActivity"
+    tools:ignore="MissingPrefix">
 
     <LinearLayout
-        android:id="@+id/btnBottom"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:layout_alignParentBottom="true"
-        android:backgroundTint="@color/transparent"
-        tools:ignore="BottomAppBar">
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.NoActionBar">
 
-        <TextView
-            android:id="@+id/webview"
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="@string/syarat_ketentuan"
-            android:textAppearance="@style/BarlowSemiBold"
-            android:textColor="@color/Blue_056fb6"
-            android:textSize="12sp" />
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/Blue_1f204c"
+            android:contentInsetStart="0dp"
+            android:contentInsetLeft="0dp"
+            android:contentInsetEnd="0dp"
+            android:contentInsetRight="0dp"
+            app:contentInsetEnd="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetStart="0dp"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:theme="@style/ToolBarStyle">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/ivBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:padding="16dp"
+                    android:src="@drawable/ic_back" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/title_ottocash"
+                    android:textAppearance="@style/BarlowRegular"
+                    android:textColor="@color/White_ffffff"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+
+        </android.support.v7.widget.Toolbar>
+
     </LinearLayout>
 
+    <include layout="@layout/content_dashboard_sdk" />
 
-</RelativeLayout>
+
+</LinearLayout>

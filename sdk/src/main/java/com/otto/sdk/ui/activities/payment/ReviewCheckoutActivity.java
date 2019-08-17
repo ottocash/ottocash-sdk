@@ -32,6 +32,7 @@ public class ReviewCheckoutActivity extends BaseActivity implements IReviewCheck
     private int grandTotal;
     private String customerReferenceNumber;
     private String SESSION_GRAND_TOTAL = "total";
+    int total;
 
     TextView tvBill;
     TextView tvPembayaranMitra;
@@ -134,7 +135,7 @@ public class ReviewCheckoutActivity extends BaseActivity implements IReviewCheck
     public void handleReviewCheckout(ReviewCheckOutResponse model) {
         if (model.getMeta().getCode() == 200) {
 
-            int total = (reviewCheckOutRequest.getAmount() + reviewCheckOutRequest.getFee());
+            total = (reviewCheckOutRequest.getAmount() + reviewCheckOutRequest.getFee());
             CacheUtil.putPreferenceInteger(IConfig.SESSION_TOTAL, total, ReviewCheckoutActivity.this);
 
             Intent intent = new Intent(ReviewCheckoutActivity.this, PinPaymentActivity.class);
