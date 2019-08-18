@@ -17,7 +17,7 @@ import android.widget.Toast;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.R;
 import com.otto.sdk.ui.activities.tac.TACMitraActivity;
-import com.otto.sdk.ui.component.support.Util;
+import com.otto.sdk.ui.component.support.UiUtil;
 import com.otto.sdk.ui.component.support.FormValidation;
 import com.otto.sdk.ui.activities.tac.TACOttoCashActivity;
 
@@ -58,8 +58,8 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
         cbTACMitra = findViewById(R.id.cbTACMitra);
         tvTACOttoCash = findViewById(R.id.tvTACOttoCash);
         tvTACMitra = findViewById(R.id.tvTACMitra);
-        tvTACOttoCash.setText(Util.getHTMLContent(getString(R.string.sign_up_label_tac_link)));
-        tvTACMitra.setText(Util.getHTMLContent(getString(R.string.sign_up_label_tac_link_mitra)));
+        tvTACOttoCash.setText(UiUtil.getHTMLContent(getString(R.string.sign_up_label_tac_link)));
+        tvTACMitra.setText(UiUtil.getHTMLContent(getString(R.string.sign_up_label_tac_link_mitra)));
 
         addTextWatcher(edtNameKtp);
         addTextWatcher(edtEmail);

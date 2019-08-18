@@ -16,7 +16,7 @@ import com.otto.sdk.model.api.request.PaymentValidateRequest;
 import com.otto.sdk.model.api.response.PaymentValidateResponse;
 import com.otto.sdk.model.api.response.ReviewCheckOutResponse;
 import com.otto.sdk.presenter.ReviewCheckoutPresenter;
-import com.otto.sdk.support.UiUtil;
+import com.otto.sdk.ui.component.support.UiUtil;
 import com.poovam.pinedittextfield.LinePinField;
 
 import app.beelabs.com.codebase.base.BaseActivity;

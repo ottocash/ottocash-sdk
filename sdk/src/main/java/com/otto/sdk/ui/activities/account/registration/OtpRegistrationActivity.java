@@ -19,7 +19,7 @@ import com.otto.sdk.model.api.request.OtpVerificationRequest;
 import com.otto.sdk.model.api.response.OtpResponse;
 import com.otto.sdk.model.api.response.OtpVerificationResponse;
 import com.otto.sdk.presenter.OtpPresenter;
-import com.otto.sdk.ui.component.support.Util;
+import com.otto.sdk.ui.component.support.UiUtil;
 import com.poovam.pinedittextfield.LinePinField;
 
 import app.beelabs.com.codebase.base.BaseActivity;
@@ -101,12 +101,12 @@ public class OtpRegistrationActivity extends BaseActivity implements IOtpView {
 
     private void initEnableClickResendOtp() {
         tvResend.setEnabled(true);
-        tvResend.setText(Util.getHTMLContent(getString(R.string.resend_otp)));
+        tvResend.setText(UiUtil.getHTMLContent(getString(R.string.resend_otp)));
     }
 
     private void initDisableClickResendOtp() {
         tvResend.setEnabled(false);
-        tvResend.setText(Util.getHTMLContent(getString(R.string.describe_qa_otp)));
+        tvResend.setText(UiUtil.getHTMLContent(getString(R.string.describe_qa_otp)));
     }
 
 

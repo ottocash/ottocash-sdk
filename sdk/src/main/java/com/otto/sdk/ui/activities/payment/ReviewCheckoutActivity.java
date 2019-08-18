@@ -18,8 +18,8 @@ import com.otto.sdk.model.api.request.ReviewCheckOutRequest;
 import com.otto.sdk.model.api.response.PaymentValidateResponse;
 import com.otto.sdk.model.api.response.ReviewCheckOutResponse;
 import com.otto.sdk.presenter.ReviewCheckoutPresenter;
-import com.otto.sdk.support.UiUtil;
 import com.otto.sdk.ui.component.dialog.SaldoDialog;
+import com.otto.sdk.ui.component.support.UiUtil;
 
 import java.util.Random;
 
@@ -64,11 +64,11 @@ public class ReviewCheckoutActivity extends BaseActivity implements IReviewCheck
         btnPay = findViewById(R.id.btnPay);
         ivBack = findViewById(R.id.ivBack);
 
-//        Bundle extras = getIntent().getExtras();
-//        grandTotal = Integer.parseInt(extras.getString(SESSION_GRAND_TOTAL));
-//        tvBill.setText(UiUtil.formatMoneyIDR(Long.parseLong(String.valueOf(grandTotal))));
-//        tvPembayaranMitra.setText(UiUtil.formatMoneyIDR(Long.parseLong(String.valueOf(grandTotal))));
-//        tvTotalBayar.setText(UiUtil.formatMoneyIDR(Long.parseLong(String.valueOf(grandTotal))));
+        Bundle extras = getIntent().getExtras();
+        grandTotal = Integer.parseInt(extras.getString(SESSION_GRAND_TOTAL));
+        tvBill.setText(UiUtil.formatMoneyIDR(Long.parseLong(String.valueOf(grandTotal))));
+        tvPembayaranMitra.setText(UiUtil.formatMoneyIDR(Long.parseLong(String.valueOf(grandTotal))));
+        tvTotalBayar.setText(UiUtil.formatMoneyIDR(Long.parseLong(String.valueOf(grandTotal))));
     }
 
     private void initContent() {

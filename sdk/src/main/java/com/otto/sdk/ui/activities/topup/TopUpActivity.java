@@ -3,20 +3,18 @@ package com.otto.sdk.ui.activities.topup;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.design.bottomappbar.BottomAppBar;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.otto.sdk.IConfig;
 import com.otto.sdk.R;
 import com.otto.sdk.ui.activities.dashboard.DashboardSDKActivity;
-import com.otto.sdk.ui.component.support.Util;
+import com.otto.sdk.ui.component.support.UiUtil;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.support.util.CacheUtil;
@@ -45,8 +43,8 @@ public class TopUpActivity extends BaseActivity {
         tvAtm5 = findViewById(R.id.tvAtm5);
         tvMbank3 = findViewById(R.id.tvMbank3);
         tvMbank5 = findViewById(R.id.tvMbank5);
-        tvAtm4.setText(Util.getHTMLContent(getString(R.string.atm_4)));
-        tvMbank3.setText(Util.getHTMLContent(getString(R.string.mbank_3)));
+        tvAtm4.setText(UiUtil.getHTMLContent(getString(R.string.atm_4)));
+        tvMbank3.setText(UiUtil.getHTMLContent(getString(R.string.mbank_3)));
 
         String phone = CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, TopUpActivity.this);
         SpannableStringBuilder builder = new SpannableStringBuilder();

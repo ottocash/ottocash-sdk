@@ -11,8 +11,8 @@ import android.widget.TextView;
 
 import com.otto.sdk.R;
 import com.otto.sdk.model.api.response.TransactionHistoryResponse;
-import com.otto.sdk.support.UiUtil;
 import com.otto.sdk.ui.component.support.DateUtil;
+import com.otto.sdk.ui.component.support.UiUtil;
 
 import java.util.ArrayList;
 import java.util.List;

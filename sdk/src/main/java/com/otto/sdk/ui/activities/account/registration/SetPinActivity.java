@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.otto.sdk.AppActivity;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCashSdk;
 import com.otto.sdk.R;
@@ -19,6 +20,8 @@ import com.otto.sdk.model.api.request.RegisterRequest;
 import com.otto.sdk.model.api.response.LoginResponse;
 import com.otto.sdk.model.api.response.RegisterResponse;
 import com.otto.sdk.presenter.AuthPresenter;
+import com.otto.sdk.ui.component.support.Connectivity;
+import com.otto.sdk.ui.component.support.DeviceId;
 import com.otto.sdk.ui.component.support.FormValidation;
 
 import app.beelabs.com.codebase.base.BaseActivity;
@@ -28,7 +31,7 @@ import static com.otto.sdk.IConfig.SESSION_EMAIL;
 import static com.otto.sdk.IConfig.SESSION_NAME;
 import static com.otto.sdk.IConfig.SESSION_PHONE;
 
-public class SetPinActivity extends BaseActivity implements IAuthView {
+public class SetPinActivity extends AppActivity implements IAuthView {
 
     EditText edtPin;
     EditText edtConfirmPin;
@@ -80,26 +83,32 @@ public class SetPinActivity extends BaseActivity implements IAuthView {
     }
 
     private void onCallApiSetPin() {
-        model = new RegisterRequest(
-                CacheUtil.getPreferenceString(SESSION_PHONE, SetPinActivity.this),
-                CacheUtil.getPreferenceString(SESSION_NAME, SetPinActivity.this),
-                CacheUtil.getPreferenceString(SESSION_EMAIL, SetPinActivity.this));
+        if (Connectivity.isNetworkAvailable(this)) {
+            model = new RegisterRequest(
+                    CacheUtil.getPreferenceString(SESSION_PHONE, SetPinActivity.this),
+                    CacheUtil.getPreferenceString(SESSION_NAME, SetPinActivity.this),
+                    CacheUtil.getPreferenceString(SESSION_EMAIL, SetPinActivity.this));
 
-        model.setPin(edtPin.getText().toString());
-        model.setSecurityQuestionId("1");
-        model.setAnswer("ˆ˜ÎØÅÒÒˆ");
-        model.setPlatform("android");
-
-
-        showApiProgressDialog(OttoCashSdk.getAppComponent(), new AuthPresenter(SetPinActivity.this) {
-            @Override
-            public void call() {
-                getRegister(model);
-
+            model.setPin(edtPin.getText().toString());
+            model.setSecurityQuestionId("1");
+            model.setAnswer("ˆ˜ÎØÅÒÒˆ");
+            model.setDeviceId(DeviceId.getDeviceID(this));
+            model.setPlatform("android");
+            if (getMyLastLocation() != null) {
+                model.setLatitude(String.valueOf(getMyLastLocation().getLatitude()));
+                model.setLongitude(String.valueOf(getMyLastLocation().getLongitude()));
             }
-        }, "Loading");
-    }
 
+
+            showApiProgressDialog(OttoCashSdk.getAppComponent(), new AuthPresenter(SetPinActivity.this) {
+                @Override
+                public void call() {
+                    getRegister(model);
+
+                }
+            }, "Loading");
+        }
+    }
 
     private void validateForm() {
         String pin = edtPin.getText().toString();

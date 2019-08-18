@@ -16,7 +16,7 @@ import com.otto.sdk.R;
 import com.otto.sdk.ui.component.support.FormValidation;
 import com.otto.sdk.ui.activities.tac.TACMitraActivity;
 import com.otto.sdk.ui.activities.tac.TACOttoCashActivity;
-import com.otto.sdk.ui.component.support.Util;
+import com.otto.sdk.ui.component.support.UiUtil;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.support.util.CacheUtil;
@@ -51,8 +51,8 @@ public class ActivationActivity extends BaseActivity implements View.OnClickList
         tvTACOttoCash = findViewById(R.id.tvTACOttocash);
         tvTACMitra = findViewById(R.id.tvTACMitra);
         btnAktifkan = findViewById(R.id.btnAktifkan);
-        tvTACOttoCash.setText(Util.getHTMLContent(getString(R.string.sign_up_label_tac_link)));
-        tvTACMitra.setText(Util.getHTMLContent(getString(R.string.sign_up_label_tac_link_mitra)));
+        tvTACOttoCash.setText(UiUtil.getHTMLContent(getString(R.string.sign_up_label_tac_link)));
+        tvTACMitra.setText(UiUtil.getHTMLContent(getString(R.string.sign_up_label_tac_link_mitra)));
         tvDesc = findViewById(R.id.tvDesc);
         ivBack = findViewById(R.id.ivBack);
     }

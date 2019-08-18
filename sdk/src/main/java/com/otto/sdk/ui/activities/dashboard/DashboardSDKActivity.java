@@ -18,14 +18,13 @@ import com.otto.sdk.model.api.request.InquiryRequest;
 import com.otto.sdk.model.api.response.InquiryResponse;
 import com.otto.sdk.model.general.MainMenuModel;
 import com.otto.sdk.presenter.InquiryPresenter;
-import com.otto.sdk.support.UiUtil;
 import com.otto.sdk.ui.activities.payment.HistoryActivity;
 import com.otto.sdk.ui.activities.payment.PayWithQr;
 import com.otto.sdk.ui.activities.topup.TopUpActivity;
 import com.otto.sdk.ui.adapter.MainMenuAdapter;
 import com.otto.sdk.ui.component.dialog.CustomDialog;
 import com.otto.sdk.ui.component.support.ItemClickSupport;
-import com.otto.sdk.ui.component.support.Util;
+import com.otto.sdk.ui.component.support.UiUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,8 +67,8 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
         tvSetPinOttocash = findViewById(R.id.tvSetPinOttocash);
         tvTacOttocash = findViewById(R.id.tvTacOttocash);
 
-        tvSetPinOttocash.setText(Util.getHTMLContent(getString(R.string.set_pin_ottocash)));
-        tvTacOttocash.setText(Util.getHTMLContent(getString(R.string.tac_ottocash)));
+        tvSetPinOttocash.setText(UiUtil.getHTMLContent(getString(R.string.set_pin_ottocash)));
+        tvTacOttocash.setText(UiUtil.getHTMLContent(getString(R.string.tac_ottocash)));
 
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override

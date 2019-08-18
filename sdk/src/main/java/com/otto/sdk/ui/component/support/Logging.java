@@ -1,6 +1,5 @@
 package com.otto.sdk.ui.component.support;
 
-
 import android.util.Log;
 
 import com.otto.sdk.BuildConfig;

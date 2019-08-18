@@ -12,7 +12,7 @@ public class DeviceId {
     private static String sID = null;
     private static final String INSTALLATION = "INSTALLATION";
 
-    public synchronized static int getDeviceID(Context context) {
+    public synchronized static String getDeviceID(Context context) {
         if (sID == null) {
             File installation = new File(context.getFilesDir(), INSTALLATION);
             try {
@@ -23,7 +23,7 @@ public class DeviceId {
                 throw new RuntimeException(e);
             }
         }
-        return Integer.parseInt(sID);
+        return sID;
     }
 
     private static String readInstallationFile(File installation) throws IOException {
@@ -41,4 +41,3 @@ public class DeviceId {
         out.close();
     }
 }
-
