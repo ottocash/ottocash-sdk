@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="@string/register_success"
+            android:text="@string/registration_success"
             android:textAppearance="@style/RobotoRegular"
             android:textColor="@color/Black_484848"
             android:textSize="14sp" />
@@ -60,7 +60,7 @@
             android:background="@color/Red_d04a55"
             android:text="@string/registration_finish"
             android:textAllCaps="false"
-            android:textAppearance="@style/RobotoRegular"
+            android:textAppearance="@style/RobotoBold"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold" />

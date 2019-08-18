@@ -32,7 +32,7 @@
             android:padding="20dp">
 
             <TextView
-                android:id="@+id/tvNoHpOtp"
+                android:id="@+id/tvBill"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -49,8 +49,8 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:gravity="center"
-                android:textAppearance="@style/BarlowSemiBold"
                 android:text="Rp 149.658"
+                android:textAppearance="@style/BarlowSemiBold"
                 android:textColor="@color/Blue_1f204c"
                 android:textSize="24sp" />
 
@@ -64,9 +64,6 @@
                 android:textColor="@color/Black_484848"
                 android:textSize="14sp"
                 android:textStyle="bold" />
-
-
-
 
 
             <com.poovam.pinedittextfield.LinePinField
@@ -91,13 +88,14 @@
 
         <TextView
             android:id="@+id/errorMessage"
-            fontPath="fonts/SemiBold.otf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="25dp"
             android:layout_marginBottom="20dp"
-            android:textSize="12sp" />
+            android:textAppearance="@style/RobotoBold"
+            android:textSize="12sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

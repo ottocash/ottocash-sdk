@@ -9,8 +9,7 @@
     <application android:name=".OttoCashSdk">
         <activity
             android:name=".ui.activities.payment.HistoryActivity"
-            android:label="@string/title_activity_history"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activities.SdkActivity"
             android:screenOrientation="portrait" />

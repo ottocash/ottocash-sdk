@@ -73,12 +73,12 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyViewHo
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            ivIcon = (ImageView) itemView.findViewById(R.id.ivIcon);
-            tvPrice = (TextView) itemView.findViewById(R.id.tvPrice);
-            tvDesc = (TextView) itemView.findViewById(R.id.tvDescription);
-            tvDate = (TextView) itemView.findViewById(R.id.tvDate);
-            tvOderId = (TextView) itemView.findViewById(R.id.tvOrderID);
-            tvTime = (TextView) itemView.findViewById(R.id.tvTime);
+            ivIcon = itemView.findViewById(R.id.ivIcon);
+            tvPrice = itemView.findViewById(R.id.tvPrice);
+            tvDesc = itemView.findViewById(R.id.tvDescription);
+            tvDate = itemView.findViewById(R.id.tvDate);
+            tvOderId = itemView.findViewById(R.id.tvOrderID);
+            tvTime = itemView.findViewById(R.id.tvTime);
         }
     }
 

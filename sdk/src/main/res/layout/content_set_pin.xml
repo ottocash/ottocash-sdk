@@ -114,7 +114,7 @@
             android:background="@color/Grey_C4C4C4"
             android:text="@string/save_ottocash"
             android:textAllCaps="false"
-            android:textAppearance="@style/RobotoRegular"
+            android:textAppearance="@style/RobotoBold"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold" />

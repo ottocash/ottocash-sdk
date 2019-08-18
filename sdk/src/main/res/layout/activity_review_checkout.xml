@@ -1,115 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".ui.activities.payment.ReviewCheckoutActivity">
-
-    <android.support.v7.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/Black_81868a">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/review_payment"
-            android:textAppearance="@style/BarlowSemiBold"
-            android:textColor="@color/color_white"
-            android:textSize="14sp" />
-    </android.support.v7.widget.Toolbar>
+    android:background="@color/White_ffffff"
+    tools:context=".ui.activities.payment.ReviewCheckoutActivity"
+    tools:ignore="MissingPrefix">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/img_header"
-        android:orientation="horizontal">
+        android:theme="@style/AppTheme.NoActionBar">
 
-        <LinearLayout
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="38dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="BIAYA TERTAGIH" />
-
-            <TextView
-                android:id="@+id/tvBill"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Rp 125.000"
-                android:textAppearance="@style/BarlowSemiBold"
-                android:textSize="24sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="38dp"
-            android:layout_marginRight="20dp"
-            android:layout_weight="1"
-            android:gravity="right"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_otto_cash" />
-        </LinearLayout>
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="14dp"
-            android:text="DETAIL PEMBAYARAN"
-            android:textAppearance="@style/BarlowRegular"
-            android:textColor="@color/Grey_8b8b8b"
-            android:textSize="10sp" />
-
-        <include layout="@layout/partial_review_checkout" />
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="bottom"
-        android:gravity="bottom"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btnBottom"
-            android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"
+            android:layout_height="?attr/actionBarSize"
             android:background="@color/Blue_1f204c"
-            android:gravity="center"
-            android:layout_gravity="bottom"
-            android:text="@string/bayar"
-            android:textAppearance="@style/RobotoBold"
-            android:textColor="@color/White_ffffff"
-            android:textSize="14sp" />
+            android:contentInsetStart="0dp"
+            android:contentInsetLeft="0dp"
+            android:contentInsetEnd="0dp"
+            android:contentInsetRight="0dp"
+            app:contentInsetEnd="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetStart="0dp"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:theme="@style/ToolBarStyle">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/ivBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:padding="16dp"
+                    android:src="@drawable/ic_back" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/title_ottocash"
+                    android:textAppearance="@style/BarlowRegular"
+                    android:textColor="@color/White_ffffff"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+        </android.support.v7.widget.Toolbar>
     </LinearLayout>
+
+    <include layout="@layout/content_review_checkout" />
 
 
 </LinearLayout>

@@ -9,6 +9,7 @@ import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -22,7 +23,7 @@ import app.beelabs.com.codebase.support.util.CacheUtil;
 
 public class TopUpActivity extends BaseActivity {
 
-    LinearLayout btnBottom;
+    Button btnBack;
     TextView tvMbank3;
     TextView tvMbank5;
     TextView tvAtm4;
@@ -39,7 +40,7 @@ public class TopUpActivity extends BaseActivity {
 
     private void initComponent() {
 
-        btnBottom = findViewById(R.id.btnBottom);
+        btnBack = findViewById(R.id.btnBack);
         tvAtm4 = findViewById(R.id.tvAtm4);
         tvAtm5 = findViewById(R.id.tvAtm5);
         tvMbank3 = findViewById(R.id.tvMbank3);
@@ -64,7 +65,7 @@ public class TopUpActivity extends BaseActivity {
     }
 
     private void initContent() {
-        btnBottom.setOnClickListener(new View.OnClickListener() {
+        btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TopUpActivity.this, DashboardSDKActivity.class);

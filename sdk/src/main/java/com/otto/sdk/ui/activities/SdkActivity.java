@@ -19,8 +19,12 @@ import com.otto.sdk.model.api.response.InquiryResponse;
 import com.otto.sdk.presenter.InquiryPresenter;
 import com.otto.sdk.presenter.SdkResourcePresenter;
 import com.otto.sdk.ui.activities.account.activation.ActivationActivity;
+import com.otto.sdk.ui.activities.account.activation.ActivationBlockedActivity;
 import com.otto.sdk.ui.activities.account.registration.RegistrationActivity;
 import com.otto.sdk.ui.activities.dashboard.DashboardSDKActivity;
+import com.otto.sdk.ui.activities.payment.PinPaymentActivity;
+import com.otto.sdk.ui.activities.payment.ReviewCheckoutActivity;
+import com.otto.sdk.ui.activities.topup.TopUpActivity;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.base.BasePresenter;

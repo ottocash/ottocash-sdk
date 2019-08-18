@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,7 +39,8 @@ public class ReviewCheckoutActivity extends BaseActivity implements IReviewCheck
     TextView tvPembayaranMitra;
     TextView tvBiayaLayanan;
     TextView tvTotalBayar;
-    Button btnBottom;
+    Button btnPay;
+    ImageView ivBack;
 
     private ReviewCheckOutRequest reviewCheckOutRequest;
 
@@ -59,20 +61,28 @@ public class ReviewCheckoutActivity extends BaseActivity implements IReviewCheck
         tvPembayaranMitra = findViewById(R.id.tvPembayaranMitra);
         tvBiayaLayanan = findViewById(R.id.tvBiayaLayanan);
         tvTotalBayar = findViewById(R.id.tvTotalBayar);
-        btnBottom = findViewById(R.id.btnBottom);
+        btnPay = findViewById(R.id.btnPay);
+        ivBack = findViewById(R.id.ivBack);
 
-        Bundle extras = getIntent().getExtras();
-        grandTotal = Integer.parseInt(extras.getString(SESSION_GRAND_TOTAL));
-        tvBill.setText(UiUtil.formatMoneyIDR(Long.parseLong(String.valueOf(grandTotal))));
-        tvPembayaranMitra.setText(UiUtil.formatMoneyIDR(Long.parseLong(String.valueOf(grandTotal))));
-        tvTotalBayar.setText(UiUtil.formatMoneyIDR(Long.parseLong(String.valueOf(grandTotal))));
+//        Bundle extras = getIntent().getExtras();
+//        grandTotal = Integer.parseInt(extras.getString(SESSION_GRAND_TOTAL));
+//        tvBill.setText(UiUtil.formatMoneyIDR(Long.parseLong(String.valueOf(grandTotal))));
+//        tvPembayaranMitra.setText(UiUtil.formatMoneyIDR(Long.parseLong(String.valueOf(grandTotal))));
+//        tvTotalBayar.setText(UiUtil.formatMoneyIDR(Long.parseLong(String.valueOf(grandTotal))));
     }
 
     private void initContent() {
-        btnBottom.setOnClickListener(new View.OnClickListener() {
+        btnPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onCallApiReviewCheckOut();
+            }
+        });
+
+        ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
     }

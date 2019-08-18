@@ -205,7 +205,7 @@
             android:background="@color/Grey_C4C4C4"
             android:text="@string/aktifkan"
             android:textAllCaps="false"
-            android:textAppearance="@style/RobotoMedium"
+            android:textAppearance="@style/RobotoBold"
             android:textColor="@color/White_ffffff"
             android:textSize="14sp"
             android:textStyle="bold" />
