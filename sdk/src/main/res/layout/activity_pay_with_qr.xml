@@ -50,7 +50,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="@string/title_ottocash"
-                    android:textAppearance="@style/BarlowRegular"
+                    android:textAppearance="@style/BarlowSemiBold"
                     android:textColor="@color/White_ffffff"
                     android:textSize="14sp" />
             </RelativeLayout>
