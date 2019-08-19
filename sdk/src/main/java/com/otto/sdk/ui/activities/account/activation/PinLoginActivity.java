@@ -31,11 +31,11 @@ public class PinLoginActivity extends BaseActivity implements IAuthView {
     ImageView ivBack;
     TextView errorMessage;
     LinePinField lineField;
+    String messagePIN;
     private LoginRequest model;
 
     private String phone;
-    private String errorMessagePin = "Invalid Token";
-    private String messagePIN;
+    private String errorMessagePin = "PIN yang Anda masukkan salah.";
     private AuthPresenter authPresenter;
 
     @Override
@@ -87,7 +87,6 @@ public class PinLoginActivity extends BaseActivity implements IAuthView {
             String account_number = data.getData().getAccountNumber();
             String name = data.getData().getName();
             String phone = data.getData().getPhone();
-            messagePIN = data.getMeta().getMessage();
 
 
             boolean isLogin = data.getMeta().isStatus();
@@ -104,8 +103,11 @@ public class PinLoginActivity extends BaseActivity implements IAuthView {
             intent.putExtra(IConfig.SESSION_PHONE, phone);
             startActivity(intent);
             finish();
-        } else if (messagePIN.equals(errorMessagePin)) {
-            initErrorInvalid();
+        } else if (data.getMeta().getCode() == 400) {
+            messagePIN = data.getMeta().getMessage();
+            if (messagePIN.equals(errorMessagePin)) {
+                initErrorInvalid();
+            }
         } else {
             Toast.makeText(this, data.getMeta().getCode() + ":" + data.getMeta().getMessage(),
                     Toast.LENGTH_LONG).show();
@@ -115,7 +117,7 @@ public class PinLoginActivity extends BaseActivity implements IAuthView {
 
     private void initErrorInvalid() {
         errorMessage.setText(getString(R.string.invalid_pin));
-        errorMessage.setTextColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+        errorMessage.setTextColor(ContextCompat.getColor(this, R.color.Blue_1f204c));
     }
 
 

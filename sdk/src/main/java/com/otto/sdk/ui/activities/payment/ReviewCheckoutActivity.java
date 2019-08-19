@@ -120,7 +120,7 @@ public class ReviewCheckoutActivity extends BaseActivity implements IReviewCheck
 
         int total = (reviewCheckOutRequest.getAmount() + reviewCheckOutRequest.getFee());
         CacheUtil.putPreferenceInteger(IConfig.SESSION_TOTAL, total, ReviewCheckoutActivity.this);
-        int emoney = CacheUtil.getPreferenceInteger(IConfig.SESSION_EMONEY_BALANCE, ReviewCheckoutActivity.this);
+        int emoney = Integer.parseInt(CacheUtil.getPreferenceString(IConfig.SESSION_EMONEY_BALANCE, ReviewCheckoutActivity.this));
         if (emoney < total) {
             saldoDialog();
         } else {

@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.otto.sdk.IConfig;
 import com.otto.sdk.model.api.response.InquiryResponse;
+import com.otto.sdk.ui.activities.dashboard.DashboardSDKActivity;
 import com.otto.sdk.ui.activities.payment.ReviewCheckoutActivity;
 import com.otto.sdk.ui.component.support.UiUtil;
 
@@ -72,7 +73,7 @@ public class CheckOutActivity extends BaseActivity {
     }
 
     private void initContent() {
-        String emoney = String.valueOf(CacheUtil.getPreferenceInteger(IConfig.SESSION_EMONEY_BALANCE, CheckOutActivity.this));
+        emoney = CacheUtil.getPreferenceString(IConfig.SESSION_EMONEY_BALANCE, CheckOutActivity.this);
         tvSaldoOttoCash.setText(UiUtil.formatMoneyIDR(Long.parseLong(emoney)));
     }
 

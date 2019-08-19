@@ -19,6 +19,7 @@ import com.otto.sdk.model.api.request.OtpVerificationRequest;
 import com.otto.sdk.model.api.response.OtpResponse;
 import com.otto.sdk.model.api.response.OtpVerificationResponse;
 import com.otto.sdk.presenter.OtpPresenter;
+import com.otto.sdk.ui.activities.dashboard.DashboardSDKActivity;
 import com.otto.sdk.ui.component.support.UiUtil;
 import com.poovam.pinedittextfield.LinePinField;
 
@@ -168,7 +169,7 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
     @Override
     public void handleVerificationOtp(OtpVerificationResponse model) {
         if (model.getBaseMeta().getCode() == 200) {
-            Intent intent = new Intent(OtpLoginActivity.this, ActivationSuccessActivity.class);
+            Intent intent = new Intent(OtpLoginActivity.this, DashboardSDKActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();

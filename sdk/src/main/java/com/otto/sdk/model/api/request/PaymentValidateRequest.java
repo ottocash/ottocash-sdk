@@ -12,10 +12,6 @@ public class PaymentValidateRequest {
     private String latitude;
     private String longitude;
 
-    public PaymentValidateRequest(String phone) {
-        this.phone = phone;
-    }
-
     public void setPin(String pin) {
         this.pin = pin;
     }

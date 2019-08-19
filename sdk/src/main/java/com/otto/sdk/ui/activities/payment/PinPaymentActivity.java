@@ -16,6 +16,8 @@ import com.otto.sdk.model.api.request.PaymentValidateRequest;
 import com.otto.sdk.model.api.response.PaymentValidateResponse;
 import com.otto.sdk.model.api.response.ReviewCheckOutResponse;
 import com.otto.sdk.presenter.ReviewCheckoutPresenter;
+import com.otto.sdk.ui.activities.account.activation.PinLoginActivity;
+import com.otto.sdk.ui.activities.dashboard.DashboardSDKActivity;
 import com.otto.sdk.ui.component.support.UiUtil;
 import com.poovam.pinedittextfield.LinePinField;
 
@@ -26,11 +28,12 @@ public class PinPaymentActivity extends BaseActivity implements IReviewCheckoutV
 
     TextView tvPaymentValue;
     LinePinField lineField;
-    private PaymentValidateRequest model;
 
     int emoneyBalance;
     int total;
     int paymentValue;
+    int user_id;
+    String phone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,13 +47,23 @@ public class PinPaymentActivity extends BaseActivity implements IReviewCheckoutV
     private void initComponent() {
         tvPaymentValue = findViewById(R.id.tvPaymentValue);
         lineField = findViewById(R.id.lineField);
+
+        total = CacheUtil.getPreferenceInteger(IConfig.SESSION_TOTAL, PinPaymentActivity.this);
+        tvPaymentValue.setText(UiUtil.formatMoneyIDR(total));
     }
 
     private void onCallApiSetPin(final String pin) {
 
-        model = new PaymentValidateRequest(String.valueOf(CacheUtil.getPreferenceString(
-                IConfig.SESSION_PHONE, PinPaymentActivity.this)));
+        final PaymentValidateRequest model = new PaymentValidateRequest();
+
+        user_id = CacheUtil.getPreferenceInteger(IConfig.SESSION_USER_ID, PinPaymentActivity.this);
+        phone = CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, PinPaymentActivity.this);
+
+        model.setUserId(user_id);
+        model.setPhone(phone);
         model.setPin(lineField.getText().toString());
+
+
 
         showApiProgressDialog(OttoCashSdk.getAppComponent(), new ReviewCheckoutPresenter(this) {
             @Override
@@ -94,13 +107,13 @@ public class PinPaymentActivity extends BaseActivity implements IReviewCheckoutV
     public void handlePaymentValidate(PaymentValidateResponse model) {
         if (model.getMeta().getCode() == 200) {
 
-            emoneyBalance = CacheUtil.getPreferenceInteger(IConfig.SESSION_EMONEY_BALANCE, PinPaymentActivity.this);
+            emoneyBalance = Integer.parseInt(CacheUtil.getPreferenceString(IConfig.SESSION_EMONEY_BALANCE, PinPaymentActivity.this));
             total = CacheUtil.getPreferenceInteger(IConfig.SESSION_TOTAL, PinPaymentActivity.this);
             tvPaymentValue.setText(UiUtil.formatMoneyIDR(Long.parseLong(String.valueOf(total))));
 
             paymentValue = emoneyBalance - total;
 
-            Intent intent = new Intent(PinPaymentActivity.this, CheckOutSuccessActivity.class);
+            Intent intent = new Intent(PinPaymentActivity.this, DashboardSDKActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
