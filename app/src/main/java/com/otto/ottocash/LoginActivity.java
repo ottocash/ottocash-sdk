@@ -8,6 +8,7 @@ import android.widget.EditText;
 
 import com.crashlytics.android.Crashlytics;
 import com.otto.sdk.IConfig;
+import com.otto.sdk.ui.activity.payment.TransferToFriend.TransferToFriendActivity;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.support.util.CacheUtil;
@@ -54,6 +55,13 @@ public class LoginActivity extends BaseActivity {
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             LoginActivity.this.startActivity(intent);
         }
+    }
+
+    @OnClick(R.id.btnTransfer)
+    public void onTransfer() {
+        Intent intent = new Intent(LoginActivity.this, TransferToFriendActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 
 

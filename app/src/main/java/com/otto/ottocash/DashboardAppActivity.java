@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.otto.sdk.IConfig;
 import com.otto.sdk.presenter.manager.SessionManager;
-import com.otto.sdk.ui.activities.SdkActivity;
+import com.otto.sdk.ui.activity.SdkActivity;
 import com.otto.sdk.ui.component.support.UiUtil;
 
 import app.beelabs.com.codebase.support.util.CacheUtil;

@@ -7,7 +7,7 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     android:background="@color/White_ffffff"
-    tools:context=".ui.activities.account.activation.ActivationSuccessActivity"
+    tools:context=".ui.activity.account.activation.ActivationSuccessActivity"
     tools:ignore="MissingPrefix">
 
 

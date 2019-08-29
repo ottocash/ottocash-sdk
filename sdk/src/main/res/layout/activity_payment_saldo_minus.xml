@@ -7,7 +7,7 @@
     android:background="@color/White_ffffff"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".ui.activities.payment.PaymentSaldoMinusActivity"
+    tools:context=".ui.activity.payment.PaymentSaldoMinusActivity"
     tools:ignore="MissingPrefix">
 
 

@@ -42,6 +42,17 @@
             android:text="Login"
             android:textAppearance="@style/BarlowRegular"
             android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btnTransfer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@color/Red_d04a55"
+            android:padding="5dp"
+            android:text="Transfer to Friend"
+            android:textAppearance="@style/BarlowRegular"
+            android:textColor="@color/white" />
     </LinearLayout>
 
 
@@ -50,10 +61,10 @@
         android:layout_height="match_parent"
         android:layout_gravity="bottom"
         android:layout_margin="20dp"
-        android:textColor="@color/Black_484848"
-        android:textAppearance="@style/RobotoRegular"
         android:gravity="bottom"
-        android:text="ottocash-sdk | versi 1.0.4" />
+        android:text="ottocash-sdk | versi 1.0.26"
+        android:textAppearance="@style/RobotoRegular"
+        android:textColor="@color/Black_484848" />
 
 
 </LinearLayout>

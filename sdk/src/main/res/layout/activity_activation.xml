@@ -7,7 +7,7 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     android:background="@color/White_ffffff"
-    tools:context=".ui.activities.account.activation.ActivationActivity"
+    tools:context=".ui.activity.account.activation.ActivationActivity"
     tools:ignore="MissingPrefix">
 
 
@@ -42,7 +42,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:padding="16dp"
+                    android:padding="20dp"
                     android:src="@drawable/ic_back" />
 
                 <TextView

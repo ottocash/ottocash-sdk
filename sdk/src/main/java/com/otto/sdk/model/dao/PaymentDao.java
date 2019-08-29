@@ -33,7 +33,7 @@ public class PaymentDao extends BaseDao {
         super(obj);
     }
 
-    public PaymentDao(PaymentDao.IReviewCheckoutDao iReviewCheckoutDao, ReviewCheckoutPresenter.OnPresenterResponseCallback onPresenterResponseCallback) {
+    public PaymentDao(IReviewCheckoutDao iReviewCheckoutDao, ReviewCheckoutPresenter.OnPresenterResponseCallback onPresenterResponseCallback) {
         this.iReviewCheckoutDao = iReviewCheckoutDao;
         this.onPresenterResponseCallback = onPresenterResponseCallback;
     }

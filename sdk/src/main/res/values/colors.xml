@@ -14,6 +14,10 @@
     <color name="Grey_e5e5e5">#e5e5e5</color>
     <color name="Grey_8b8b8b">#8b8b8b</color>
     <color name="Grey_C4C4C4">#C4C4C4</color>
+    <color name="Grey_F1F1F1">#F1F1F1</color>
+    <color name="Grey_828282">#828282</color>
+    <color name="Grey_F5F5F5">#F5F5F5</color>
+    <color name="Grey_484848">#484848</color>
 
     //Red
     <color name="Red_d04a55">#d04a55</color>

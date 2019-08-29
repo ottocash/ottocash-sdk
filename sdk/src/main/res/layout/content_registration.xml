@@ -8,7 +8,7 @@
     android:background="@color/white"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".ui.activities.account.registration.RegistrationActivity"
+    tools:context=".ui.activity.account.registration.RegistrationActivity"
     tools:ignore="MissingPrefix"
     tools:showIn="@layout/activity_registration">
 

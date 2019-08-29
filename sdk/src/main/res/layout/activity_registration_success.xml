@@ -7,7 +7,7 @@
     android:fitsSystemWindows="true"
     android:background="@color/White_ffffff"
     android:orientation="vertical"
-    tools:context=".ui.activities.account.registration.RegistrationSuccessActivity"
+    tools:context=".ui.activity.account.registration.RegistrationSuccessActivity"
     tools:ignore="MissingPrefix">
 
 

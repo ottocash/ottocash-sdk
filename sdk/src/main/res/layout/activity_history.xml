@@ -7,7 +7,7 @@
     android:background="@color/White_ffffff"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".ui.activities.payment.HistoryActivity"
+    tools:context=".ui.activity.payment.HistoryActivity"
     tools:ignore="MissingPrefix">
 
     <LinearLayout
@@ -41,7 +41,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:padding="16dp"
+                    android:padding="20dp"
                     android:src="@drawable/ic_back" />
 
                 <TextView

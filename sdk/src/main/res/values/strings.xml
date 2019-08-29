@@ -116,7 +116,6 @@
     <string name="mbank_7">7. Konfirmasi transaksi telah berhasil.</string>
 
 
-
     <!--DIALOG-->
     <string name="dialog_tittle_coming_soon">Akan Segera Hadir!</string>
     <string name="dialog_message_coming_soon">Request money akan hadir untuk kemudahan Anda dalam transaksi menggunakan OttoCash</string>
@@ -144,7 +143,6 @@
     <string name="payment_amount">Total Pembayaran</string>
     <string name="amount">Rp 125.000</string>
     <string name="free">Gratis</string>
-
 
 
     <string name="review_payment">Review Payment</string>

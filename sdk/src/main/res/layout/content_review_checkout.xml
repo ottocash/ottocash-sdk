@@ -7,7 +7,7 @@
     android:background="@color/white"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".ui.activities.payment.ReviewCheckoutActivity"
+    tools:context=".ui.activity.payment.ReviewCheckoutActivity"
     tools:ignore="MissingPrefix"
     tools:showIn="@layout/activity_review_checkout">
 
