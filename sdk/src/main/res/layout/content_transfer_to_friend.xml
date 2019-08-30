@@ -1,101 +1,78 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".ui.activity.payment.TransferToFriend.TransferToFriendActivity"
-    tools:ignore="MissingPrefix"
-    tools:showIn="@layout/activity_transfer_to_friend">
+    tools:ignore="MissingPrefix">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:background="@color/white"
+        android:focusableInTouchMode="true">
 
-        <LinearLayout
-            android:id="@+id/tab_layout"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:layout_above="@+id/btn_submit">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:id="@+id/search_layout"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:background="@color/Grey_F1F1F1"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="12dp">
 
-                    <Button
-                        android:id="@+id/btn_tab_1"
-                        fontPath="fonts/SemiBold.otf"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="@color/white"
-                        android:clickable="true"
-                        android:text="Transfer Teman"
-                        android:textAllCaps="false"
-                        android:textColor="@color/Red_d04a55" />
+                    <EditText
+                        android:id="@+id/et_search"
+                        fontPath="fonts/Regular.otf"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:layout_weight="1"
+                        android:drawableStart="@drawable/ic_search"
+                        android:drawablePadding="8dp"
+                        android:background="@drawable/rectangle_input"
+                        android:hint="Masukkan nama atau nomor"
+                        android:inputType="phone"
+                        android:maxLines="1"
+                        android:padding="8dp"
+                        android:textColor="@color/Grey_8b8b8b"
+                        android:textSize="15sp" />
 
-                    <View
-                        android:id="@+id/line_tab_1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="3dp"
-                        android:background="@color/Red_d04a55" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="0.5dp"
-                    android:layout_height="53dp"
-                    android:background="@color/Grey_F5F5F5" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <Button
-                        android:id="@+id/btn_tab_2"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="@color/white"
-                        android:clickable="true"
-                        android:text="Riwayat Transfer"
-                        android:textAllCaps="false"
-                        android:textColor="@color/Grey_8b8b8b" />
-
-                    <View
-                        android:id="@+id/line_tab_2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="3dp"
-                        android:background="@color/Red_d04a55"
-                        android:visibility="gone" />
+                    <ImageView
+                        android:id="@+id/img_contact"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:padding="5dp"
+                        android:src="@drawable/ic_next_contact" />
 
                 </LinearLayout>
 
             </LinearLayout>
 
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="0.5dp"
-                android:background="@color/Grey_F5F5F5" />
+        </ScrollView>
 
-        </LinearLayout>
-
-        <FrameLayout
-            android:id="@+id/fragment_container"
+        <Button
+            android:id="@+id/btn_submit"
+            fontPath="fonts/Medium.otf"
             android:layout_width="match_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="?android:actionBarSize"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/button_primary_selected_bg"
+            android:enabled="false"
+            android:text="Lanjut"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
 
-        </FrameLayout>
+    </RelativeLayout>
 
-    </LinearLayout>
-
-</RelativeLayout>
+</FrameLayout>
