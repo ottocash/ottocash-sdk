@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:background="@color/White_ffffff"
     android:orientation="vertical"
-    tools:context=".ui.activity.payment.TransferToFriend.TransferToFriendActivity"
+    android:background="@color/White_ffffff"
+    tools:context=".ui.activity.payment.ReviewCheckoutActivity"
     tools:ignore="MissingPrefix">
 
 
@@ -58,6 +58,7 @@
         </android.support.v7.widget.Toolbar>
     </LinearLayout>
 
-    <include layout="@layout/content_transfer_to_friend" />
+    <include layout="@layout/content_transfer_to_friend_review" />
+
 
 </LinearLayout>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".ui.activity.payment.TransferToFriend.TransferToFriendPinActivity"
+    tools:ignore="MissingPrefix"
+    tools:showIn="@layout/activity_transfer_to_friend_pin">
+
+
+    <LinearLayout
+        android:id="@+id/parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include layout="@layout/partial_banner_ottocash" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/pin_login"
+                android:textAppearance="@style/RobotoRegular"
+                android:textColor="@color/Black_484848"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <!--<TextView
+                android:id="@+id/tvNoHpOtp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="@string/desc_pin_login"
+                android:textAppearance="@style/RobotoRegular"
+                android:textColor="@color/Grey_8b8b8b"
+                android:textSize="12sp" />-->
+
+            <com.poovam.pinedittextfield.LinePinField
+                android:id="@+id/lineField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:cursorVisible="false"
+                android:inputType="numberPassword"
+                android:textColor="@color/Black_484848"
+                android:textSize="16sp"
+                app:bottomTextPaddingDp="15dp"
+                app:distanceInBetween="20dp"
+                app:fieldColor="@color/Grey_e5e5e5"
+                app:highlightColor="@color/Grey_e5e5e5"
+                app:highlightType="allFields"
+                app:isCursorEnabled="true"
+                app:lineThickness="1dp"
+                app:noOfFields="6" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/errorMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="20dp"
+            android:textAppearance="@style/RobotoRegular"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_back"
+        android:layout_width="match_parent"
+        android:layout_height="?android:actionBarSize"
+        android:layout_alignParentBottom="true"
+        android:background="@color/Red_d04a55"
+        android:text="@string/back"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+
+</RelativeLayout>

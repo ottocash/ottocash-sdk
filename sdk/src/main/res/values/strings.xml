@@ -144,8 +144,22 @@
     <string name="amount">Rp 125.000</string>
     <string name="free">Gratis</string>
 
-
     <string name="review_payment">Review Payment</string>
     <string name="bayar">Bayar</string>
     <string name="masukkan_checkout">Silahkan masukkan 6 digit Ottocash kamu untuk membayar transaksi ini menggunakan OttoCash</string>
+
+
+    <!--TRANSFER TO FRIEND-->
+    <string name="title_transfer_teman">Transfer Teman</string>
+    <string name="edt_masukkan_nomor_handphone">Masukkan nomor handphone</string>
+    <string name="btn_lanjut">Lanjut</string>
+    <string name="nominal_transfer">Nominal Transfer</string>
+    <string name="masukkan_nominal">masukkan nominal</string>
+    <string name="detail_transfer">DETAIL TRANSFER</string>
+    <string name="transfer_sekarang">Transfer Sekarang</string>
+    <string name="masukkan_pin">Masukkan PIN</string>
+    <string name="transfer_berhasil">TRANSFER BERHASIL</string>
+    <string name="uang_yang_kamu_transfer_telah_berhasil_dikirimkan">Uang yang kamu transfer telah berhasil dikirimkan</string>
+    <string name="total_transfer">TOTAL TRANSFER</string>
+
 </resources>

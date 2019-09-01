@@ -15,8 +15,7 @@
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/nestedLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/bottom_layout">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:id="@+id/parent"
@@ -59,7 +58,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:gravity="center"
-                    android:text="Rp 10.000.000"
+                    android:text="Rp 0"
                     android:textAppearance="@style/BarlowSemiBold"
                     android:textColor="@color/Blue_1f204c"
                     android:textSize="24sp" />
@@ -107,7 +106,7 @@
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
-    <LinearLayout
+<!--    <LinearLayout
         android:id="@+id/bottom_layout"
         android:layout_width="match_parent"
         android:layout_height="?android:actionBarSize"
@@ -117,7 +116,7 @@
 
         <include layout="@layout/partial_setting_ottocash" />
 
-    </LinearLayout>
+    </LinearLayout>-->
 
 
 </RelativeLayout>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".ui.activity.payment.PaymentSuccessActivity"
+    tools:ignore="MissingPrefix"
+    tools:showIn="@layout/activity_payment_success">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/iv_close"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/ic_close"
+            android:background="@null"
+            android:tint="@color/Blue_1f204c"
+            android:visibility="gone"
+            android:layout_alignParentEnd="true"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="55dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="92dp"
+                android:background="@drawable/ic_success" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/transfer_berhasil"
+                android:textAppearance="@style/RobotoRegular"
+                android:textColor="@color/Black_484848"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:gravity="center"
+                android:text="@string/uang_yang_kamu_transfer_telah_berhasil_dikirimkan"
+                android:textAppearance="@style/RobotoRegular"
+                android:textColor="@color/Grey_8b8b8b"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="118dp"
+                android:gravity="center"
+                android:text="@string/total_transfer"
+                android:textAppearance="@style/BarlowRegular"
+                android:textColor="@color/Blue_1f204c"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="Rp 125.000"
+                android:textAppearance="@style/BarlowRegular"
+                android:textColor="@color/Grey_8b8b8b"
+                android:textSize="30sp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+
+
+</RelativeLayout>

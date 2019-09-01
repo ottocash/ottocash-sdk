@@ -18,7 +18,7 @@ import com.otto.sdk.model.api.request.InquiryRequest;
 import com.otto.sdk.model.api.response.InquiryResponse;
 import com.otto.sdk.model.general.MainMenuModel;
 import com.otto.sdk.presenter.InquiryPresenter;
-import com.otto.sdk.ui.activity.payment.HistoryActivity;
+import com.otto.sdk.ui.activity.history.HistoryActivity;
 import com.otto.sdk.ui.activity.payment.QR.PayWithQr;
 import com.otto.sdk.ui.activity.payment.TransferToFriend.TransferToFriendActivity;
 import com.otto.sdk.ui.activity.topup.TopUpActivity;

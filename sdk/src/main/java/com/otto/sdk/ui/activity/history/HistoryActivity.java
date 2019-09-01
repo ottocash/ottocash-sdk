@@ -1,4 +1,4 @@
-package com.otto.sdk.ui.activity.payment;
+package com.otto.sdk.ui.activity.history;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;

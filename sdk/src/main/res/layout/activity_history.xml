@@ -7,7 +7,7 @@
     android:background="@color/White_ffffff"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".ui.activity.payment.HistoryActivity"
+    tools:context=".ui.activity.history.HistoryActivity"
     tools:ignore="MissingPrefix">
 
     <LinearLayout

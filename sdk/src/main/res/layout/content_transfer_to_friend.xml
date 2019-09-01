@@ -32,15 +32,13 @@
 
                     <EditText
                         android:id="@+id/et_search"
-                        fontPath="fonts/Regular.otf"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="8dp"
+                        android:layout_marginEnd="8dp"
                         android:layout_weight="1"
-                        android:drawableStart="@drawable/ic_search"
                         android:drawablePadding="8dp"
                         android:background="@drawable/rectangle_input"
-                        android:hint="Masukkan nama atau nomor"
+                        android:hint="@string/edt_masukkan_nomor_handphone"
                         android:inputType="phone"
                         android:maxLines="1"
                         android:padding="8dp"
@@ -63,16 +61,13 @@
 
         <Button
             android:id="@+id/btn_submit"
-            fontPath="fonts/Medium.otf"
             android:layout_width="match_parent"
             android:layout_height="?android:actionBarSize"
             android:layout_alignParentBottom="true"
-            android:background="@drawable/button_primary_selected_bg"
-            android:enabled="false"
-            android:text="Lanjut"
+            android:background="@color/Red_d04a55"
+            android:text="@string/btn_lanjut"
             android:textAllCaps="false"
             android:textColor="@color/white" />
-
     </RelativeLayout>
 
 </FrameLayout>

@@ -42,10 +42,11 @@ public class ReviewCheckoutActivity extends BaseActivity implements IReviewCheck
     Button btnPay;
     ImageView ivBack;
 
-    private ReviewCheckOutRequest reviewCheckOutRequest;
+    TextView tv_title_tujuan;
+    TextView tv_title_no_tujuan;
+    TextView tv_title_jumlah_uang;
 
-    Activity activity;
-    Context context;
+    private ReviewCheckOutRequest reviewCheckOutRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +58,13 @@ public class ReviewCheckoutActivity extends BaseActivity implements IReviewCheck
     }
 
     private void initComponent() {
+        tv_title_tujuan = findViewById(R.id.tv_title_tujuan);
+        tv_title_no_tujuan = findViewById(R.id.tv_title_no_tujuan);
+        tv_title_jumlah_uang = findViewById(R.id.tv_title_jumlah_uang);
+        tv_title_tujuan.setVisibility(View.GONE);
+        tv_title_no_tujuan.setVisibility(View.GONE);
+        tv_title_jumlah_uang.setVisibility(View.GONE);
+
         tvBill = findViewById(R.id.tvBill);
         tvPembayaranMitra = findViewById(R.id.tvPembayaranMitra);
         tvBiayaLayanan = findViewById(R.id.tvBiayaLayanan);

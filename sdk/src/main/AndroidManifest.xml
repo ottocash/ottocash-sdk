@@ -15,7 +15,7 @@
     <application android:name=".OttoCashSdk">
 
         <activity
-            android:name=".ui.activity.payment.HistoryActivity"
+            android:name=".ui.activity.history.HistoryActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.SdkActivity"
@@ -79,6 +79,18 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.payment.TransferToFriend.TransferToFriendActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.payment.TransferToFriend.TransferToFriendSendActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.payment.TransferToFriend.TransferToFriendReviewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.payment.TransferToFriend.TransferToFriendPinActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.payment.PaymentSuccessActivity"
             android:screenOrientation="portrait" />
     </application>
 
