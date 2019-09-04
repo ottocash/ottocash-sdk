@@ -20,6 +20,12 @@ public interface IConfig {
     String SESSION_ACCESS_TOKEN = "access_token";
 
 
+    String KEY_NUMBER_CONTACT = "number_contact";
+    String KEY_NAME_CONTACT = "name_contact";
+    String KEY_NOMINAL = "nominal";
+    String KEY_DESTINATION = "destination_number";
+
+
     final boolean SESSION_CHECK_PHONE_NUMBER = false;
     final boolean SESSION_IS_LOGIN = false;
 
@@ -35,6 +41,7 @@ public interface IConfig {
     int KEY_API_CHECK_PHONE_NUMBER = 18;
     int KEY_API_TOKEN = 19;
     int KEY_API_HISTORIES = 20;
+    int KEY_API_TRANSFER_TO_FRIEND = 21;
 
 
 }

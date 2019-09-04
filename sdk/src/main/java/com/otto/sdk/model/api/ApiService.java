@@ -11,6 +11,7 @@ import com.otto.sdk.model.api.request.PaymentValidateRequest;
 import com.otto.sdk.model.api.request.RegisterRequest;
 import com.otto.sdk.model.api.request.ReviewCheckOutRequest;
 import com.otto.sdk.model.api.request.TransactionHistoryRequest;
+import com.otto.sdk.model.api.request.TransferToFriendRequest;
 import com.otto.sdk.model.api.response.CheckPhoneNumberResponse;
 import com.otto.sdk.model.api.response.ClientsResponse;
 import com.otto.sdk.model.api.response.CreateTokenResponse;
@@ -23,6 +24,7 @@ import com.otto.sdk.model.api.response.RegisterResponse;
 import com.otto.sdk.model.api.response.ReviewCheckOutResponse;
 import com.otto.sdk.model.api.response.SecurityQuestionResponse;
 import com.otto.sdk.model.api.response.TransactionHistoryResponse;
+import com.otto.sdk.model.api.response.TransferToFriendResponse;
 
 import java.util.Map;
 
@@ -82,6 +84,11 @@ public interface ApiService {
                                                            @Body CheckPhoneNumberRequest checkPhoneNumberRequest);
 
     @POST("v1/account/history")
-    Call<TransactionHistoryResponse> callApiGetHistories(@HeaderMap Map<String,Object> headers,
+    Call<TransactionHistoryResponse> callApiGetHistories(@HeaderMap Map<String, Object> headers,
                                                          @Body TransactionHistoryRequest model);
+
+    @POST("v1/transfer")
+    Call<TransferToFriendResponse> callApiTransferToFriend(@HeaderMap Map<String, Object> headers,
+                                                           @Body TransferToFriendRequest transferToFriendRequest);
+
 }

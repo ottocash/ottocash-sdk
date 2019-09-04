@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.otto.sdk.IConfig;
 import com.otto.sdk.R;
 
 import app.beelabs.com.codebase.base.BaseActivity;
@@ -17,16 +18,20 @@ public class TransferToFriendReviewActivity extends BaseActivity {
     Button btnPay;
     TextView tvBill;
 
-    TextView tv_title_review;
-    TextView tv_sub_review;
-    TextView tv_title_payment;
-    TextView tv_title_tujuan;
-    TextView tv_title_no_tujuan;
-    TextView tv_title_jumlah_uang;
-
+    TextView tvTitleReview;
+    TextView tvSubReview;
+    TextView tvTitlePayment;
+    TextView tvTitleDestination;
+    TextView tvTitleNoTujuan;
+    TextView tvTitleJumlahUang;
     TextView tvPembayaranMitra;
     TextView tvBiayaLayanan;
     TextView tvTotalBayar;
+
+    private String nominal;
+    private String destinationPhone;
+    private String nameContact;
+    private String numberContact;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,29 +39,45 @@ public class TransferToFriendReviewActivity extends BaseActivity {
         setContentView(R.layout.activity_transfer_to_friend_review);
 
         initComponent();
+        initView();
     }
 
     private void initComponent() {
+
         ivBack = findViewById(R.id.ivBack);
         btnPay = findViewById(R.id.btnPay);
         tvBill = findViewById(R.id.tvBill);
 
-        tv_title_review = findViewById(R.id.tv_title_review);
-        tv_sub_review = findViewById(R.id.tv_sub_review);
-        tv_title_payment = findViewById(R.id.tv_title_payment);
-        tv_title_tujuan = findViewById(R.id.tv_title_tujuan);
-        tv_title_no_tujuan = findViewById(R.id.tv_title_no_tujuan);
-        tv_title_jumlah_uang = findViewById(R.id.tv_title_jumlah_uang);
+        tvTitleReview = findViewById(R.id.tv_title_review);
+        tvSubReview = findViewById(R.id.tv_sub_review);
+        tvTitlePayment = findViewById(R.id.tv_title_payment);
+        tvTitleDestination = findViewById(R.id.tv_title_tujuan);
+        tvTitleNoTujuan = findViewById(R.id.tv_title_no_tujuan);
+        tvTitleJumlahUang = findViewById(R.id.tv_title_jumlah_uang);
         tvPembayaranMitra = findViewById(R.id.tvPembayaranMitra);
         tvBiayaLayanan = findViewById(R.id.tvBiayaLayanan);
         tvTotalBayar = findViewById(R.id.tvTotalBayar);
 
-        tv_title_review.setText("DETAIL TRANSFER");
-        tv_sub_review.setText("Transfer");
-        tv_title_payment.setText("Transfer Uang");
-        tv_title_tujuan.setText("Tujuan : JOHN");
-        tv_title_no_tujuan.setText("No Tujuan:0878586859");
-        tv_title_jumlah_uang.setText("Jumlah uang: Rp 125.000");
+        tvTitleReview.setText("DETAIL TRANSFER");
+        tvSubReview.setText("Transfer");
+        tvTitlePayment.setText("Transfer Uang");
+    }
+
+    private void initView() {
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            nominal = extras.getString(IConfig.KEY_NOMINAL);
+            destinationPhone = extras.getString(IConfig.KEY_DESTINATION);
+            nameContact = extras.getString(IConfig.KEY_NAME_CONTACT);
+            numberContact = extras.getString(IConfig.KEY_NUMBER_CONTACT);
+        }
+
+        tvBill.setText(nominal);
+        tvPembayaranMitra.setText(nominal);
+        tvTotalBayar.setText(nominal);
+        tvTitleDestination.setText("Tujuan : " + nameContact);
+        tvTitleNoTujuan.setText("No Tujuan : " + numberContact);
+        tvTitleJumlahUang.setText("Jumlah Uang : " + nominal);
 
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override

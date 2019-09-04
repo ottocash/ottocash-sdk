@@ -29,6 +29,7 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.DialogOnAnyDeniedMultiplePermissionsListener;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.karumi.dexter.listener.single.PermissionListener;
+import com.otto.sdk.IConfig;
 import com.otto.sdk.R;
 import com.otto.sdk.model.general.PhoneContact;
 import com.otto.sdk.ui.component.support.UiUtil;
@@ -50,7 +51,8 @@ public class TransferToFriendActivity extends BaseActivity {
     Button btnSubmit;
 
     private PhoneContact mPhoneContact;
-    private List<PhoneContact> mContactList = new ArrayList();
+    private String numberContact;
+    private String nameContact;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +85,7 @@ public class TransferToFriendActivity extends BaseActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                transferToFriend(mPhoneContact);
+                transferToFriend();
             }
         });
 
@@ -168,7 +170,6 @@ public class TransferToFriendActivity extends BaseActivity {
                     phoneContact.setName(name);
                     phoneContact.setMobileNumber(number);
 
-
                     addReceiver(phoneContact);
                     cursor.close();
                 }
@@ -185,12 +186,34 @@ public class TransferToFriendActivity extends BaseActivity {
     }
 
 
-    public void transferToFriend(PhoneContact phoneContact) {
-        phoneContact.setMobileNumber(UiUtil.countryCodeReplacedWithZero(phoneContact.getMobileNumber()));
-        EventBus.getDefault().postSticky(phoneContact);
+    public void transferToFriend() {
 
-        Intent intent = new Intent(this, TransferToFriendSendActivity.class);
+        if (mPhoneContact != null) {
+            mPhoneContact.setMobileNumber(UiUtil.countryCodeReplacedWithZero(mPhoneContact.getMobileNumber()));
+            numberContact = mPhoneContact.getMobileNumber();
+            nameContact = mPhoneContact.getName();
+        } else {
+            numberContact = etSearch.getText().toString();
+            nameContact = "-";
+        }
+
+        Intent intent = new Intent(TransferToFriendActivity.this, TransferToFriendSendActivity.class);
+        intent.putExtra(IConfig.KEY_NUMBER_CONTACT, numberContact);
+        intent.putExtra(IConfig.KEY_NAME_CONTACT, nameContact);
         startActivity(intent);
     }
+
+
+    /*public void transferToFriend() {
+        mPhoneContact.setMobileNumber(UiUtil.countryCodeReplacedWithZero(mPhoneContact.getMobileNumber()));
+
+        numberContact = mPhoneContact.getMobileNumber();
+        nameContact = mPhoneContact.getName();
+
+        Intent intent = new Intent(this, TransferToFriendSendActivity.class);
+        intent.putExtra(IConfig.KEY_NUMBER_CONTACT, numberContact);
+        intent.putExtra(IConfig.KEY_NAME_CONTACT, nameContact);
+        startActivity(intent);
+    }*/
 
 }
