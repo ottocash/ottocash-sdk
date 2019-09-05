@@ -113,7 +113,7 @@ public class PaymentSuccessActivity extends BaseActivity {
             tvTitleReceipt.setText("TRANSFER BERHASIL");
             tvDescTitleReceipt.setText(R.string.desc_title_receipt);
             tvTitlePaymentReceipt.setText("TOTAL TRANSFER");
-            tvPaymentValue.setText(UiUtil.formatMoneyIDR(Long.parseLong(nominalTransferToFriend)));
+            tvPaymentValue.setText(nominalTransferToFriend);
         }
 
     }

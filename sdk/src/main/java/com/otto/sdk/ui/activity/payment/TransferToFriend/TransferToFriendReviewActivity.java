@@ -73,12 +73,12 @@ public class TransferToFriendReviewActivity extends BaseActivity {
             numberContact = extras.getString(IConfig.KEY_NUMBER_CONTACT);
         }
 
-        tvBill.setText(UiUtil.formatMoneyIDR(Long.parseLong(nominalTransferToFriend)));
-        tvPembayaranMitra.setText(UiUtil.formatMoneyIDR(Long.parseLong(nominalTransferToFriend)));
-        tvTotalBayar.setText(UiUtil.formatMoneyIDR(Long.parseLong(nominalTransferToFriend)));
+        tvBill.setText(nominalTransferToFriend);
+        tvPembayaranMitra.setText(nominalTransferToFriend);
+        tvTotalBayar.setText(nominalTransferToFriend);
         tvTitleDestination.setText("Tujuan : " + nameContact);
         tvTitleNoTujuan.setText("No Tujuan : " + numberContact);
-        tvTitleJumlahUang.setText("Jumlah Uang : " + UiUtil.formatMoneyIDR(Long.parseLong(nominalTransferToFriend)));
+        tvTitleJumlahUang.setText("Jumlah Uang : " + nominalTransferToFriend);
 
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override

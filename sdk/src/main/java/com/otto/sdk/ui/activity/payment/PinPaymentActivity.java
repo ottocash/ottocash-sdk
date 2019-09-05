@@ -72,7 +72,7 @@ public class PinPaymentActivity extends BaseActivity implements IPinVerification
         total = CacheUtil.getPreferenceInteger(IConfig.SESSION_TOTAL, PinPaymentActivity.this);
 
         if (pinTransferToFriend.equals(keyPinTransferToFriend)) {
-            tvPaymentValue.setText(UiUtil.formatMoneyIDR(Long.parseLong(nominalTransferToFriend)));
+            tvPaymentValue.setText(nominalTransferToFriend);
         } else if (pinReviewCheckout.equals(keyPinReviewCheckout)) {
             tvPaymentValue.setText(UiUtil.formatMoneyIDR(total));
         }
@@ -141,10 +141,8 @@ public class PinPaymentActivity extends BaseActivity implements IPinVerification
 
         model.setAccountNumber(phone);
         model.setCustomerReference(numberContact);
-        model.setAmount(nominalTransferToFriend);
+        model.setAmount(UiUtil.removeAllCharacterExpectNumbers(nominalTransferToFriend));
 
-        /*pinVerificationPaymentPresenter = ((PinVerificationPaymentPresenter) BasePresenter.getInstance(PinPaymentActivity.this, new PinVerificationPaymentPresenter(PinPaymentActivity.this)));
-        pinVerificationPaymentPresenter.getTransferToFriend(model);*/
         showApiProgressDialog(OttoCashSdk.getAppComponent(), new PinVerificationPaymentPresenter(this) {
             @Override
             public void call() {
