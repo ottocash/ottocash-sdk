@@ -54,7 +54,7 @@ public class SdkActivity extends BaseActivity implements ISdkView, IInquiryView 
                 getCheckPhone(model);
 
             }
-        }, "Loading...");
+        }, "Loading");
     }
 
     public void onCreateToken() {

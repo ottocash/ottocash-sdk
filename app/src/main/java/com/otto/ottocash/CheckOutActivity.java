@@ -23,9 +23,6 @@ import butterknife.ButterKnife;
 public class CheckOutActivity extends BaseActivity {
 
     private String SESSION_GRAND_TOTAL = "total";
-    private boolean isFormValidationSuccess = false;
-    private InquiryResponse data;
-
     private String emoney;
 
     @BindView(R.id.PaymentOttoCash)
@@ -36,6 +33,7 @@ public class CheckOutActivity extends BaseActivity {
 
     @BindView(R.id.edtSubTotal)
     EditText edtSubTotal;
+
     @BindView(R.id.tvGrandTotal)
     TextView tvGrandTotal;
 

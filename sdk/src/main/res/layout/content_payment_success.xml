@@ -40,6 +40,7 @@
                 android:background="@drawable/ic_success" />
 
             <TextView
+                android:id="@+id/tvTitleReceipt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -50,16 +51,18 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tvDescTitleReceipt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
                 android:gravity="center"
-                android:text="@string/uang_yang_kamu_transfer_telah_berhasil_dikirimkan"
+                android:text="@string/desc_title_receipt"
                 android:textAppearance="@style/RobotoRegular"
                 android:textColor="@color/Grey_8b8b8b"
                 android:textSize="12sp" />
 
             <TextView
+                android:id="@+id/tvTitlePaymentReceipt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="118dp"

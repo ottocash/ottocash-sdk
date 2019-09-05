@@ -22,7 +22,7 @@ public interface IConfig {
 
     String KEY_NUMBER_CONTACT = "number_contact";
     String KEY_NAME_CONTACT = "name_contact";
-    String KEY_NOMINAL = "nominal";
+    String KEY_NOMINAL_TRANSFER_TO_FRIEND = "nominal";
     String KEY_DESTINATION = "destination_number";
 
     //KEY PIN PAYMENT

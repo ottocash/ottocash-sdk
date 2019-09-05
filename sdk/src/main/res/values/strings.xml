@@ -159,7 +159,7 @@
     <string name="transfer_sekarang">Transfer Sekarang</string>
     <string name="masukkan_pin">Masukkan PIN</string>
     <string name="transfer_berhasil">TRANSFER BERHASIL</string>
-    <string name="uang_yang_kamu_transfer_telah_berhasil_dikirimkan">Uang yang kamu transfer telah berhasil dikirimkan</string>
+    <string name="desc_title_receipt">Uang yang kamu transfer telah berhasil dikirimkan</string>
     <string name="total_transfer">TOTAL TRANSFER</string>
 
 </resources>

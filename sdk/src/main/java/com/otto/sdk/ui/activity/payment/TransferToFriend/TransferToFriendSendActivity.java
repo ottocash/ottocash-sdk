@@ -26,6 +26,7 @@ public class TransferToFriendSendActivity extends BaseActivity {
 
     private String numberContact;
     private String nameContact;
+    private String nominalTransferToFriend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,13 +64,13 @@ public class TransferToFriendSendActivity extends BaseActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String nominal = et_amount.getText().toString();
+                nominalTransferToFriend = et_amount.getText().toString();
 
-                if (nominal.isEmpty()) {
+                if (nominalTransferToFriend.isEmpty()) {
                     Toast.makeText(TransferToFriendSendActivity.this, "Masukkan nominal transfer", Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent = new Intent(TransferToFriendSendActivity.this, TransferToFriendReviewActivity.class);
-                    intent.putExtra(IConfig.KEY_NOMINAL, nominal);
+                    intent.putExtra(IConfig.KEY_NOMINAL_TRANSFER_TO_FRIEND, nominalTransferToFriend);
                     intent.putExtra(IConfig.KEY_NAME_CONTACT, nameContact);
                     intent.putExtra(IConfig.KEY_NUMBER_CONTACT, numberContact);
                     startActivity(intent);
@@ -80,7 +81,6 @@ public class TransferToFriendSendActivity extends BaseActivity {
     }
 
     //HIT INQUIRY
-
 
     //IF RESPONSE REGISTERED NEXT REVIEW
 

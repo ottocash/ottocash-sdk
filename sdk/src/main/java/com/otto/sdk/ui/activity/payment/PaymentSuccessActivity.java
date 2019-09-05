@@ -15,15 +15,26 @@ import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
 import com.otto.sdk.ui.component.support.UiUtil;
 
 import app.beelabs.com.codebase.base.BaseActivity;
+import app.beelabs.com.codebase.support.util.CacheUtil;
 
 public class PaymentSuccessActivity extends BaseActivity {
 
-    private String nominal;
+    private String nominalTransferToFriend;
+    private int total;
 
-    TextView tvPaymentValue;
     ImageButton ivClose;
     ImageButton ivCloseReceipt;
     NestedScrollView nestedScrollView;
+
+    TextView tvTitleReceipt;
+    TextView tvDescTitleReceipt;
+    TextView tvTitlePaymentReceipt;
+    TextView tvPaymentValue;
+
+    private String pinTransferToFriend = "P2P";
+    private String pinReviewCheckout = "ReviewCheckout";
+    private String keyPinTransferToFriend;
+    private String keyPinReviewCheckout;
     private BottomSheetBehavior mBottomSheetBehaviour;
 
     @Override
@@ -31,15 +42,26 @@ public class PaymentSuccessActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_success);
 
-        initPaymentValue();
         initComponent();
+        initPaymentValue();
         billPaymentSuccess();
     }
 
     private void initPaymentValue() {
+        total = CacheUtil.getPreferenceInteger(IConfig.SESSION_TOTAL, PaymentSuccessActivity.this);
+
         Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            nominal = extras.getString(IConfig.KEY_NOMINAL);
+        nominalTransferToFriend = extras.getString(IConfig.KEY_NOMINAL_TRANSFER_TO_FRIEND);
+        keyPinReviewCheckout = extras.getString(IConfig.KEY_PIN_CHECKOUT);
+        keyPinTransferToFriend = extras.getString(IConfig.KEY_PIN_TRANSFER_TO_FRIEND);
+
+        if (pinReviewCheckout.equals(keyPinReviewCheckout)) {
+            tvPaymentValue.setText(UiUtil.formatMoneyIDR(total));
+        } else if (pinTransferToFriend.equals(keyPinTransferToFriend)) {
+            tvTitleReceipt.setText("TRANSFER BERHASIL");
+            tvDescTitleReceipt.setText(R.string.desc_title_receipt);
+            tvTitlePaymentReceipt.setText("TOTAL TRANSFER");
+            tvPaymentValue.setText(UiUtil.formatMoneyIDR(Long.parseLong(nominalTransferToFriend)));
         }
 
     }
@@ -49,7 +71,9 @@ public class PaymentSuccessActivity extends BaseActivity {
         ivCloseReceipt = findViewById(R.id.iv_close_receipt);
         nestedScrollView = findViewById(R.id.nestedScrollView);
         tvPaymentValue = findViewById(R.id.tvPaymentValue);
-        tvPaymentValue.setText(UiUtil.formatMoneyIDR(Long.parseLong(nominal)));
+        tvTitleReceipt = findViewById(R.id.tvTitleReceipt);
+        tvDescTitleReceipt = findViewById(R.id.tvDescTitleReceipt);
+        tvTitlePaymentReceipt = findViewById(R.id.tvTitlePaymentReceipt);
 
         mBottomSheetBehaviour = BottomSheetBehavior.from(nestedScrollView);
         mBottomSheetBehaviour.setPeekHeight(0);

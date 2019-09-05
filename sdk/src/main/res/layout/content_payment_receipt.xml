@@ -42,7 +42,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="13dp"
-                android:text="BUKTI BAYAR DAN DETIL TRANSAKSI"
+                android:text="BUKTI BAYAR DAN DETAIL TRANSAKSI"
                 android:textColor="@color/Black_484848"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toStartOf="@id/iv_close_receipt"

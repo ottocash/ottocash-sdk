@@ -30,10 +30,10 @@ public class TransferToFriendReviewActivity extends BaseActivity {
     TextView tvBiayaLayanan;
     TextView tvTotalBayar;
 
-    private String nominal;
+    private String nominalTransferToFriend;
     private String nameContact;
     private String numberContact;
-    private String transferToFriend = "P2P";
+    private String pinTransferToFriend = "P2P";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,18 +68,17 @@ public class TransferToFriendReviewActivity extends BaseActivity {
     private void initView() {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            nominal = extras.getString(IConfig.KEY_NOMINAL);
+            nominalTransferToFriend = extras.getString(IConfig.KEY_NOMINAL_TRANSFER_TO_FRIEND);
             nameContact = extras.getString(IConfig.KEY_NAME_CONTACT);
             numberContact = extras.getString(IConfig.KEY_NUMBER_CONTACT);
         }
 
-
-        tvBill.setText(UiUtil.formatMoneyIDR(Long.parseLong(nominal)));
-        tvPembayaranMitra.setText(UiUtil.formatMoneyIDR(Long.parseLong(nominal)));
-        tvTotalBayar.setText(UiUtil.formatMoneyIDR(Long.parseLong(nominal)));
+        tvBill.setText(UiUtil.formatMoneyIDR(Long.parseLong(nominalTransferToFriend)));
+        tvPembayaranMitra.setText(UiUtil.formatMoneyIDR(Long.parseLong(nominalTransferToFriend)));
+        tvTotalBayar.setText(UiUtil.formatMoneyIDR(Long.parseLong(nominalTransferToFriend)));
         tvTitleDestination.setText("Tujuan : " + nameContact);
         tvTitleNoTujuan.setText("No Tujuan : " + numberContact);
-        tvTitleJumlahUang.setText("Jumlah Uang : " + UiUtil.formatMoneyIDR(Long.parseLong(nominal)));
+        tvTitleJumlahUang.setText("Jumlah Uang : " + UiUtil.formatMoneyIDR(Long.parseLong(nominalTransferToFriend)));
 
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,8 +91,8 @@ public class TransferToFriendReviewActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(TransferToFriendReviewActivity.this, PinPaymentActivity.class);
-                intent.putExtra(IConfig.KEY_PIN_TRANSFER_TO_FRIEND, transferToFriend);
-                intent.putExtra(IConfig.KEY_NOMINAL, nominal);
+                intent.putExtra(IConfig.KEY_PIN_TRANSFER_TO_FRIEND, pinTransferToFriend);
+                intent.putExtra(IConfig.KEY_NOMINAL_TRANSFER_TO_FRIEND, nominalTransferToFriend);
                 intent.putExtra(IConfig.KEY_NUMBER_CONTACT, numberContact);
                 startActivity(intent);
             }
