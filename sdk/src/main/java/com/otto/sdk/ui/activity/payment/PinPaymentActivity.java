@@ -11,10 +11,12 @@ import android.widget.Toast;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCashSdk;
 import com.otto.sdk.R;
-import com.otto.sdk.interfaces.IReviewCheckoutView;
+import com.otto.sdk.interfaces.IPinVerificationPaymentView;
 import com.otto.sdk.model.api.request.PaymentValidateRequest;
+import com.otto.sdk.model.api.request.TransferToFriendRequest;
 import com.otto.sdk.model.api.response.PaymentValidateResponse;
-import com.otto.sdk.model.api.response.ReviewCheckOutResponse;
+import com.otto.sdk.model.api.response.TransferToFriendResponse;
+import com.otto.sdk.presenter.PinVerificationPaymentPresenter;
 import com.otto.sdk.presenter.ReviewCheckoutPresenter;
 import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
 import com.otto.sdk.ui.component.support.UiUtil;
@@ -23,22 +25,31 @@ import com.poovam.pinedittextfield.LinePinField;
 import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.support.util.CacheUtil;
 
-public class PinPaymentActivity extends BaseActivity implements IReviewCheckoutView {
+public class PinPaymentActivity extends BaseActivity implements IPinVerificationPaymentView {
 
     TextView tvPaymentValue;
     LinePinField lineField;
+    TextView errorMessage;
 
-    int emoneyBalance;
-    int total;
     int paymentValue;
     int user_id;
-    String phone;
+
+    private int total;
+    private int emoneyBalance;
+    private String numberContact;
+    private String nominal;
+    private String phone;
+    private String pinTransferToFriend = "P2P";
+    private String reviewCheckout = "ReviewCheckout";
+    private String keyPinTransferToFriend;
+    private String keyReviewCheckout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pin_payment);
 
+        keyPinVerificationPayment();
         initComponent();
         addTextWatcher(lineField);
     }
@@ -46,12 +57,32 @@ public class PinPaymentActivity extends BaseActivity implements IReviewCheckoutV
     private void initComponent() {
         tvPaymentValue = findViewById(R.id.tvPaymentValue);
         lineField = findViewById(R.id.lineField);
+        errorMessage = findViewById(R.id.errorMessage);
 
         total = CacheUtil.getPreferenceInteger(IConfig.SESSION_TOTAL, PinPaymentActivity.this);
-        tvPaymentValue.setText(UiUtil.formatMoneyIDR(total));
+
+
+        if (pinTransferToFriend.equals(keyPinTransferToFriend)) {
+            tvPaymentValue.setText(UiUtil.formatMoneyIDR(Long.parseLong(nominal)));
+        } else if (reviewCheckout.equals(keyReviewCheckout)) {
+            tvPaymentValue.setText(UiUtil.formatMoneyIDR(total));
+        }
     }
 
-    private void onCallApiSetPin(final String pin) {
+    private void keyPinVerificationPayment() {
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            keyPinTransferToFriend = extras.getString(IConfig.KEY_PIN_TRANSFER_TO_FRIEND);
+            keyReviewCheckout = extras.getString(IConfig.KEY_PIN_CHECKOUT);
+            nominal = extras.getString(IConfig.KEY_NOMINAL);
+            numberContact = extras.getString(IConfig.KEY_NUMBER_CONTACT);
+        }
+    }
+
+    /**
+     * START PAYMENT VALIDATE
+     */
+    private void onCallApiPaymentValidate(final String pin) {
 
         final PaymentValidateRequest model = new PaymentValidateRequest();
 
@@ -62,8 +93,7 @@ public class PinPaymentActivity extends BaseActivity implements IReviewCheckoutV
         model.setPhone(phone);
         model.setPin(pin);
 
-
-        showApiProgressDialog(OttoCashSdk.getAppComponent(), new ReviewCheckoutPresenter(this) {
+        showApiProgressDialog(OttoCashSdk.getAppComponent(), new PinVerificationPaymentPresenter(this) {
             @Override
             public void call() {
                 getPaymentValidate(model);
@@ -72,31 +102,69 @@ public class PinPaymentActivity extends BaseActivity implements IReviewCheckoutV
         }, "Loading");
     }
 
-
-    @Override
-    public void handleReviewCheckout(ReviewCheckOutResponse model) {
-
-    }
-
     @Override
     public void handlePaymentValidate(PaymentValidateResponse model) {
         if (model.getMeta().getCode() == 200) {
-
             emoneyBalance = Integer.parseInt(CacheUtil.getPreferenceString(IConfig.SESSION_EMONEY_BALANCE, PinPaymentActivity.this));
-            total = CacheUtil.getPreferenceInteger(IConfig.SESSION_TOTAL, PinPaymentActivity.this);
-            tvPaymentValue.setText(UiUtil.formatMoneyIDR(Long.parseLong(String.valueOf(total))));
 
-            paymentValue = emoneyBalance - total;
-
-            Intent intent = new Intent(PinPaymentActivity.this, DashboardSDKActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            finish();
+            if (pinTransferToFriend.equals(keyPinTransferToFriend)) {
+                onCallApiTransferToFriend();
+            } else if (reviewCheckout.equals(keyReviewCheckout)) {
+                paymentValue = emoneyBalance - total;
+                Intent intent = new Intent(PinPaymentActivity.this, PaymentSuccessActivity.class);
+                startActivity(intent);
+            }
         } else {
             Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
                     Toast.LENGTH_LONG).show();
         }
     }
+    /**
+     * END PAYMENT VALIDATE
+     */
+
+
+    /**
+     * START TRANSFER TO FRIEND
+     */
+    private void onCallApiTransferToFriend() {
+
+        final TransferToFriendRequest model = new TransferToFriendRequest();
+
+        phone = CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, PinPaymentActivity.this);
+
+        model.setAccountNumber(phone);
+        model.setCustomerReference(numberContact);
+        model.setAmount(nominal);
+
+        showApiProgressDialog(OttoCashSdk.getAppComponent(), new PinVerificationPaymentPresenter(this) {
+            @Override
+            public void call() {
+                getTransferToFriend(model);
+
+            }
+        }, "Loading");
+    }
+
+
+    @Override
+    public void handlePaymentTransferToFriend(TransferToFriendResponse model) {
+        if (model.getMeta().getCode() == 200) {
+
+            Intent intent = new Intent(PinPaymentActivity.this, PaymentSuccessActivity.class);
+            intent.putExtra(IConfig.KEY_NOMINAL, nominal);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
+                    Toast.LENGTH_LONG).show();
+        }
+    }
+
+    /**
+     * END TRANSFER TO FRIEND
+     */
+
 
     public void addTextWatcher(EditText input) {
         input.addTextChangedListener(new TextWatcher() {
@@ -109,7 +177,7 @@ public class PinPaymentActivity extends BaseActivity implements IReviewCheckoutV
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (charSequence.toString().length() == 6) {
-                    onCallApiSetPin(charSequence.toString());
+                    onCallApiPaymentValidate(charSequence.toString());
                 }
             }
 

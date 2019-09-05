@@ -58,14 +58,13 @@
             android:id="@+id/et_amount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="58dp"
             android:background="@color/transparent"
             android:gravity="center"
             android:hint="@string/masukkan_nominal"
             android:inputType="number"
             android:padding="12dp"
             android:textColor="@color/Black_484848"
-            android:textSize="16sp" />
+            android:textSize="22sp" />
 
         <View
             android:layout_width="match_parent"

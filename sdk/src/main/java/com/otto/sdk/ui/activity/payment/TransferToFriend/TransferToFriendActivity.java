@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
@@ -85,7 +86,13 @@ public class TransferToFriendActivity extends BaseActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                transferToFriend();
+
+                final String phone = etSearch.getText().toString();
+                if (phone.isEmpty()) {
+                    Toast.makeText(TransferToFriendActivity.this, "Masukkan nomor handphone", Toast.LENGTH_SHORT).show();
+                } else {
+                    transferToFriend();
+                }
             }
         });
 
@@ -202,18 +209,5 @@ public class TransferToFriendActivity extends BaseActivity {
         intent.putExtra(IConfig.KEY_NAME_CONTACT, nameContact);
         startActivity(intent);
     }
-
-
-    /*public void transferToFriend() {
-        mPhoneContact.setMobileNumber(UiUtil.countryCodeReplacedWithZero(mPhoneContact.getMobileNumber()));
-
-        numberContact = mPhoneContact.getMobileNumber();
-        nameContact = mPhoneContact.getName();
-
-        Intent intent = new Intent(this, TransferToFriendSendActivity.class);
-        intent.putExtra(IConfig.KEY_NUMBER_CONTACT, numberContact);
-        intent.putExtra(IConfig.KEY_NAME_CONTACT, nameContact);
-        startActivity(intent);
-    }*/
 
 }

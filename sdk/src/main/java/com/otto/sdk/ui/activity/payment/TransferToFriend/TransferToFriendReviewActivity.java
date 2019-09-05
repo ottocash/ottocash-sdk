@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.otto.sdk.IConfig;
 import com.otto.sdk.R;
+import com.otto.sdk.ui.activity.payment.PinPaymentActivity;
+import com.otto.sdk.ui.component.support.UiUtil;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 
@@ -29,9 +31,9 @@ public class TransferToFriendReviewActivity extends BaseActivity {
     TextView tvTotalBayar;
 
     private String nominal;
-    private String destinationPhone;
     private String nameContact;
     private String numberContact;
+    private String transferToFriend = "P2P";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,17 +69,17 @@ public class TransferToFriendReviewActivity extends BaseActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             nominal = extras.getString(IConfig.KEY_NOMINAL);
-            destinationPhone = extras.getString(IConfig.KEY_DESTINATION);
             nameContact = extras.getString(IConfig.KEY_NAME_CONTACT);
             numberContact = extras.getString(IConfig.KEY_NUMBER_CONTACT);
         }
 
-        tvBill.setText(nominal);
-        tvPembayaranMitra.setText(nominal);
-        tvTotalBayar.setText(nominal);
+
+        tvBill.setText(UiUtil.formatMoneyIDR(Long.parseLong(nominal)));
+        tvPembayaranMitra.setText(UiUtil.formatMoneyIDR(Long.parseLong(nominal)));
+        tvTotalBayar.setText(UiUtil.formatMoneyIDR(Long.parseLong(nominal)));
         tvTitleDestination.setText("Tujuan : " + nameContact);
         tvTitleNoTujuan.setText("No Tujuan : " + numberContact);
-        tvTitleJumlahUang.setText("Jumlah Uang : " + nominal);
+        tvTitleJumlahUang.setText("Jumlah Uang : " + UiUtil.formatMoneyIDR(Long.parseLong(nominal)));
 
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,7 +91,10 @@ public class TransferToFriendReviewActivity extends BaseActivity {
         btnPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(TransferToFriendReviewActivity.this, TransferToFriendPinActivity.class);
+                Intent intent = new Intent(TransferToFriendReviewActivity.this, PinPaymentActivity.class);
+                intent.putExtra(IConfig.KEY_PIN_TRANSFER_TO_FRIEND, transferToFriend);
+                intent.putExtra(IConfig.KEY_NOMINAL, nominal);
+                intent.putExtra(IConfig.KEY_NUMBER_CONTACT, numberContact);
                 startActivity(intent);
             }
         });

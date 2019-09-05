@@ -3,9 +3,7 @@ package com.otto.sdk.presenter;
 import android.content.Context;
 
 import com.otto.sdk.interfaces.IReviewCheckoutView;
-import com.otto.sdk.model.api.request.PaymentValidateRequest;
 import com.otto.sdk.model.api.request.ReviewCheckOutRequest;
-import com.otto.sdk.model.api.response.PaymentValidateResponse;
 import com.otto.sdk.model.api.response.ReviewCheckOutResponse;
 import com.otto.sdk.model.dao.PaymentDao;
 
@@ -33,16 +31,6 @@ public class ReviewCheckoutPresenter extends BasePresenter implements PaymentDao
         }).onReviewCheckOut(requestModel, getContext());
     }
 
-    @Override
-    public void getPaymentValidate(PaymentValidateRequest requestModel) {
-        new PaymentDao(this, new OnPresenterResponseCallback() {
-            @Override
-            public void call(BaseResponse br) {
-                PaymentValidateResponse model = (PaymentValidateResponse) br;
-                iReviewCheckoutView.handlePaymentValidate(model);
-            }
-        }).onPaymentValidate(requestModel, getContext());
-    }
 
     @Override
     public BasePresenter getPresenter() {

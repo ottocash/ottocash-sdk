@@ -1,7 +1,5 @@
 package com.otto.sdk.ui.activity.payment;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,7 +13,6 @@ import com.otto.sdk.OttoCashSdk;
 import com.otto.sdk.R;
 import com.otto.sdk.interfaces.IReviewCheckoutView;
 import com.otto.sdk.model.api.request.ReviewCheckOutRequest;
-import com.otto.sdk.model.api.response.PaymentValidateResponse;
 import com.otto.sdk.model.api.response.ReviewCheckOutResponse;
 import com.otto.sdk.presenter.ReviewCheckoutPresenter;
 import com.otto.sdk.ui.component.dialog.SaldoDialog;
@@ -30,10 +27,6 @@ import static app.beelabs.com.codebase.support.util.CacheUtil.getPreferenceStrin
 
 public class ReviewCheckoutActivity extends BaseActivity implements IReviewCheckoutView {
 
-    private int grandTotal;
-    private String customerReferenceNumber;
-    private String SESSION_GRAND_TOTAL = "total";
-    int total;
 
     TextView tvBill;
     TextView tvPembayaranMitra;
@@ -45,6 +38,13 @@ public class ReviewCheckoutActivity extends BaseActivity implements IReviewCheck
     TextView tv_title_tujuan;
     TextView tv_title_no_tujuan;
     TextView tv_title_jumlah_uang;
+
+    private int total;
+    private int grandTotal;
+    private String customerReferenceNumber;
+    private String SESSION_GRAND_TOTAL = "total";
+    private String reviewCheckout = "ReviewCheckout";
+
 
     private ReviewCheckOutRequest reviewCheckOutRequest;
 
@@ -157,18 +157,12 @@ public class ReviewCheckoutActivity extends BaseActivity implements IReviewCheck
             CacheUtil.putPreferenceInteger(IConfig.SESSION_TOTAL, total, ReviewCheckoutActivity.this);
 
             Intent intent = new Intent(ReviewCheckoutActivity.this, PinPaymentActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.putExtra(IConfig.KEY_PIN_CHECKOUT, reviewCheckout);
             startActivity(intent);
-            finish();
-
         } else {
             Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
                     Toast.LENGTH_LONG).show();
         }
     }
 
-    @Override
-    public void handlePaymentValidate(PaymentValidateResponse model) {
-
-    }
 }

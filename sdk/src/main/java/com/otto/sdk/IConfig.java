@@ -25,6 +25,10 @@ public interface IConfig {
     String KEY_NOMINAL = "nominal";
     String KEY_DESTINATION = "destination_number";
 
+    //KEY PIN PAYMENT
+    String KEY_PIN_TRANSFER_TO_FRIEND = "pin_transfer_to_friend";
+    String KEY_PIN_CHECKOUT = "pin_checkout";
+
 
     final boolean SESSION_CHECK_PHONE_NUMBER = false;
     final boolean SESSION_IS_LOGIN = false;

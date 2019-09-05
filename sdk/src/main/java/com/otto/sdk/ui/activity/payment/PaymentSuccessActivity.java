@@ -1,18 +1,26 @@
 package com.otto.sdk.ui.activity.payment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.widget.NestedScrollView;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
+import com.otto.sdk.IConfig;
 import com.otto.sdk.R;
+import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
+import com.otto.sdk.ui.component.support.UiUtil;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 
 public class PaymentSuccessActivity extends BaseActivity {
 
+    private String nominal;
+
+    TextView tvPaymentValue;
     ImageButton ivClose;
     ImageButton ivCloseReceipt;
     NestedScrollView nestedScrollView;
@@ -23,15 +31,25 @@ public class PaymentSuccessActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_success);
 
+        initPaymentValue();
         initComponent();
         billPaymentSuccess();
+    }
+
+    private void initPaymentValue() {
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            nominal = extras.getString(IConfig.KEY_NOMINAL);
+        }
+
     }
 
     private void initComponent() {
         ivClose = findViewById(R.id.iv_close);
         ivCloseReceipt = findViewById(R.id.iv_close_receipt);
         nestedScrollView = findViewById(R.id.nestedScrollView);
-
+        tvPaymentValue = findViewById(R.id.tvPaymentValue);
+        tvPaymentValue.setText(UiUtil.formatMoneyIDR(Long.parseLong(nominal)));
 
         mBottomSheetBehaviour = BottomSheetBehavior.from(nestedScrollView);
         mBottomSheetBehaviour.setPeekHeight(0);
@@ -53,14 +71,18 @@ public class PaymentSuccessActivity extends BaseActivity {
         ivCloseReceipt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
+                Intent intent = new Intent(PaymentSuccessActivity.this, DashboardSDKActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
             }
         });
 
         ivClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
+                Intent intent = new Intent(PaymentSuccessActivity.this, DashboardSDKActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
             }
         });
 
