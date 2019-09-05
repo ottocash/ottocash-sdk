@@ -11,10 +11,6 @@ public class InquiryRequest {
         this.accountNumber = accountNumber;
     }
 
-    public InquiryRequest() {
-
-    }
-
     public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
     }

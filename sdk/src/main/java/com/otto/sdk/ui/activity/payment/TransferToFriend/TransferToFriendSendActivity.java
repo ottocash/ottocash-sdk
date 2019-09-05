@@ -83,7 +83,7 @@ public class TransferToFriendSendActivity extends BaseActivity implements IInqui
 
     private void onCallApiInquiry() {
 
-        final InquiryRequest model = new InquiryRequest();
+        final InquiryRequest model = new InquiryRequest(numberContact);
         model.setAccountNumber(numberContact);
 
         showApiProgressDialog(OttoCashSdk.getAppComponent(), new InquiryPresenter(TransferToFriendSendActivity.this) {

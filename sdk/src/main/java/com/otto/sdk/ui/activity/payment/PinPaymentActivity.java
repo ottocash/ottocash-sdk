@@ -143,14 +143,15 @@ public class PinPaymentActivity extends BaseActivity implements IPinVerification
         model.setCustomerReference(numberContact);
         model.setAmount(nominalTransferToFriend);
 
-        pinVerificationPaymentPresenter.getTransferToFriend(model);
-        /*showApiProgressDialog(OttoCashSdk.getAppComponent(), new PinVerificationPaymentPresenter(this) {
+        /*pinVerificationPaymentPresenter = ((PinVerificationPaymentPresenter) BasePresenter.getInstance(PinPaymentActivity.this, new PinVerificationPaymentPresenter(PinPaymentActivity.this)));
+        pinVerificationPaymentPresenter.getTransferToFriend(model);*/
+        showApiProgressDialog(OttoCashSdk.getAppComponent(), new PinVerificationPaymentPresenter(this) {
             @Override
             public void call() {
                 getTransferToFriend(model);
 
             }
-        }, "Loading");*/
+        }, "Loading");
     }
 
 
