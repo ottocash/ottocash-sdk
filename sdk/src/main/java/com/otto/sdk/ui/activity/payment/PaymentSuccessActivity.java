@@ -43,27 +43,14 @@ public class PaymentSuccessActivity extends BaseActivity {
         setContentView(R.layout.activity_payment_success);
 
         initComponent();
-        initPaymentValue();
+        initDisplayPaymentValue();
         billPaymentSuccess();
     }
 
-    private void initPaymentValue() {
-        total = CacheUtil.getPreferenceInteger(IConfig.SESSION_TOTAL, PaymentSuccessActivity.this);
-
-        Bundle extras = getIntent().getExtras();
-        nominalTransferToFriend = extras.getString(IConfig.KEY_NOMINAL_TRANSFER_TO_FRIEND);
-        keyPinReviewCheckout = extras.getString(IConfig.KEY_PIN_CHECKOUT);
-        keyPinTransferToFriend = extras.getString(IConfig.KEY_PIN_TRANSFER_TO_FRIEND);
-
-        if (pinReviewCheckout.equals(keyPinReviewCheckout)) {
-            tvPaymentValue.setText(UiUtil.formatMoneyIDR(total));
-        } else if (pinTransferToFriend.equals(keyPinTransferToFriend)) {
-            tvTitleReceipt.setText("TRANSFER BERHASIL");
-            tvDescTitleReceipt.setText(R.string.desc_title_receipt);
-            tvTitlePaymentReceipt.setText("TOTAL TRANSFER");
-            tvPaymentValue.setText(UiUtil.formatMoneyIDR(Long.parseLong(nominalTransferToFriend)));
-        }
-
+    public void billPaymentSuccess() {
+        ivClose.setVisibility(View.VISIBLE);
+        int peekHeightPx = getResources().getDimensionPixelSize(R.dimen.peek_height);
+        mBottomSheetBehaviour.setPeekHeight(peekHeightPx);
     }
 
     private void initComponent() {
@@ -112,10 +99,22 @@ public class PaymentSuccessActivity extends BaseActivity {
 
     }
 
+    private void initDisplayPaymentValue() {
+        total = CacheUtil.getPreferenceInteger(IConfig.SESSION_TOTAL, PaymentSuccessActivity.this);
 
-    public void billPaymentSuccess() {
-        ivClose.setVisibility(View.VISIBLE);
-        int peekHeightPx = getResources().getDimensionPixelSize(R.dimen.peek_height);
-        mBottomSheetBehaviour.setPeekHeight(peekHeightPx);
+        Bundle extras = getIntent().getExtras();
+        nominalTransferToFriend = extras.getString(IConfig.KEY_NOMINAL_TRANSFER_TO_FRIEND);
+        keyPinReviewCheckout = extras.getString(IConfig.KEY_PIN_CHECKOUT);
+        keyPinTransferToFriend = extras.getString(IConfig.KEY_PIN_TRANSFER_TO_FRIEND);
+
+        if (pinReviewCheckout.equals(keyPinReviewCheckout)) {
+            tvPaymentValue.setText(UiUtil.formatMoneyIDR(total));
+        } else if (pinTransferToFriend.equals(keyPinTransferToFriend)) {
+            tvTitleReceipt.setText("TRANSFER BERHASIL");
+            tvDescTitleReceipt.setText(R.string.desc_title_receipt);
+            tvTitlePaymentReceipt.setText("TOTAL TRANSFER");
+            tvPaymentValue.setText(UiUtil.formatMoneyIDR(Long.parseLong(nominalTransferToFriend)));
+        }
+
     }
 }

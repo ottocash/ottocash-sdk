@@ -18,11 +18,14 @@ import com.otto.sdk.model.api.response.PaymentValidateResponse;
 import com.otto.sdk.model.api.response.TransferToFriendResponse;
 import com.otto.sdk.presenter.PinVerificationPaymentPresenter;
 import com.otto.sdk.presenter.ReviewCheckoutPresenter;
+import com.otto.sdk.presenter.SdkResourcePresenter;
+import com.otto.sdk.ui.activity.SdkActivity;
 import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
 import com.otto.sdk.ui.component.support.UiUtil;
 import com.poovam.pinedittextfield.LinePinField;
 
 import app.beelabs.com.codebase.base.BaseActivity;
+import app.beelabs.com.codebase.base.BasePresenter;
 import app.beelabs.com.codebase.support.util.CacheUtil;
 
 public class PinPaymentActivity extends BaseActivity implements IPinVerificationPaymentView {
@@ -46,6 +49,7 @@ public class PinPaymentActivity extends BaseActivity implements IPinVerification
 
 
     /*Receipt Transfer To Friend*/
+    private PinVerificationPaymentPresenter pinVerificationPaymentPresenter;
     private String receiptDestinationAccountNumber;
     private String receiptNominal;
     private String receiptDate;
@@ -133,20 +137,20 @@ public class PinPaymentActivity extends BaseActivity implements IPinVerification
     private void onCallApiTransferToFriend() {
 
         final TransferToFriendRequest model = new TransferToFriendRequest();
-
         phone = CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, PinPaymentActivity.this);
 
         model.setAccountNumber(phone);
         model.setCustomerReference(numberContact);
         model.setAmount(nominalTransferToFriend);
 
-        showApiProgressDialog(OttoCashSdk.getAppComponent(), new PinVerificationPaymentPresenter(this) {
+        pinVerificationPaymentPresenter.getTransferToFriend(model);
+        /*showApiProgressDialog(OttoCashSdk.getAppComponent(), new PinVerificationPaymentPresenter(this) {
             @Override
             public void call() {
                 getTransferToFriend(model);
 
             }
-        }, "Loading");
+        }, "Loading");*/
     }
 
 

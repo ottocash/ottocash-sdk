@@ -28,6 +28,7 @@ import app.beelabs.com.codebase.support.util.CacheUtil;
 
 public class SdkActivity extends BaseActivity implements ISdkView, IInquiryView {
 
+    private String account_number;
     private SdkResourcePresenter presenterSDK;
 
     @Override
@@ -44,10 +45,10 @@ public class SdkActivity extends BaseActivity implements ISdkView, IInquiryView 
         final ClientsRequest clients = new ClientsRequest();
         clients.setEmail("ardi@clappingape.com");
 
-        String phone = CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, SdkActivity.this);
-        model.setPhone(phone);
+        account_number = CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, SdkActivity.this);
+        model.setPhone(account_number);
 
-        new InquiryPresenter(this).getInquiry(new InquiryRequest(phone));
+        new InquiryPresenter(this).getInquiry(new InquiryRequest(account_number));
         showApiProgressDialog(OttoCashSdk.getAppComponent(), new SdkResourcePresenter(SdkActivity.this) {
             @Override
             public void call() {

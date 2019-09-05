@@ -10,11 +10,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.otto.sdk.IConfig;
+import com.otto.sdk.OttoCashSdk;
 import com.otto.sdk.R;
+import com.otto.sdk.interfaces.IInquiryView;
+import com.otto.sdk.model.api.request.InquiryRequest;
+import com.otto.sdk.model.api.response.InquiryResponse;
+import com.otto.sdk.presenter.InquiryPresenter;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 
-public class TransferToFriendSendActivity extends BaseActivity {
+public class TransferToFriendSendActivity extends BaseActivity implements IInquiryView {
 
     ImageView ivBack;
     TextView tvName;
@@ -69,21 +74,38 @@ public class TransferToFriendSendActivity extends BaseActivity {
                 if (nominalTransferToFriend.isEmpty()) {
                     Toast.makeText(TransferToFriendSendActivity.this, "Masukkan nominal transfer", Toast.LENGTH_SHORT).show();
                 } else {
-                    Intent intent = new Intent(TransferToFriendSendActivity.this, TransferToFriendReviewActivity.class);
-                    intent.putExtra(IConfig.KEY_NOMINAL_TRANSFER_TO_FRIEND, nominalTransferToFriend);
-                    intent.putExtra(IConfig.KEY_NAME_CONTACT, nameContact);
-                    intent.putExtra(IConfig.KEY_NUMBER_CONTACT, numberContact);
-                    startActivity(intent);
+                    onCallApiInquiry();
                 }
             }
         });
 
     }
 
-    //HIT INQUIRY
+    private void onCallApiInquiry() {
 
-    //IF RESPONSE REGISTERED NEXT REVIEW
+        final InquiryRequest model = new InquiryRequest();
+        model.setAccountNumber(numberContact);
 
-    //ELSE NO TIDAK TERDAFTAR
+        showApiProgressDialog(OttoCashSdk.getAppComponent(), new InquiryPresenter(TransferToFriendSendActivity.this) {
+            @Override
+            public void call() {
+                getInquiry(model);
+
+            }
+        }, "Loading");
+    }
+
+    @Override
+    public void handleInquiry(InquiryResponse model) {
+        if (model.getMeta().getCode() == 200) {
+            Intent intent = new Intent(TransferToFriendSendActivity.this, TransferToFriendReviewActivity.class);
+            intent.putExtra(IConfig.KEY_NOMINAL_TRANSFER_TO_FRIEND, nominalTransferToFriend);
+            intent.putExtra(IConfig.KEY_NAME_CONTACT, nameContact);
+            intent.putExtra(IConfig.KEY_NUMBER_CONTACT, numberContact);
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
 
 }

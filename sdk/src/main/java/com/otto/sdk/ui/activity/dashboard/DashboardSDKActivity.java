@@ -42,11 +42,11 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
     /*TextView tvSetPinOttocash;
     TextView tvTacOttocash;*/
 
-    private InquiryPresenter inquiryPresenter;
 
     private InquiryRequest model;
-    String emoneyBalance;
-    String name;
+    private String emoneyBalance;
+    private String name;
+    private String account_number;
 
 
     @Override
@@ -177,8 +177,9 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
 
     private void onCallApiInquiry() {
 
-        model = new InquiryRequest(String.valueOf(CacheUtil.getPreferenceString(
-                IConfig.SESSION_PHONE, DashboardSDKActivity.this)));
+        final InquiryRequest model = new InquiryRequest(account_number);
+        account_number = CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, DashboardSDKActivity.this);
+        model.setAccountNumber(account_number);
 
         showApiProgressDialog(OttoCashSdk.getAppComponent(), new InquiryPresenter(DashboardSDKActivity.this) {
             @Override
