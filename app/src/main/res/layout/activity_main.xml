@@ -43,7 +43,7 @@
             android:textAppearance="@style/BarlowRegular"
             android:textColor="@color/white" />
 
-        <Button
+        <!--<Button
             android:id="@+id/btnTransfer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
             android:padding="5dp"
             android:text="Transfer to Friend"
             android:textAppearance="@style/BarlowRegular"
-            android:textColor="@color/white" />
+            android:textColor="@color/white" />-->
     </LinearLayout>
 
 

@@ -57,12 +57,12 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
-    @OnClick(R.id.btnTransfer)
+    /*@OnClick(R.id.btnTransfer)
     public void onTransfer() {
         Intent intent = new Intent(LoginActivity.this, TransferToFriendActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-    }
+    }*/
 
 
 }

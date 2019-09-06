@@ -45,6 +45,7 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
     private InquiryRequest inquiryRequest;
     private String emoneyBalance;
     private String name;
+    private int verifyStatus;
 
 
     @Override
@@ -164,11 +165,35 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
                 dialogComingSoon();
                 break;
             case "mm_8":
-                intent = new Intent(this, TransferToFriendActivity.class);
-                startActivity(intent);
+                goTransferToFriend();
                 break;
             default:
                 break;
+        }
+    }
+
+    protected void dialogComingSoon() {
+        String title = getString(R.string.dialog_tittle_coming_soon);
+        String message = getString(R.string.dialog_message_coming_soon);
+        String btnLabel = getString(R.string.dialog_button_coming_soon);
+
+        CustomDialog.alertDialog(this, title, message, btnLabel, false);
+    }
+
+    protected void dialogUpgradePlus() {
+        String title = getString(R.string.dialog_title);
+        String message = getString(R.string.dialog_msg);
+        String btnLabel = getString(R.string.dialog_btn_close);
+
+        CustomDialog.alertDialog(this, title, message, btnLabel, false);
+    }
+
+    private void goTransferToFriend() {
+        if (verifyStatus == 0 || verifyStatus == 1 || verifyStatus == 3) {
+            dialogUpgradePlus();
+        } else {
+            Intent intent = new Intent(this, TransferToFriendActivity.class);
+            startActivity(intent);
         }
     }
 
@@ -188,16 +213,6 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
     }
 
 
-    protected void dialogComingSoon() {
-        String title = getString(R.string.dialog_tittle_coming_soon);
-        String message = getString(R.string.dialog_message_coming_soon);
-        String btnLabel = getString(R.string.dialog_button_coming_soon);
-
-        CustomDialog.alertDialog(this, title, message, btnLabel, false);
-
-    }
-
-
     public void handleInquiry(InquiryResponse model) {
         if (model.getMeta().getCode() == 200) {
 
@@ -206,6 +221,8 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
 
             name = model.getData().getName();
             CacheUtil.putPreferenceString(IConfig.SESSION_NAME, name, DashboardSDKActivity.this);
+
+            verifyStatus = model.getData().getVerifyStatus();
 
             tvTitleOttoCash.setText("Hai " + name + ". Saldo OttoCash Reguler Kamu");
             tvEmoneyBalance.setText(UiUtil.formatMoneyIDR(Long.parseLong(emoneyBalance)));
