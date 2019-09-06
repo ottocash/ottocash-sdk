@@ -25,6 +25,10 @@ public interface IConfig {
     String KEY_NOMINAL_TRANSFER_TO_FRIEND = "nominal";
     String KEY_DESTINATION = "destination_number";
 
+    //KEY PAYMENT RECEIPT
+    String KEY_REFERENCE_NUMBER_P2P = "reference_number_P2P";
+    String KEY_DATE_P2P = "date_p2p";
+
     //KEY PIN PAYMENT
     String KEY_PIN_TRANSFER_TO_FRIEND = "pin_transfer_to_friend";
     String KEY_PIN_CHECKOUT = "pin_checkout";

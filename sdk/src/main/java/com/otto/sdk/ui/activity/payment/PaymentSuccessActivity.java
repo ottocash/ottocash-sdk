@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.widget.NestedScrollView;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -31,11 +32,23 @@ public class PaymentSuccessActivity extends BaseActivity {
     TextView tvTitlePaymentReceipt;
     TextView tvPaymentValue;
 
+    TextView tv_id_transaction;
+    TextView tv_jumlah_pembayaran;
+    TextView tv_date;
+    TextView tv_paket;
+    TextView tv_harga_paket;
+    TextView tv_total_pembayaran;
+
     private String pinTransferToFriend = "P2P";
     private String pinReviewCheckout = "ReviewCheckout";
     private String keyPinTransferToFriend;
     private String keyPinReviewCheckout;
     private BottomSheetBehavior mBottomSheetBehaviour;
+
+    private String receiptReferenceNumber;
+    private String receiptDate;
+    private String numberContact;
+    private String nameContact;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +59,20 @@ public class PaymentSuccessActivity extends BaseActivity {
         initDisplayPaymentValue();
         billPaymentSuccess();
     }
+
+    @Override
+    public void onBackPressed() {
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            super.onKeyDown(keyCode, event);
+            return true;
+        }
+        return false;
+    }
+
 
     public void billPaymentSuccess() {
         ivClose.setVisibility(View.VISIBLE);
@@ -61,6 +88,13 @@ public class PaymentSuccessActivity extends BaseActivity {
         tvTitleReceipt = findViewById(R.id.tvTitleReceipt);
         tvDescTitleReceipt = findViewById(R.id.tvDescTitleReceipt);
         tvTitlePaymentReceipt = findViewById(R.id.tvTitlePaymentReceipt);
+        tv_id_transaction = findViewById(R.id.tv_id_transaction);
+        tv_jumlah_pembayaran = findViewById(R.id.tv_jumlah_pembayaran);
+        tv_date = findViewById(R.id.tv_date);
+        tv_paket = findViewById(R.id.tv_paket);
+        tv_harga_paket = findViewById(R.id.tv_harga_paket);
+        tv_total_pembayaran = findViewById(R.id.tv_total_pembayaran);
+
 
         mBottomSheetBehaviour = BottomSheetBehavior.from(nestedScrollView);
         mBottomSheetBehaviour.setPeekHeight(0);
@@ -107,6 +141,11 @@ public class PaymentSuccessActivity extends BaseActivity {
         keyPinReviewCheckout = extras.getString(IConfig.KEY_PIN_CHECKOUT);
         keyPinTransferToFriend = extras.getString(IConfig.KEY_PIN_TRANSFER_TO_FRIEND);
 
+        receiptReferenceNumber = extras.getString(IConfig.KEY_REFERENCE_NUMBER_P2P);
+        receiptDate = extras.getString(IConfig.KEY_DATE_P2P);
+        numberContact = extras.getString(IConfig.KEY_NUMBER_CONTACT);
+        nameContact = extras.getString(IConfig.KEY_NAME_CONTACT);
+
         if (pinReviewCheckout.equals(keyPinReviewCheckout)) {
             tvPaymentValue.setText(UiUtil.formatMoneyIDR(total));
         } else if (pinTransferToFriend.equals(keyPinTransferToFriend)) {
@@ -114,6 +153,12 @@ public class PaymentSuccessActivity extends BaseActivity {
             tvDescTitleReceipt.setText(R.string.desc_title_receipt);
             tvTitlePaymentReceipt.setText("TOTAL TRANSFER");
             tvPaymentValue.setText(nominalTransferToFriend);
+            tv_id_transaction.setText(receiptReferenceNumber);
+            tv_jumlah_pembayaran.setText(nominalTransferToFriend);
+            tv_date.setText(receiptDate);
+            tv_paket.setText("Transfer Ke " + nameContact);
+            tv_harga_paket.setText(nominalTransferToFriend);
+            tv_total_pembayaran.setText(nominalTransferToFriend);
         }
 
     }

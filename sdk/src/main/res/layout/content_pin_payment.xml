@@ -99,4 +99,15 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/btn_back"
+        android:layout_width="match_parent"
+        android:layout_height="?android:actionBarSize"
+        android:layout_alignParentBottom="true"
+        android:background="@color/Red_d04a55"
+        android:text="@string/back"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:visibility="gone" />
+
 </RelativeLayout>

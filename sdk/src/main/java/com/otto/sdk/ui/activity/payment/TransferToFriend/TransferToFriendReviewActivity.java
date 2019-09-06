@@ -94,6 +94,7 @@ public class TransferToFriendReviewActivity extends BaseActivity {
                 intent.putExtra(IConfig.KEY_PIN_TRANSFER_TO_FRIEND, pinTransferToFriend);
                 intent.putExtra(IConfig.KEY_NOMINAL_TRANSFER_TO_FRIEND, nominalTransferToFriend);
                 intent.putExtra(IConfig.KEY_NUMBER_CONTACT, numberContact);
+                intent.putExtra(IConfig.KEY_NAME_CONTACT, nameContact);
                 startActivity(intent);
             }
         });

@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,13 +35,18 @@ public class PinPaymentActivity extends BaseActivity implements IPinVerification
     TextView tvPaymentValue;
     LinePinField lineField;
     TextView errorMessage;
+    Button btnBack;
 
     int paymentValue;
     int user_id;
 
+    private int emoneyBalance;
+    private int nominalTransfer;
+
     private int total;
     private String numberContact;
     private String nominalTransferToFriend;
+    private String nameContact;
     private String phone;
 
     private String pinTransferToFriend = "P2P";
@@ -50,8 +57,7 @@ public class PinPaymentActivity extends BaseActivity implements IPinVerification
 
     /*Receipt Transfer To Friend*/
     private PinVerificationPaymentPresenter pinVerificationPaymentPresenter;
-    private String receiptDestinationAccountNumber;
-    private String receiptNominal;
+    private String receiptReferenceNumber;
     private String receiptDate;
 
     @Override
@@ -68,6 +74,7 @@ public class PinPaymentActivity extends BaseActivity implements IPinVerification
         tvPaymentValue = findViewById(R.id.tvPaymentValue);
         lineField = findViewById(R.id.lineField);
         errorMessage = findViewById(R.id.errorMessage);
+        btnBack = findViewById(R.id.btn_back);
 
         total = CacheUtil.getPreferenceInteger(IConfig.SESSION_TOTAL, PinPaymentActivity.this);
 
@@ -85,6 +92,8 @@ public class PinPaymentActivity extends BaseActivity implements IPinVerification
             keyPinReviewCheckout = extras.getString(IConfig.KEY_PIN_CHECKOUT);
             nominalTransferToFriend = extras.getString(IConfig.KEY_NOMINAL_TRANSFER_TO_FRIEND);
             numberContact = extras.getString(IConfig.KEY_NUMBER_CONTACT);
+            nameContact = extras.getString(IConfig.KEY_NAME_CONTACT);
+
         }
     }
 
@@ -114,16 +123,16 @@ public class PinPaymentActivity extends BaseActivity implements IPinVerification
     @Override
     public void handlePaymentValidate(PaymentValidateResponse model) {
         if (model.getMeta().getCode() == 200) {
-            int emoneyBalance = Integer.parseInt(CacheUtil.getPreferenceString(IConfig.SESSION_EMONEY_BALANCE, PinPaymentActivity.this));
 
             if (pinTransferToFriend.equals(keyPinTransferToFriend)) {
                 onCallApiTransferToFriend();
             } else if (pinReviewCheckout.equals(keyPinReviewCheckout)) {
                 paymentValue = emoneyBalance - total;
-                Intent intent = new Intent(PinPaymentActivity.this, PaymentSuccessActivity.class);
+                Intent intent = new Intent(PinPaymentActivity.this, DashboardSDKActivity.class);
                 intent.putExtra(IConfig.KEY_PIN_CHECKOUT, keyPinReviewCheckout);
                 startActivity(intent);
             }
+
         } else {
             Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
                     Toast.LENGTH_LONG).show();
@@ -157,14 +166,19 @@ public class PinPaymentActivity extends BaseActivity implements IPinVerification
     public void handlePaymentTransferToFriend(TransferToFriendResponse model) {
         if (model.getMeta().getCode() == 200) {
 
-            receiptDestinationAccountNumber = model.getData().getDestinationAccountNumber();
-            receiptNominal = model.getData().getNominal();
+            receiptReferenceNumber = model.getData().getReferenceNumber();
             receiptDate = model.getData().getDate();
+
 
             Intent intent = new Intent(PinPaymentActivity.this, PaymentSuccessActivity.class);
             intent.putExtra(IConfig.KEY_NOMINAL_TRANSFER_TO_FRIEND, nominalTransferToFriend);
             intent.putExtra(IConfig.KEY_PIN_TRANSFER_TO_FRIEND, keyPinTransferToFriend);
             intent.putExtra(IConfig.KEY_PIN_CHECKOUT, keyPinReviewCheckout);
+            intent.putExtra(IConfig.KEY_NAME_CONTACT, nameContact);
+            intent.putExtra(IConfig.KEY_NUMBER_CONTACT, numberContact);
+            intent.putExtra(IConfig.KEY_REFERENCE_NUMBER_P2P, receiptReferenceNumber);
+            intent.putExtra(IConfig.KEY_DATE_P2P, receiptDate);
+
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         } else {
