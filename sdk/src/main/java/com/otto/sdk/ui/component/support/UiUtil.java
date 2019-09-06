@@ -58,4 +58,9 @@ public class UiUtil {
         String result = input.replaceAll("[^0-9]","");
         return result;
     }
+
+    public static int removeAllCharacterNumbers(String input){
+        String result = input.replaceAll("[^0-9]","");
+        return Integer.parseInt(result);
+    }
 }

@@ -103,11 +103,16 @@ public class TransferToFriendSendActivity extends BaseActivity implements IInqui
     @Override
     public void handleInquiry(InquiryResponse model) {
         if (model.getMeta().getCode() == 200) {
-            Intent intent = new Intent(TransferToFriendSendActivity.this, TransferToFriendReviewActivity.class);
-            intent.putExtra(IConfig.KEY_NOMINAL_TRANSFER_TO_FRIEND, nominalTransferToFriend);
-            intent.putExtra(IConfig.KEY_NAME_CONTACT, nameContact);
-            intent.putExtra(IConfig.KEY_NUMBER_CONTACT, numberContact);
-            startActivity(intent);
+
+            if (model.getData().getVerifyStatus() == 0 || model.getData().getVerifyStatus() == 1 || model.getData().getVerifyStatus() == 3) {
+                Toast.makeText(this, "Upgrade To OttoCash Plus", Toast.LENGTH_LONG).show();
+            } else {
+                Intent intent = new Intent(TransferToFriendSendActivity.this, TransferToFriendReviewActivity.class);
+                intent.putExtra(IConfig.KEY_NOMINAL_TRANSFER_TO_FRIEND, nominalTransferToFriend);
+                intent.putExtra(IConfig.KEY_NAME_CONTACT, nameContact);
+                intent.putExtra(IConfig.KEY_NUMBER_CONTACT, numberContact);
+                startActivity(intent);
+            }
         } else {
             Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(), Toast.LENGTH_LONG).show();
         }

@@ -6,13 +6,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.otto.sdk.IConfig;
 import com.otto.sdk.R;
 import com.otto.sdk.ui.activity.payment.PinPaymentActivity;
+import com.otto.sdk.ui.activity.payment.ReviewCheckoutActivity;
+import com.otto.sdk.ui.component.dialog.SaldoDialog;
 import com.otto.sdk.ui.component.support.UiUtil;
 
 import app.beelabs.com.codebase.base.BaseActivity;
+import app.beelabs.com.codebase.support.util.CacheUtil;
 
 public class TransferToFriendReviewActivity extends BaseActivity {
 
@@ -30,6 +34,7 @@ public class TransferToFriendReviewActivity extends BaseActivity {
     TextView tvBiayaLayanan;
     TextView tvTotalBayar;
 
+    private int grandTotal;
     private String nominalTransferToFriend;
     private String nameContact;
     private String numberContact;
@@ -69,6 +74,7 @@ public class TransferToFriendReviewActivity extends BaseActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             nominalTransferToFriend = extras.getString(IConfig.KEY_NOMINAL_TRANSFER_TO_FRIEND);
+            grandTotal = UiUtil.removeAllCharacterNumbers(nominalTransferToFriend);
             nameContact = extras.getString(IConfig.KEY_NAME_CONTACT);
             numberContact = extras.getString(IConfig.KEY_NUMBER_CONTACT);
         }
@@ -87,16 +93,26 @@ public class TransferToFriendReviewActivity extends BaseActivity {
             }
         });
 
+
         btnPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(TransferToFriendReviewActivity.this, PinPaymentActivity.class);
-                intent.putExtra(IConfig.KEY_PIN_TRANSFER_TO_FRIEND, pinTransferToFriend);
-                intent.putExtra(IConfig.KEY_NOMINAL_TRANSFER_TO_FRIEND, nominalTransferToFriend);
-                intent.putExtra(IConfig.KEY_NUMBER_CONTACT, numberContact);
-                intent.putExtra(IConfig.KEY_NAME_CONTACT, nameContact);
-                startActivity(intent);
+
+                int totalBalance = Integer.parseInt(CacheUtil.getPreferenceString(IConfig.SESSION_EMONEY_BALANCE, TransferToFriendReviewActivity.this));
+                if (totalBalance < grandTotal) {
+                    Toast.makeText(TransferToFriendReviewActivity.this, "Saldo Anda tidak mencukupi", Toast.LENGTH_LONG).show();
+                } else {
+                    Intent intent = new Intent(TransferToFriendReviewActivity.this, PinPaymentActivity.class);
+                    intent.putExtra(IConfig.KEY_PIN_TRANSFER_TO_FRIEND, pinTransferToFriend);
+                    intent.putExtra(IConfig.KEY_NOMINAL_TRANSFER_TO_FRIEND, nominalTransferToFriend);
+                    intent.putExtra(IConfig.KEY_NUMBER_CONTACT, numberContact);
+                    intent.putExtra(IConfig.KEY_NAME_CONTACT, nameContact);
+                    startActivity(intent);
+                }
+
+
             }
         });
+
     }
 }
