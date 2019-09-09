@@ -1,11 +1,13 @@
 package com.otto.sdk.ui.activity.account.activation;
 
+import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -137,6 +139,7 @@ public class PinLoginActivity extends BaseActivity implements IAuthView {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (charSequence.toString().length() == 6) {
                     onCallApiSetPin(charSequence.toString());
+                    hideSoftKeyboard(lineField);
                 }
             }
 
@@ -146,5 +149,13 @@ public class PinLoginActivity extends BaseActivity implements IAuthView {
             }
 
         });
+    }
+
+    public void hideSoftKeyboard(EditText editText) {
+        if (editText == null)
+            return;
+
+        InputMethodManager imm = (InputMethodManager) getSystemService(Service.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
     }
 }

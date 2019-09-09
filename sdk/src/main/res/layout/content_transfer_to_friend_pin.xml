@@ -94,6 +94,7 @@
         android:background="@color/Red_d04a55"
         android:text="@string/back"
         android:textAllCaps="false"
+        android:visibility="gone"
         android:textColor="@color/white" />
 
 </RelativeLayout>

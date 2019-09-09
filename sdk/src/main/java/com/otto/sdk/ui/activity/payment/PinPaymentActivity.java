@@ -1,10 +1,12 @@
 package com.otto.sdk.ui.activity.payment;
 
+import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -23,6 +25,7 @@ import com.otto.sdk.presenter.ReviewCheckoutPresenter;
 import com.otto.sdk.presenter.SdkResourcePresenter;
 import com.otto.sdk.ui.activity.SdkActivity;
 import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
+import com.otto.sdk.ui.activity.payment.TransferToFriend.TransferToFriendReviewActivity;
 import com.otto.sdk.ui.component.support.UiUtil;
 import com.poovam.pinedittextfield.LinePinField;
 
@@ -42,6 +45,7 @@ public class PinPaymentActivity extends BaseActivity implements IPinVerification
 
     private int emoneyBalance;
     private int nominalTransfer;
+    private int grandTotal;
 
     private int total;
     private String numberContact;
@@ -77,6 +81,7 @@ public class PinPaymentActivity extends BaseActivity implements IPinVerification
         btnBack = findViewById(R.id.btn_back);
 
         total = CacheUtil.getPreferenceInteger(IConfig.SESSION_TOTAL, PinPaymentActivity.this);
+        emoneyBalance = Integer.parseInt(CacheUtil.getPreferenceString(IConfig.SESSION_EMONEY_BALANCE, PinPaymentActivity.this));
 
         if (pinTransferToFriend.equals(keyPinTransferToFriend)) {
             tvPaymentValue.setText(nominalTransferToFriend);
@@ -93,7 +98,6 @@ public class PinPaymentActivity extends BaseActivity implements IPinVerification
             nominalTransferToFriend = extras.getString(IConfig.KEY_NOMINAL_TRANSFER_TO_FRIEND);
             numberContact = extras.getString(IConfig.KEY_NUMBER_CONTACT);
             nameContact = extras.getString(IConfig.KEY_NAME_CONTACT);
-
         }
     }
 
@@ -125,7 +129,20 @@ public class PinPaymentActivity extends BaseActivity implements IPinVerification
         if (model.getMeta().getCode() == 200) {
 
             if (pinTransferToFriend.equals(keyPinTransferToFriend)) {
-                onCallApiTransferToFriend();
+                grandTotal = UiUtil.removeAllCharacterNumbers(nominalTransferToFriend);
+                if (emoneyBalance < grandTotal) {
+                    errorMessage.setText("Saldo Anda tidak mencukupi");
+                    btnBack.setVisibility(View.VISIBLE);
+                    btnBack.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            onBackPressed();
+                        }
+                    });
+                } else {
+                    onCallApiTransferToFriend();
+                }
+
             } else if (pinReviewCheckout.equals(keyPinReviewCheckout)) {
                 paymentValue = emoneyBalance - total;
                 Intent intent = new Intent(PinPaymentActivity.this, DashboardSDKActivity.class);
@@ -200,6 +217,7 @@ public class PinPaymentActivity extends BaseActivity implements IPinVerification
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (charSequence.toString().length() == 6) {
                     onCallApiPaymentValidate(charSequence.toString());
+                    hideSoftKeyboard(lineField);
                 }
             }
 
@@ -209,5 +227,13 @@ public class PinPaymentActivity extends BaseActivity implements IPinVerification
             }
 
         });
+    }
+
+    public void hideSoftKeyboard(EditText editText) {
+        if (editText == null)
+            return;
+
+        InputMethodManager imm = (InputMethodManager) getSystemService(Service.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
     }
 }
