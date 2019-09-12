@@ -39,8 +39,8 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
     TextView tvTitleOttoCash;
     TextView tvEmoneyBalance;
     RecyclerView rvMainMenu;
-    /*TextView tvSetPinOttocash;
-    TextView tvTacOttocash;*/
+    TextView tvSetPinOttocash;
+    TextView tvTacOttocash;
 
     private InquiryRequest inquiryRequest;
     private String emoneyBalance;
@@ -65,11 +65,11 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
         tvEmoneyBalance = findViewById(R.id.tvEmoneyBalance);
         rvMainMenu = findViewById(R.id.rvMainMenu);
 
-        /*tvSetPinOttocash = findViewById(R.id.tvSetPinOttocash);
-        tvTacOttocash = findViewById(R.id.tvTacOttocash);*/
+        tvSetPinOttocash = findViewById(R.id.tvSetPinOttocash);
+        tvTacOttocash = findViewById(R.id.tvTacOttocash);
 
-        /*tvSetPinOttocash.setText(UiUtil.getHTMLContent(getString(R.string.set_pin_ottocash)));
-        tvTacOttocash.setText(UiUtil.getHTMLContent(getString(R.string.tac_ottocash)));*/
+        tvSetPinOttocash.setText(UiUtil.getHTMLContent(getString(R.string.set_pin_ottocash)));
+        tvTacOttocash.setText(UiUtil.getHTMLContent(getString(R.string.tac_ottocash)));
 
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override

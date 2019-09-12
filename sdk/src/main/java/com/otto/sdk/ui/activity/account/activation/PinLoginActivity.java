@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.otto.sdk.AppActivity;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCashSdk;
 import com.otto.sdk.R;
@@ -22,12 +23,13 @@ import com.otto.sdk.model.api.response.LoginResponse;
 import com.otto.sdk.model.api.response.RegisterResponse;
 import com.otto.sdk.presenter.AuthPresenter;
 import com.otto.sdk.presenter.manager.SessionManager;
+import com.otto.sdk.ui.component.support.DeviceId;
 import com.poovam.pinedittextfield.LinePinField;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.support.util.CacheUtil;
 
-public class PinLoginActivity extends BaseActivity implements IAuthView {
+public class PinLoginActivity extends AppActivity implements IAuthView {
 
     ImageView ivBack;
     TextView errorMessage;
@@ -68,6 +70,9 @@ public class PinLoginActivity extends BaseActivity implements IAuthView {
                 IConfig.SESSION_PHONE, this)), pin);
         model.setPhone(phone);
         model.setPin(pin);
+        model.setLatitude(String.valueOf(getMyLastLocation().getLatitude()));
+        model.setLongitude(String.valueOf(getMyLastLocation().getLongitude()));
+        model.setDeviceId(DeviceId.getDeviceID(this));
 
 
         showApiProgressDialog(OttoCashSdk.getAppComponent(), new AuthPresenter(PinLoginActivity.this) {

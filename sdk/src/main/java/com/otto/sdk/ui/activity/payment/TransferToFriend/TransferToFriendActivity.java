@@ -205,6 +205,7 @@ public class TransferToFriendActivity extends BaseActivity {
         }
 
         Intent intent = new Intent(TransferToFriendActivity.this, TransferToFriendSendActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.putExtra(IConfig.KEY_NUMBER_CONTACT, numberContact);
         intent.putExtra(IConfig.KEY_NAME_CONTACT, nameContact);
         startActivity(intent);

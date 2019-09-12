@@ -30,8 +30,6 @@ public class AppActivity extends BaseActivity {
 
     protected Preferences preferences;
 
-    private boolean isActivityQueued = false;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
