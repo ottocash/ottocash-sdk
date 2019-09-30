@@ -40,10 +40,14 @@ public class ReviewCheckoutActivity extends BaseActivity implements IReviewCheck
     TextView tv_title_jumlah_uang;
 
     private int total;
-    private int grandTotal;
     private String customerReferenceNumber;
-    private String SESSION_GRAND_TOTAL = "total";
     private String reviewCheckout = "ReviewCheckout";
+
+    private String BILL_PAYMENT = "bill_payment";
+    private int billPayment;
+
+    private String SERVICES_FEE = "services_fee";
+    private String servicesFee;
 
 
     private ReviewCheckOutRequest reviewCheckOutRequest;
@@ -73,10 +77,10 @@ public class ReviewCheckoutActivity extends BaseActivity implements IReviewCheck
         ivBack = findViewById(R.id.ivBack);
 
         Bundle extras = getIntent().getExtras();
-        grandTotal = Integer.parseInt(extras.getString(SESSION_GRAND_TOTAL));
-        tvBill.setText(UiUtil.formatMoneyIDR(Long.parseLong(String.valueOf(grandTotal))));
-        tvPembayaranMitra.setText(UiUtil.formatMoneyIDR(Long.parseLong(String.valueOf(grandTotal))));
-        tvTotalBayar.setText(UiUtil.formatMoneyIDR(Long.parseLong(String.valueOf(grandTotal))));
+        billPayment = Integer.parseInt(extras.getString(BILL_PAYMENT));
+        tvBill.setText(UiUtil.formatMoneyIDR(Long.parseLong(String.valueOf(billPayment))));
+        tvPembayaranMitra.setText(UiUtil.formatMoneyIDR(Long.parseLong(String.valueOf(billPayment))));
+        tvTotalBayar.setText(UiUtil.formatMoneyIDR(Long.parseLong(String.valueOf(billPayment))));
     }
 
     private void initContent() {
@@ -118,7 +122,7 @@ public class ReviewCheckoutActivity extends BaseActivity implements IReviewCheck
     private void onCallApiReviewCheckOut() {
         reviewCheckOutRequest = new ReviewCheckOutRequest(String.valueOf(getPreferenceString(
                 IConfig.SESSION_ACCOUNT_NUMBER, ReviewCheckoutActivity.this)));
-        reviewCheckOutRequest.setAmount(grandTotal);
+        reviewCheckOutRequest.setAmount(billPayment);
         reviewCheckOutRequest.setFee(0);
         reviewCheckOutRequest.setProductName("Pembayaran");
         reviewCheckOutRequest.setBillerId("PURCHASE_ELEVENIA");

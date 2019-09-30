@@ -22,7 +22,10 @@ import butterknife.ButterKnife;
 
 public class CheckOutActivity extends BaseActivity {
 
-    private String SESSION_GRAND_TOTAL = "total";
+    private String BILL_PAYMENT = "bill_payment";
+    private String SERVICES_FEE = "services_fee";
+    private String billPayment;
+    private String servicesFee;
     private String emoney;
 
     @BindView(R.id.PaymentOttoCash)
@@ -58,12 +61,11 @@ public class CheckOutActivity extends BaseActivity {
                 if (TextUtils.isEmpty(inputSubTotal)) {
                     edtSubTotal.setError("Input Sample Sub Total");
                 } else {
-                    String grandTotal = edtSubTotal.getText().toString();
+                    billPayment = edtSubTotal.getText().toString();
                     Intent intent = new Intent(CheckOutActivity.this, ReviewCheckoutActivity.class);
-                    intent.putExtra(SESSION_GRAND_TOTAL, grandTotal);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    intent.putExtra(BILL_PAYMENT, billPayment);
+                    intent.putExtra(SERVICES_FEE, servicesFee);
                     startActivity(intent);
-                    finish();
                 }
             }
         });
