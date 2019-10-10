@@ -62,7 +62,7 @@
         android:layout_gravity="bottom"
         android:layout_margin="20dp"
         android:gravity="bottom"
-        android:text="ottocash-sdk | versi 1.0.26"
+        android:text="ottocash-sdk | versi 1.0.29"
         android:textAppearance="@style/RobotoRegular"
         android:textColor="@color/Black_484848" />
 
