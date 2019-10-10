@@ -9,6 +9,7 @@ import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.otto.sdk.IConfig;
@@ -22,6 +23,7 @@ import app.beelabs.com.codebase.support.util.CacheUtil;
 public class TopUpActivity extends BaseActivity {
 
     Button btnBack;
+    ImageView ivBack;
     TextView tvMbank3;
     TextView tvMbank5;
     TextView tvAtm4;
@@ -37,8 +39,8 @@ public class TopUpActivity extends BaseActivity {
     }
 
     private void initComponent() {
-
         btnBack = findViewById(R.id.btnBack);
+        ivBack = findViewById(R.id.ivBack);
         tvAtm4 = findViewById(R.id.tvAtm4);
         tvAtm5 = findViewById(R.id.tvAtm5);
         tvMbank3 = findViewById(R.id.tvMbank3);
@@ -63,6 +65,13 @@ public class TopUpActivity extends BaseActivity {
     }
 
     private void initContent() {
+        ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

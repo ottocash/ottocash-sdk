@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.zxing.Result;
@@ -20,6 +22,7 @@ import static android.Manifest.permission.CAMERA;
 
 public class PayWithQr extends BaseActivity implements ZXingScannerView.ResultHandler {
 
+    ImageView ivBack;
 
     private static final int REQUEST_CAMERA = 1;
     ZXingScannerView mScannerView;
@@ -28,6 +31,7 @@ public class PayWithQr extends BaseActivity implements ZXingScannerView.ResultHa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay_with_qr);
+        initComponent();
 
         mScannerView = findViewById(R.id.scann);
         int currentapiVersion = Build.VERSION.SDK_INT;
@@ -38,6 +42,17 @@ public class PayWithQr extends BaseActivity implements ZXingScannerView.ResultHa
                 requestPermission();
             }
         }
+    }
+
+    private void initComponent(){
+        ivBack = findViewById(R.id.ivBack);
+
+        ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 
     private boolean checkPermission() {
