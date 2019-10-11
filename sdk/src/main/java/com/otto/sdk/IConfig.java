@@ -33,6 +33,9 @@ public interface IConfig {
     String KEY_PIN_TRANSFER_TO_FRIEND = "pin_transfer_to_friend";
     String KEY_PIN_CHECKOUT = "pin_checkout";
 
+    //MESSAGE PIN PAYMENT
+    String STATUS_CODE_PAYMENT = "status_payment";
+
 
     final boolean SESSION_CHECK_PHONE_NUMBER = false;
     final boolean SESSION_IS_LOGIN = false;

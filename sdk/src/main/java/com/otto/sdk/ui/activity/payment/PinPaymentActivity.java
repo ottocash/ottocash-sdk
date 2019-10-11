@@ -21,16 +21,11 @@ import com.otto.sdk.model.api.request.TransferToFriendRequest;
 import com.otto.sdk.model.api.response.PaymentValidateResponse;
 import com.otto.sdk.model.api.response.TransferToFriendResponse;
 import com.otto.sdk.presenter.PinVerificationPaymentPresenter;
-import com.otto.sdk.presenter.ReviewCheckoutPresenter;
-import com.otto.sdk.presenter.SdkResourcePresenter;
-import com.otto.sdk.ui.activity.SdkActivity;
 import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
-import com.otto.sdk.ui.activity.payment.TransferToFriend.TransferToFriendReviewActivity;
 import com.otto.sdk.ui.component.support.UiUtil;
 import com.poovam.pinedittextfield.LinePinField;
 
 import app.beelabs.com.codebase.base.BaseActivity;
-import app.beelabs.com.codebase.base.BasePresenter;
 import app.beelabs.com.codebase.support.util.CacheUtil;
 
 public class PinPaymentActivity extends BaseActivity implements IPinVerificationPaymentView {
@@ -52,6 +47,7 @@ public class PinPaymentActivity extends BaseActivity implements IPinVerification
     private String nominalTransferToFriend;
     private String nameContact;
     private String phone;
+    private int statusPayment;
 
     private String pinTransferToFriend = "P2P";
     private String pinReviewCheckout = "ReviewCheckout";
@@ -127,6 +123,8 @@ public class PinPaymentActivity extends BaseActivity implements IPinVerification
     @Override
     public void handlePaymentValidate(PaymentValidateResponse model) {
         if (model.getMeta().getCode() == 200) {
+            statusPayment = model.getMeta().getCode();
+            CacheUtil.putPreferenceInteger(IConfig.STATUS_CODE_PAYMENT, statusPayment, PinPaymentActivity.this);
 
             if (pinTransferToFriend.equals(keyPinTransferToFriend)) {
                 grandTotal = UiUtil.removeAllCharacterNumbers(nominalTransferToFriend);
@@ -145,12 +143,29 @@ public class PinPaymentActivity extends BaseActivity implements IPinVerification
 
             } else if (pinReviewCheckout.equals(keyPinReviewCheckout)) {
                 paymentValue = emoneyBalance - total;
+
+                /*try {
+                    String PackageName = CacheUtil.getPreferenceString(IConfig.SESSION_PACKAGE_NAME,
+                            PinPaymentActivity.this);
+
+                    Intent intent = new Intent(PinPaymentActivity.this, Class.forName(PackageName));
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    intent.putExtra(IConfig.KEY_PIN_CHECKOUT, keyPinReviewCheckout);
+                    startActivity(intent);
+                    finish();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }*/
+
                 Intent intent = new Intent(PinPaymentActivity.this, DashboardSDKActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.putExtra(IConfig.KEY_PIN_CHECKOUT, keyPinReviewCheckout);
                 startActivity(intent);
             }
 
         } else {
+            statusPayment = model.getMeta().getCode();
+            CacheUtil.putPreferenceInteger(IConfig.STATUS_CODE_PAYMENT, statusPayment, PinPaymentActivity.this);
             Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
                     Toast.LENGTH_LONG).show();
         }
