@@ -141,7 +141,7 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
     private void mainMenuSelected(MainMenuModel mainMenu) {
         switch (mainMenu.getCode()) {
             case "mm_1":
-                goQR();
+                goPaymentWithQR();
                 break;
             case "mm_2":
                 dialogComingSoon();
@@ -188,7 +188,7 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
         CustomDialog.alertDialog(this, title, message, btnLabel, false);
     }
 
-    public void goQR(){
+    public void goPaymentWithQR(){
         startActivity(new Intent(this, PayWithQr.class));
     }
 
