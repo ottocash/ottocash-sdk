@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.otto.sdk.AppActivity;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCashSdk;
 import com.otto.sdk.R;
@@ -22,13 +24,16 @@ import com.otto.sdk.model.api.response.PaymentValidateResponse;
 import com.otto.sdk.model.api.response.TransferToFriendResponse;
 import com.otto.sdk.presenter.PinVerificationPaymentPresenter;
 import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
+import com.otto.sdk.ui.component.support.DeviceId;
+import com.otto.sdk.ui.component.support.Logging;
 import com.otto.sdk.ui.component.support.UiUtil;
 import com.poovam.pinedittextfield.LinePinField;
 
-import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.support.util.CacheUtil;
 
-public class PinPaymentActivity extends BaseActivity implements IPinVerificationPaymentView {
+public class PinPaymentActivity extends AppActivity implements IPinVerificationPaymentView {
+
+    private final String TAG = this.getClass().getSimpleName();
 
     TextView tvPaymentValue;
     LinePinField lineField;
@@ -65,6 +70,7 @@ public class PinPaymentActivity extends BaseActivity implements IPinVerification
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pin_payment);
 
+        getLastKnownLocation();
         keyPinVerificationPayment();
         initComponent();
         addTextWatcher(lineField);
@@ -110,6 +116,9 @@ public class PinPaymentActivity extends BaseActivity implements IPinVerification
         model.setUserId(user_id);
         model.setPhone(phone);
         model.setPin(pin);
+        model.setLatitude(String.valueOf(getMyLastLocation().getLatitude()));
+        model.setLongitude(String.valueOf(getMyLastLocation().getLongitude()));
+        model.setDeviceId(DeviceId.getDeviceID(this));
 
         showApiProgressDialog(OttoCashSdk.getAppComponent(), new PinVerificationPaymentPresenter(this) {
             @Override
@@ -123,8 +132,6 @@ public class PinPaymentActivity extends BaseActivity implements IPinVerification
     @Override
     public void handlePaymentValidate(PaymentValidateResponse model) {
         if (model.getMeta().getCode() == 200) {
-            statusPayment = model.getMeta().getCode();
-            CacheUtil.putPreferenceInteger(IConfig.STATUS_CODE_PAYMENT, statusPayment, PinPaymentActivity.this);
 
             if (pinTransferToFriend.equals(keyPinTransferToFriend)) {
                 grandTotal = UiUtil.removeAllCharacterNumbers(nominalTransferToFriend);
@@ -144,19 +151,6 @@ public class PinPaymentActivity extends BaseActivity implements IPinVerification
             } else if (pinReviewCheckout.equals(keyPinReviewCheckout)) {
                 paymentValue = emoneyBalance - total;
 
-                /*try {
-                    String PackageName = CacheUtil.getPreferenceString(IConfig.SESSION_PACKAGE_NAME,
-                            PinPaymentActivity.this);
-
-                    Intent intent = new Intent(PinPaymentActivity.this, Class.forName(PackageName));
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    intent.putExtra(IConfig.KEY_PIN_CHECKOUT, keyPinReviewCheckout);
-                    startActivity(intent);
-                    finish();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }*/
-
                 Intent intent = new Intent(PinPaymentActivity.this, DashboardSDKActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.putExtra(IConfig.KEY_PIN_CHECKOUT, keyPinReviewCheckout);
@@ -164,8 +158,6 @@ public class PinPaymentActivity extends BaseActivity implements IPinVerification
             }
 
         } else {
-            statusPayment = model.getMeta().getCode();
-            CacheUtil.putPreferenceInteger(IConfig.STATUS_CODE_PAYMENT, statusPayment, PinPaymentActivity.this);
             Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
                     Toast.LENGTH_LONG).show();
         }
@@ -201,7 +193,6 @@ public class PinPaymentActivity extends BaseActivity implements IPinVerification
             receiptReferenceNumber = model.getData().getReferenceNumber();
             receiptDate = model.getData().getDate();
 
-
             Intent intent = new Intent(PinPaymentActivity.this, PaymentSuccessActivity.class);
             intent.putExtra(IConfig.KEY_NOMINAL_TRANSFER_TO_FRIEND, nominalTransferToFriend);
             intent.putExtra(IConfig.KEY_PIN_TRANSFER_TO_FRIEND, keyPinTransferToFriend);
@@ -217,6 +208,12 @@ public class PinPaymentActivity extends BaseActivity implements IPinVerification
             Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
                     Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public void onSuccess(PaymentValidateResponse paymentValidateResponse) {
+
+        Logging.response(TAG, new Gson().toJson(paymentValidateResponse));
     }
 
 

@@ -46,6 +46,7 @@ public class SetPinActivity extends AppActivity implements IAuthView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_pin);
 
+        getLastKnownLocation();
         initComponent();
         initContent();
     }
@@ -91,13 +92,10 @@ public class SetPinActivity extends AppActivity implements IAuthView {
             model.setPin(edtPin.getText().toString());
             model.setSecurityQuestionId("1");
             model.setAnswer("ˆ˜ÎØÅÒÒˆ");
+            model.setLatitude(String.valueOf(getMyLastLocation().getLatitude()));
+            model.setLongitude(String.valueOf(getMyLastLocation().getLongitude()));
             model.setDeviceId(DeviceId.getDeviceID(this));
             model.setPlatform("android");
-            if (getMyLastLocation() != null) {
-                model.setLatitude(String.valueOf(getMyLastLocation().getLatitude()));
-                model.setLongitude(String.valueOf(getMyLastLocation().getLongitude()));
-            }
-
 
             showApiProgressDialog(OttoCashSdk.getAppComponent(), new AuthPresenter(SetPinActivity.this) {
                 @Override

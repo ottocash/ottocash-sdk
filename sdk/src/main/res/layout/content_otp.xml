@@ -84,7 +84,6 @@
 
         <cn.iwgang.countdownview.CountdownView
             android:id="@+id/countdown_view"
-            fontPath="fonts/SemiBold.ttf"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:isHideTimeBackground="true"
@@ -106,7 +105,6 @@
 
         <TextView
             android:id="@+id/countdownView"
-            fontPath="fonts/SemiBold.ttf"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -117,7 +115,6 @@
 
         <TextView
             android:id="@+id/tvResend"
-            fontPath="fonts/SemiBold.otf"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/transparent"

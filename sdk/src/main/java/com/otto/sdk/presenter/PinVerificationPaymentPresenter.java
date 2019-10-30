@@ -21,6 +21,10 @@ public class PinVerificationPaymentPresenter extends BasePresenter implements Pi
         this.iPinVerificationPaymentView = (IPinVerificationPaymentView) view;
     }
 
+    public void setCallback(IPinVerificationPaymentView callback) {
+        this.iPinVerificationPaymentView = callback;
+    }
+
     @Override
     public void getTransferToFriend(TransferToFriendRequest transferToFriendRequest) {
         new PinVerificationPaymentDao(this, new OnPresenterResponseCallback() {
@@ -39,6 +43,7 @@ public class PinVerificationPaymentPresenter extends BasePresenter implements Pi
             public void call(BaseResponse br) {
                 PaymentValidateResponse model = (PaymentValidateResponse) br;
                 iPinVerificationPaymentView.handlePaymentValidate(model);
+                iPinVerificationPaymentView.onSuccess(model);
             }
         }).onPaymentValidate(paymentValidateRequest, getContext());
     }

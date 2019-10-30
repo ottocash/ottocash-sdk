@@ -26,7 +26,6 @@ import com.otto.sdk.presenter.manager.SessionManager;
 import com.otto.sdk.ui.component.support.DeviceId;
 import com.poovam.pinedittextfield.LinePinField;
 
-import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.support.util.CacheUtil;
 
 public class PinLoginActivity extends AppActivity implements IAuthView {
@@ -46,6 +45,7 @@ public class PinLoginActivity extends AppActivity implements IAuthView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pin_login);
 
+        getLastKnownLocation();
         initComponent();
         addTextWatcher(lineField);
     }

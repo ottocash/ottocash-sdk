@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.otto.sdk.AppActivity;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCashSdk;
 import com.otto.sdk.R;
@@ -16,16 +17,16 @@ import com.otto.sdk.model.api.request.ReviewCheckOutRequest;
 import com.otto.sdk.model.api.response.ReviewCheckOutResponse;
 import com.otto.sdk.presenter.ReviewCheckoutPresenter;
 import com.otto.sdk.ui.component.dialog.SaldoDialog;
+import com.otto.sdk.ui.component.support.DeviceId;
 import com.otto.sdk.ui.component.support.UiUtil;
 
 import java.util.Random;
 
-import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.support.util.CacheUtil;
 
 import static app.beelabs.com.codebase.support.util.CacheUtil.getPreferenceString;
 
-public class ReviewCheckoutActivity extends BaseActivity implements IReviewCheckoutView {
+public class ReviewCheckoutActivity extends AppActivity implements IReviewCheckoutView {
 
 
     TextView tvBill;
@@ -57,6 +58,7 @@ public class ReviewCheckoutActivity extends BaseActivity implements IReviewCheck
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_checkout);
 
+        getLastKnownLocation();
         initComponent();
         initContent();
     }
@@ -126,9 +128,12 @@ public class ReviewCheckoutActivity extends BaseActivity implements IReviewCheck
         reviewCheckOutRequest.setFee(0);
         reviewCheckOutRequest.setProductName("Pembayaran");
         reviewCheckOutRequest.setBillerId("PURCHASE_ELEVENIA");
+        reviewCheckOutRequest.setCustomerReferenceNumber("UPN" + generateRandom(9) + "");
         reviewCheckOutRequest.setProductCode("PYMNT");
         reviewCheckOutRequest.setPartnerCode("P000001");
-        reviewCheckOutRequest.setCustomerReferenceNumber("UPN" + generateRandom(9) + "");
+        reviewCheckOutRequest.setLatitude(String.valueOf(getMyLastLocation().getLatitude()));
+        reviewCheckOutRequest.setLongitude(String.valueOf(getMyLastLocation().getLongitude()));
+        reviewCheckOutRequest.setDeviceId(DeviceId.getDeviceID(this));
 
         int total = (reviewCheckOutRequest.getAmount() + reviewCheckOutRequest.getFee());
         CacheUtil.putPreferenceInteger(IConfig.SESSION_TOTAL, total, ReviewCheckoutActivity.this);

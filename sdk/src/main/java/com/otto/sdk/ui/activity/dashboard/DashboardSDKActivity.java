@@ -141,14 +141,13 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
     private void mainMenuSelected(MainMenuModel mainMenu) {
         switch (mainMenu.getCode()) {
             case "mm_1":
-                Intent intent = new Intent(this, PayWithQr.class);
-                startActivity(intent);
+                goQR();
                 break;
             case "mm_2":
                 dialogComingSoon();
                 break;
             case "mm_3":
-                intent = new Intent(this, TopUpActivity.class);
+                Intent intent = new Intent(this, TopUpActivity.class);
                 startActivity(intent);
                 break;
             case "mm_4":
@@ -172,6 +171,7 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
         }
     }
 
+
     protected void dialogComingSoon() {
         String title = getString(R.string.dialog_tittle_coming_soon);
         String message = getString(R.string.dialog_message_coming_soon);
@@ -186,6 +186,10 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
         String btnLabel = getString(R.string.dialog_btn_close);
 
         CustomDialog.alertDialog(this, title, message, btnLabel, false);
+    }
+
+    public void goQR(){
+        startActivity(new Intent(this, PayWithQr.class));
     }
 
     private void goTransferToFriend() {

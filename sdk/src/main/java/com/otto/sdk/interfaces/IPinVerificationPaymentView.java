@@ -9,4 +9,6 @@ public interface IPinVerificationPaymentView extends IView {
     void handlePaymentValidate(PaymentValidateResponse model);
 
     void handlePaymentTransferToFriend(TransferToFriendResponse model);
+
+    void onSuccess(PaymentValidateResponse paymentValidateResponse);
 }
