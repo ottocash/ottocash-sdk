@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#49A5F8"
+    tools:context=".ui.activity.kycupgrade.OttocashSuccesActivity">
+
+    <ImageView
+        android:id="@+id/image_succes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="149dp"
+        android:background="@drawable/icon_succesp" />
+
+    <TextView
+        android:layout_width="303dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/image_succes"
+        android:text="Pengajuan OttoCash Plus telah berhasil"
+        android:gravity="center"
+        android:layout_marginTop="52dp"
+        android:layout_centerInParent="true"
+        android:textSize="24dp"
+        android:textColor="@color/white"
+        />
+
+
+    <Button
+        android:id="@+id/btn_fotoKTP"
+        fontPath="fonts/SemiBold.otf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#CF4A54"
+        android:layout_alignParentBottom="true"
+        android:text="@string/selesai"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        tools:ignore="MissingPrefix" />
+
+
+</RelativeLayout>

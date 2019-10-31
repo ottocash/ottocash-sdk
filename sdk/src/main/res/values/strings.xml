@@ -161,5 +161,23 @@
     <string name="transfer_berhasil">TRANSFER BERHASIL</string>
     <string name="desc_title_receipt">Uang yang kamu transfer telah berhasil dikirimkan</string>
     <string name="total_transfer">TOTAL TRANSFER</string>
+    <string name="upgrade">Upgrade</string>
+    <string name="upgrade_ottocash_plus">Upgrade OttoCash Plus</string>
+    <string name="hai_kamu_akan_upgrade_ke_ottocash_plus_berikut_keuntungan_yang_akan_kamu_dapatkan_dengan_upgrade_ke_ottocash_plus">Hai, kamu akan upgrade ke OttoCash Plus, Berikut keuntungan yang akan kamu dapatkan dengan upgrade ke OttoCash Plus</string>
+    <string name="transfer_ke_sesama_ottocash">Transfer ke sesama OttoCash</string>
+    <string name="ajak_teman_bergabung_di_ottocash_dengan_invite_pakai_kode_referal_mu">Ajak teman bergabung di OttoCash dengan invite pakai Kode Referal-mu</string>
+    <string name="ajak">Ajak teman bergabung di OttoCash dengan invite pakai Kode Referal-mu</string>
+    <string name="tarik_tunai_dari_saldo_e_money">Tarik Tunai dari saldo E Money</string>
+    <string name="nanti_saja">Nanti saja</string>
+    <string name="lanjut_upgrade">Lanjut Upgrade</string>
+    <string name="foto_ktp_sekarang">Foto KTP Sekarang</string>
+    <string name="lanjut_upgrade2">Lanjut upgrade</string>
+    <string name="cara_upgrade_ottocash_plus_sangat_mudah_pertama_cukup_foto_ktp_kamu_dan_melakukan_selfie_dan_membawa_ktp_dengan_handphone_mu">Cara upgrade OttoCash Plus sangat mudah, pertama cukup foto KTP kamu, dan melakukan selfie dan membawa KTP dengan handphone-mu</string>
+    <string name="data_belum_sesuai">Data belum sesuai</string>
+    <string name="batalkan_dan_kembali_ke_menu_utama">Batalkan dan kembali ke menu utama</string>
+    <string name="hand">Cara upgrade OttoCash Plus sangat mudah, pertama cukup foto KTP kamu, dan melakukan selfie dan membawa KTP dengan handphone-mu</string>
+    <string name="submit">Submit</string>
+    <string name="data_belum_sesuai_ulangi_foto_selfie">Data belum sesuai, ulangi foto selfie</string>
+    <string name="selesai">Selesai</string>
 
 </resources>

@@ -55,6 +55,7 @@ dependencies {
     implementation 'com.google.zxing:core:3.3.3'
     implementation 'com.journeyapps:zxing-android-embedded:3.6.0@aar'
     implementation 'cn.simonlee.xcodescanner:zbar:1.1.5'
+    implementation 'com.otaliastudios:cameraview:2.0.0-beta05'
 
 
     //Design

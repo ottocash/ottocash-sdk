@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCashSdk;
 import com.otto.sdk.R;
+import com.otto.sdk.ui.activity.kycupgrade.UpgradeActivity;
 import com.otto.sdk.interfaces.IInquiryView;
 import com.otto.sdk.model.api.request.InquiryRequest;
 import com.otto.sdk.model.api.response.InquiryResponse;
@@ -41,6 +42,7 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
     RecyclerView rvMainMenu;
     TextView tvSetPinOttocash;
     TextView tvTacOttocash;
+    TextView tvUpgrade;
 
     private InquiryRequest inquiryRequest;
     private String emoneyBalance;
@@ -57,6 +59,14 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
         initRecyclerView();
         displayMainMenu();
         onCallApiInquiry();
+
+        tvUpgrade.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashboardSDKActivity.this, UpgradeActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void initComponent() {
@@ -67,6 +77,7 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
 
         tvSetPinOttocash = findViewById(R.id.tvSetPinOttocash);
         tvTacOttocash = findViewById(R.id.tvTacOttocash);
+        tvUpgrade = findViewById(R.id.tv_upgrade);
 
         tvSetPinOttocash.setText(UiUtil.getHTMLContent(getString(R.string.set_pin_ottocash)));
         tvTacOttocash.setText(UiUtil.getHTMLContent(getString(R.string.tac_ottocash)));

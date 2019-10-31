@@ -12,8 +12,26 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-    <application android:name=".OttoCashSdk">
 
+
+    <application android:name=".OttoCashSdk">
+        <activity android:name=".ui.activity.kycupgrade.CaptureKTPActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            ></activity>
+        <activity android:name=".ui.activity.kycupgrade.OttocashSuccesActivity" />
+        <activity android:name=".ui.activity.selfiewithktp.ResultSelfieWithKtpActivity" />
+        <activity android:name=".ui.activity.kycupgrade.KTPResultViewActivity" />
+        <activity android:name=".ui.activity.kycupgrade.ActivityUpgradeNext" />
+        <activity
+            android:name=".ui.activity.kycupgrade.UpgradeActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ui.activity.history.HistoryActivity"
             android:screenOrientation="portrait" />
