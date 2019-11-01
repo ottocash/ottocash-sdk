@@ -16,6 +16,7 @@ public class UpgradeActivity extends BaseActivity {
 
     Button btnCancel;
     Button btnNext;
+    ImageView ivback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +39,28 @@ public class UpgradeActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
+
+
+        ivback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              onBackPressed();
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     public void initComponent() {
         btnCancel = findViewById(R.id.btn_nanti_saja);
         btnNext = findViewById(R.id.btn_next_upgrade);
+        ivback = findViewById(R.id.ivBack);
+
 
     }
 

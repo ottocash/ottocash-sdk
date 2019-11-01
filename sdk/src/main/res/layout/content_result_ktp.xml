@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="31dp"
-        android:layout_marginTop="47dp"
+        android:layout_marginTop="20dp"
         android:text="@string/upgrade_ottocash_plus"
         android:textAppearance="@style/BarlowRegular"
         android:textColor="#2A6EAF"
@@ -35,8 +35,9 @@
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="230dp"
-            android:layout_height="280dp"
+            android:id="@+id/img"
+            android:layout_width="285dp"
+            android:layout_height="329dp"
             android:layout_gravity="center"
             android:layout_marginTop="25dp"
             android:src="@drawable/bg_lanjut_upgrade"
