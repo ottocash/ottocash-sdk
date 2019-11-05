@@ -29,7 +29,7 @@
 
 
     <Button
-        android:id="@+id/btn_fotoKTP"
+        android:id="@+id/btn_done"
         fontPath="fonts/SemiBold.otf"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

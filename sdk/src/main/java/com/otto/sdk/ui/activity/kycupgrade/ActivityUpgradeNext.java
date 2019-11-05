@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.otto.sdk.R;
+import com.otto.sdk.ui.activity.selfiewithktp.CaptureSelfieWithKTPActivity;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 
@@ -20,7 +21,10 @@ public class ActivityUpgradeNext extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upgrade_next);
 
-        initComponent();
+//        initComponent();
+        btn_fotoKTP = findViewById(R.id.btn_fotoKTP);
+        ivback = findViewById(R.id.ivBack);
+
 
         btn_fotoKTP.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,10 +42,5 @@ public class ActivityUpgradeNext extends BaseActivity {
         });
     }
 
-    public void initComponent() {
-        btn_fotoKTP = findViewById(R.id.btn_fotoKTP);
-        ivback = findViewById(R.id.ivBack);
-
-    }
 
 }

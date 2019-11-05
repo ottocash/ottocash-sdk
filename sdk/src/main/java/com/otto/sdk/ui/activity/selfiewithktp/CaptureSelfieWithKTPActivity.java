@@ -1,4 +1,4 @@
-package com.otto.sdk.ui.activity.kycupgrade;
+package com.otto.sdk.ui.activity.selfiewithktp;
 
 import android.Manifest;
 import android.content.Context;
@@ -8,46 +8,43 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.hardware.Camera;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
-import com.otto.sdk.AppActivity;
 import com.otto.sdk.R;
+import com.otto.sdk.ui.activity.kycupgrade.CameraPreview;
+import com.otto.sdk.ui.activity.payment.ReviewCheckoutActivity;
 
-public class CaptureKTPActivity extends AppCompatActivity {
+import app.beelabs.com.codebase.base.BaseActivity;
 
-    //    CameraView cameraView;
+
+public class CaptureSelfieWithKTPActivity extends BaseActivity {
+
     private int REQUEST_WRITE_STORAGE_REQUEST_CODE = 112;
-
-    private android.hardware.Camera mCamera;
+    private Camera mCamera;
     private CameraPreview mPreview;
-    private android.hardware.Camera.PictureCallback mPicture;
-    private ImageView ivCapture, switchCamera, ivback;
+    private Camera.PictureCallback mPicture;
+    private ImageView capture, switchCamera, ivback, btnCam;
     private Context myContext;
     private FrameLayout cameraPreview;
     private boolean cameraFront = false;
     public static Bitmap bitmap;
-
+//    private ZBarScannerView mScannerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_capture_ktp);
+        setContentView(R.layout.activity_selfie_with_ktpcamera_kit);
 //        initView();
 
         ivback = findViewById(R.id.ivBack);
-
-
         ivback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,29 +52,24 @@ public class CaptureKTPActivity extends AppCompatActivity {
             }
         });
 
-
-        ivCapture = findViewById(R.id.btnCam);
-        ivCapture.setOnClickListener(new View.OnClickListener() {
+        btnCam = findViewById(R.id.btnCam);
+        btnCam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CaptureKTPActivity.this, KTPResultViewActivity.class);
+                Intent intent = new Intent(CaptureSelfieWithKTPActivity.this, ResultSelfieWithKtpActivity.class);
                 startActivity(intent);
-
             }
         });
 
 
-
     }
 
-   /* private void initView() {
+
+/*    private void initView() {
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         requestAppPermissions();
         myContext = this;
-
-//        mCamera = Camera.open();
-
         Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
         int cameraCount = Camera.getNumberOfCameras();
         for (int camIdx = 0; camIdx < cameraCount; camIdx++) {
@@ -94,32 +86,33 @@ public class CaptureKTPActivity extends AppCompatActivity {
         }
 
         cameraPreview = (FrameLayout) findViewById(R.id.cPreview);
-//        ivback = findViewById(R.id.ivBack);
-//
-//
-//        ivback.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                onBackPressed();
-//            }
-//        });
+        ivback = findViewById(R.id.ivBack);
+
+
+        ivback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         mPreview = new CameraPreview(myContext, mCamera);
         cameraPreview.addView(mPreview);
+        cameraPreview.setBackgroundResource(R.drawable.ic_selfie);
 
-//        capture = (ImageView) findViewById(R.id.btnCam);
-//        capture.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
+
+        capture = (ImageView) findViewById(R.id.btnCam);
+        capture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 //                try {
-//                    mCamera.takePicture(null, null, mPicture);
+                    mCamera.takePicture(null, null, mPicture);
 //                } catch (Exception e) {
 //                    Log.e("tag", e.getMessage());
 //                }
-//
-//            }
-//        });
+
+            }
+        });
 
         switchCamera = (ImageView) findViewById(R.id.btnSwitch);
         switchCamera.setOnClickListener(new View.OnClickListener() {
@@ -140,9 +133,9 @@ public class CaptureKTPActivity extends AppCompatActivity {
         });
 
         mCamera.startPreview();
-    }*/
+    }
 
-/*
+
     private int findFrontFacingCamera() {
 
         int cameraId = -1;
@@ -180,7 +173,6 @@ public class CaptureKTPActivity extends AppCompatActivity {
         }
         return cameraId;
     }
-
 
     public void onResume() {
 
@@ -246,7 +238,7 @@ public class CaptureKTPActivity extends AppCompatActivity {
             @Override
             public void onPictureTaken(byte[] data, Camera camera) {
                 bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
-                Intent intent = new Intent(CaptureKTPActivity.this, KTPResultViewActivity.class);
+                Intent intent = new Intent(CaptureSelfieWithKTPActivity.this, ResultSelfieWithKtpActivity.class);
                 startActivity(intent);
             }
         };
@@ -254,7 +246,7 @@ public class CaptureKTPActivity extends AppCompatActivity {
     }
 
     private void requestAppPermissions() {
-        if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
             return;
         }
 
@@ -266,22 +258,20 @@ public class CaptureKTPActivity extends AppCompatActivity {
                 new String[]{
                         //android.Manifest.permission.READ_EXTERNAL_STORAGE,
                         //android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        android.Manifest.permission.CAMERA
+                        Manifest.permission.CAMERA
                 }, REQUEST_WRITE_STORAGE_REQUEST_CODE); // your request code
     }
 
 
     private boolean hasReadPermissions() {
-        return (ContextCompat.checkSelfPermission(getBaseContext(), android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
+        return (ContextCompat.checkSelfPermission(getBaseContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
     }
 
     private boolean hasWritePermissions() {
-        return (ContextCompat.checkSelfPermission(getBaseContext(), android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
+        return (ContextCompat.checkSelfPermission(getBaseContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
     }
 
     private boolean hasCameraPermissions() {
         return (ContextCompat.checkSelfPermission(getBaseContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED);
-    }
-*/
-
+    }*/
 }

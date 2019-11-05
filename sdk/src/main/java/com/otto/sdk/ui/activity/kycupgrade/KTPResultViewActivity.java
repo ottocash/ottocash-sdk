@@ -1,5 +1,6 @@
 package com.otto.sdk.ui.activity.kycupgrade;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.MediaScannerConnection;
 import android.os.Environment;
@@ -11,6 +12,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.otto.sdk.R;
+import com.otto.sdk.ui.activity.account.registration.RegistrationSuccessActivity;
+import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
+import com.otto.sdk.ui.activity.selfiewithktp.CaptureSelfieWithKTPActivity;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -20,9 +24,9 @@ import java.util.Calendar;
 
 public class KTPResultViewActivity extends AppCompatActivity {
 
-    private ImageView imageView, ivback;
+    private ImageView ivback;
     private static final String IMAGE_DIRECTORY = "/CustomImage";
-//    private Button btn_data_belum_sesuai;
+    private Button btn_data_belum_sesuai, btnBackHome, btn_fotoKTP;
 
 
     @Override
@@ -31,23 +35,46 @@ public class KTPResultViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ktpresult_view);
 
 //        initComponent();
-        imageView = findViewById(R.id.img);
-        imageView.setImageBitmap(CaptureKTPActivity.bitmap);
-//        btn_data_belum_sesuai = findViewById(R.id.btn_data_belum_sesuai);
-        ivback = findViewById(R.id.ivBack);
+//        imageView = findViewById(R.id.img);
+//        imageView.setImageBitmap(CaptureKTPActivity.bitmap);
+        btn_data_belum_sesuai = findViewById(R.id.btn_data_belum_sesuai);
+//        ivback = findViewById(R.id.ivBack);
+//
+//        saveImage(CaptureKTPActivity.bitmap);
+        btn_data_belum_sesuai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
-        saveImage(CaptureKTPActivity.bitmap);
-//        btn_data_belum_sesuai.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                onBackPressed();
-//            }
-//        });
+        ivback = findViewById(R.id.ivBack);
 
         ivback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
+            }
+        });
+
+        btn_fotoKTP = findViewById(R.id.btn_fotoKTP);
+        btn_fotoKTP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(KTPResultViewActivity.this, CaptureSelfieWithKTPActivity.class);
+
+                startActivity(intent);
+            }
+        });
+
+
+        btnBackHome = findViewById(R.id.btn_batalkan);
+        btnBackHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(KTPResultViewActivity.this, DashboardSDKActivity.class);
+
+                startActivity(intent);
             }
         });
 
@@ -58,7 +85,7 @@ public class KTPResultViewActivity extends AppCompatActivity {
     }
 
 
-    public String saveImage(Bitmap myBitmap) {
+/*    public String saveImage(Bitmap myBitmap) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         myBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
         File wallpaperDirectory = new File(
@@ -93,5 +120,5 @@ public class KTPResultViewActivity extends AppCompatActivity {
         }
         return "";
 
-    }
+    }*/
 }

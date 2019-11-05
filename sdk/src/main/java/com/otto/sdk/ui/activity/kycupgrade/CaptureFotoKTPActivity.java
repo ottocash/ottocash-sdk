@@ -8,75 +8,42 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.hardware.Camera;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
-import com.otto.sdk.AppActivity;
 import com.otto.sdk.R;
 
-public class CaptureKTPActivity extends AppCompatActivity {
-
-    //    CameraView cameraView;
-    private int REQUEST_WRITE_STORAGE_REQUEST_CODE = 112;
-
-    private android.hardware.Camera mCamera;
+public class CaptureFotoKTPActivity extends AppCompatActivity {
+    private Camera mCamera;
     private CameraPreview mPreview;
-    private android.hardware.Camera.PictureCallback mPicture;
-    private ImageView ivCapture, switchCamera, ivback;
+    private Camera.PictureCallback mPicture;
+    private ImageView capture, switchCamera;
     private Context myContext;
     private FrameLayout cameraPreview;
     private boolean cameraFront = false;
     public static Bitmap bitmap;
+    private int REQUEST_WRITE_STORAGE_REQUEST_CODE = 112;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_capture_ktp);
-//        initView();
-
-        ivback = findViewById(R.id.ivBack);
-
-
-        ivback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-
-
-        ivCapture = findViewById(R.id.btnCam);
-        ivCapture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(CaptureKTPActivity.this, KTPResultViewActivity.class);
-                startActivity(intent);
-
-            }
-        });
-
-
-
-    }
-
-   /* private void initView() {
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         requestAppPermissions();
         myContext = this;
 
-//        mCamera = Camera.open();
+       mCamera = Camera.open();
+        mCamera.startPreview();
 
         Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
         int cameraCount = Camera.getNumberOfCameras();
@@ -107,19 +74,19 @@ public class CaptureKTPActivity extends AppCompatActivity {
         mPreview = new CameraPreview(myContext, mCamera);
         cameraPreview.addView(mPreview);
 
-//        capture = (ImageView) findViewById(R.id.btnCam);
-//        capture.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                try {
-//                    mCamera.takePicture(null, null, mPicture);
-//                } catch (Exception e) {
-//                    Log.e("tag", e.getMessage());
-//                }
-//
-//            }
-//        });
+        capture = (ImageView) findViewById(R.id.btnCam);
+        capture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                try {
+                    mCamera.takePicture(null, null, mPicture);
+                } catch (Exception e) {
+                    Log.e("tag", e.getMessage());
+                }
+
+            }
+        });
 
         switchCamera = (ImageView) findViewById(R.id.btnSwitch);
         switchCamera.setOnClickListener(new View.OnClickListener() {
@@ -139,10 +106,12 @@ public class CaptureKTPActivity extends AppCompatActivity {
             }
         });
 
-        mCamera.startPreview();
-    }*/
 
-/*
+//        mCamera.startPreview();
+
+    }
+
+
     private int findFrontFacingCamera() {
 
         int cameraId = -1;
@@ -180,23 +149,20 @@ public class CaptureKTPActivity extends AppCompatActivity {
         }
         return cameraId;
     }
-
-
     public void onResume() {
 
         super.onResume();
-        if (mCamera == null) {
+        if(mCamera == null) {
             mCamera = Camera.open();
             mCamera.setDisplayOrientation(90);
             mPicture = getPictureCallback();
             mPreview.refreshCamera(mCamera);
             Log.d("nu", "null");
-        } else {
-            Log.d("nu", "no null");
+        }else {
+            Log.d("nu","no null");
         }
 
     }
-
     public void chooseCamera() {
         //if the camera preview is the front
         if (cameraFront) {
@@ -224,10 +190,10 @@ public class CaptureKTPActivity extends AppCompatActivity {
             }
         }
     }
-
     @Override
     protected void onPause() {
         super.onPause();
+        //when on Pause, release camera in order to be used from other applications
         releaseCamera();
     }
 
@@ -240,13 +206,12 @@ public class CaptureKTPActivity extends AppCompatActivity {
             mCamera = null;
         }
     }
-
     private Camera.PictureCallback getPictureCallback() {
         Camera.PictureCallback picture = new Camera.PictureCallback() {
             @Override
             public void onPictureTaken(byte[] data, Camera camera) {
                 bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
-                Intent intent = new Intent(CaptureKTPActivity.this, KTPResultViewActivity.class);
+                Intent intent = new Intent(CaptureFotoKTPActivity.this, KTPResultViewActivity.class);
                 startActivity(intent);
             }
         };
@@ -282,6 +247,5 @@ public class CaptureKTPActivity extends AppCompatActivity {
     private boolean hasCameraPermissions() {
         return (ContextCompat.checkSelfPermission(getBaseContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED);
     }
-*/
 
 }
