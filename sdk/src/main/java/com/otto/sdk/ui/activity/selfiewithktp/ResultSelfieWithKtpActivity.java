@@ -24,7 +24,7 @@ public class ResultSelfieWithKtpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result_selfie_with_ktp);
 
-        imageView = findViewById(R.id.img);
+        imageView = findViewById(R.id.iv_avatar);
 //        imageView.setImageBitmap(CaptureKTPActivity.bitmap);
         btn_data_belum_sesuai = findViewById(R.id.btn_data_belum_sesuai);
         ivback = findViewById(R.id.ivBack);

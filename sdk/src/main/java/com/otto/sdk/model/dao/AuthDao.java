@@ -4,6 +4,7 @@ import com.otto.sdk.IConfig;
 import com.otto.sdk.model.api.Api;
 import com.otto.sdk.model.api.request.LoginRequest;
 import com.otto.sdk.model.api.request.RegisterRequest;
+import com.otto.sdk.model.api.request.UpgradeAccountRequest;
 import com.otto.sdk.model.api.response.LoginResponse;
 import com.otto.sdk.model.api.response.RegisterResponse;
 import com.otto.sdk.presenter.AuthPresenter;
@@ -44,6 +45,9 @@ public class AuthDao extends BaseDao {
     public void onLogin(LoginRequest model) {
         Api.onLogin(model, BaseDao.getInstance(this, adao.getPresenter(), IConfig.KEY_API_LOGIN).callback);
     }
+
+
+
 
     @Override
     public void onApiResponseCallback(BaseResponse br, int responseCode, Response response) {

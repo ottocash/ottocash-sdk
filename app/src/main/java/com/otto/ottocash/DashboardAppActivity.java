@@ -65,7 +65,6 @@ public class DashboardAppActivity extends SdkActivity {
         }
     }
 
-
     public void onEmoneyBalanceWidget() {
         if (getIntent().getExtras() != null) {
             Bundle extras = getIntent().getExtras();
@@ -79,7 +78,6 @@ public class DashboardAppActivity extends SdkActivity {
             });
         }
     }
-
 
     @OnClick(R.id.btnCheckOut)
     public void onCheckOut() {

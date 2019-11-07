@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCashSdk;
 import com.otto.sdk.R;
+import com.otto.sdk.model.api.response.UpgradeAccountResponse;
 import com.otto.sdk.ui.activity.kycupgrade.UpgradeActivity;
 import com.otto.sdk.interfaces.IInquiryView;
 import com.otto.sdk.model.api.request.InquiryRequest;
@@ -243,6 +244,7 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
                     Toast.LENGTH_LONG).show();
         }
     }
+
 
     @Override
     public void onBackPressed() {

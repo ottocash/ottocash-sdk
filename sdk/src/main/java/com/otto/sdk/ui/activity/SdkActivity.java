@@ -16,6 +16,7 @@ import com.otto.sdk.model.api.request.InquiryRequest;
 import com.otto.sdk.model.api.response.CheckPhoneNumberResponse;
 import com.otto.sdk.model.api.response.CreateTokenResponse;
 import com.otto.sdk.model.api.response.InquiryResponse;
+import com.otto.sdk.model.api.response.UpgradeAccountResponse;
 import com.otto.sdk.presenter.InquiryPresenter;
 import com.otto.sdk.presenter.SdkResourcePresenter;
 import com.otto.sdk.ui.activity.account.activation.ActivationActivity;
@@ -129,4 +130,6 @@ public class SdkActivity extends BaseActivity implements ISdkView, IInquiryView 
                     Toast.LENGTH_LONG).show();
         }
     }
+
+
 }

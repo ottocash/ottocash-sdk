@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.otto.sdk.Flag;
 import com.otto.sdk.R;
 import com.otto.sdk.ui.activity.account.registration.RegistrationSuccessActivity;
 import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
@@ -24,9 +25,10 @@ import java.util.Calendar;
 
 public class KTPResultViewActivity extends AppCompatActivity {
 
-    private ImageView ivback;
+    private ImageView ivback, ivAvatar;
     private static final String IMAGE_DIRECTORY = "/CustomImage";
     private Button btn_data_belum_sesuai, btnBackHome, btn_fotoKTP;
+    private String id_card;
 
 
     @Override
@@ -34,9 +36,14 @@ public class KTPResultViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ktpresult_view);
 
-//        initComponent();
-//        imageView = findViewById(R.id.img);
-//        imageView.setImageBitmap(CaptureKTPActivity.bitmap);
+        id_card = getIntent().getStringExtra(Flag.ID_CARD);
+
+        Log.i( id_card, "id_card");
+
+
+
+        ivAvatar = findViewById(R.id.iv_avatar);
+        ivAvatar.setImageBitmap(CaptureKTPActivity.bitmap);
         btn_data_belum_sesuai = findViewById(R.id.btn_data_belum_sesuai);
 //        ivback = findViewById(R.id.ivBack);
 //

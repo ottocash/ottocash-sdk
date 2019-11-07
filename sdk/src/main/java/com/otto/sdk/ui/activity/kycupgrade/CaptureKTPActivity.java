@@ -12,6 +12,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -20,9 +21,15 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.otto.sdk.AppActivity;
 import com.otto.sdk.R;
+
+import pl.tajchert.nammu.Nammu;
+import pl.tajchert.nammu.PermissionCallback;
+
+import static me.dm7.barcodescanner.core.CameraUtils.getCameraInstance;
 
 public class CaptureKTPActivity extends AppCompatActivity {
 
@@ -38,14 +45,21 @@ public class CaptureKTPActivity extends AppCompatActivity {
     private boolean cameraFront = false;
     public static Bitmap bitmap;
 
+    private Camera camera;
+    private CameraComponent cameraComponent;
+    private boolean permissionsGranted = false;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_capture_ktp);
-//        initView();
+        initView();
 
         ivback = findViewById(R.id.ivBack);
+        cameraPreview = findViewById(R.id.cPreview);
 
 
         ivback.setOnClickListener(new View.OnClickListener() {
@@ -66,15 +80,24 @@ public class CaptureKTPActivity extends AppCompatActivity {
             }
         });
 
+        myContext = this;
+
+        boolean hasFrontCamera = getApplication().getPackageManager()
+                .hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT);
+        camera = getCameraInstance();
+        cameraComponent = new CameraComponent(myContext, camera, hasFrontCamera);
+
+        cameraPreview.addView(cameraComponent);
+        cameraPreview.setBackgroundResource(R.drawable.frame_capture_ktp);
+
 
 
     }
 
-   /* private void initView() {
+    private void initView() {
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         requestAppPermissions();
-        myContext = this;
 
 //        mCamera = Camera.open();
 
@@ -94,32 +117,23 @@ public class CaptureKTPActivity extends AppCompatActivity {
         }
 
         cameraPreview = (FrameLayout) findViewById(R.id.cPreview);
-//        ivback = findViewById(R.id.ivBack);
-//
-//
-//        ivback.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                onBackPressed();
-//            }
-//        });
 
         mPreview = new CameraPreview(myContext, mCamera);
         cameraPreview.addView(mPreview);
 
-//        capture = (ImageView) findViewById(R.id.btnCam);
-//        capture.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                try {
-//                    mCamera.takePicture(null, null, mPicture);
-//                } catch (Exception e) {
-//                    Log.e("tag", e.getMessage());
-//                }
-//
-//            }
-//        });
+        ivCapture = (ImageView) findViewById(R.id.btnCam);
+        ivCapture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                try {
+                    mCamera.takePicture(null, null, mPicture);
+                } catch (Exception e) {
+                    Log.e("tag", e.getMessage());
+                }
+
+            }
+        });
 
         switchCamera = (ImageView) findViewById(R.id.btnSwitch);
         switchCamera.setOnClickListener(new View.OnClickListener() {
@@ -140,9 +154,9 @@ public class CaptureKTPActivity extends AppCompatActivity {
         });
 
         mCamera.startPreview();
-    }*/
+    }
 
-/*
+
     private int findFrontFacingCamera() {
 
         int cameraId = -1;
@@ -282,6 +296,6 @@ public class CaptureKTPActivity extends AppCompatActivity {
     private boolean hasCameraPermissions() {
         return (ContextCompat.checkSelfPermission(getBaseContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED);
     }
-*/
+
 
 }

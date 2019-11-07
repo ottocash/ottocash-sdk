@@ -15,6 +15,7 @@ import com.otto.sdk.model.api.request.RegisterRequest;
 import com.otto.sdk.model.api.request.ReviewCheckOutRequest;
 import com.otto.sdk.model.api.request.TransactionHistoryRequest;
 import com.otto.sdk.model.api.request.TransferToFriendRequest;
+import com.otto.sdk.model.api.request.UpgradeAccountRequest;
 import com.otto.sdk.model.api.response.CheckPhoneNumberResponse;
 import com.otto.sdk.model.api.response.CreateTokenResponse;
 import com.otto.sdk.model.api.response.InquiryResponse;
@@ -27,6 +28,7 @@ import com.otto.sdk.model.api.response.ReviewCheckOutResponse;
 import com.otto.sdk.model.api.response.SecurityQuestionResponse;
 import com.otto.sdk.model.api.response.TransactionHistoryResponse;
 import com.otto.sdk.model.api.response.TransferToFriendResponse;
+import com.otto.sdk.model.api.response.UpgradeAccountResponse;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -92,6 +94,10 @@ public class Api extends BaseApi {
 
     synchronized public static void onLogin(LoginRequest loginRequest, Callback callback) {
         initApiDomain().callApiLogin(initHeader(), loginRequest).enqueue((Callback<LoginResponse>) callback);
+    }
+
+    synchronized public static void onUpgrade(UpgradeAccountRequest upgradeAccountRequest, Callback callback) {
+        initApiDomain().callApiUpgrade(initHeader(), upgradeAccountRequest).enqueue((Callback<UpgradeAccountResponse>) callback);
     }
 
     //OTP VERIFICATION

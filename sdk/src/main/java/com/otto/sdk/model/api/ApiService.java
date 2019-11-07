@@ -12,6 +12,7 @@ import com.otto.sdk.model.api.request.RegisterRequest;
 import com.otto.sdk.model.api.request.ReviewCheckOutRequest;
 import com.otto.sdk.model.api.request.TransactionHistoryRequest;
 import com.otto.sdk.model.api.request.TransferToFriendRequest;
+import com.otto.sdk.model.api.request.UpgradeAccountRequest;
 import com.otto.sdk.model.api.response.CheckPhoneNumberResponse;
 import com.otto.sdk.model.api.response.ClientsResponse;
 import com.otto.sdk.model.api.response.CreateTokenResponse;
@@ -25,6 +26,7 @@ import com.otto.sdk.model.api.response.ReviewCheckOutResponse;
 import com.otto.sdk.model.api.response.SecurityQuestionResponse;
 import com.otto.sdk.model.api.response.TransactionHistoryResponse;
 import com.otto.sdk.model.api.response.TransferToFriendResponse;
+import com.otto.sdk.model.api.response.UpgradeAccountResponse;
 
 import java.util.Map;
 
@@ -44,6 +46,11 @@ public interface ApiService {
     @POST("v1/auth/login")
     Call<LoginResponse> callApiLogin(@HeaderMap Map<String, String> headers,
                                      @Body LoginRequest loginRequest);
+
+    @POST("v1/account/upgrade")
+    Call<UpgradeAccountResponse> callApiUpgrade(@HeaderMap Map<String, String> headers,
+                                              @Body UpgradeAccountRequest upgradeAccountRequest);
+
 
 
     @POST("v1/account")

@@ -18,6 +18,9 @@ public interface IConfig {
     String SESSION_ID = "id";
     String SESSION_SECRET = "secret";
     String SESSION_ACCESS_TOKEN = "access_token";
+    String SESSION_ID_CARD = "id_card";
+    String SESSION_PASSPORT_PHOTO = "passport_photo";
+
 
 
     String KEY_NUMBER_CONTACT = "number_contact";
@@ -32,10 +35,18 @@ public interface IConfig {
     //KEY PIN PAYMENT
     String KEY_PIN_TRANSFER_TO_FRIEND = "pin_transfer_to_friend";
     String KEY_PIN_CHECKOUT = "pin_checkout";
+    String KEY_BASE64_SELFIE_CAMERA_KTP = "selfie_camera_ktp_base64";
+    String BASE64_CAMERA_PERSONA_KEY = "camera_persona64";
 
 
+
+    boolean REMOVE_CAMERA_PHOTO_TAKEN_CONFIG = true;
     final boolean SESSION_CHECK_PHONE_NUMBER = false;
     final boolean SESSION_IS_LOGIN = false;
+    int CAMERA_KTP_SELFIE_TYPE = 110;
+    int CAMERA_KTP_TYPE = 100;
+
+
 
 
     //API 11 - ?
@@ -50,6 +61,7 @@ public interface IConfig {
     int KEY_API_TOKEN = 19;
     int KEY_API_HISTORIES = 20;
     int KEY_API_TRANSFER_TO_FRIEND = 21;
+    int KEY_API_UPGRADE = 22;
 
 
 }
