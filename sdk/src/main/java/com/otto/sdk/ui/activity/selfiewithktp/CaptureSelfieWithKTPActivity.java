@@ -4,30 +4,21 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.otto.sdk.Flag;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.R;
 import com.otto.sdk.ui.activity.kycupgrade.CameraComponent;
-import com.otto.sdk.ui.activity.kycupgrade.CameraPreview;
-import com.otto.sdk.ui.activity.kycupgrade.CaptureFotoKTPActivity;
-import com.otto.sdk.ui.activity.kycupgrade.KTPResultViewActivity;
 import com.otto.sdk.ui.activity.kycupgrade.PhotoHandler;
-import com.otto.sdk.ui.activity.payment.ReviewCheckoutActivity;
 
 import java.io.File;
 
@@ -44,7 +35,10 @@ public class CaptureSelfieWithKTPActivity extends BaseActivity implements PhotoH
     private CameraComponent cameraPreview;
     private boolean permissionsGranted = false;
     private Context myContext;
-    private ImageView btnCam;
+    private ImageView btnCam, ivFlash, ivback;
+    private String ktp, number;
+    private boolean isFlashOn = false;
+
 
 
     @Override
@@ -55,19 +49,67 @@ public class CaptureSelfieWithKTPActivity extends BaseActivity implements PhotoH
         myContext = this;
         previewContainer = findViewById(R.id.cPreview);
         btnCam = findViewById(R.id.btnCam);
+        ivFlash = findViewById(R.id.iv_flash);
+        ivback = findViewById(R.id.ivBack);
+        ktp = getIntent().getStringExtra(Flag.ID_CARD);
+        number = getIntent().getStringExtra(Flag.ACCOUNT_NUMBER);
+
 
         btnCam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 captureImage();
                 Intent intent = new Intent(CaptureSelfieWithKTPActivity.this, ResultSelfieWithKtpActivity.class);
+                intent.putExtra(Flag.ID_CARD, ktp);
+                intent.putExtra(Flag.ACCOUNT_NUMBER, number);
                 startActivity(intent);
+            }
+        });
+
+        ivback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               onBackPressed();
+            }
+        });
+
+        ivFlash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isFlashOn) {
+                    isFlashOn = false;
+                    onFlashOff();
+                }else {
+                    isFlashOn = true;
+                    onFlashOn();
+                }
+
+
             }
         });
 
     }
 
-    private void  initView() {
+    private void onFlashOff() {
+        Camera.Parameters params = camera.getParameters();
+        params.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+        camera.setParameters(params);
+//        camera.stopPreview();
+//        camera.release();
+
+    }
+
+    private void onFlashOn() {
+        Camera.Parameters params = camera.getParameters();
+        params.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+        camera.setParameters(params);
+        camera.startPreview();
+    }
+
+
+
+
+    private void initView() {
 
         try {
             initializeCamera();
@@ -162,7 +204,7 @@ public class CaptureSelfieWithKTPActivity extends BaseActivity implements PhotoH
         }
     }
 
-    private void captureImage()  {
+    private void captureImage() {
         String rootPath = Environment.getExternalStorageDirectory() + File.separator
                 + getResources().getString(R.string.app_name);
         String photoDir = "photos";

@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.otto.sdk.Flag;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCashSdk;
 import com.otto.sdk.R;
@@ -46,6 +47,7 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
     TextView tvUpgrade;
 
     private InquiryRequest inquiryRequest;
+    private InquiryResponse inquiryResponse;
     private String emoneyBalance;
     private String name;
     private int verifyStatus;
@@ -61,10 +63,13 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
         displayMainMenu();
         onCallApiInquiry();
 
+        inquiryResponse = new InquiryResponse();
+
         tvUpgrade.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DashboardSDKActivity.this, UpgradeActivity.class);
+//                intent.putExtra(Flag.ACCOUNT_NUMBER, inquiryResponse.getData().getAccountNumber());
                 startActivity(intent);
             }
         });

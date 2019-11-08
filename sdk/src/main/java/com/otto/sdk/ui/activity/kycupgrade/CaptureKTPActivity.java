@@ -50,8 +50,6 @@ public class CaptureKTPActivity extends AppCompatActivity {
     private boolean permissionsGranted = false;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,8 +87,6 @@ public class CaptureKTPActivity extends AppCompatActivity {
 
         cameraPreview.addView(cameraComponent);
         cameraPreview.setBackgroundResource(R.drawable.frame_capture_ktp);
-
-
 
     }
 

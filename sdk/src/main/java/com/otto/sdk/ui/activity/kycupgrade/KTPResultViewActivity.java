@@ -1,9 +1,13 @@
 package com.otto.sdk.ui.activity.kycupgrade;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaScannerConnection;
+import android.nfc.Tag;
 import android.os.Environment;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,32 +32,29 @@ public class KTPResultViewActivity extends AppCompatActivity {
     private ImageView ivback, ivAvatar;
     private static final String IMAGE_DIRECTORY = "/CustomImage";
     private Button btn_data_belum_sesuai, btnBackHome, btn_fotoKTP;
-    private String id_card;
+    private String ktp, number;
+    private final String TAG = this.getClass().getSimpleName();
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ktpresult_view);
-
-        id_card = getIntent().getStringExtra(Flag.ID_CARD);
-
-        Log.i( id_card, "id_card");
-
-
-
-        ivAvatar = findViewById(R.id.iv_avatar);
-        ivAvatar.setImageBitmap(CaptureKTPActivity.bitmap);
         btn_data_belum_sesuai = findViewById(R.id.btn_data_belum_sesuai);
-//        ivback = findViewById(R.id.ivBack);
-//
-//        saveImage(CaptureKTPActivity.bitmap);
         btn_data_belum_sesuai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
+
+        ktp = getIntent().getStringExtra(Flag.ID_CARD);
+        number = getIntent().getStringExtra(Flag.ACCOUNT_NUMBER);
+
+        Log.i( TAG, "ktp : " + ktp );
+        Log.i( number, "number : " );
+
 
         ivback = findViewById(R.id.ivBack);
 
@@ -69,7 +70,8 @@ public class KTPResultViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(KTPResultViewActivity.this, CaptureSelfieWithKTPActivity.class);
-
+                intent.putExtra(Flag.ID_CARD, ktp);
+                intent.putExtra(Flag.ACCOUNT_NUMBER, number);
                 startActivity(intent);
             }
         });
@@ -85,18 +87,35 @@ public class KTPResultViewActivity extends AppCompatActivity {
             }
         });
 
+        ivAvatar = findViewById(R.id.iv_avatar);
+//        ivAvatar.setImageBitmap(CaptureKTPActivity.bitmap);
+//
+//        saveImage(CaptureKTPActivity.bitmap);
+
     }
 
-    private void initView() {
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if ( resultCode == Activity.RESULT_OK)
+        {
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            ivAvatar.setImageBitmap(photo);
+        }
     }
 
-
-/*    public String saveImage(Bitmap myBitmap) {
+    public String saveImage(Bitmap myBitmap) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+
         myBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
         File wallpaperDirectory = new File(
                 Environment.getExternalStorageDirectory() + IMAGE_DIRECTORY);
+
+
+        // have the object build the directory structure, if needed.
+
 
         if (!wallpaperDirectory.exists()) {
             Log.d("dirrrrrr", "" + wallpaperDirectory.mkdirs());
@@ -106,13 +125,7 @@ public class KTPResultViewActivity extends AppCompatActivity {
         try {
             File f = new File(wallpaperDirectory, Calendar.getInstance()
                     .getTimeInMillis() + ".jpg");
-
-            if (!f.getParentFile().exists())
-                f.getParentFile().mkdirs();
-            if (!f.exists())
-                f.createNewFile();
-
-//            f.createNewFile();   //give read write permission
+            f.createNewFile();   //give read write permission
             FileOutputStream fo = new FileOutputStream(f);
             fo.write(bytes.toByteArray());
             MediaScannerConnection.scanFile(this,
@@ -127,5 +140,5 @@ public class KTPResultViewActivity extends AppCompatActivity {
         }
         return "";
 
-    }*/
+    }
 }
