@@ -18,20 +18,28 @@ import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCashSdk;
 import com.otto.sdk.R;
 import com.otto.sdk.interfaces.IPinVerificationPaymentView;
+import com.otto.sdk.interfaces.IReviewCheckoutView;
 import com.otto.sdk.model.api.request.PaymentValidateRequest;
+import com.otto.sdk.model.api.request.ReviewCheckOutRequest;
 import com.otto.sdk.model.api.request.TransferToFriendRequest;
 import com.otto.sdk.model.api.response.PaymentValidateResponse;
+import com.otto.sdk.model.api.response.ReviewCheckOutResponse;
 import com.otto.sdk.model.api.response.TransferToFriendResponse;
 import com.otto.sdk.presenter.PinVerificationPaymentPresenter;
+import com.otto.sdk.presenter.ReviewCheckoutPresenter;
 import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
 import com.otto.sdk.ui.component.support.DeviceId;
 import com.otto.sdk.ui.component.support.Logging;
 import com.otto.sdk.ui.component.support.UiUtil;
 import com.poovam.pinedittextfield.LinePinField;
 
+import java.util.Random;
+
 import app.beelabs.com.codebase.support.util.CacheUtil;
 
-public class PinPaymentActivity extends AppActivity implements IPinVerificationPaymentView {
+import static app.beelabs.com.codebase.support.util.CacheUtil.getPreferenceString;
+
+public class PinPaymentActivity extends AppActivity implements IPinVerificationPaymentView, IReviewCheckoutView {
 
     private final String TAG = this.getClass().getSimpleName();
 
@@ -40,25 +48,27 @@ public class PinPaymentActivity extends AppActivity implements IPinVerificationP
     TextView errorMessage;
     Button btnBack;
 
-    int paymentValue;
-    int user_id;
-
+    /*payment validate;*/
+    private int user_id;
     private int emoneyBalance;
-    private int nominalTransfer;
     private int grandTotal;
 
-    private int total;
+    /*transfer to friend*/
     private String numberContact;
     private String nominalTransferToFriend;
     private String nameContact;
     private String phone;
-    private int statusPayment;
 
+    /*key payment for receipt */
     private String pinTransferToFriend = "P2P";
     private String pinReviewCheckout = "ReviewCheckout";
     private String keyPinTransferToFriend;
     private String keyPinReviewCheckout;
 
+    /*review checkout*/
+    private int amount;
+    private String customerReferenceNumber;
+    private ReviewCheckOutRequest reviewCheckOutRequest;
 
     /*Receipt Transfer To Friend*/
     private PinVerificationPaymentPresenter pinVerificationPaymentPresenter;
@@ -76,22 +86,6 @@ public class PinPaymentActivity extends AppActivity implements IPinVerificationP
         addTextWatcher(lineField);
     }
 
-    private void initComponent() {
-        tvPaymentValue = findViewById(R.id.tvPaymentValue);
-        lineField = findViewById(R.id.lineField);
-        errorMessage = findViewById(R.id.errorMessage);
-        btnBack = findViewById(R.id.btn_back);
-
-        total = CacheUtil.getPreferenceInteger(IConfig.SESSION_TOTAL, PinPaymentActivity.this);
-        emoneyBalance = Integer.parseInt(CacheUtil.getPreferenceString(IConfig.SESSION_EMONEY_BALANCE, PinPaymentActivity.this));
-
-        if (pinTransferToFriend.equals(keyPinTransferToFriend)) {
-            tvPaymentValue.setText(nominalTransferToFriend);
-        } else if (pinReviewCheckout.equals(keyPinReviewCheckout)) {
-            tvPaymentValue.setText(UiUtil.formatMoneyIDR(total));
-        }
-    }
-
     private void keyPinVerificationPayment() {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -100,6 +94,24 @@ public class PinPaymentActivity extends AppActivity implements IPinVerificationP
             nominalTransferToFriend = extras.getString(IConfig.KEY_NOMINAL_TRANSFER_TO_FRIEND);
             numberContact = extras.getString(IConfig.KEY_NUMBER_CONTACT);
             nameContact = extras.getString(IConfig.KEY_NAME_CONTACT);
+        }
+    }
+
+    private void initComponent() {
+        tvPaymentValue = findViewById(R.id.tvPaymentValue);
+        lineField = findViewById(R.id.lineField);
+        errorMessage = findViewById(R.id.errorMessage);
+        btnBack = findViewById(R.id.btn_back);
+
+        //total = CacheUtil.getPreferenceInteger(IConfig.SESSION_TOTAL, PinPaymentActivity.this);
+        emoneyBalance = Integer.parseInt(CacheUtil.getPreferenceString(IConfig.SESSION_EMONEY_BALANCE,
+                PinPaymentActivity.this));
+        amount = CacheUtil.getPreferenceInteger(IConfig.SESSION_TOTAL, PinPaymentActivity.this);
+
+        if (pinTransferToFriend.equals(keyPinTransferToFriend)) {
+            tvPaymentValue.setText(nominalTransferToFriend);
+        } else if (pinReviewCheckout.equals(keyPinReviewCheckout)) {
+            tvPaymentValue.setText(UiUtil.formatMoneyIDR(amount));
         }
     }
 
@@ -136,7 +148,7 @@ public class PinPaymentActivity extends AppActivity implements IPinVerificationP
             if (pinTransferToFriend.equals(keyPinTransferToFriend)) {
                 grandTotal = UiUtil.removeAllCharacterNumbers(nominalTransferToFriend);
                 if (emoneyBalance < grandTotal) {
-                    errorMessage.setText("Saldo Anda tidak mencukupi");
+                    errorMessage.setText(R.string.saldo_minus);
                     btnBack.setVisibility(View.VISIBLE);
                     btnBack.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -149,14 +161,69 @@ public class PinPaymentActivity extends AppActivity implements IPinVerificationP
                 }
 
             } else if (pinReviewCheckout.equals(keyPinReviewCheckout)) {
-                paymentValue = emoneyBalance - total;
+                onCallApiReviewCheckOut();
 
                 Intent intent = new Intent(PinPaymentActivity.this, DashboardSDKActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.putExtra(IConfig.KEY_PIN_CHECKOUT, keyPinReviewCheckout);
                 startActivity(intent);
             }
 
+        } else {
+            Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
+                    Toast.LENGTH_LONG).show();
+        }
+    }
+
+
+    /**
+     * START REVIEW CHECKOUT
+     */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (customerReferenceNumber != null) {
+            customerReferenceNumber = (generateRandom(12) + "");
+        }
+    }
+
+    public static long generateRandom(int length) {
+        Random random = new Random();
+        char[] digits = new char[length];
+        digits[0] = (char) (random.nextInt(9) + '1');
+        for (int i = 1; i < length; i++) {
+            digits[i] = (char) (random.nextInt(10) + '0');
+        }
+        return Long.parseLong(new String(digits));
+    }
+
+    private void onCallApiReviewCheckOut() {
+        reviewCheckOutRequest = new ReviewCheckOutRequest(String.valueOf(getPreferenceString(
+                IConfig.SESSION_ACCOUNT_NUMBER, PinPaymentActivity.this)));
+        reviewCheckOutRequest.setAmount(amount);
+        reviewCheckOutRequest.setFee(0);
+        reviewCheckOutRequest.setProductName("Pembayaran");
+        reviewCheckOutRequest.setBillerId("PURCHASE_ELEVENIA");
+        reviewCheckOutRequest.setCustomerReferenceNumber("UPN" + generateRandom(9) + "");
+        reviewCheckOutRequest.setProductCode("PYMNT");
+        reviewCheckOutRequest.setPartnerCode("P000001");
+        reviewCheckOutRequest.setLatitude(String.valueOf(getMyLastLocation().getLatitude()));
+        reviewCheckOutRequest.setLongitude(String.valueOf(getMyLastLocation().getLongitude()));
+        reviewCheckOutRequest.setDeviceId(DeviceId.getDeviceID(this));
+
+        showApiProgressDialog(OttoCashSdk.getAppComponent(), new ReviewCheckoutPresenter(this) {
+            @Override
+            public void call() {
+                getReviewCheckout(reviewCheckOutRequest);
+
+            }
+        }, "Loading");
+    }
+
+    @Override
+    public void handleReviewCheckout(ReviewCheckOutResponse model) {
+        if (model.getMeta().getCode() == 200) {
+            Intent intent = new Intent(PinPaymentActivity.this, DashboardSDKActivity.class);
+            startActivity(intent);
         } else {
             Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
                     Toast.LENGTH_LONG).show();
@@ -184,7 +251,6 @@ public class PinPaymentActivity extends AppActivity implements IPinVerificationP
             }
         }, "Loading");
     }
-
 
     @Override
     public void handlePaymentTransferToFriend(TransferToFriendResponse model) {
@@ -248,4 +314,6 @@ public class PinPaymentActivity extends AppActivity implements IPinVerificationP
         InputMethodManager imm = (InputMethodManager) getSystemService(Service.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
     }
+
+
 }

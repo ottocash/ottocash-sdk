@@ -29,6 +29,9 @@ public interface IConfig {
     String KEY_REFERENCE_NUMBER_P2P = "reference_number_P2P";
     String KEY_DATE_P2P = "date_p2p";
 
+    //KEY REVIEW CHECKOUT
+    String TOTAL_BILL_PAYMENT = "total_bill_checkout";
+
     //KEY PIN PAYMENT
     String KEY_PIN_TRANSFER_TO_FRIEND = "pin_transfer_to_friend";
     String KEY_PIN_CHECKOUT = "pin_checkout";
