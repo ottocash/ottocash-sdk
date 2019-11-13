@@ -4,40 +4,48 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.otto.sdk.Flag;
-import com.otto.sdk.IConfig;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.otto.sdk.R;
-import com.otto.sdk.ui.activity.kycupgrade.CameraComponent;
-import com.otto.sdk.ui.activity.kycupgrade.PhotoHandler;
+import com.otto.sdk.ui.activity.CameraPreview;
+import com.otto.sdk.ui.activity.kycupgrade.KTPResultViewActivity;
 
-import java.io.File;
+import java.io.ByteArrayOutputStream;
+import java.util.List;
 
 import app.beelabs.com.codebase.base.BaseActivity;
-import pl.tajchert.nammu.Nammu;
-import pl.tajchert.nammu.PermissionCallback;
 
 
-public class CaptureSelfieWithKTPActivity extends BaseActivity implements PhotoHandler.PhotoHandlerCallback {
+public class CaptureSelfieWithKTPActivity extends BaseActivity {
 
-    FrameLayout previewContainer;
-    private Bundle bundle;
-    private Camera camera;
-    private CameraComponent cameraPreview;
+    FrameLayout cameraPreview;
+    private Camera mCamera;
+    private CameraPreview mPreview;
     private boolean permissionsGranted = false;
     private Context myContext;
-    private ImageView btnCam, ivFlash, ivback;
+    private ImageView ivCapture, ivFlash, ivback, switchCamera;
     private String ktp, number;
     private boolean isFlashOn = false;
+    public static Bitmap bitmap;
+    private boolean cameraFront = false;
+    private android.hardware.Camera.PictureCallback mPicture;
+    public static String base64String;
 
 
 
@@ -45,33 +53,31 @@ public class CaptureSelfieWithKTPActivity extends BaseActivity implements PhotoH
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selfie_with_ktpcamera_kit);
-        initView();
+        initpermission();
         myContext = this;
-        previewContainer = findViewById(R.id.cPreview);
-        btnCam = findViewById(R.id.btnCam);
-        ivFlash = findViewById(R.id.iv_flash);
+//        ktp = getIntent().getStringExtra("base64");
+        Log.i("KTP", "ktp : " + ktp);
+        ktp = KTPResultViewActivity.getBase64;
+        number = getIntent().getStringExtra("account_number");
+        Log.i("ACCOUNT", "Account number : " + number);
+
         ivback = findViewById(R.id.ivBack);
-        ktp = getIntent().getStringExtra(Flag.ID_CARD);
-        number = getIntent().getStringExtra(Flag.ACCOUNT_NUMBER);
-
-
-        btnCam.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                captureImage();
-                Intent intent = new Intent(CaptureSelfieWithKTPActivity.this, ResultSelfieWithKtpActivity.class);
-                intent.putExtra(Flag.ID_CARD, ktp);
-                intent.putExtra(Flag.ACCOUNT_NUMBER, number);
-                startActivity(intent);
-            }
-        });
-
+        cameraPreview = findViewById(R.id.cPreview);
         ivback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               onBackPressed();
+                onBackPressed();
             }
         });
+        ivCapture = findViewById(R.id.btnCam);
+        ivCapture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                mCamera.takePicture(null, null, getPictureCallback());
+            }
+        });
+
 
         ivFlash.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +85,7 @@ public class CaptureSelfieWithKTPActivity extends BaseActivity implements PhotoH
                 if (isFlashOn) {
                     isFlashOn = false;
                     onFlashOff();
-                }else {
+                } else {
                     isFlashOn = true;
                     onFlashOn();
                 }
@@ -90,36 +96,32 @@ public class CaptureSelfieWithKTPActivity extends BaseActivity implements PhotoH
 
     }
 
-    private void onFlashOff() {
-        Camera.Parameters params = camera.getParameters();
-        params.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
-        camera.setParameters(params);
-//        camera.stopPreview();
-//        camera.release();
-
-    }
-
-    private void onFlashOn() {
-        Camera.Parameters params = camera.getParameters();
-        params.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
-        camera.setParameters(params);
-        camera.startPreview();
-    }
-
-
-
-
-    private void initView() {
-
-        try {
-            initializeCamera();
-        } catch (Exception e) {
-            Log.e("PHOTO ERROR:", e.getMessage());
-        }
-    }
-
     @Override
-    public void getData(Intent data) {
+    public void onBackPressed() {
+        super.onBackPressed();
+        mCamera = getCameraInstance();
+    }
+    private void initpermission() {
+        Dexter.withActivity(this).
+                withPermissions(Manifest.permission.CAMERA)
+                .withListener(new MultiplePermissionsListener() {
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+
+                        if (report.areAllPermissionsGranted()) {
+                            initView();
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+
+                    }
+
+
+                }).onSameThread().check();
 
     }
 
@@ -133,109 +135,234 @@ public class CaptureSelfieWithKTPActivity extends BaseActivity implements PhotoH
         return c;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        reloadCamera();
-    }
 
-    private void initializeCamera() throws Exception {
-        Nammu.askForPermission(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                new PermissionCallback() {
-                    @Override
-                    public void permissionGranted() {
-                        permissionsGranted = true;
-                        camera = getCameraInstance();
-                        if (!isDeviceSupportCamera() || camera == null)
-                            onBackPressed();
-                        boolean hasFrontCamera = myContext.getPackageManager()
-                                .hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT);
-                        cameraPreview = new CameraComponent(myContext, camera, hasFrontCamera);
+    private void initView() {
+        myContext = this;
 
-                        previewContainer.addView(cameraPreview);
-                        previewContainer.setBackgroundResource(R.drawable.ic_selfie);
+        boolean hasFrontCamera = getApplication().getPackageManager()
+                .hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT);
+        mCamera = getCameraInstance();
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-//                        DisplayMetrics metrics = new DisplayMetrics();
-//                        .getWindowManager().getDefaultDisplay().getMetrics(metrics);
-                    }
+//        mCamera = Camera.open();
+//        requestAppPermissions();
 
-                    @Override
-                    public void permissionRefused() {
-                        Toast.makeText(myContext, "Not allowed to use camera", Toast.LENGTH_SHORT).show();
-                        onBackPressed();
-                    }
-                });
-    }
 
-    private boolean isDeviceSupportCamera() {
-        return this.getPackageManager().hasSystemFeature(
-                PackageManager.FEATURE_CAMERA);
-    }
+        Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
+        int cameraCount = Camera.getNumberOfCameras();
+        for (int camIdx = 0; camIdx < cameraCount; camIdx++) {
+            Camera.getCameraInfo(camIdx, cameraInfo);
+            if (cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
+                try {
+                    mCamera = Camera.open(camIdx);
+                    mCamera.setDisplayOrientation(90);
 
-    private void reloadCamera() {
-        if (!permissionsGranted) {
-            try {
-                initializeCamera();
-            } catch (Exception e) {
-                e.printStackTrace();
+                } catch (RuntimeException e) {
+                    Log.e("", "Camera failed to open: " + e.getLocalizedMessage());
+                }
             }
         }
-        if (camera == null) {
-            camera = getCameraInstance();
+
+        cameraPreview = (FrameLayout) findViewById(R.id.cPreview);
+        mPreview = new CameraPreview(myContext, mCamera, hasFrontCamera);
+        cameraPreview.addView(mPreview);
+        cameraPreview.setBackgroundResource(R.drawable.background_selfie2);
+
+        ivFlash = findViewById(R.id.iv_flash);
+        ivFlash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                if (isFlashOn) {
+                    isFlashOn = false;
+                    onFlashOff();
+                } else {
+                    isFlashOn = true;
+                    onFlashOn();
+                }
+
+            }
+
+
+        });
+
+
+        ivCapture = (ImageView) findViewById(R.id.btnCam);
+        ivCapture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                try {
+                    mCamera.takePicture(null, null, mPicture);
+                } catch (Exception e) {
+                    Log.e("tag", e.getMessage());
+                }
+
+            }
+        });
+
+        switchCamera = (ImageView) findViewById(R.id.btnSwitch);
+        switchCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //get the number of cameras
+                int camerasNumber = Camera.getNumberOfCameras();
+                if (camerasNumber > 1) {
+                    //release the old camera instance
+                    //switch camera, from the front and the back and vice versa
+
+                    releaseCamera();
+                    chooseCamera();
+                } else {
+
+                }
+            }
+        });
+
+        mCamera.startPreview();
+
+
+    }
+
+
+    private int findFrontFacingCamera() {
+
+        int cameraId = -1;
+        // Search for the front facing camera
+        int numberOfCameras = Camera.getNumberOfCameras();
+        for (int i = 0; i < numberOfCameras; i++) {
+            Camera.CameraInfo info = new Camera.CameraInfo();
+            Camera.getCameraInfo(i, info);
+            if (info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
+                cameraId = i;
+                cameraFront = true;
+                break;
+            }
         }
-        if (camera != null && cameraPreview == null) {
-            boolean hasFrontCamera = this.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT);
-            cameraPreview = new CameraComponent(this, camera, hasFrontCamera);
-            previewContainer.addView(cameraPreview);
+        return cameraId;
+
+    }
+
+    private int findBackFacingCamera() {
+        int cameraId = -1;
+        //Search for the back facing camera
+        //get the number of cameras
+        int numberOfCameras = Camera.getNumberOfCameras();
+        //for every camera check
+        for (int i = 0; i < numberOfCameras; i++) {
+            Camera.CameraInfo info = new Camera.CameraInfo();
+            Camera.getCameraInfo(i, info);
+            if (info.facing == Camera.CameraInfo.CAMERA_FACING_BACK) {
+                cameraId = i;
+                cameraFront = false;
+                break;
+
+            }
+
+        }
+        return cameraId;
+    }
+
+    public void onResume() {
+
+        super.onResume();
+        if (mCamera == null) {
+            mCamera = Camera.open();
+            mCamera.setDisplayOrientation(90);
+            mPicture = getPictureCallback();
+            mPreview.refreshCamera(mCamera);
+            Log.d("nu", "null");
+        } else {
+            Log.d("nu", "no null");
+        }
+
+    }
+
+
+    public void chooseCamera() {
+        if (cameraFront) {
+            int cameraId = findBackFacingCamera();
+            if (cameraId >= 0) {
+                mCamera = Camera.open(cameraId);
+                mCamera.setDisplayOrientation(90);
+                mPicture = getPictureCallback();
+                mPreview.refreshCamera(mCamera);
+            }
+        } else {
+            int cameraId = findFrontFacingCamera();
+            if (cameraId >= 0) {
+                mCamera = Camera.open(cameraId);
+                mCamera.setDisplayOrientation(90);
+                mPicture = getPictureCallback();
+                mPreview.refreshCamera(mCamera);
+            }
         }
     }
 
     @Override
-    public void onPause() {
+    protected void onPause() {
         super.onPause();
-        if (camera != null) {
-            camera.stopPreview();
-            camera.release();
-            camera = null;
-        }
-        if (cameraPreview != null) {
-            previewContainer.removeView(cameraPreview);
-            cameraPreview = null;
+        releaseCamera();
+    }
+
+    private void releaseCamera() {
+        // stop and release camera
+        if (mCamera != null) {
+            mCamera.stopPreview();
+            mCamera.setPreviewCallback(null);
+            mCamera.release();
+            mCamera = null;
         }
     }
 
-    private void captureImage() {
-        String rootPath = Environment.getExternalStorageDirectory() + File.separator
-                + getResources().getString(R.string.app_name);
-        String photoDir = "photos";
-        String pictureDirPath = rootPath + File.separator + photoDir;
-        final File pictureDir = new File(pictureDirPath);
-        pictureDir.mkdirs();
-        if (!pictureDir.exists() && !pictureDir.mkdirs()) {
-            Log.d("", "Can't create directory to save image.");
-            return;
-        }
+    private Camera.PictureCallback getPictureCallback() {
+        Camera.PictureCallback picture = new Camera.PictureCallback() {
+            @Override
+            public void onPictureTaken(byte[] data, Camera camera) {
 
-        boolean hasAutoFocus = this.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_AUTOFOCUS);
 
-        if (android.os.Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
-            hasAutoFocus = false;
-        }
+                bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+                getBase64String(bitmap);
 
-        if (hasAutoFocus) {
-            camera.autoFocus(new Camera.AutoFocusCallback() {
-                @Override
-                public void onAutoFocus(boolean b, Camera camera) {
-                    camera.takePicture(null, null, new PhotoHandler(pictureDir, IConfig.CAMERA_KTP_SELFIE_TYPE,
-                            Camera.CameraInfo.CAMERA_FACING_FRONT, CaptureSelfieWithKTPActivity.this));
-                    camera.setPreviewCallback(null);
-                }
-            });
-        } else {
-            camera.takePicture(null, null, new PhotoHandler(pictureDir, IConfig.CAMERA_KTP_SELFIE_TYPE,
-                    Camera.CameraInfo.CAMERA_FACING_FRONT, this));
-            camera.setPreviewCallback(null);
-        }
+                Log.i("BASE64", "ini base : " + getBase64String(bitmap));
+                Log.i("BITMAP", "itu bitmap" + bitmap);
+                Intent intent = new Intent(CaptureSelfieWithKTPActivity.this, ResultSelfieWithKtpActivity.class);
+//                intent.putExtra("base64selfie", getBase64String(bitmap));
+//                intent.putExtra("base64", ktp);
+                intent.putExtra("account_number", number);
+
+                startActivity(intent);
+            }
+        };
+        return picture;
     }
+
+    private String getBase64String(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
+
+        byte[] imageBytes = baos.toByteArray();
+
+         base64String = Base64.encodeToString(imageBytes, Base64.NO_WRAP);
+
+        return base64String;
+    }
+
+    private void onFlashOff() {
+        Camera.Parameters params = mCamera.getParameters();
+        params.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+        mCamera.setParameters(params);
+
+    }
+
+    private void onFlashOn() {
+        Camera.Parameters params = mCamera.getParameters();
+        params.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+        mCamera.setParameters(params);
+        mCamera.startPreview();
+    }
+
 
 }

@@ -26,4 +26,4 @@ public class OttocashSuccesActivity extends AppCompatActivity {
             }
         });
     }
-}
+ }

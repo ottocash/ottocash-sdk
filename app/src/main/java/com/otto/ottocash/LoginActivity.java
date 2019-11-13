@@ -8,6 +8,7 @@ import android.widget.EditText;
 
 import com.crashlytics.android.Crashlytics;
 import com.otto.sdk.IConfig;
+import com.otto.sdk.ui.activity.SdkActivity;
 import com.otto.sdk.ui.activity.payment.TransferToFriend.TransferToFriendActivity;
 
 import app.beelabs.com.codebase.base.BaseActivity;
@@ -17,7 +18,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.fabric.sdk.android.Fabric;
 
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends SdkActivity {
 
     @BindView(R.id.btnNextWidget)
     Button btnNextWidget;

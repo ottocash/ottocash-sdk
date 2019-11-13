@@ -72,8 +72,15 @@ public class CheckOutActivity extends BaseActivity {
     }
 
     private void initContent() {
-        emoney = CacheUtil.getPreferenceString(IConfig.SESSION_EMONEY_BALANCE, CheckOutActivity.this);
-        tvSaldoOttoCash.setText(UiUtil.formatMoneyIDR(Long.parseLong(emoney)));
+        try {
+            emoney = CacheUtil.getPreferenceString(IConfig.SESSION_EMONEY_BALANCE, CheckOutActivity.this);
+            tvSaldoOttoCash.setText(UiUtil.formatMoneyIDR(Long.parseLong(emoney)));
+
+        }
+
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void addTextWatcher(EditText input) {

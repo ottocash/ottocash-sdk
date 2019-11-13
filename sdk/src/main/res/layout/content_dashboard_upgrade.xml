@@ -99,8 +99,8 @@
                                 android:layout_height="37dp"
                                 android:layout_marginTop="5dp"
                                 android:maxLines="2"
+                                style="@style/RobotoBold"
                                 android:textColor="#0E314E"
-                                fontPath="fonts/SemiBold.otf"
                                 android:textSize="14dp"
                                 android:text="@string/transfer_ke_sesama_ottocash" />
 
@@ -109,6 +109,7 @@
                                 android:layout_height="24dp"
                                 android:layout_marginTop="8dp"
                                 android:maxLines="4"
+                                android:textColor="#6B6A6A"
                                 fontPath="fonts/Regular.otf"
                                 android:textSize="10dp"
                                 android:text="@string/ajak" />
@@ -167,7 +168,7 @@
                                 android:layout_marginTop="5dp"
                                 android:maxLines="2"
                                 android:textColor="#0E314E"
-                                fontPath="fonts/SemiBold.otf"
+                                style="@style/RobotoBold"
                                 android:textSize="14dp"
                                 android:text="@string/tarik_tunai_dari_saldo_e_money" />
 
@@ -178,6 +179,7 @@
                                 android:maxLines="4"
                                 fontPath="fonts/Regular.otf"
                                 android:textSize="10dp"
+                                android:textColor="#6B6A6A"
                                 android:text="@string/ajak" />
 
                         </LinearLayout>
@@ -233,9 +235,9 @@
                                 android:layout_marginTop="5dp"
                                 android:maxLines="2"
                                 android:textColor="#0E314E"
-                                fontPath="fonts/SemiBold.otf"
+                                style="@style/RobotoBold"
                                 android:textSize="14dp"
-                                android:text="@string/tarik_tunai_dari_saldo_e_money" />
+                                android:text="@string/transfer_ke_rekening_bank_kamu" />
 
                             <TextView
                                 android:layout_width="173dp"
@@ -244,6 +246,7 @@
                                 android:maxLines="4"
                                 fontPath="fonts/Regular.otf"
                                 android:textSize="10dp"
+                                android:textColor="#6B6A6A"
                                 android:text="@string/ajak" />
 
                         </LinearLayout>

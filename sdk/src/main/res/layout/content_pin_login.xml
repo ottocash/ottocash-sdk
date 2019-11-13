@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:cursorVisible="false"
-                android:inputType="number"
+                android:inputType="numberPassword"
                 android:textColor="@color/Black_484848"
                 android:textSize="16sp"
                 app:bottomTextPaddingDp="15dp"

@@ -1,7 +1,9 @@
 package com.otto.sdk.ui.activity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.otto.sdk.IConfig;
@@ -22,6 +24,7 @@ import com.otto.sdk.presenter.SdkResourcePresenter;
 import com.otto.sdk.ui.activity.account.activation.ActivationActivity;
 import com.otto.sdk.ui.activity.account.registration.RegistrationActivity;
 import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
+import com.otto.sdk.ui.component.support.UiUtil;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.base.BasePresenter;
@@ -31,29 +34,34 @@ public class SdkActivity extends BaseActivity implements ISdkView, IInquiryView 
 
     private String account_number;
     private SdkResourcePresenter presenterSDK;
+    private CheckPhoneNumberResponse checkPhoneNumberResponse;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sdk);
-
     }
-
-
     public void initializeSDK() {
 
         final CheckPhoneNumberRequest model = new CheckPhoneNumberRequest();
+
         final ClientsRequest clients = new ClientsRequest();
         clients.setEmail("ardi@clappingape.com");
-
         account_number = CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, SdkActivity.this);
         model.setPhone(account_number);
 
+        final Dialog loading = UiUtil.getProgressDialog(SdkActivity.this);
+        loading.show();
+
         new InquiryPresenter(this).getInquiry(new InquiryRequest(account_number));
-        showApiProgressDialog(OttoCashSdk.getAppComponent(), new SdkResourcePresenter(SdkActivity.this) {
+        showApiProgressDialog(OttoCashSdk.getAppComponent(), new SdkResourcePresenter(SdkActivity.this)
+
+        {
             @Override
             public void call() {
                 getCheckPhone(model);
+                loading.dismiss();
 
             }
         }, "Loading");
@@ -71,7 +79,6 @@ public class SdkActivity extends BaseActivity implements ISdkView, IInquiryView 
         presenterSDK = ((SdkResourcePresenter) BasePresenter.getInstance(SdkActivity.this, new SdkResourcePresenter(SdkActivity.this)));
         presenterSDK.doCreateToken(token);
     }
-
 
     public void goDashboardSDK() {
         Intent intent = new Intent(SdkActivity.this, DashboardSDKActivity.class);
@@ -94,10 +101,13 @@ public class SdkActivity extends BaseActivity implements ISdkView, IInquiryView 
 
     @Override
     public void handleCheckPhoneNumber(CheckPhoneNumberResponse model) {
+        checkPhoneNumberResponse = model;
         if (model.getMeta().getCode() == 200) {
             boolean is_existing = model.getData().isIs_existing();
             CacheUtil.putPreferenceBoolean(String.valueOf(Boolean.valueOf(IConfig.SESSION_CHECK_PHONE_NUMBER)),
                     is_existing, SdkActivity.this);
+
+            Log.i("ISEX", "isExisting"+is_existing);
 
             onCreateToken();
         } else {

@@ -1,4 +1,8 @@
-package com.otto.sdk.ui.activity.kycupgrade;
+package com.otto.sdk.ui.activity;
+
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
 
 import android.content.Context;
 import android.graphics.ImageFormat;
@@ -7,133 +11,104 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import java.io.IOException;
-import java.util.Iterator;
-import java.util.List;
-
-@SuppressWarnings("deprecation")
-public class CameraComponent extends SurfaceView implements Camera.PictureCallback, SurfaceHolder.Callback {
-
-    private static final String TAG = "Camera Preview";
+public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
     private SurfaceHolder mHolder;
     private Camera mCamera;
     private Camera.Parameters mParameters;
     private boolean isCameraSelfie;
     private boolean hasFrontCamera;
 
-    public CameraComponent(Context context, Camera camera, boolean hasFrontCamera) {
+
+    public CameraPreview(Context context, Camera camera, boolean hasFrontCamera) {
         super(context);
         mCamera = camera;
+        mHolder = getHolder();
+        mHolder.addCallback(this);
         this.isCameraSelfie = isCameraSelfie;
         this.hasFrontCamera = hasFrontCamera;
 
-        // Install a SurfaceHolder.Callback so we get notified when the
-        // underlying surface is created and destroyed.
-        mHolder = getHolder();
-        mHolder.addCallback(this);
+        // deprecated setting, but required on Android versions prior to 3.0
+        mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
     }
 
+
     public void surfaceCreated(SurfaceHolder holder) {
-        // The Surface has been created, now tell the camera where to draw the preview.
         try {
-            setParameters(mCamera, 0);
-            mCamera.setPreviewDisplay(holder);
-//            mCamera.setDisplayOrientation(90);
-            mCamera.startPreview();
+            // create the surface and start camera preview
+            if (mCamera == null) {
+                setParameters(mCamera, 0);
+                mCamera.setPreviewDisplay(holder);
+                mCamera.setDisplayOrientation(90);
+                mCamera.startPreview();
+            }
         } catch (IOException e) {
-            Log.d(TAG, "Error setting camera preview: " + e.getMessage());
+            Log.d(VIEW_LOG_TAG, "Error setting camera preview: " + e.getMessage());
         }
     }
 
-    public void surfaceDestroyed(SurfaceHolder holder) {
-        // empty. Take care of releasing the Camera preview in your activity.
-        mCamera.release();
-    }
-
-    public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
-        // If your preview can change or rotate, take care of those events here.
-        // Make sure to stop the preview before resizing or reformatting it.
-
+    public void refreshCamera(Camera camera) {
         if (mHolder.getSurface() == null) {
             // preview surface does not exist
             return;
         }
-
         // stop preview before making changes
         try {
             mCamera.stopPreview();
         } catch (Exception e) {
             // ignore: tried to stop a non-existent preview
         }
-
         // set preview size and make any resize, rotate or
         // reformatting changes here
+        // start preview with new settings
+        setCamera(camera);
+        try {
+            mCamera.setPreviewDisplay(mHolder);
+            mCamera.startPreview();
+        } catch (Exception e) {
+            Log.d(VIEW_LOG_TAG, "Error starting camera preview: " + e.getMessage());
+        }
+    }
+
+    public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
+        if (mHolder.getSurface() == null) {
+            // preview surface does not exist
+            return;
+        }
+
+        try {
+            mCamera.stopPreview();
+        } catch (Exception e) {
+
+        }
 
         // start preview with new settings
         try {
 
             setParameters(mCamera, 0);
             mCamera.setPreviewDisplay(mHolder);
-//            mCamera.setDisplayOrientation(90);
+            mCamera.setDisplayOrientation(90);
             mCamera.startPreview();
 
 
         } catch (Exception e) {
-            Log.d(TAG, "Error starting camera preview: " + e.getMessage());
+            Log.d("jejn", "Error starting camera preview: " + e.getMessage());
         }
+
+        refreshCamera(mCamera);
     }
 
-    private Camera.Size getOptimalPreviewSize(List<Camera.Size> sizes, int index, double aspectRatio) {
-        int w = sizes.get(index).width;
-        int h = sizes.get(index).height;
-
-        final double ASPECT_TOLERANCE = aspectRatio;
-
-        if (sizes == null) return null;
-
-        Camera.Size optimalSize = null;
-        double minDiff = Double.MAX_VALUE;
-
-        int targetHeight = h;
-
-        int ww = 0;
-        int hh = 0;
-        int i = 0;
-        for (Camera.Size size : sizes) {
-            if (i < index) continue; // force to iterate again base on index value
-
-            if ((size.width > ww) && (size.height > hh)) {
-                ww = size.width;
-                hh = size.height;
-                optimalSize = size;
-                minDiff = Math.abs(size.height - targetHeight);
-            }
-
-            i++;
-        }
-
-
-        if (optimalSize == null) {
-            minDiff = Double.MAX_VALUE;
-            i = 0;
-            for (Camera.Size size : sizes) {
-                if (i < index) continue;
-                if ((size.width > ww) && (size.height > hh)) {
-                    ww = size.width;
-                    hh = size.height;
-                    optimalSize = size;
-                    minDiff = Math.abs(size.height - targetHeight);
-                }
-                i++;
-            }
-        }
-
-        return optimalSize;
+    public void setCamera(Camera camera) {
+        //method to set a camera instance
+        mCamera = camera;
     }
 
-    /**
-     * SetParameters - orientation portrait
-     */
+    @Override
+    public void surfaceDestroyed(SurfaceHolder holder) {
+        // TODO Auto-generated method stub
+        // mCamera.release();
+
+    }
+
     public void setParameters(Camera mCamera, int index) {
 
         List<Camera.Size> sizes = null;
@@ -196,9 +171,53 @@ public class CameraComponent extends SurfaceView implements Camera.PictureCallba
 
     }
 
-    @Override
-    public void onPictureTaken(byte[] data, Camera camera) {
+    private Camera.Size getOptimalPreviewSize(List<Camera.Size> sizes, int index, double aspectRatio) {
+        int w = sizes.get(index).width;
+        int h = sizes.get(index).height;
 
+        final double ASPECT_TOLERANCE = aspectRatio;
+
+        if (sizes == null) return null;
+
+        Camera.Size optimalSize = null;
+        double minDiff = Double.MAX_VALUE;
+
+        int targetHeight = h;
+
+        int ww = 0;
+        int hh = 0;
+        int i = 0;
+        for (Camera.Size size : sizes) {
+            if (i < index) continue; // force to iterate again base on index value
+
+            if ((size.width > ww) && (size.height > hh)) {
+                ww = size.width;
+                hh = size.height;
+                optimalSize = size;
+                minDiff = Math.abs(size.height - targetHeight);
+            }
+
+            i++;
+        }
+
+
+        if (optimalSize == null) {
+            minDiff = Double.MAX_VALUE;
+            i = 0;
+            for (Camera.Size size : sizes) {
+                if (i < index) continue;
+                if ((size.width > ww) && (size.height > hh)) {
+                    ww = size.width;
+                    hh = size.height;
+                    optimalSize = size;
+                    minDiff = Math.abs(size.height - targetHeight);
+                }
+                i++;
+            }
+        }
+
+        return optimalSize;
     }
+
 
 }

@@ -29,8 +29,8 @@ public class UpgradeDao extends BaseDao {
 
     }
 
-    public void onUpgrade(UpgradeAccountRequest model) {
-        Api.onUpgrade(model, BaseDao.getInstance(this, idao.getPresenter(), IConfig.KEY_API_UPGRADE).callback);
+    public void onUpgrade(UpgradeAccountRequest model, Context context) {
+        Api.onUpgrade(model, context,BaseDao.getInstance(this, idao.getPresenter(), IConfig.KEY_API_UPGRADE).callback);
     }
 
     @Override

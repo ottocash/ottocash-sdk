@@ -3,9 +3,13 @@ package com.otto.sdk.ui.activity.kycupgrade;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.ExifInterface;
 import android.media.MediaScannerConnection;
 import android.nfc.Tag;
+import android.os.Build;
 import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -17,25 +21,30 @@ import android.widget.ImageView;
 
 import com.otto.sdk.Flag;
 import com.otto.sdk.R;
+import com.otto.sdk.ui.activity.ImageUtils;
 import com.otto.sdk.ui.activity.account.registration.RegistrationSuccessActivity;
 import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
 import com.otto.sdk.ui.activity.selfiewithktp.CaptureSelfieWithKTPActivity;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
+
+import static com.otto.sdk.ui.activity.kycupgrade.CaptureKTPActivity.bitmap;
+import static com.otto.sdk.ui.activity.kycupgrade.CaptureKTPActivity.rotateImage;
 
 public class KTPResultViewActivity extends AppCompatActivity {
 
     private ImageView ivback, ivAvatar;
     private static final String IMAGE_DIRECTORY = "/CustomImage";
     private Button btn_data_belum_sesuai, btnBackHome, btn_fotoKTP;
-    private String ktp, number;
+    private String ktp, number, path;
     private final String TAG = this.getClass().getSimpleName();
-
-
+    public static String getBase64;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,13 +57,10 @@ public class KTPResultViewActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-
-        ktp = getIntent().getStringExtra(Flag.ID_CARD);
-        number = getIntent().getStringExtra(Flag.ACCOUNT_NUMBER);
-
-        Log.i( TAG, "ktp : " + ktp );
-        Log.i( number, "number : " );
-
+        Log.i(TAG, "ktp : " + ktp);
+        number = getIntent().getStringExtra("account_number");
+        getBase64 = CaptureKTPActivity.base64String;
+        Log.i("ACCOUNT", "Account number : " + number);
 
         ivback = findViewById(R.id.ivBack);
 
@@ -70,8 +76,8 @@ public class KTPResultViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(KTPResultViewActivity.this, CaptureSelfieWithKTPActivity.class);
-                intent.putExtra(Flag.ID_CARD, ktp);
-                intent.putExtra(Flag.ACCOUNT_NUMBER, number);
+                intent.putExtra("account_number", number);
+//                intent.putExtra("base64", CaptureKTPActivity.base64String);
                 startActivity(intent);
             }
         });
@@ -87,23 +93,45 @@ public class KTPResultViewActivity extends AppCompatActivity {
             }
         });
 
-        ivAvatar = findViewById(R.id.iv_avatar);
-//        ivAvatar.setImageBitmap(CaptureKTPActivity.bitmap);
-//
-//        saveImage(CaptureKTPActivity.bitmap);
 
+        ivAvatar = findViewById(R.id.iv_avatar);
+        ivAvatar.setImageBitmap(CaptureKTPActivity.bitmap);
+        byteSizeOf(bitmap);
+        Log.i("ROby", "ukuran : " + byteSizeOf(bitmap));
+//        ivAvatar.setRotation(450);
+      /*  try {
+            rotateImage(bitmap);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+
+
+        Log.i("BITMAP", "INI BITMAP" + bitmap);
     }
 
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if ( resultCode == Activity.RESULT_OK)
-        {
-            Bitmap photo = (Bitmap) data.getExtras().get("data");
-            ivAvatar.setImageBitmap(photo);
+    public static int byteSizeOf(Bitmap bitmap) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            return bitmap.getAllocationByteCount();
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR1) {
+            return bitmap.getByteCount();
+        } else {
+            return bitmap.getRowBytes() * bitmap.getHeight();
         }
+    }
+
+    public Bitmap getResizedBitmap(Bitmap image, int maxSize) {
+        int width = image.getWidth();
+        int height = image.getHeight();
+
+        float bitmapRatio = (float) width / (float) height;
+        if (bitmapRatio > 1) {
+            width = maxSize;
+            height = (int) (width / bitmapRatio);
+        } else {
+            height = maxSize;
+            width = (int) (height * bitmapRatio);
+        }
+        return Bitmap.createScaledBitmap(image, width, height, true);
     }
 
     public String saveImage(Bitmap myBitmap) {
@@ -112,10 +140,6 @@ public class KTPResultViewActivity extends AppCompatActivity {
         myBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
         File wallpaperDirectory = new File(
                 Environment.getExternalStorageDirectory() + IMAGE_DIRECTORY);
-
-
-        // have the object build the directory structure, if needed.
-
 
         if (!wallpaperDirectory.exists()) {
             Log.d("dirrrrrr", "" + wallpaperDirectory.mkdirs());

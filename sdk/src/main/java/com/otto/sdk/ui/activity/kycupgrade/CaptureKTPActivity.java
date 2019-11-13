@@ -6,96 +6,103 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.hardware.Camera;
+import android.media.ExifInterface;
+import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
-
-import com.otto.sdk.AppActivity;
 import com.otto.sdk.R;
+import com.otto.sdk.ui.activity.CameraPreview;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import app.beelabs.com.codebase.base.BaseActivity;
 
-import pl.tajchert.nammu.Nammu;
-import pl.tajchert.nammu.PermissionCallback;
 
-import static me.dm7.barcodescanner.core.CameraUtils.getCameraInstance;
-
-public class CaptureKTPActivity extends AppCompatActivity {
-
-    //    CameraView cameraView;
+public class CaptureKTPActivity extends BaseActivity {
     private int REQUEST_WRITE_STORAGE_REQUEST_CODE = 112;
-
-    private android.hardware.Camera mCamera;
     private CameraPreview mPreview;
     private android.hardware.Camera.PictureCallback mPicture;
-    private ImageView ivCapture, switchCamera, ivback;
+    private ImageView ivCapture, switchCamera, ivback, ivFlash;
     private Context myContext;
     private FrameLayout cameraPreview;
     private boolean cameraFront = false;
-    public static Bitmap bitmap;
-
-    private Camera camera;
-    private CameraComponent cameraComponent;
+    public static Bitmap bitmap = null;
+    private Camera mCamera;
     private boolean permissionsGranted = false;
-
+    private boolean isFlashOn = false;
+    private String number;
+    public static String base64String;
+    private File output;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_capture_ktp);
         initView();
-
+        myContext = this;
         ivback = findViewById(R.id.ivBack);
         cameraPreview = findViewById(R.id.cPreview);
-
-
         ivback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
-
-
         ivCapture = findViewById(R.id.btnCam);
         ivCapture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CaptureKTPActivity.this, KTPResultViewActivity.class);
-                startActivity(intent);
 
+                mCamera.takePicture(null, null, getPictureCallback());
             }
         });
 
-        myContext = this;
+        number = getIntent().getStringExtra("account_number");
+        Log.i("ACCOUNT", "Account number : " + number);
+    }
 
-        boolean hasFrontCamera = getApplication().getPackageManager()
-                .hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT);
-        camera = getCameraInstance();
-        cameraComponent = new CameraComponent(myContext, camera, hasFrontCamera);
 
-        cameraPreview.addView(cameraComponent);
-        cameraPreview.setBackgroundResource(R.drawable.frame_capture_ktp);
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        mCamera = getCameraInstance();
+    }
 
+
+    private static Camera getCameraInstance() {
+        Camera c = null;
+        try {
+            c = Camera.open(Camera.CameraInfo.CAMERA_FACING_BACK);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return c;
     }
 
     private void initView() {
+        myContext = this;
+        boolean hasAutoFocus = this.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_AUTOFOCUS);
 
+        boolean hasFrontCamera = getApplication().getPackageManager()
+                .hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT);
+        mCamera = getCameraInstance();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        requestAppPermissions();
 
 //        mCamera = Camera.open();
+//        requestAppPermissions();
+
 
         Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
         int cameraCount = Camera.getNumberOfCameras();
@@ -113,9 +120,29 @@ public class CaptureKTPActivity extends AppCompatActivity {
         }
 
         cameraPreview = (FrameLayout) findViewById(R.id.cPreview);
-
-        mPreview = new CameraPreview(myContext, mCamera);
+        mPreview = new CameraPreview(myContext, mCamera, hasFrontCamera);
         cameraPreview.addView(mPreview);
+        cameraPreview.setBackgroundResource(R.drawable.frame_capture_ktp);
+
+        ivFlash = findViewById(R.id.iv_flash);
+        ivFlash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                if (isFlashOn) {
+                    isFlashOn = false;
+                    onFlashOff();
+                } else {
+                    isFlashOn = true;
+                    onFlashOn();
+                }
+
+            }
+
+
+        });
+
 
         ivCapture = (ImageView) findViewById(R.id.btnCam);
         ivCapture.setOnClickListener(new View.OnClickListener() {
@@ -152,6 +179,18 @@ public class CaptureKTPActivity extends AppCompatActivity {
         mCamera.startPreview();
     }
 
+    private void onFlashOff() {
+        Camera.Parameters params = mCamera.getParameters();
+        params.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+        mCamera.setParameters(params);
+    }
+
+    private void onFlashOn() {
+        Camera.Parameters params = mCamera.getParameters();
+        params.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+        mCamera.setParameters(params);
+        mCamera.startPreview();
+    }
 
     private int findFrontFacingCamera() {
 
@@ -191,6 +230,26 @@ public class CaptureKTPActivity extends AppCompatActivity {
         return cameraId;
     }
 
+    private Bitmap resize(Bitmap image) {
+        int maxHeight = 576;
+        int maxWidth = 1024;
+
+        int width = image.getWidth();
+        int height = image.getHeight();
+        float ratioBitmap = (float) width / (float) height;
+        float ratioMax = (float) maxWidth / (float) maxHeight;
+
+        int finalWidth = maxWidth;
+        int finalHeight = maxHeight;
+        if (ratioMax > 1) {
+            finalWidth = (int) ((float) maxHeight * ratioBitmap);
+        } else {
+            finalHeight = (int) ((float) maxWidth / ratioBitmap);
+        }
+        image = Bitmap.createScaledBitmap(image, finalWidth, finalHeight, true);
+        return image;
+    }
+
 
     public void onResume() {
 
@@ -204,18 +263,11 @@ public class CaptureKTPActivity extends AppCompatActivity {
         } else {
             Log.d("nu", "no null");
         }
-
     }
-
     public void chooseCamera() {
-        //if the camera preview is the front
         if (cameraFront) {
             int cameraId = findBackFacingCamera();
             if (cameraId >= 0) {
-                //open the backFacingCamera
-                //set a picture callback
-                //refresh the preview
-
                 mCamera = Camera.open(cameraId);
                 mCamera.setDisplayOrientation(90);
                 mPicture = getPictureCallback();
@@ -224,9 +276,6 @@ public class CaptureKTPActivity extends AppCompatActivity {
         } else {
             int cameraId = findFrontFacingCamera();
             if (cameraId >= 0) {
-                //open the backFacingCamera
-                //set a picture callback
-                //refresh the preview
                 mCamera = Camera.open(cameraId);
                 mCamera.setDisplayOrientation(90);
                 mPicture = getPictureCallback();
@@ -239,28 +288,128 @@ public class CaptureKTPActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         releaseCamera();
+
     }
 
     private void releaseCamera() {
         // stop and release camera
         if (mCamera != null) {
             mCamera.stopPreview();
+            mCamera.setDisplayOrientation(90);
             mCamera.setPreviewCallback(null);
             mCamera.release();
             mCamera = null;
         }
     }
 
+    public static Bitmap rotateImage(Bitmap bitmap) throws IOException {
+        String rootPath = Environment.getExternalStorageDirectory() + File.separator;
+        String photoDir = "photos";
+        String pictureDirPath = rootPath + File.separator + photoDir;
+        final File pictureDir = new File(pictureDirPath);
+        pictureDir.mkdirs();
+        int rotate = 0;
+        ExifInterface exif;
+        exif = new ExifInterface(pictureDirPath);
+        int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION,
+                ExifInterface.ORIENTATION_NORMAL);
+        switch (orientation) {
+            case ExifInterface.ORIENTATION_ROTATE_270:
+                rotate = 270;
+                break;
+            case ExifInterface.ORIENTATION_ROTATE_180:
+                rotate = 180;
+                break;
+            case ExifInterface.ORIENTATION_ROTATE_90:
+                rotate = 90;
+                break;
+        }
+        Matrix matrix = new Matrix();
+        matrix.postRotate(rotate);
+        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
+                bitmap.getHeight(), matrix, true);
+    }
+
     private Camera.PictureCallback getPictureCallback() {
-        Camera.PictureCallback picture = new Camera.PictureCallback() {
-            @Override
+/*
+
+        File dir=
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
+
+        output=new File(dir, "CameraContentDemo.jpeg");
+        Intent i=new Intent(Intent.ACTION_VIEW);
+
+        i.setDataAndType(Uri.fromFile(output), "image/jpeg");
+*/
+
+
+
+        final Camera.PictureCallback picture = new Camera.PictureCallback() {
+
+
+                @Override
             public void onPictureTaken(byte[] data, Camera camera) {
+//                mCamera.setDisplayOrientation(270);
+
+
                 bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+                getBase64String(bitmap);
+
+                Log.i("BASE64", "ini base : " + getBase64String(bitmap));
+                Log.i("BITMAP", "itu bitmap" + bitmap);
                 Intent intent = new Intent(CaptureKTPActivity.this, KTPResultViewActivity.class);
+                intent.putExtra("account_number", number);
                 startActivity(intent);
             }
         };
+
         return picture;
+    }
+
+//    public static Bitmap rotateImage(Bitmap bitmap) throws IOException {
+//        int rotate = 0;
+//        ExifInterface exif;
+//        exif = new ExifInterface(path);
+//        int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION,
+//                ExifInterface.ORIENTATION_NORMAL);
+//        switch (orientation) {
+//            case ExifInterface.ORIENTATION_ROTATE_270:
+//                rotate = 270;
+//                break;
+//            case ExifInterface.ORIENTATION_ROTATE_180:
+//                rotate = 180;
+//                break;
+//            case ExifInterface.ORIENTATION_ROTATE_90:
+//                rotate = 90;
+//                break;
+//        }
+//        Matrix matrix = new Matrix();
+//        matrix.postRotate(rotate);
+//        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
+//                bitmap.getHeight(), matrix, true);
+//    }
+//}
+//
+
+
+
+
+private String getBase64String(Bitmap bitmap) {
+
+//    BitmapFactory.Options options = new BitmapFactory.Options();
+//     bitmap = bitmap.decodeFile("ottoCash", options);
+    bitmap = resize(bitmap);
+
+
+      ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
+
+
+        byte[] imageBytes = baos.toByteArray();
+
+        base64String = Base64.encodeToString(imageBytes, Base64.NO_WRAP);
+
+        return base64String;
     }
 
     private void requestAppPermissions() {

@@ -64,7 +64,6 @@
                     android:textColor="@color/Blue_1f204c"
                     android:textSize="24sp" />
 
-
                 <TextView
                     android:id="@+id/tv_upgrade"
                     android:layout_width="wrap_content"
@@ -74,9 +73,26 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:text="@string/upgrade"
+                    android:visibility="gone"
+                    android:layout_marginTop="8dp"
                     android:background="@drawable/background_upgrade"
                     android:textAppearance="@style/BarlowSemiBold"
                     android:textColor="@color/white"
+                    android:textSize="10dp" />
+
+                <TextView
+                    android:id="@+id/tv_pending"
+                    android:layout_width="124dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/dalam_proses_verifikasi"
+                    android:background=" #F7F7F7"
+                    android:textAppearance="@style/BarlowSemiBold"
+                    android:textColor="#0671B6"
                     android:textSize="10dp" />
 
             </LinearLayout>

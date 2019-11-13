@@ -1,7 +1,15 @@
 package com.otto.sdk.ui.component.support;
 
+import android.app.Dialog;
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.text.Html;
 import android.text.Spanned;
+import android.view.Window;
+import android.view.WindowManager;
+
+import com.otto.sdk.R;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -27,6 +35,17 @@ public class UiUtil {
             validNumber = "0" + tempNumber;
         }
         return validNumber;
+    }
+
+    public static Dialog getProgressDialog(Context context) {
+        Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.primary_progress_bar);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(false);
+
+        return dialog;
     }
 
     public static String numberToIDR(long number, boolean isWithSymbol) {

@@ -179,5 +179,7 @@
     <string name="submit">Submit</string>
     <string name="data_belum_sesuai_ulangi_foto_selfie">Data belum sesuai, ulangi foto selfie</string>
     <string name="selesai">Selesai</string>
+    <string name="dalam_proses_verifikasi">Dalam proses verifikasi</string>
+    <string name="transfer_ke_rekening_bank_kamu">Transfer ke rekening bank kamu</string>
 
 </resources>

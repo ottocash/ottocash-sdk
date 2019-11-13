@@ -7,9 +7,12 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.hardware.Camera;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.StrictMode;
+import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -23,10 +26,13 @@ import com.otto.sdk.R;
 import com.otto.sdk.model.api.request.UpgradeAccountRequest;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.Calendar;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 import pl.tajchert.nammu.Nammu;
 import pl.tajchert.nammu.PermissionCallback;
+
 
 @SuppressWarnings("deprecation")
 public class CaptureFotoKTPActivity extends BaseActivity implements PhotoHandler.PhotoHandlerCallback {
@@ -45,11 +51,17 @@ public class CaptureFotoKTPActivity extends BaseActivity implements PhotoHandler
     private boolean isfront = true;
     int camId = Camera.CameraInfo.CAMERA_FACING_BACK;
     private int REQUEST_WRITE_STORAGE_REQUEST_CODE = 112;
+    public String photoFileName = "photo.jpeg";
+    String path;
+    private File output=null;
+    private static final int CONTENT_REQUEST=1337;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
         setContentView(R.layout.activity_capture_ktp);
         initView();
         requestAppPermissions();
@@ -72,9 +84,7 @@ public class CaptureFotoKTPActivity extends BaseActivity implements PhotoHandler
             @Override
             public void onClick(View v) {
                 captureImage();
-                Intent intent = new Intent(CaptureFotoKTPActivity.this, KTPResultViewActivity.class);
-                getData(intent);
-                startActivity(intent);
+
             }
         });
 
@@ -93,7 +103,6 @@ public class CaptureFotoKTPActivity extends BaseActivity implements PhotoHandler
 
             }
         });
-
 
         ivSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,9 +127,6 @@ public class CaptureFotoKTPActivity extends BaseActivity implements PhotoHandler
         Camera.Parameters params = camera.getParameters();
         params.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
         camera.setParameters(params);
-//        camera.stopPreview();
-//        camera.release();
-
     }
 
     private void onFlashOn() {
@@ -164,6 +170,7 @@ public class CaptureFotoKTPActivity extends BaseActivity implements PhotoHandler
                     @Override
                     public void permissionGranted() {
                         permissionsGranted = true;
+                        camera = getCameraInstance();
                         camera = getCameraInstance();
                         if (!isDeviceSupportCamera() || camera == null)
                             onBackPressed();
@@ -223,14 +230,76 @@ public class CaptureFotoKTPActivity extends BaseActivity implements PhotoHandler
         }
     }
 
+    public File getPhotoFileUri(String fileName) {
+        // Get safe storage directory for photos
+        // Use `getExternalFilesDir` on Context to access package-specific directories.
+        // This way, we don't need to request external read/write runtime permissions.
+        File mediaStorageDir = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "CHILD");
+
+        // Create the storage directory if it does not exist
+        if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
+            Log.d("CHILD", "failed to create directory");
+        }
+
+        // Return the file target for the photo based on filename
+        File file = new File(mediaStorageDir.getPath() + File.separator + fileName);
+
+        return file;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,
+                                    Intent data) {
+        if (requestCode == CONTENT_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                Intent i=new Intent(Intent.ACTION_VIEW);
+
+                i.setDataAndType(Uri.fromFile(output), "image/jpeg");
+                startActivity(i);
+                finish();
+            }
+        }
+    }
+
+
     private void captureImage() {
-        String rootPath = Environment.getExternalStorageDirectory() + File.separator
-                + getResources().getString(R.string.app_name);
-        String photoDir = "photos";
-        String pictureDirPath = rootPath + File.separator + photoDir;
-        final File pictureDir = new File(pictureDirPath);
-        pictureDir.mkdirs();
-        if (!pictureDir.exists() && !pictureDir.mkdirs()) {
+//        Uri capturedImageUri=null;
+//        Calendar cal = Calendar.getInstance();
+//        File file = new File(Environment.getExternalStorageDirectory(),  (cal.getTimeInMillis()+".jpg"));
+//        if(!file.exists()){
+//            try {
+//                file.createNewFile();
+//                System.out.println("FILE TERSIMPAN");
+//            } catch (IOException e) {
+//                // TODO Auto-generated catch block
+//                e.printStackTrace();
+//            }
+//        }else{
+//            file.delete();
+//            try {
+//                file.createNewFile();
+//            } catch (IOException e) {
+//                // TODO Auto-generated catch block
+//                e.printStackTrace();
+//            }
+//        }
+//        capturedImageUri = Uri.fromFile(file);
+
+//        Intent i = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+//        i.putExtra(MediaStore.EXTRA_OUTPUT, capturedImageUri);
+
+        File dir=
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
+
+        output=new File(dir, "CameraContentDemo.jpeg");
+        Intent i=new Intent(Intent.ACTION_VIEW);
+
+        i.setDataAndType(Uri.fromFile(output), "image/jpeg");
+
+
+
+        output.mkdirs();
+        if (!output.exists() && !output.mkdirs()) {
             Log.d("", "Can't create directory to save image.");
             return;
         }
@@ -245,50 +314,69 @@ public class CaptureFotoKTPActivity extends BaseActivity implements PhotoHandler
             camera.autoFocus(new Camera.AutoFocusCallback() {
                 @Override
                 public void onAutoFocus(boolean b, Camera camera) {
-                    camera.takePicture(null, null, new PhotoHandler(pictureDir, IConfig.CAMERA_KTP_SELFIE_TYPE,
+                    camera.takePicture(null, null, new PhotoHandler(output, IConfig.CAMERA_KTP_SELFIE_TYPE,
                             Camera.CameraInfo.CAMERA_FACING_FRONT, CaptureFotoKTPActivity.this));
                     camera.setPreviewCallback(null);
                 }
             });
         } else {
-            camera.takePicture(null, null, new PhotoHandler(pictureDir, IConfig.CAMERA_KTP_SELFIE_TYPE,
+            camera.takePicture(null, null, new PhotoHandler(output, IConfig.CAMERA_KTP_SELFIE_TYPE,
                     Camera.CameraInfo.CAMERA_FACING_FRONT, this));
             camera.setPreviewCallback(null);
+
         }
+        String path = Environment.getExternalStorageDirectory().toString()+"/DCIM/CameraContentDemo.jpeg";
+        Log.d("Files", "Path: " + path);
+        File directory = new File(path);
+        File[] files = directory.listFiles();
+        Log.d("Files", "Size: "+ files.length);
+        for (int iss = 0; iss < files.length; iss++)
+        {
+            Log.d("FilesNAMEEEE", "FileName:" + files[iss].getName());
+        }
+
+        Intent intent = new Intent(CaptureFotoKTPActivity.this, KTPResultViewActivity.class);
+        intent.putExtra("path", files[0].getPath());
+        System.out.println("HASIL PATH " + files[0].getPath());
+
+        startActivity(intent);
+
+
     }
 
-    /*private void onCallApiUpgrade() {
-        model = new UpgradeAccountRequest(
-                IConfig.SESSION_ACCOUNT_NUMBER, IConfig.SESSION_ID_CARD, IConfig.SESSION_PASSPORT_PHOTO, CaptureFotoKTPActivity.this);
+//    private void onCallApiUpgrade() {
+//        model = new UpgradeAccountRequest(
+//                IConfig.SESSION_ACCOUNT_NUMBER, IConfig.SESSION_ID_CARD, IConfig.SESSION_PASSPORT_PHOTO, CaptureFotoKTPActivity.this);
+//
+//        showApiProgressDialog(OttoCashSdk.getAppComponent(), new UpgradePresenter(CaptureFotoKTPActivity.this) {
+//            @Override
+//            public void call() {
+//                getUpgrade(model);
+//
+//            }
+//        }, "Loading");
+//    }
 
-        showApiProgressDialog(OttoCashSdk.getAppComponent(), new UpgradePresenter(CaptureFotoKTPActivity.this) {
-            @Override
-            public void call() {
-                getUpgrade(model);
-
-            }
-        }, "Loading");
-    }
-*/
     @Override
     public void getData(Intent data) {
         final String ktp = CameraUtil.convertImageToBase64(CameraUtil.getPhotoCameraResult(data,
                 IConfig.BASE64_CAMERA_PERSONA_KEY, this));
+
 //        model.setIdCard(ktp);
 //        bundle.remove("model");
         /*Intent intent = new Intent(CaptureFotoKTPActivity.this, KTPResultViewActivity.class);
         intent.putExtra(Flag.ID_CARD, ktp);
         startActivity(intent);
 */
-        btnCam.setOnClickListener(new View.OnClickListener() {
+        /*btnCam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Intent intent = new Intent(CaptureFotoKTPActivity.this, KTPResultViewActivity.class);
-                intent.putExtra(Flag.ID_CARD, ktp);
+                intent.putExtra();
                 startActivity(intent);
             }
-        });
+        });*/
     }
 
     @Override

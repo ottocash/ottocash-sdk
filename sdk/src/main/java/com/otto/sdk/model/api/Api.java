@@ -96,8 +96,8 @@ public class Api extends BaseApi {
         initApiDomain().callApiLogin(initHeader(), loginRequest).enqueue((Callback<LoginResponse>) callback);
     }
 
-    synchronized public static void onUpgrade(UpgradeAccountRequest upgradeAccountRequest, Callback callback) {
-        initApiDomain().callApiUpgrade(initHeader(), upgradeAccountRequest).enqueue((Callback<UpgradeAccountResponse>) callback);
+    synchronized public static void onUpgrade(UpgradeAccountRequest upgradeAccountRequest,Context context, Callback callback) {
+        initApiDomain().callApiUpgrade(initHeaderForRequest(context), upgradeAccountRequest).enqueue((Callback<UpgradeAccountResponse>) callback);
     }
 
     //OTP VERIFICATION

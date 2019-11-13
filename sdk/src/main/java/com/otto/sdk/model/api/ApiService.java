@@ -48,7 +48,7 @@ public interface ApiService {
                                      @Body LoginRequest loginRequest);
 
     @POST("v1/account/upgrade")
-    Call<UpgradeAccountResponse> callApiUpgrade(@HeaderMap Map<String, String> headers,
+    Call<UpgradeAccountResponse> callApiUpgrade(@HeaderMap Map<String, Object> headers,
                                               @Body UpgradeAccountRequest upgradeAccountRequest);
 
 

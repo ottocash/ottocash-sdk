@@ -3,6 +3,7 @@ package com.otto.sdk.ui.activity.kycupgrade;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -26,7 +27,8 @@ public class UpgradeActivity extends BaseActivity {
         setContentView(R.layout.activity_upgrade_plus);
         initComponent();
 
-        number = getIntent().getStringExtra(Flag.ACCOUNT_NUMBER);
+        number = getIntent().getStringExtra("account_number");
+        Log.i("ACCOUNT", "Account number : " + number);
 
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,7 +41,7 @@ public class UpgradeActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(UpgradeActivity.this, ActivityUpgradeNext.class);
-                intent.putExtra(Flag.ACCOUNT_NUMBER, number);
+                intent.putExtra("account_number", number);
                 startActivity(intent);
             }
         });
@@ -48,7 +50,7 @@ public class UpgradeActivity extends BaseActivity {
         ivback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              onBackPressed();
+                onBackPressed();
             }
         });
 

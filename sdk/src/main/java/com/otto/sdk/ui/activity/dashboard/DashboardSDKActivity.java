@@ -5,16 +5,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.otto.sdk.Flag;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCashSdk;
 import com.otto.sdk.R;
-import com.otto.sdk.model.api.response.UpgradeAccountResponse;
 import com.otto.sdk.ui.activity.kycupgrade.UpgradeActivity;
 import com.otto.sdk.interfaces.IInquiryView;
 import com.otto.sdk.model.api.request.InquiryRequest;
@@ -45,6 +44,7 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
     TextView tvSetPinOttocash;
     TextView tvTacOttocash;
     TextView tvUpgrade;
+    TextView tvPending;
 
     private InquiryRequest inquiryRequest;
     private InquiryResponse inquiryResponse;
@@ -63,16 +63,17 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
         displayMainMenu();
         onCallApiInquiry();
 
-        inquiryResponse = new InquiryResponse();
-
         tvUpgrade.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DashboardSDKActivity.this, UpgradeActivity.class);
-//                intent.putExtra(Flag.ACCOUNT_NUMBER, inquiryResponse.getData().getAccountNumber());
+                intent.putExtra("account_number", inquiryResponse.getData().getAccountNumber());
+
                 startActivity(intent);
             }
         });
+
+
     }
 
     public void initComponent() {
@@ -80,6 +81,7 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
         tvTitleOttoCash = findViewById(R.id.tvTitleOttoCash);
         tvEmoneyBalance = findViewById(R.id.tvEmoneyBalance);
         rvMainMenu = findViewById(R.id.rvMainMenu);
+        tvPending = findViewById(R.id.tv_pending);
 
         tvSetPinOttocash = findViewById(R.id.tvSetPinOttocash);
         tvTacOttocash = findViewById(R.id.tvTacOttocash);
@@ -232,17 +234,27 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
 
     public void handleInquiry(InquiryResponse model) {
         if (model.getMeta().getCode() == 200) {
+            inquiryResponse = model;
 
             emoneyBalance = model.getData().getEmoneyBalance();
             CacheUtil.putPreferenceString(IConfig.SESSION_EMONEY_BALANCE, emoneyBalance, DashboardSDKActivity.this);
-
             name = model.getData().getName();
             CacheUtil.putPreferenceString(IConfig.SESSION_NAME, name, DashboardSDKActivity.this);
-
             verifyStatus = model.getData().getVerifyStatus();
-
             tvTitleOttoCash.setText("Hai " + name + ". Saldo OttoCash Reguler Kamu");
             tvEmoneyBalance.setText(UiUtil.formatMoneyIDR(Long.parseLong(emoneyBalance)));
+
+            if (model.getData().getVerifyStatus()== 2) {
+                tvUpgrade.setVisibility(View.GONE);
+                tvPending.setVisibility(View.GONE);
+            } else if (model.getData().getVerifyStatus()== 1) {
+                tvUpgrade.setVisibility(View.GONE);
+                tvPending.setVisibility(View.VISIBLE);
+            } else if (model.getData().getVerifyStatus()== 0) {
+                tvUpgrade.setVisibility(View.VISIBLE);
+                tvPending.setVisibility(View.GONE);
+            }
+
 
         } else {
             Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
@@ -267,4 +279,6 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
             e.printStackTrace();
         }
     }
+
+
 }

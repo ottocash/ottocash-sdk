@@ -26,7 +26,7 @@ public class UpgradePresenter  extends BasePresenter implements UpgradeDao.YUpgr
                 UpgradeAccountResponse model = (UpgradeAccountResponse) br;
                 iUpgrade.handleUpgrade(model);
             }
-        }).onUpgrade(upgradeAccountRequest);
+        }).onUpgrade(upgradeAccountRequest, getContext());
     }
 
     @Override
