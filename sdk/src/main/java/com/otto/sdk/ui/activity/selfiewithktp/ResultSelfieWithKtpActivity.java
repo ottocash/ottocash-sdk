@@ -1,6 +1,11 @@
 package com.otto.sdk.ui.activity.selfiewithktp;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,6 +31,8 @@ import com.otto.sdk.ui.component.support.UiUtil;
 import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.support.util.CacheUtil;
 
+import static com.otto.sdk.ui.activity.selfiewithktp.CaptureSelfieWithKTPActivity.bitmap;
+
 public class ResultSelfieWithKtpActivity extends BaseActivity implements IUpgradeView {
 
     private ImageView ivAvatar, ivback;
@@ -34,6 +41,8 @@ public class ResultSelfieWithKtpActivity extends BaseActivity implements IUpgrad
     private String passpor_photo,ktp, number;
     private UpgradeAccountRequest upgradeAccountRequest;
     private UpgradeAccountResponse upgradeAccountResponse;
+//    Canvas canvas;
+    Paint paint;
 
 
     @Override
@@ -54,7 +63,33 @@ public class ResultSelfieWithKtpActivity extends BaseActivity implements IUpgrad
         btnBacktomenu = findViewById(R.id.btn_batalkan);
         btn_fotoKTP = findViewById(R.id.btn_fotoKTP);
         ivAvatar = findViewById(R.id.iv_avatar);
-        ivAvatar.setImageBitmap(CaptureSelfieWithKTPActivity.bitmap);
+
+//        bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.loading);
+//        Matrix mat = new Matrix();
+//        mat.postRotate(90);
+//
+//        bitmap = bitmap.createBitmap(bitmap, 0, 0,
+//                bitmap.getWidth(), bitmap.getHeight(),
+//                mat, true);
+//        int h = bitmap.getHeight();
+//
+//        Canvas canvas = new Canvas();
+//        canvas.drawBitmap(bitmap, 10,10, paint);
+//        canvas.drawBitmap(bitmap, 10,10 + h + 10, paint);
+//
+//        Matrix matrix = new Matrix();
+//
+//        matrix.postRotate(90);
+//
+//        Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 260, 280, true);
+//
+//        Bitmap rotatedBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, true);
+
+//        Matrix matrix = new Matrix();
+//        matrix.setRotate(90, 90,90);
+//        Bitmap rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+        ivAvatar.setImageBitmap(bitmap);
+
         btn_data_belum_sesuai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,6 +121,9 @@ public class ResultSelfieWithKtpActivity extends BaseActivity implements IUpgrad
             }
         });
     }
+
+
+
 
     private void onCallApiUpgrade() {
 

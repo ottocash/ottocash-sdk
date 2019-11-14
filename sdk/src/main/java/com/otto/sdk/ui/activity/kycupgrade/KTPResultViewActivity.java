@@ -96,8 +96,8 @@ public class KTPResultViewActivity extends AppCompatActivity {
 
         ivAvatar = findViewById(R.id.iv_avatar);
         ivAvatar.setImageBitmap(CaptureKTPActivity.bitmap);
-        byteSizeOf(bitmap);
-        Log.i("ROby", "ukuran : " + byteSizeOf(bitmap));
+//        byteSizeOf(bitmap);
+//        Log.i("ROby", "ukuran : " + byteSizeOf(bitmap));
 //        ivAvatar.setRotation(450);
       /*  try {
             rotateImage(bitmap);
