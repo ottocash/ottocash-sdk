@@ -122,9 +122,6 @@ public class ResultSelfieWithKtpActivity extends BaseActivity implements IUpgrad
         });
     }
 
-
-
-
     private void onCallApiUpgrade() {
 
         upgradeAccountRequest = new UpgradeAccountRequest(

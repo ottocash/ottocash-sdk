@@ -320,8 +320,6 @@ public class CaptureSelfieWithKTPActivity extends BaseActivity {
         Camera.PictureCallback picture = new Camera.PictureCallback() {
             @Override
             public void onPictureTaken(byte[] data, Camera camera) {
-
-
                 bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
                 getBase64String(bitmap);
 
