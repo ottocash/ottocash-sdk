@@ -109,15 +109,11 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
     }
 
     public void setParameters(Camera mCamera, int index) {
-
         List<Camera.Size> sizes = null;
-
-
         mParameters = mCamera.getParameters();
         mParameters.set("camera-id", 2);
         mParameters.set("orientation", "portrait");
         sizes = mParameters.getSupportedPreviewSizes();
-
 
         double aspectRatio = (isCameraSelfie && hasFrontCamera) ? 0.8 : 0.4;
         Camera.Size cs = getOptimalPreviewSize(sizes, index, aspectRatio);////sizes.get(0);

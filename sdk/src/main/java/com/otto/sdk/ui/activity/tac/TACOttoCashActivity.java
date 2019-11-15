@@ -37,6 +37,7 @@ public class TACOttoCashActivity extends BaseActivity {
     private void displayTAC() {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.loadUrl("https://ottocash.id/terms_and_condition");
+
     }
 
 

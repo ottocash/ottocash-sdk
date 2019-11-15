@@ -267,11 +267,20 @@ public class CaptureSelfieWithKTPActivity extends BaseActivity {
     public void onResume() {
 
         super.onResume();
+        int cameraId = findFrontFacingCamera();
+
         if (mCamera == null) {
-            mCamera = Camera.open();
-            mCamera.setDisplayOrientation(90);
-            mPicture = getPictureCallback();
-            mPreview.refreshCamera(mCamera);
+//            mCamera = Camera.open();
+//            mCamera.setDisplayOrientation(90);
+//            mPicture = getPictureCallback();
+//            mPreview.refreshCamera(mCamera);
+
+            if (cameraId >= 0) {
+                mCamera = Camera.open(cameraId);
+                mCamera.setDisplayOrientation(90);
+                mPicture = getPictureCallback();
+                mPreview.refreshCamera(mCamera);
+            }
             Log.d("nu", "null");
         } else {
             Log.d("nu", "no null");

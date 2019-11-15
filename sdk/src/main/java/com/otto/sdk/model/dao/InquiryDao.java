@@ -1,6 +1,7 @@
 package com.otto.sdk.model.dao;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.otto.sdk.IConfig;
 import com.otto.sdk.model.api.Api;
@@ -19,6 +20,7 @@ import app.beelabs.com.codebase.base.BaseDao;
 import app.beelabs.com.codebase.base.IDao;
 import app.beelabs.com.codebase.base.IDaoPresenter;
 import app.beelabs.com.codebase.base.response.BaseResponse;
+import app.beelabs.com.codebase.support.rx.RxObserver;
 import retrofit2.Callback;
 import retrofit2.Response;
 
@@ -57,4 +59,24 @@ public class InquiryDao extends BaseDao {
             }
         }
     }
+
+
+//    public void addSkill(InquiryRequest request) {
+//        iInquiryDao.getInquiry(request)
+//                .subscribe(new RxObserver<InquiryResponse>() {
+//                    @Override
+//                    public void onNext(Object o) {
+//                        if ((((AddSkillResponse) o).getMeta()).getCode() == 200) {
+//                            skillView.doSaveSkill();
+//                        } else {
+////                            onApiFailed((((AddSkillResponse) o).getMeta().getMessage()));
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        Log.e("error", e.getMessage());
+//                    }
+//                });
+//    }
 }

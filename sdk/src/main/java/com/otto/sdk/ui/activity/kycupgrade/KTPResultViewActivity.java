@@ -106,7 +106,7 @@ public class KTPResultViewActivity extends AppCompatActivity {
         }*/
 
 
-        Log.i("BITMAP", "INI BITMAP" + bitmap);
+        Log.i("BITMAP", "INI BITMAP" + CaptureKTPActivity.bitmap);
     }
 
     public static int byteSizeOf(Bitmap bitmap) {

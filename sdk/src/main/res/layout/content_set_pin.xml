@@ -73,8 +73,9 @@
                     android:layout_height="40dp"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/rectangle_input"
-                    android:inputType="number"
+                    android:inputType="numberPassword"
                     android:paddingLeft="14dp"
+                    android:maxLength="6"
                     android:textAppearance="@style/RobotoRegular"
                     android:textColor="@color/Black_484848" />
 
@@ -93,8 +94,9 @@
                     android:layout_height="40dp"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/rectangle_input"
-                    android:inputType="number"
+                    android:inputType="numberPassword"
                     android:paddingLeft="14dp"
+                    android:maxLength="6"
                     android:textAppearance="@style/RobotoRegular"
                     android:textColor="@color/Black_484848" />
             </LinearLayout>

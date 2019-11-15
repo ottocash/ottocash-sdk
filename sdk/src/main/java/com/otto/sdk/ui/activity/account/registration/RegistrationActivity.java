@@ -1,5 +1,6 @@
 package com.otto.sdk.ui.activity.account.registration;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -7,6 +8,7 @@ import android.support.v7.widget.AppCompatTextView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -46,12 +48,14 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
 
         initComponent();
         initContent();
+//        requestFocus();
     }
 
     private void initComponent() {
         ivBack = findViewById(R.id.ivBack);
         edtNoHp = findViewById(R.id.edtNoHp);
         edtNameKtp = findViewById(R.id.edtNameKtp);
+
         edtEmail = findViewById(R.id.edtEmail);
         btnBottom = findViewById(R.id.btnBottom);
         cbTACOttoCash = findViewById(R.id.cbTACOttoCash);
@@ -116,6 +120,15 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
     }
 
 
+    private  void requestFocus() {
+
+//        edtNameKtp.requestFocus();
+//        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+//        inputMethodManager.showSoftInput(edtNameKtp,InputMethodManager.SHOW_IMPLICIT);
+//
+
+
+    }
     private void initContent() {
         String phone = CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, RegistrationActivity.this);
         edtNoHp.setText(phone);

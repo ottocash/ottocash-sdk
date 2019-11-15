@@ -86,9 +86,10 @@ public class ResultSelfieWithKtpActivity extends BaseActivity implements IUpgrad
 //        Bitmap rotatedBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, true);
 
 //        Matrix matrix = new Matrix();
-//        matrix.setRotate(90, 90,90);
+//        matrix.setRotate(90);
 //        Bitmap rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
         ivAvatar.setImageBitmap(bitmap);
+        ivAvatar.setRotation(270);
 
         btn_data_belum_sesuai.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,6 +123,9 @@ public class ResultSelfieWithKtpActivity extends BaseActivity implements IUpgrad
         });
     }
 
+
+
+
     private void onCallApiUpgrade() {
 
         upgradeAccountRequest = new UpgradeAccountRequest(
@@ -133,6 +137,7 @@ public class ResultSelfieWithKtpActivity extends BaseActivity implements IUpgrad
 
             }
         }, "Loading");
+
     }
 
 

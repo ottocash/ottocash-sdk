@@ -15,19 +15,18 @@ import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
-import com.otto.sdk.Flag;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.R;
 import com.otto.sdk.model.api.request.UpgradeAccountRequest;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
-import java.util.Calendar;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 import pl.tajchert.nammu.Nammu;
@@ -55,6 +54,9 @@ public class CaptureFotoKTPActivity extends BaseActivity implements PhotoHandler
     String path;
     private File output=null;
     private static final int CONTENT_REQUEST=1337;
+    public static String base64String;
+    public static Bitmap bitmap;
+    private String number;
 
 
     @Override
@@ -65,6 +67,10 @@ public class CaptureFotoKTPActivity extends BaseActivity implements PhotoHandler
         setContentView(R.layout.activity_capture_ktp);
         initView();
         requestAppPermissions();
+
+        number = getIntent().getStringExtra("account_number");
+        Log.i("ACCOUNT", "Account number : " + number);
+
         myContext = this;
         previewContainer = findViewById(R.id.cPreview);
         btnCam = findViewById(R.id.btnCam);
@@ -83,11 +89,14 @@ public class CaptureFotoKTPActivity extends BaseActivity implements PhotoHandler
         btnCam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                captureImage();
+                try {
+                    captureImage();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
             }
         });
-
 
         ivFlash.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,11 +126,9 @@ public class CaptureFotoKTPActivity extends BaseActivity implements PhotoHandler
 
                 }
 
-
             }
         });
     }
-
 
     private void onFlashOff() {
         Camera.Parameters params = camera.getParameters();
@@ -198,6 +205,50 @@ public class CaptureFotoKTPActivity extends BaseActivity implements PhotoHandler
                 PackageManager.FEATURE_CAMERA);
     }
 
+    private void captureImage() throws Exception {
+        String rootPath = Environment.getExternalStorageDirectory() + File.separator
+                + getResources().getString(R.string.app_name);
+        String photoDir = "photos";
+        String pictureDirPath = rootPath + File.separator + photoDir;
+        final File pictureDir = new File(pictureDirPath);
+        pictureDir.mkdirs();
+        if (!pictureDir.exists() && !pictureDir.mkdirs()) {
+            android.util.Log.d("", "Can't create directory to save image.");
+            return;
+        }
+
+
+        boolean hasAutoFocus = this.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_AUTOFOCUS);
+
+        if (android.os.Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
+            hasAutoFocus = false;
+        }
+
+        if (hasAutoFocus) {
+            camera.autoFocus(new Camera.AutoFocusCallback() {
+
+                @Override
+                public void onAutoFocus(boolean b, Camera camera) {
+                    camera.takePicture(null, null, new PhotoHandler(output, IConfig.CAMERA_KTP_SELFIE_TYPE,
+                            Camera.CameraInfo.CAMERA_FACING_FRONT, CaptureFotoKTPActivity.this));
+                    camera.setPreviewCallback(null);
+                }
+            });
+        } else {
+            camera.takePicture(null, null, new PhotoHandler(output, IConfig.CAMERA_KTP_SELFIE_TYPE,
+                    Camera.CameraInfo.CAMERA_FACING_FRONT, this));
+            camera.setPreviewCallback(null);
+
+        }
+
+        getBase64String(bitmap);
+
+
+
+
+    }
+
+
     private void reloadCamera() {
         if (!permissionsGranted) {
             try {
@@ -220,7 +271,7 @@ public class CaptureFotoKTPActivity extends BaseActivity implements PhotoHandler
     public void onPause() {
         super.onPause();
         if (camera != null) {
-//            camera.stopPreview();
+            camera.stopPreview();
             camera.release();
             camera = null;
         }
@@ -230,153 +281,66 @@ public class CaptureFotoKTPActivity extends BaseActivity implements PhotoHandler
         }
     }
 
-    public File getPhotoFileUri(String fileName) {
-        // Get safe storage directory for photos
-        // Use `getExternalFilesDir` on Context to access package-specific directories.
-        // This way, we don't need to request external read/write runtime permissions.
-        File mediaStorageDir = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "CHILD");
-
-        // Create the storage directory if it does not exist
-        if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
-            Log.d("CHILD", "failed to create directory");
-        }
-
-        // Return the file target for the photo based on filename
-        File file = new File(mediaStorageDir.getPath() + File.separator + fileName);
-
-        return file;
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode,
-                                    Intent data) {
-        if (requestCode == CONTENT_REQUEST) {
-            if (resultCode == RESULT_OK) {
-                Intent i=new Intent(Intent.ACTION_VIEW);
-
-                i.setDataAndType(Uri.fromFile(output), "image/jpeg");
-                startActivity(i);
-                finish();
-            }
-        }
-    }
 
 
-    private void captureImage() {
-//        Uri capturedImageUri=null;
-//        Calendar cal = Calendar.getInstance();
-//        File file = new File(Environment.getExternalStorageDirectory(),  (cal.getTimeInMillis()+".jpg"));
-//        if(!file.exists()){
-//            try {
-//                file.createNewFile();
-//                System.out.println("FILE TERSIMPAN");
-//            } catch (IOException e) {
-//                // TODO Auto-generated catch block
-//                e.printStackTrace();
-//            }
-//        }else{
-//            file.delete();
-//            try {
-//                file.createNewFile();
-//            } catch (IOException e) {
-//                // TODO Auto-generated catch block
-//                e.printStackTrace();
-//            }
-//        }
-//        capturedImageUri = Uri.fromFile(file);
+    private Bitmap resize(Bitmap image) {
+        int maxHeight = 576;
+        int maxWidth = 1024;
 
-//        Intent i = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-//        i.putExtra(MediaStore.EXTRA_OUTPUT, capturedImageUri);
+        int width = image.getWidth();
+        int height = image.getHeight();
+        float ratioBitmap = (float) width / (float) height;
+        float ratioMax = (float) maxWidth / (float) maxHeight;
 
-        File dir=
-                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
-
-        output=new File(dir, "CameraContentDemo.jpeg");
-        Intent i=new Intent(Intent.ACTION_VIEW);
-
-        i.setDataAndType(Uri.fromFile(output), "image/jpeg");
-
-
-
-        output.mkdirs();
-        if (!output.exists() && !output.mkdirs()) {
-            Log.d("", "Can't create directory to save image.");
-            return;
-        }
-
-        boolean hasAutoFocus = this.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_AUTOFOCUS);
-
-        if (android.os.Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
-            hasAutoFocus = false;
-        }
-
-        if (hasAutoFocus) {
-            camera.autoFocus(new Camera.AutoFocusCallback() {
-                @Override
-                public void onAutoFocus(boolean b, Camera camera) {
-                    camera.takePicture(null, null, new PhotoHandler(output, IConfig.CAMERA_KTP_SELFIE_TYPE,
-                            Camera.CameraInfo.CAMERA_FACING_FRONT, CaptureFotoKTPActivity.this));
-                    camera.setPreviewCallback(null);
-                }
-            });
+        int finalWidth = maxWidth;
+        int finalHeight = maxHeight;
+        if (ratioMax > 1) {
+            finalWidth = (int) ((float) maxHeight * ratioBitmap);
         } else {
-            camera.takePicture(null, null, new PhotoHandler(output, IConfig.CAMERA_KTP_SELFIE_TYPE,
-                    Camera.CameraInfo.CAMERA_FACING_FRONT, this));
-            camera.setPreviewCallback(null);
-
+            finalHeight = (int) ((float) maxWidth / ratioBitmap);
         }
-        String path = Environment.getExternalStorageDirectory().toString()+"/DCIM/CameraContentDemo.jpeg";
-        Log.d("Files", "Path: " + path);
-        File directory = new File(path);
-        File[] files = directory.listFiles();
-        Log.d("Files", "Size: "+ files.length);
-        for (int iss = 0; iss < files.length; iss++)
-        {
-            Log.d("FilesNAMEEEE", "FileName:" + files[iss].getName());
-        }
-
-        Intent intent = new Intent(CaptureFotoKTPActivity.this, KTPResultViewActivity.class);
-        intent.putExtra("path", files[0].getPath());
-        System.out.println("HASIL PATH " + files[0].getPath());
-
-        startActivity(intent);
-
-
+        image = Bitmap.createScaledBitmap(image, finalWidth, finalHeight, true);
+        return image;
     }
 
-//    private void onCallApiUpgrade() {
-//        model = new UpgradeAccountRequest(
-//                IConfig.SESSION_ACCOUNT_NUMBER, IConfig.SESSION_ID_CARD, IConfig.SESSION_PASSPORT_PHOTO, CaptureFotoKTPActivity.this);
-//
-//        showApiProgressDialog(OttoCashSdk.getAppComponent(), new UpgradePresenter(CaptureFotoKTPActivity.this) {
-//            @Override
-//            public void call() {
-//                getUpgrade(model);
-//
-//            }
-//        }, "Loading");
-//    }
+
+    private String getBase64String(Bitmap bitmap) {
+
+//    BitmapFactory.Options options = new BitmapFactory.Options();
+//     bitmap = bitmap.decodeFile("ottoCash", options);
+        bitmap = resize(bitmap);
+
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
+
+
+        byte[] imageBytes = baos.toByteArray();
+
+        base64String = Base64.encodeToString(imageBytes, Base64.NO_WRAP);
+
+        return base64String;
+    }
+
+
+
+
 
     @Override
     public void getData(Intent data) {
-        final String ktp = CameraUtil.convertImageToBase64(CameraUtil.getPhotoCameraResult(data,
-                IConfig.BASE64_CAMERA_PERSONA_KEY, this));
 
-//        model.setIdCard(ktp);
-//        bundle.remove("model");
-        /*Intent intent = new Intent(CaptureFotoKTPActivity.this, KTPResultViewActivity.class);
-        intent.putExtra(Flag.ID_CARD, ktp);
+//        bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+        getBase64String(bitmap);
+
+
+
+        Log.i("BASE64", "ini base : " + getBase64String(bitmap));
+        Log.i("BITMAP", "itu bitmap" + bitmap);
+        Intent intent = new Intent(CaptureFotoKTPActivity.this, KTPResultViewActivity.class);
+        intent.putExtra("account_number", number);
         startActivity(intent);
-*/
-        /*btnCam.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                Intent intent = new Intent(CaptureFotoKTPActivity.this, KTPResultViewActivity.class);
-                intent.putExtra();
-                startActivity(intent);
-            }
-        });*/
+
     }
 
     @Override

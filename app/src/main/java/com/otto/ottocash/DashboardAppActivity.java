@@ -122,9 +122,17 @@ public class DashboardAppActivity extends BaseActivity implements ISdkView, IInq
         prefs.edit().putInt(PREF_VERSION_CODE_KEY, currentVersionCode).apply();
     }
 
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(DashboardAppActivity.this, LoginActivity.class);
+        startActivity(intent);
+    }
+
     public void goDashboardSDK() {
         Intent intent = new Intent(DashboardAppActivity.this, DashboardSDKActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
@@ -250,8 +258,8 @@ public class DashboardAppActivity extends BaseActivity implements ISdkView, IInq
                 goRegistration();
             }
         } else {
-            Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
-                    Toast.LENGTH_LONG).show();
+//            Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
+//                    Toast.LENGTH_LONG).show();
         }
     }
 
@@ -263,8 +271,8 @@ public class DashboardAppActivity extends BaseActivity implements ISdkView, IInq
             CacheUtil.putPreferenceString(IConfig.SESSION_ACCESS_TOKEN, accessToken, DashboardAppActivity.this);
 
         } else {
-            Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
-                    Toast.LENGTH_LONG).show();
+//            Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
+//                    Toast.LENGTH_LONG).show();
         }
     }
 
@@ -275,8 +283,8 @@ public class DashboardAppActivity extends BaseActivity implements ISdkView, IInq
             CacheUtil.putPreferenceString(IConfig.SESSION_EMONEY_BALANCE, model.getData().getEmoneyBalance(), this);
 
         } else {
-            Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
-                    Toast.LENGTH_LONG).show();
+//            Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
+//                    Toast.LENGTH_LONG).show();
         }
     }
 }

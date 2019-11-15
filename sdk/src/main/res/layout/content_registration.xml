@@ -60,7 +60,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp"
+                    android:layout_marginTop="10dp"
                     android:text="@string/no_hp"
                     android:textAppearance="@style/RobotoRegular"
                     android:textColor="@color/Black_484848"
@@ -70,7 +70,7 @@
                     android:id="@+id/edtNoHp"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="6dp"
                     android:background="@drawable/rounded_grey_input"
                     android:gravity="center_vertical"
                     android:hint="@string/hp"
@@ -91,11 +91,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp"
+                    android:layout_marginTop="10dp"
                     android:text="@string/nama_sesuai_ktp"
                     android:textAppearance="@style/RobotoRegular"
                     android:textColor="@color/Black_484848"
                     android:textSize="12sp" />
+
 
 
                 <EditText
@@ -107,12 +108,13 @@
                     android:inputType="textCapWords"
                     android:paddingLeft="14dp"
                     android:textAppearance="@style/RobotoRegular"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp"
+                    android:layout_marginTop="10dp"
                     android:text="@string/email_aktif"
                     android:textAppearance="@style/RobotoRegular"
                     android:textColor="@color/Black_484848"
@@ -182,7 +184,35 @@
                         android:text="@string/sign_up_label_tac_link_mitra"
                         android:textAppearance="@style/BarlowMedium"
                         android:textSize="14sp" />
+
+
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="invisible"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/checkbox" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:autoLink="all"
+                        android:linksClickable="true"
+                        android:padding="5dp"
+                        android:text="ffffffffffffffffffffffffffffffffff"
+                        android:textAppearance="@style/BarlowMedium"
+                     />
+
+
+                </LinearLayout>
+
 
             </LinearLayout>
 

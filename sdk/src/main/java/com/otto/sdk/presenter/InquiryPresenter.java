@@ -19,21 +19,24 @@ public class InquiryPresenter extends BasePresenter implements InquiryDao.IInqui
         this.inquiryView = (IInquiryView) view;
     }
 
-    @Override
-    public void getInquiry(InquiryRequest requestModel) {
-        new InquiryDao(this, new OnPresenterResponseCallback() {
-            @Override
-            public void call(BaseResponse br) {
-                InquiryResponse model = (InquiryResponse) br;
-                inquiryView.handleInquiry(model);
-            }
-        }).onInquiry(requestModel, getContext());
-    }
+
+        @Override
+        public void getInquiry (InquiryRequest requestModel){
+            new InquiryDao(this, new OnPresenterResponseCallback() {
+                @Override
+                public void call(BaseResponse br) {
+                    InquiryResponse model = (InquiryResponse) br;
+                    inquiryView.handleInquiry(model);
+                }
+            }).onInquiry(requestModel, getContext());
+        }
+
 
     @Override
     public BasePresenter getPresenter() {
         return this;
     }
+
 
     @Override
     public Context getContext() {

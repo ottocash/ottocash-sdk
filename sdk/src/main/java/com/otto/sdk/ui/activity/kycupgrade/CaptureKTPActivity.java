@@ -26,6 +26,8 @@ import com.otto.sdk.R;
 import com.otto.sdk.ui.activity.CameraPreview;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import app.beelabs.com.codebase.base.BaseActivity;
 
@@ -45,6 +47,7 @@ public class CaptureKTPActivity extends BaseActivity {
     private String number;
     public static String base64String;
     private File output;
+    private int orientation =113;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -360,6 +363,53 @@ public class CaptureKTPActivity extends BaseActivity {
                 Intent intent = new Intent(CaptureKTPActivity.this, KTPResultViewActivity.class);
                 intent.putExtra("account_number", number);
                 startActivity(intent);
+
+                   /* BitmapFactory.Options options = new BitmapFactory.Options();
+                    options.inSampleSize = 6;
+                    options.inDither = false; // Disable Dithering mode
+                    options.inPurgeable = true; // Tell to gc that whether it needs free
+                    // memory, the Bitmap can be cleared
+                    options.inInputShareable = true; // Which kind of reference will be
+                    // used to recover the Bitmap
+                    // data after being clear, when
+                    // it will be used in the future
+                    options.inTempStorage = new byte[32 * 1024];
+                    options.inPreferredConfig = Bitmap.Config.RGB_565;
+                    bitmap = BitmapFactory.decodeByteArray(data, 0, data.length, options);
+
+                    // others devices
+                    if(bitmap.getHeight() < bitmap.getWidth()){
+                        orientation = 90;
+                    } else {
+                        orientation = 0;
+                    }
+
+                    Bitmap bMapRotate;
+                    if (orientation != 0) {
+                        Matrix matrix = new Matrix();
+                        matrix.postRotate(orientation);
+                        bMapRotate = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
+                                bitmap.getHeight(), matrix, true);
+                    } else
+                        bMapRotate = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth(),
+                                bitmap.getHeight(), true);
+
+
+                    FileOutputStream out;
+                    try {
+                        out = new FileOutputStream(
+                                String.format("/sdcard/DCIM/test/screen.jpg"));
+                        bMapRotate.compress(Bitmap.CompressFormat.JPEG, 90, out);
+                        if (bMapRotate != null) {
+                            bMapRotate.recycle();
+                            bMapRotate = null;
+                        }
+                    } catch (FileNotFoundException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                    mCamera.startPreview();
+*/
             }
         };
 

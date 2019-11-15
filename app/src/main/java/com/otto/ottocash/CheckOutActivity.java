@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -40,6 +41,10 @@ public class CheckOutActivity extends BaseActivity {
     @BindView(R.id.tvGrandTotal)
     TextView tvGrandTotal;
 
+    @BindView(R.id.ivBack)
+    ImageView ivBack;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +54,13 @@ public class CheckOutActivity extends BaseActivity {
         addTextWatcher(edtSubTotal);
         initComponent();
         initContent();
+
+        ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            onBackPressed();
+            }
+        });
     }
 
     private void initComponent() {

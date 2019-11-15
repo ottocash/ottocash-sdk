@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCashSdk;
 import com.otto.sdk.R;
+import com.otto.sdk.ui.activity.account.activation.ActivationActivity;
 import com.otto.sdk.ui.activity.kycupgrade.UpgradeActivity;
 import com.otto.sdk.interfaces.IInquiryView;
 import com.otto.sdk.model.api.request.InquiryRequest;
@@ -23,6 +24,7 @@ import com.otto.sdk.presenter.InquiryPresenter;
 import com.otto.sdk.ui.activity.history.HistoryActivity;
 import com.otto.sdk.ui.activity.payment.QR.PayWithQr;
 import com.otto.sdk.ui.activity.payment.TransferToFriend.TransferToFriendActivity;
+import com.otto.sdk.ui.activity.tac.TACOttoCashActivity;
 import com.otto.sdk.ui.activity.topup.TopUpActivity;
 import com.otto.sdk.ui.adapter.MainMenuAdapter;
 import com.otto.sdk.ui.component.dialog.CustomDialog;
@@ -45,7 +47,6 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
     TextView tvTacOttocash;
     TextView tvUpgrade;
     TextView tvPending;
-
     private InquiryRequest inquiryRequest;
     private InquiryResponse inquiryResponse;
     private String emoneyBalance;
@@ -69,6 +70,15 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
                 Intent intent = new Intent(DashboardSDKActivity.this, UpgradeActivity.class);
                 intent.putExtra("account_number", inquiryResponse.getData().getAccountNumber());
 
+                startActivity(intent);
+            }
+        });
+
+        tvTacOttocash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashboardSDKActivity.this, TACOttoCashActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }
         });
@@ -271,7 +281,7 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
                     DashboardSDKActivity.this);
 
             Intent intent = new Intent(DashboardSDKActivity.this, Class.forName(PackageName));
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP );
             intent.putExtra("EMONEY", emoneyBalance);
             startActivity(intent);
             finish();
