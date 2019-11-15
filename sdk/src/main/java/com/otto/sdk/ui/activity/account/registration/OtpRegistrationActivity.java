@@ -54,6 +54,13 @@ public class OtpRegistrationActivity extends BaseActivity implements IOtpView {
 
         phone = CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, OtpRegistrationActivity.this);
         tvNoHpOtp.setText("6 Digit kode OTP telah dikirimkan ke nomor " + phone + ", Silahkan cek HP Anda");
+        ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
     }
 
 
