@@ -2,7 +2,9 @@ package com.otto.sdk;
 
 public interface IConfig {
 
-    String API_BASE_URL = "https://ottocash-sdk.clappingape.com/";
+//    String API_BASE_URL = "https://ottocash-sdk.clappingape.com/";
+
+    String API_BASE_URL = "https://sdkmw.ottocash.id/";
 
 
     //Session
@@ -21,8 +23,6 @@ public interface IConfig {
     String SESSION_ID_CARD = "id_card";
     String SESSION_PASSPORT_PHOTO = "passport_photo";
 
-
-
     String KEY_NUMBER_CONTACT = "number_contact";
     String KEY_NAME_CONTACT = "name_contact";
     String KEY_NOMINAL_TRANSFER_TO_FRIEND = "nominal";
@@ -37,17 +37,11 @@ public interface IConfig {
     String KEY_PIN_CHECKOUT = "pin_checkout";
     String KEY_BASE64_SELFIE_CAMERA_KTP = "selfie_camera_ktp_base64";
     String BASE64_CAMERA_PERSONA_KEY = "camera_persona64";
-
-
-
     boolean REMOVE_CAMERA_PHOTO_TAKEN_CONFIG = true;
     final boolean SESSION_CHECK_PHONE_NUMBER = false;
     final boolean SESSION_IS_LOGIN = false;
     int CAMERA_KTP_SELFIE_TYPE = 110;
     int CAMERA_KTP_TYPE = 100;
-
-
-
 
     //API 11 - ?
     int KEY_API_REGISTER = 11;
@@ -62,6 +56,5 @@ public interface IConfig {
     int KEY_API_HISTORIES = 20;
     int KEY_API_TRANSFER_TO_FRIEND = 21;
     int KEY_API_UPGRADE = 22;
-
 
 }

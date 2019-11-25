@@ -88,6 +88,7 @@
                     android:layout_marginRight="20dp"
                     android:layout_gravity="center"
                     android:gravity="center"
+                    android:visibility="invisible"
                     android:layout_marginTop="8dp"
                     android:text="@string/dalam_proses_verifikasi"
                     android:background=" #F7F7F7"

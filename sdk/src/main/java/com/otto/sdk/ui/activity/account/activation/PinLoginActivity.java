@@ -123,9 +123,8 @@ public class PinLoginActivity extends AppActivity implements IAuthView {
 
     private void initErrorInvalid() {
         errorMessage.setText(getString(R.string.invalid_pin));
-        errorMessage.setTextColor(ContextCompat.getColor(this, R.color.Blue_1f204c));
+        errorMessage.setTextColor(ContextCompat.getColor(this, R.color.Blue_2E70B1));
     }
-
 
     @Override
     public void handleRegister(RegisterResponse model) {

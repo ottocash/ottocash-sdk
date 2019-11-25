@@ -166,7 +166,6 @@ public class SetPinActivity extends AppActivity implements IAuthView {
             CacheUtil.putPreferenceString(IConfig.SESSION_NAME, name, SetPinActivity.this);
             CacheUtil.putPreferenceString(IConfig.SESSION_EMAIL, email, SetPinActivity.this);
 
-
             Intent intent = new Intent(SetPinActivity.this, OtpRegistrationActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);

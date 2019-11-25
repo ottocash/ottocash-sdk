@@ -63,7 +63,6 @@ public class ActivityUpgradeNext extends BaseActivity {
                             startActivity(intent);
                         }
 
-
                     }
 
                     @Override

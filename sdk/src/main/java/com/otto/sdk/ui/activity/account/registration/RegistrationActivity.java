@@ -153,7 +153,7 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
 
 
         if (FormValidation.required(name) && FormValidation.validName(name)
-                && FormValidation.required(email) && FormValidation.validEmail(email) && TACOttoCash && TACMitra) {
+                && FormValidation.required(email) && FormValidation.validEmail(email) && TACOttoCash && TACMitra && FormValidation.validUsername(name)) {
             isFormValidationSuccess = true;
             btnBottom.setBackground(ContextCompat.getDrawable(this, R.drawable.button_primary_selector));
         } else {

@@ -34,12 +34,11 @@ public class FormValidation {
     }
 
     public static boolean validUsername(String username) {
-        if (username.trim().length() > 3) {
+        if (username.trim().length() > 4) {
             return true;
         }
         return false;
     }
-
 
     public static boolean validName(String name) {
         String result = name.replaceAll("[^a-zA-Z\\s]", "");

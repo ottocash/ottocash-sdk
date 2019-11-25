@@ -13,6 +13,8 @@
             android:name=".ui.activity.kycupgrade.UpgradeActivity"
             android:screenOrientation="portrait">
 
+
+
         </activity>
         <activity
             android:name=".ui.activity.history.HistoryActivity"

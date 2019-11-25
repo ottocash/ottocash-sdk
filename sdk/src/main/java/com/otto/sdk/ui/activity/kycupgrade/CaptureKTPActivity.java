@@ -96,10 +96,9 @@ public class CaptureKTPActivity extends BaseActivity {
 
     private void initView() {
         myContext = this;
-        boolean hasAutoFocus = this.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_AUTOFOCUS);
 
         boolean hasFrontCamera = getApplication().getPackageManager()
-                .hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT);
+                .hasSystemFeature(PackageManager.FEATURE_CAMERA);
         mCamera = getCameraInstance();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
@@ -111,7 +110,7 @@ public class CaptureKTPActivity extends BaseActivity {
         int cameraCount = Camera.getNumberOfCameras();
         for (int camIdx = 0; camIdx < cameraCount; camIdx++) {
             Camera.getCameraInfo(camIdx, cameraInfo);
-            if (cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
+            if (cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_BACK) {
                 try {
                     mCamera = Camera.open(camIdx);
                     mCamera.setDisplayOrientation(90);

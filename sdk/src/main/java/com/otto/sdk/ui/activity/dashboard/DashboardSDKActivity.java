@@ -5,16 +5,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCashSdk;
 import com.otto.sdk.R;
-import com.otto.sdk.ui.activity.account.activation.ActivationActivity;
 import com.otto.sdk.ui.activity.kycupgrade.UpgradeActivity;
 import com.otto.sdk.interfaces.IInquiryView;
 import com.otto.sdk.model.api.request.InquiryRequest;
@@ -30,10 +27,8 @@ import com.otto.sdk.ui.adapter.MainMenuAdapter;
 import com.otto.sdk.ui.component.dialog.CustomDialog;
 import com.otto.sdk.ui.component.support.ItemClickSupport;
 import com.otto.sdk.ui.component.support.UiUtil;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.support.util.CacheUtil;
 
@@ -82,7 +77,6 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
                 startActivity(intent);
             }
         });
-
 
     }
 
@@ -245,7 +239,6 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
     public void handleInquiry(InquiryResponse model) {
         if (model.getMeta().getCode() == 200) {
             inquiryResponse = model;
-
             emoneyBalance = model.getData().getEmoneyBalance();
             CacheUtil.putPreferenceString(IConfig.SESSION_EMONEY_BALANCE, emoneyBalance, DashboardSDKActivity.this);
             name = model.getData().getName();
@@ -259,12 +252,11 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
                 tvPending.setVisibility(View.GONE);
             } else if (model.getData().getVerifyStatus()== 1) {
                 tvUpgrade.setVisibility(View.GONE);
-                tvPending.setVisibility(View.VISIBLE);
+                tvPending.setVisibility(View.GONE);
             } else if (model.getData().getVerifyStatus()== 0) {
-                tvUpgrade.setVisibility(View.VISIBLE);
+                tvUpgrade.setVisibility(View.GONE);
                 tvPending.setVisibility(View.GONE);
             }
-
 
         } else {
             Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
@@ -276,7 +268,6 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
     @Override
     public void onBackPressed() {
         try {
-
             String PackageName = CacheUtil.getPreferenceString(IConfig.SESSION_PACKAGE_NAME,
                     DashboardSDKActivity.this);
 

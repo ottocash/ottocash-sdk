@@ -268,15 +268,17 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
                     android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/btn_nanti_saja"
                     fontPath="fonts/SemiBold.otf"
-                    android:layout_width="159dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="50dp"
+
                     android:text="@string/nanti_saja"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="10dp"
                     android:textColor="#CF4A54"
                     android:background="@drawable/bg_nanti_saja"
                     android:textAllCaps="false"
@@ -285,14 +287,16 @@
                     <Button
                         android:id="@+id/btn_next_upgrade"
                         fontPath="fonts/SemiBold.otf"
-                        android:layout_width="159dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="50dp"
+                        android:layout_weight="1"
                         android:text="@string/lanjut_upgrade"
                         android:layout_marginLeft="10dp"
                         android:textColor="@color/white"
+                        android:src="@drawable/bg_nanti_saja"
                         android:background="#CF4A54"
                         android:textAllCaps="false"
-                        tools:ignore="MissingPrefix" />
+                         />
 
 
                 </LinearLayout>
