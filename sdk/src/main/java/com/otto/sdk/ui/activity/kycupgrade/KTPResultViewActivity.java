@@ -21,7 +21,6 @@ import android.widget.ImageView;
 
 import com.otto.sdk.Flag;
 import com.otto.sdk.R;
-import com.otto.sdk.ui.activity.ImageUtils;
 import com.otto.sdk.ui.activity.account.registration.RegistrationSuccessActivity;
 import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
 import com.otto.sdk.ui.activity.selfiewithktp.CaptureSelfieWithKTPActivity;

@@ -25,9 +25,6 @@
             android:name=".ui.activity.SdkActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.kycupgrade.CaptureFotoKTPActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".ui.activity.kycupgrade.CaptureKTPActivity"
             android:screenOrientation="portrait"
          />

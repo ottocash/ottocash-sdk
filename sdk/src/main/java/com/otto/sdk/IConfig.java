@@ -2,8 +2,10 @@ package com.otto.sdk;
 
 public interface IConfig {
 
+    //Development
 //    String API_BASE_URL = "https://ottocash-sdk.clappingape.com/";
 
+    //Production
     String API_BASE_URL = "https://sdkmw.ottocash.id/";
 
 
