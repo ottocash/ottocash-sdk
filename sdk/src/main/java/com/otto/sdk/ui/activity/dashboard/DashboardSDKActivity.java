@@ -244,18 +244,21 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
             name = model.getData().getName();
             CacheUtil.putPreferenceString(IConfig.SESSION_NAME, name, DashboardSDKActivity.this);
             verifyStatus = model.getData().getVerifyStatus();
-            tvTitleOttoCash.setText("Hai " + name + ". Saldo OttoCash Reguler Kamu");
+
             tvEmoneyBalance.setText(UiUtil.formatMoneyIDR(Long.parseLong(emoneyBalance)));
 
             if (model.getData().getVerifyStatus()== 2) {
                 tvUpgrade.setVisibility(View.GONE);
                 tvPending.setVisibility(View.GONE);
+                tvTitleOttoCash.setText("Hai " + name + ". Saldo OttoCash Plus Kamu");
             } else if (model.getData().getVerifyStatus()== 1) {
                 tvUpgrade.setVisibility(View.GONE);
-                tvPending.setVisibility(View.GONE);
+                tvPending.setVisibility(View.VISIBLE);
+                tvTitleOttoCash.setText("Hai " + name + ". Saldo OttoCash Reguler Kamu");
             } else if (model.getData().getVerifyStatus()== 0) {
-                tvUpgrade.setVisibility(View.GONE);
+                tvUpgrade.setVisibility(View.VISIBLE);
                 tvPending.setVisibility(View.GONE);
+                tvTitleOttoCash.setText("Hai " + name + ". Saldo OttoCash Reguler Kamu");
             }
 
         } else {

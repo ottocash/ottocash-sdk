@@ -50,9 +50,6 @@ public interface ApiService {
     @POST("v1/account/upgrade")
     Call<UpgradeAccountResponse> callApiUpgrade(@HeaderMap Map<String, Object> headers,
                                               @Body UpgradeAccountRequest upgradeAccountRequest);
-
-
-
     @POST("v1/account")
     Call<InquiryResponse> callApiInquiry(@HeaderMap Map<String, Object> headers,
                                          @Body InquiryRequest inquiryRequest);

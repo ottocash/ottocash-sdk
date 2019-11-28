@@ -3,15 +3,10 @@ package com.otto.sdk.ui.activity.kycupgrade;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.graphics.drawable.BitmapDrawable;
-import android.media.ExifInterface;
+
 import android.media.MediaScannerConnection;
-import android.nfc.Tag;
 import android.os.Build;
 import android.os.Environment;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,22 +14,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.otto.sdk.Flag;
 import com.otto.sdk.R;
-import com.otto.sdk.ui.activity.account.registration.RegistrationSuccessActivity;
 import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
 import com.otto.sdk.ui.activity.selfiewithktp.CaptureSelfieWithKTPActivity;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
-
-import static com.otto.sdk.ui.activity.kycupgrade.CaptureKTPActivity.bitmap;
-import static com.otto.sdk.ui.activity.kycupgrade.CaptureKTPActivity.rotateImage;
 
 public class KTPResultViewActivity extends AppCompatActivity {
 
