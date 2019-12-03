@@ -1,6 +1,7 @@
 package com.otto.ottocash;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -55,6 +56,9 @@ public class DashboardAppActivity extends BaseActivity implements ISdkView, IInq
     private CheckPhoneNumberResponse checkPhoneNumberResponse;
     private final String KEY_EMONEY_BALANCE = "EMONEY";
     private SdkResourcePresenter presenterSDK;
+    SharedPreferences sharedPreferences;
+    String getDatasessi;
+    String saldo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,31 +68,29 @@ public class DashboardAppActivity extends BaseActivity implements ISdkView, IInq
         PackageName = (this.getPackageName() + ".DashboardAppActivity");
         CacheUtil.putPreferenceString(IConfig.SESSION_PACKAGE_NAME, PackageName, DashboardAppActivity.this);
         onSetupAccountClick();
+
+        sharedPreferences = getSharedPreferences("dataSesi", Context.MODE_PRIVATE);
+        saldo  = sharedPreferences.getString("saldo", null);
+
+        getDatasessi = sharedPreferences.getString("session", null);
+        Log.i("responData", " " + getDatasessi);
+
+        if ( saldo != null) {
+            Log.i("respon", " " + saldo);
+            tvSaldoOttoCash.setText(UiUtil.formatMoneyIDR(Long.parseLong(saldo)));
+
+        }
+
+
         onEmoneyBalanceWidget();
+
+
 //        initializeSDK();
         checkFirstRun();
 
 
     }
 
-
-/*
-    @Override
-    public void handleCheckPhoneNumber(CheckPhoneNumberResponse model) {
-        if (model.getMeta().getCode() == 200) {
-            boolean is_existing = model.getData().isIs_existing();
-            CacheUtil.putPreferenceBoolean(String.valueOf(Boolean.valueOf(IConfig.SESSION_CHECK_PHONE_NUMBER)),
-                    is_existing, DashboardAppActivity.this);
-            onSetupAccountClick();
-            Log.i("Irithel", "isExisting"+is_existing);
-
-            onCreateToken();
-        } else {
-            Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
-                    Toast.LENGTH_LONG).show();
-        }
-    }
-*/
 
     private void checkFirstRun() {
 
@@ -126,6 +128,10 @@ public class DashboardAppActivity extends BaseActivity implements ISdkView, IInq
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+//        Intent intent = new Intent(DashboardAppActivity.this, LoginActivity.class);
+//        startActivity(intent);
+
+        CacheUtil.clearPreference(DashboardAppActivity.this);
         Intent intent = new Intent(DashboardAppActivity.this, LoginActivity.class);
         startActivity(intent);
     }
@@ -252,8 +258,14 @@ public class DashboardAppActivity extends BaseActivity implements ISdkView, IInq
             onCreateToken();
 
             if (checkPhoneNumberResponse.getData().isIs_existing() == true) {
+                if (getDatasessi != null) {
+                    startActivity(new Intent(getApplicationContext(), DashboardSDKActivity.class));
 
-                goActivation();
+
+                } else {
+                    goActivation();
+                }
+
             } else {
                 goRegistration();
             }
@@ -263,12 +275,14 @@ public class DashboardAppActivity extends BaseActivity implements ISdkView, IInq
         }
     }
 
+
     @Override
     public void handleToken(CreateTokenResponse model) {
         if (model.getMeta().getCode() == 200) {
 
             String accessToken = model.getData().getClient().getAccessToken();
             CacheUtil.putPreferenceString(IConfig.SESSION_ACCESS_TOKEN, accessToken, DashboardAppActivity.this);
+
 
         } else {
 //            Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),

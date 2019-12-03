@@ -51,8 +51,6 @@ public class HistoryActivity extends BaseActivity implements IHistoryView {
     }
 
     private void callApiGetHistories() {
-//        final TransactionHistoryRequest model = new TransactionHistoryRequest();
-
         model = new TransactionHistoryRequest(
                 CacheUtil.getPreferenceString(SESSION_PHONE, HistoryActivity.this));
 

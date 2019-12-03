@@ -9,9 +9,7 @@ import android.widget.EditText;
 import com.crashlytics.android.Crashlytics;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.ui.activity.SdkActivity;
-import com.otto.sdk.ui.activity.payment.TransferToFriend.TransferToFriendActivity;
 
-import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.support.util.CacheUtil;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,7 +22,7 @@ public class LoginActivity extends SdkActivity {
     Button btnNextWidget;
     @BindView(R.id.edt_phone)
     EditText edt_phone;
-
+    public static String PackageName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +31,14 @@ public class LoginActivity extends SdkActivity {
         ButterKnife.bind(this);
 
         initClientSendCredentialstoSDK();
+
+        String token  = CacheUtil.getPreferenceString(IConfig.SESSION_ACCESS_TOKEN, LoginActivity.this);
+        if  (!TextUtils.isEmpty (token)) {
+            Intent intent = new Intent(LoginActivity.this, DashboardAppActivity.class);
+            startActivity(intent);
+            finish();
+
+        }
     }
 
     private void initClientSendCredentialstoSDK() {

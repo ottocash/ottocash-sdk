@@ -1,10 +1,13 @@
 package com.otto.sdk.ui.activity.dashboard;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -47,6 +50,8 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
     private String emoneyBalance;
     private String name;
     private int verifyStatus;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
 
     @Override
@@ -58,6 +63,9 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
         initRecyclerView();
         displayMainMenu();
         onCallApiInquiry();
+
+        sharedPreferences = getSharedPreferences("dataSesi", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
         tvUpgrade.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -244,6 +252,9 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
             name = model.getData().getName();
             CacheUtil.putPreferenceString(IConfig.SESSION_NAME, name, DashboardSDKActivity.this);
             verifyStatus = model.getData().getVerifyStatus();
+            editor.putString("saldo", emoneyBalance);
+            Log.i("SALDO", "INI SALDO :"+ emoneyBalance);
+            editor.apply();
 
             tvEmoneyBalance.setText(UiUtil.formatMoneyIDR(Long.parseLong(emoneyBalance)));
 
@@ -277,6 +288,7 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
             Intent intent = new Intent(DashboardSDKActivity.this, Class.forName(PackageName));
 //            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP );
             intent.putExtra("EMONEY", emoneyBalance);
+            Log.i("Money", "ini money"+ emoneyBalance);
             startActivity(intent);
             finish();
         } catch (ClassNotFoundException e) {

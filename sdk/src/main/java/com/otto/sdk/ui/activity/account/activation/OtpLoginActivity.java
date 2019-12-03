@@ -1,7 +1,9 @@
 package com.otto.sdk.ui.activity.account.activation;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -193,9 +195,20 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
+            saveSession();
         } else {
             Toast.makeText(this, model.getBaseMeta().getCode() + ":" + model.getBaseMeta().getMessage(),
                     Toast.LENGTH_LONG).show();
         }
     }
+
+    private void saveSession() {
+        SharedPreferences sharedPreferences = getSharedPreferences("dataSesi", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString("session", "aktivasi");
+        editor.apply();
+    }
+
+
 }
