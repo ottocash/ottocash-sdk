@@ -1,6 +1,8 @@
 package com.otto.ottocash;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
@@ -23,6 +25,9 @@ public class LoginActivity extends SdkActivity {
     @BindView(R.id.edt_phone)
     EditText edt_phone;
     public static String PackageName;
+
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +36,8 @@ public class LoginActivity extends SdkActivity {
         ButterKnife.bind(this);
 
         initClientSendCredentialstoSDK();
+        sharedPreferences = getSharedPreferences("dataSesi", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
         String token  = CacheUtil.getPreferenceString(IConfig.SESSION_ACCESS_TOKEN, LoginActivity.this);
         if  (!TextUtils.isEmpty (token)) {
@@ -40,6 +47,21 @@ public class LoginActivity extends SdkActivity {
 
         }
     }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        editor.clear();
+        editor.commit();
+        Intent a = new Intent(Intent.ACTION_MAIN);
+        a.addCategory(Intent.CATEGORY_HOME);
+        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(a);
+        finish();
+    }
+
+
 
     private void initClientSendCredentialstoSDK() {
         String id = "31199fb491883361aab49e9e1210b6f0847d9bee83bce849062eeef234f12621";

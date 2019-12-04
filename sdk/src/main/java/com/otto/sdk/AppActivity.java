@@ -2,6 +2,7 @@ package com.otto.sdk;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -76,6 +77,7 @@ public class AppActivity extends BaseActivity {
             }
         }
     }
+
 
     private final LocationListener locationListener = new LocationListener() {
 

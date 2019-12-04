@@ -18,8 +18,11 @@ import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCashSdk;
 import com.otto.sdk.R;
 import com.otto.sdk.interfaces.IOtpView;
+import com.otto.sdk.interfaces.ISdkView;
 import com.otto.sdk.model.api.request.OtpRequest;
 import com.otto.sdk.model.api.request.OtpVerificationRequest;
+import com.otto.sdk.model.api.response.CheckPhoneNumberResponse;
+import com.otto.sdk.model.api.response.CreateTokenResponse;
 import com.otto.sdk.model.api.response.OtpResponse;
 import com.otto.sdk.model.api.response.OtpVerificationResponse;
 import com.otto.sdk.presenter.OtpPresenter;
@@ -33,7 +36,7 @@ import cn.iwgang.countdownview.CountdownView;
 
 import static com.otto.sdk.IConfig.SESSION_PHONE;
 
-public class OtpLoginActivity extends BaseActivity implements IOtpView {
+public class OtpLoginActivity extends BaseActivity implements IOtpView, ISdkView {
 
     ImageView ivBack;
     CountdownView countdownView;
@@ -195,7 +198,7 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
-            saveSession();
+//            saveSession();
         } else {
             Toast.makeText(this, model.getBaseMeta().getCode() + ":" + model.getBaseMeta().getMessage(),
                     Toast.LENGTH_LONG).show();
@@ -211,4 +214,23 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
     }
 
 
+    @Override
+    public void handleCheckPhoneNumber(CheckPhoneNumberResponse model) {
+
+    }
+
+    @Override
+    public void handleToken(CreateTokenResponse model) {
+
+        if (model.getMeta().getCode() == 200) {
+
+            String accessToken = model.getData().getClient().getAccessToken();
+            CacheUtil.putPreferenceString(IConfig.SESSION_ACCESS_TOKEN, accessToken, OtpLoginActivity.this);
+
+
+        } else {
+//            Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
+//                    Toast.LENGTH_LONG).show();
+        }
+    }
 }

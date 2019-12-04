@@ -2,6 +2,7 @@ package com.otto.sdk.ui.activity.account.registration;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatTextView;
@@ -186,6 +187,7 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
 
         });
     }
+
 
 
 }
