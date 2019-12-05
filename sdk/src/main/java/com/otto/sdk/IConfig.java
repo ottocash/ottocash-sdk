@@ -34,12 +34,16 @@ public interface IConfig {
     String KEY_REFERENCE_NUMBER_P2P = "reference_number_P2P";
     String KEY_DATE_P2P = "date_p2p";
 
+    //KEY REVIEW CHECKOUT
+    String TOTAL_BILL_PAYMENT = "total_bill_checkout";
+
     //KEY PIN PAYMENT
     String KEY_PIN_TRANSFER_TO_FRIEND = "pin_transfer_to_friend";
     String KEY_PIN_CHECKOUT = "pin_checkout";
     String KEY_BASE64_SELFIE_CAMERA_KTP = "selfie_camera_ktp_base64";
     String BASE64_CAMERA_PERSONA_KEY = "camera_persona64";
     boolean REMOVE_CAMERA_PHOTO_TAKEN_CONFIG = true;
+
     final boolean SESSION_CHECK_PHONE_NUMBER = false;
     final boolean SESSION_IS_LOGIN = false;
     int CAMERA_KTP_SELFIE_TYPE = 110;

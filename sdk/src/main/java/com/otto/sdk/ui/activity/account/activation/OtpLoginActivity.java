@@ -205,10 +205,8 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
     private void saveSession() {
         SharedPreferences sharedPreferences = getSharedPreferences("dataSesi", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-
         editor.putString("session", "aktivasi");
         editor.apply();
     }
-
 
 }
