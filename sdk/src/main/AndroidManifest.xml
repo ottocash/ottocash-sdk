@@ -2,18 +2,20 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.otto.sdk">
 
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.FLASHLIGHT"/>
+
     <application android:name=".OttoCashSdk">
 
-        <activity android:name=".ui.activity.kycupgrade.OttocashSuccesActivity" />
-        <activity android:name=".ui.activity.selfiewithktp.ResultSelfieWithKtpActivity" />
-        <activity android:name=".ui.activity.kycupgrade.KTPResultViewActivity" />
-        <activity android:name=".ui.activity.kycupgrade.ActivityUpgradeNext" />
-        <activity
 
-            android:name=".ui.activity.kycupgrade.UpgradeActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
         <activity
             android:name=".ui.activity.history.HistoryActivity"
             android:screenOrientation="portrait" />
@@ -104,24 +106,27 @@
         <activity
             android:name=".ui.activity.payment.PaymentSuccessActivity"
             android:screenOrientation="portrait" />
-    </application>
-    <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.camera.autofocus" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.FLASHLIGHT"/>
+
+        <activity
+            android:name=".ui.activity.kycupgrade.OttocashSuccesActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activity.selfiewithktp.ResultSelfieWithKtpActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activity.kycupgrade.KTPResultViewActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activity.kycupgrade.ActivityUpgradeNext"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activity.kycupgrade.UpgradeActivity"
+            android:screenOrientation="portrait"/>
+         </application>
 
     <uses-feature android:name="android.hardware.camera.flash"
         android:required="false" />
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
 </manifest>
