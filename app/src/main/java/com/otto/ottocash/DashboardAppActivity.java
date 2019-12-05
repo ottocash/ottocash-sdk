@@ -5,12 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCashSdk;
@@ -23,6 +23,7 @@ import com.otto.sdk.model.api.request.InquiryRequest;
 import com.otto.sdk.model.api.response.CheckPhoneNumberResponse;
 import com.otto.sdk.model.api.response.CreateTokenResponse;
 import com.otto.sdk.model.api.response.InquiryResponse;
+import com.otto.sdk.model.api.response.UpgradeAccountResponse;
 import com.otto.sdk.presenter.InquiryPresenter;
 import com.otto.sdk.presenter.SdkResourcePresenter;
 import com.otto.sdk.presenter.manager.SessionManager;
@@ -30,6 +31,7 @@ import com.otto.sdk.ui.activity.SdkActivity;
 import com.otto.sdk.ui.activity.account.activation.ActivationActivity;
 import com.otto.sdk.ui.activity.account.registration.RegistrationActivity;
 import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
+import com.otto.sdk.ui.activity.selfiewithktp.ResultSelfieWithKtpActivity;
 import com.otto.sdk.ui.component.support.UiUtil;
 
 import app.beelabs.com.codebase.base.BaseActivity;
@@ -55,11 +57,8 @@ public class DashboardAppActivity extends BaseActivity implements ISdkView, IInq
     private final String KEY_EMONEY_BALANCE = "EMONEY";
     private SdkResourcePresenter presenterSDK;
     SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
-
     String getDatasessi;
     String saldo;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,20 +68,29 @@ public class DashboardAppActivity extends BaseActivity implements ISdkView, IInq
         PackageName = (this.getPackageName() + ".DashboardAppActivity");
         CacheUtil.putPreferenceString(IConfig.SESSION_PACKAGE_NAME, PackageName, DashboardAppActivity.this);
         onSetupAccountClick();
+
         sharedPreferences = getSharedPreferences("dataSesi", Context.MODE_PRIVATE);
         saldo  = sharedPreferences.getString("saldo", null);
+
         getDatasessi = sharedPreferences.getString("session", null);
         Log.i("responData", " " + getDatasessi);
+
         if ( saldo != null) {
             Log.i("respon", " " + saldo);
             tvSaldoOttoCash.setText(UiUtil.formatMoneyIDR(Long.parseLong(saldo)));
 
         }
+
+
         onEmoneyBalanceWidget();
+
+
+//        initializeSDK();
         checkFirstRun();
-        editor = sharedPreferences.edit();
+
 
     }
+
 
     private void checkFirstRun() {
 
@@ -105,8 +113,11 @@ public class DashboardAppActivity extends BaseActivity implements ISdkView, IInq
 
         } else if (savedVersionCode == DOESNT_EXIST) {
 
+            // TODO This is a new install (or the user cleared the shared preferences)
 
         } else if (currentVersionCode > savedVersionCode) {
+
+            // TODO This is an upgrade
         }
 
         // Update the shared preferences with the current version code
@@ -117,12 +128,15 @@ public class DashboardAppActivity extends BaseActivity implements ISdkView, IInq
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        CacheUtil.clearPreference(DashboardAppActivity.this);
-//        editor.clear();
-//        editor.commit();
+//        Intent intent = new Intent(DashboardAppActivity.this, LoginActivity.class);
+//        startActivity(intent);
+
+        SharedPreferences.Editor editor = getSharedPreferences("dataSesi", Context.MODE_PRIVATE).edit();
+        editor.clear();
+        editor.commit();
+//        CacheUtil.clearPreference(DashboardAppActivity.this);
         Intent intent = new Intent(DashboardAppActivity.this, LoginActivity.class);
         startActivity(intent);
-        finish();
     }
 
     public void goDashboardSDK() {
@@ -215,11 +229,20 @@ public class DashboardAppActivity extends BaseActivity implements ISdkView, IInq
     @OnClick(R.id.btnClearCache)
     public void onClearCache() {
 //        SessionManager.getSessionLogin(false, DashboardAppActivity.this);
-//        CacheUtil.clearPreference(DashboardAppActivity.this);
+//        Intent intent = new Intent(DashboardAppActivity.this, LoginActivity.class);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//        DashboardAppActivity.this.startActivity(intent);
+//        finish();
+
+
+        SharedPreferences.Editor editor = getSharedPreferences("dataSesi", Context.MODE_PRIVATE).edit();
         editor.clear();
         editor.commit();
+//        CacheUtil.clearPreference(DashboardAppActivity.this);
         Intent intent = new Intent(DashboardAppActivity.this, LoginActivity.class);
         startActivity(intent);
+        finish();
+
     }
 
     public void onCreateToken() {
@@ -243,13 +266,12 @@ public class DashboardAppActivity extends BaseActivity implements ISdkView, IInq
             CacheUtil.putPreferenceBoolean(String.valueOf(Boolean.valueOf(IConfig.SESSION_CHECK_PHONE_NUMBER)),
                     is_existing, DashboardAppActivity.this);
 
-            Log.i("OTTOCASH", "isExisting :" + is_existing);
+            Log.i("ISEX", "isExisting" + is_existing);
+
             onCreateToken();
 
-            String token  = CacheUtil.getPreferenceString(IConfig.SESSION_ACCESS_TOKEN, DashboardAppActivity.this);
-
             if (checkPhoneNumberResponse.getData().isIs_existing() == true) {
-                if (!TextUtils.isEmpty (token)) {
+                if (getDatasessi != null) {
                     startActivity(new Intent(getApplicationContext(), DashboardSDKActivity.class));
 
 

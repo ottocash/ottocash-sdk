@@ -25,9 +25,10 @@ public class LoginActivity extends SdkActivity {
     @BindView(R.id.edt_phone)
     EditText edt_phone;
     public static String PackageName;
-
     SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
+    String getDatasessi;
+    String saldo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,10 +38,12 @@ public class LoginActivity extends SdkActivity {
 
         initClientSendCredentialstoSDK();
         sharedPreferences = getSharedPreferences("dataSesi", Context.MODE_PRIVATE);
-        editor = sharedPreferences.edit();
+        saldo  = sharedPreferences.getString("saldo", null);
+
+        getDatasessi = sharedPreferences.getString("session", null);
 
         String token  = CacheUtil.getPreferenceString(IConfig.SESSION_ACCESS_TOKEN, LoginActivity.this);
-        if  (!TextUtils.isEmpty (token)) {
+        if  (getDatasessi != null) {
             Intent intent = new Intent(LoginActivity.this, DashboardAppActivity.class);
             startActivity(intent);
             finish();
@@ -48,26 +51,22 @@ public class LoginActivity extends SdkActivity {
         }
     }
 
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        editor.clear();
-        editor.commit();
-        Intent a = new Intent(Intent.ACTION_MAIN);
-        a.addCategory(Intent.CATEGORY_HOME);
-        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(a);
-        finish();
-    }
-
-
-
     private void initClientSendCredentialstoSDK() {
         String id = "31199fb491883361aab49e9e1210b6f0847d9bee83bce849062eeef234f12621";
         CacheUtil.putPreferenceString(IConfig.SESSION_ID, id, LoginActivity.this);
         String secret = "9ef53ece2353a5ae9497910a1de0c483608bdb75ede462407d78ad08ec4da49a";
         CacheUtil.putPreferenceString(IConfig.SESSION_SECRET, secret, LoginActivity.this);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent mainActivity = new Intent(Intent.ACTION_MAIN);
+        mainActivity.addCategory(Intent.CATEGORY_HOME);
+        mainActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        mainActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(mainActivity);
+        finish();
     }
 
     @OnClick(R.id.btnNextWidget)

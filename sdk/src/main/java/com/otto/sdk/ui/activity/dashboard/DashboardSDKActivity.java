@@ -72,6 +72,7 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
             public void onClick(View v) {
                 Intent intent = new Intent(DashboardSDKActivity.this, UpgradeActivity.class);
                 intent.putExtra("account_number", inquiryResponse.getData().getAccountNumber());
+
                 startActivity(intent);
             }
         });
@@ -97,6 +98,7 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
         tvSetPinOttocash = findViewById(R.id.tvSetPinOttocash);
         tvTacOttocash = findViewById(R.id.tvTacOttocash);
         tvUpgrade = findViewById(R.id.tv_upgrade);
+
         tvSetPinOttocash.setText(UiUtil.getHTMLContent(getString(R.string.set_pin_ottocash)));
         tvTacOttocash.setText(UiUtil.getHTMLContent(getString(R.string.tac_ottocash)));
 
@@ -140,6 +142,7 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
         String[] mainMenus;
         String[] mainMenuCodes;
         Integer[] menuIcons;
+
         mainMenus = getResources().getStringArray(R.array.otto_cash_main_menu);
         mainMenuCodes = getResources().getStringArray(R.array.otto_cash_menu_code);
 
@@ -264,6 +267,12 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
                 tvPending.setVisibility(View.VISIBLE);
                 tvTitleOttoCash.setText("Hai " + name + ". Saldo OttoCash Reguler Kamu");
             } else if (model.getData().getVerifyStatus()== 0) {
+                tvUpgrade.setVisibility(View.VISIBLE);
+                tvPending.setVisibility(View.GONE);
+                tvTitleOttoCash.setText("Hai " + name + ". Saldo OttoCash Reguler Kamu");
+            }
+
+            else if (model.getData().getVerifyStatus()== 3) {
                 tvUpgrade.setVisibility(View.VISIBLE);
                 tvPending.setVisibility(View.GONE);
                 tvTitleOttoCash.setText("Hai " + name + ". Saldo OttoCash Reguler Kamu");
