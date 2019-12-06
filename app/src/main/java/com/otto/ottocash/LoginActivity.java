@@ -64,7 +64,7 @@ public class LoginActivity extends SdkActivity {
         Intent mainActivity = new Intent(Intent.ACTION_MAIN);
         mainActivity.addCategory(Intent.CATEGORY_HOME);
         mainActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        mainActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+       mainActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(mainActivity);
         finish();
     }

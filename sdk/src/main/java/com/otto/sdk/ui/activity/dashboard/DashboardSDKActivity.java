@@ -298,7 +298,7 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
             Intent intent = new Intent(DashboardSDKActivity.this, Class.forName(PackageName));
 //            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP );
             intent.putExtra("EMONEY", emoneyBalance);
-            Log.i("Money", "ini money"+ emoneyBalance);
+            Log.i("Money", "emoney"+ emoneyBalance);
             startActivity(intent);
             finish();
         } catch (ClassNotFoundException e) {

@@ -23,15 +23,11 @@ import com.otto.sdk.model.api.request.InquiryRequest;
 import com.otto.sdk.model.api.response.CheckPhoneNumberResponse;
 import com.otto.sdk.model.api.response.CreateTokenResponse;
 import com.otto.sdk.model.api.response.InquiryResponse;
-import com.otto.sdk.model.api.response.UpgradeAccountResponse;
 import com.otto.sdk.presenter.InquiryPresenter;
 import com.otto.sdk.presenter.SdkResourcePresenter;
-import com.otto.sdk.presenter.manager.SessionManager;
-import com.otto.sdk.ui.activity.SdkActivity;
 import com.otto.sdk.ui.activity.account.activation.ActivationActivity;
 import com.otto.sdk.ui.activity.account.registration.RegistrationActivity;
 import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
-import com.otto.sdk.ui.activity.selfiewithktp.ResultSelfieWithKtpActivity;
 import com.otto.sdk.ui.component.support.UiUtil;
 
 import app.beelabs.com.codebase.base.BaseActivity;
@@ -128,14 +124,11 @@ public class DashboardAppActivity extends BaseActivity implements ISdkView, IInq
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-//        Intent intent = new Intent(DashboardAppActivity.this, LoginActivity.class);
-//        startActivity(intent);
-
         SharedPreferences.Editor editor = getSharedPreferences("dataSesi", Context.MODE_PRIVATE).edit();
         editor.clear();
         editor.commit();
-//        CacheUtil.clearPreference(DashboardAppActivity.this);
         Intent intent = new Intent(DashboardAppActivity.this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
@@ -229,19 +222,12 @@ public class DashboardAppActivity extends BaseActivity implements ISdkView, IInq
     @OnClick(R.id.btnClearCache)
     public void onClearCache() {
 //        SessionManager.getSessionLogin(false, DashboardAppActivity.this);
-//        Intent intent = new Intent(DashboardAppActivity.this, LoginActivity.class);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//        DashboardAppActivity.this.startActivity(intent);
-//        finish();
-
-
         SharedPreferences.Editor editor = getSharedPreferences("dataSesi", Context.MODE_PRIVATE).edit();
         editor.clear();
         editor.commit();
-//        CacheUtil.clearPreference(DashboardAppActivity.this);
         Intent intent = new Intent(DashboardAppActivity.this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-        finish();
 
     }
 

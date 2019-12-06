@@ -84,6 +84,7 @@ public class PinPaymentActivity extends AppActivity implements IPinVerificationP
         keyPinVerificationPayment();
         initComponent();
         addTextWatcher(lineField);
+
     }
 
     private void keyPinVerificationPayment() {
@@ -222,8 +223,14 @@ public class PinPaymentActivity extends AppActivity implements IPinVerificationP
     @Override
     public void handleReviewCheckout(ReviewCheckOutResponse model) {
         if (model.getMeta().getCode() == 200) {
-            Intent intent = new Intent(PinPaymentActivity.this, DashboardSDKActivity.class);
-            startActivity(intent);
+//            Intent intent = new Intent(PinPaymentActivity.this, DashboardSDKActivity.class);
+//            startActivity(intent);
+
+            model.getData().getResponseDescription();
+            model.getData().getReferenceNumber();
+            model.getData().getTransactionDate();
+            model.getData().getResponseCode();
+
         } else {
             Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
                     Toast.LENGTH_LONG).show();
