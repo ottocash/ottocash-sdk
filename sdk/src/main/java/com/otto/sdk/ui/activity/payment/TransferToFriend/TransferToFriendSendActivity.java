@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -41,7 +42,6 @@ public class TransferToFriendSendActivity extends BaseActivity implements IInqui
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transfer_to_friend_send);
-
         initComponent();
         addTextWatcher(etAmount);
     }
@@ -62,6 +62,7 @@ public class TransferToFriendSendActivity extends BaseActivity implements IInqui
 
         tvName.setText(nameContact);
         tvHp.setText(numberContact);
+        Log.i("NAME", "name contact :" +nameContact );
 
 
         ivBack.setOnClickListener(new View.OnClickListener() {

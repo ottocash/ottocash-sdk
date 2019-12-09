@@ -65,8 +65,8 @@ public class TransferToFriendReviewActivity extends BaseActivity {
         tvBiayaLayanan = findViewById(R.id.tvBiayaLayanan);
         tvTotalBayar = findViewById(R.id.tvTotalBayar);
 
-        tvTitleReview.setText("DETAIL TRANSFER");
-        tvSubReview.setText("Transfer");
+        tvTitleReview.setText("Transfer");
+        tvSubReview.setText("DETAIL TRANSFER");
         tvTitlePayment.setText("Transfer Uang");
     }
 

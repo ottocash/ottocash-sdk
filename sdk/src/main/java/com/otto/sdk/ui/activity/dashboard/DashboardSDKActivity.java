@@ -265,21 +265,21 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
             if (model.getData().getVerifyStatus()== 2) {
                 tvUpgrade.setVisibility(View.GONE);
                 tvPending.setVisibility(View.GONE);
-                tvTitleOttoCash.setText("Hai " + name + ". Saldo OttoCash Plus Kamu");
+                tvTitleOttoCash.setText("Hai " + name + ". Saldo OttoCash Plus");
             } else if (model.getData().getVerifyStatus()== 1) {
                 tvUpgrade.setVisibility(View.GONE);
                 tvPending.setVisibility(View.VISIBLE);
-                tvTitleOttoCash.setText("Hai " + name + ". Saldo OttoCash Reguler Kamu");
+                tvTitleOttoCash.setText("Hai " + name + ". Saldo OttoCash Reguler");
             } else if (model.getData().getVerifyStatus()== 0) {
                 tvUpgrade.setVisibility(View.VISIBLE);
                 tvPending.setVisibility(View.GONE);
-                tvTitleOttoCash.setText("Hai " + name + ". Saldo OttoCash Reguler Kamu");
+                tvTitleOttoCash.setText("Hai " + name + ". Saldo OttoCash Reguler");
             }
 
             else if (model.getData().getVerifyStatus()== 3) {
                 tvUpgrade.setVisibility(View.VISIBLE);
                 tvPending.setVisibility(View.GONE);
-                tvTitleOttoCash.setText("Hai " + name + ". Saldo OttoCash Reguler Kamu");
+                tvTitleOttoCash.setText("Hai " + name + ". Saldo OttoCash Reguler");
             }
 
         } else {
