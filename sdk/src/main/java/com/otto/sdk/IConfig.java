@@ -44,8 +44,8 @@ public interface IConfig {
     String BASE64_CAMERA_PERSONA_KEY = "camera_persona64";
     boolean REMOVE_CAMERA_PHOTO_TAKEN_CONFIG = true;
 
-    final boolean SESSION_CHECK_PHONE_NUMBER = false;
-    final boolean SESSION_IS_LOGIN = false;
+    boolean SESSION_CHECK_PHONE_NUMBER = false;
+    boolean SESSION_IS_LOGIN = false;
     int CAMERA_KTP_SELFIE_TYPE = 110;
     int CAMERA_KTP_TYPE = 100;
 

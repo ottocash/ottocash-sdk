@@ -22,13 +22,16 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+
 import com.otto.sdk.R;
 import com.otto.sdk.ui.activity.CameraPreview;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
 import app.beelabs.com.codebase.base.BaseActivity;
 
 
@@ -47,7 +50,7 @@ public class CaptureKTPActivity extends BaseActivity {
     private String number;
     public static String base64String;
     private File output;
-    private int orientation =113;
+    private int orientation = 113;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,9 +105,8 @@ public class CaptureKTPActivity extends BaseActivity {
         mCamera = getCameraInstance();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-//        mCamera = Camera.open();
-//        requestAppPermissions();
-
+        //mCamera = Camera.open();
+        //requestAppPermissions();
 
         Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
         int cameraCount = Camera.getNumberOfCameras();
@@ -266,6 +268,7 @@ public class CaptureKTPActivity extends BaseActivity {
             Log.d("nu", "no null");
         }
     }
+
     public void chooseCamera() {
         if (cameraFront) {
             int cameraId = findBackFacingCamera();
@@ -333,25 +336,22 @@ public class CaptureKTPActivity extends BaseActivity {
     }
 
     private Camera.PictureCallback getPictureCallback() {
-/*
 
-        File dir=
+        /*File dir =
                 Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
 
-        output=new File(dir, "CameraContentDemo.jpeg");
-        Intent i=new Intent(Intent.ACTION_VIEW);
+        output = new File(dir, "CameraContentDemo.jpeg");
+        Intent i = new Intent(Intent.ACTION_VIEW);
 
-        i.setDataAndType(Uri.fromFile(output), "image/jpeg");
-*/
-
+        i.setDataAndType(Uri.fromFile(output), "image/jpeg");*/
 
 
         final Camera.PictureCallback picture = new Camera.PictureCallback() {
 
 
-                @Override
+            @Override
             public void onPictureTaken(byte[] data, Camera camera) {
-//                mCamera.setDisplayOrientation(270);
+                //mCamera.setDisplayOrientation(270);
 
 
                 bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
@@ -363,94 +363,89 @@ public class CaptureKTPActivity extends BaseActivity {
                 intent.putExtra("account_number", number);
                 startActivity(intent);
 
-                   /* BitmapFactory.Options options = new BitmapFactory.Options();
-                    options.inSampleSize = 6;
-                    options.inDither = false; // Disable Dithering mode
-                    options.inPurgeable = true; // Tell to gc that whether it needs free
-                    // memory, the Bitmap can be cleared
-                    options.inInputShareable = true; // Which kind of reference will be
-                    // used to recover the Bitmap
-                    // data after being clear, when
-                    // it will be used in the future
-                    options.inTempStorage = new byte[32 * 1024];
-                    options.inPreferredConfig = Bitmap.Config.RGB_565;
-                    bitmap = BitmapFactory.decodeByteArray(data, 0, data.length, options);
+                /*BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inSampleSize = 6;
+                options.inDither = false; // Disable Dithering mode
+                options.inPurgeable = true; // Tell to gc that whether it needs free
+                // memory, the Bitmap can be cleared
+                options.inInputShareable = true; // Which kind of reference will be
+                // used to recover the Bitmap
+                // data after being clear, when
+                // it will be used in the future
+                options.inTempStorage = new byte[32 * 1024];
+                options.inPreferredConfig = Bitmap.Config.RGB_565;
+                bitmap = BitmapFactory.decodeByteArray(data, 0, data.length, options);
 
-                    // others devices
-                    if(bitmap.getHeight() < bitmap.getWidth()){
-                        orientation = 90;
-                    } else {
-                        orientation = 0;
+                // others devices
+                if (bitmap.getHeight() < bitmap.getWidth()) {
+                    orientation = 90;
+                } else {
+                    orientation = 0;
+                }
+
+                Bitmap bMapRotate;
+                if (orientation != 0) {
+                    Matrix matrix = new Matrix();
+                    matrix.postRotate(orientation);
+                    bMapRotate = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
+                            bitmap.getHeight(), matrix, true);
+                } else
+                    bMapRotate = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth(),
+                            bitmap.getHeight(), true);
+
+
+                FileOutputStream out;
+                try {
+                    out = new FileOutputStream(
+                            String.format("/sdcard/DCIM/test/screen.jpg"));
+                    bMapRotate.compress(Bitmap.CompressFormat.JPEG, 90, out);
+                    if (bMapRotate != null) {
+                        bMapRotate.recycle();
+                        bMapRotate = null;
                     }
-
-                    Bitmap bMapRotate;
-                    if (orientation != 0) {
-                        Matrix matrix = new Matrix();
-                        matrix.postRotate(orientation);
-                        bMapRotate = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
-                                bitmap.getHeight(), matrix, true);
-                    } else
-                        bMapRotate = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth(),
-                                bitmap.getHeight(), true);
-
-
-                    FileOutputStream out;
-                    try {
-                        out = new FileOutputStream(
-                                String.format("/sdcard/DCIM/test/screen.jpg"));
-                        bMapRotate.compress(Bitmap.CompressFormat.JPEG, 90, out);
-                        if (bMapRotate != null) {
-                            bMapRotate.recycle();
-                            bMapRotate = null;
-                        }
-                    } catch (FileNotFoundException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-                    mCamera.startPreview();
-*/
+                } catch (FileNotFoundException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                mCamera.startPreview();*/
             }
         };
 
         return picture;
     }
 
-//    public static Bitmap rotateImage(Bitmap bitmap) throws IOException {
-//        int rotate = 0;
-//        ExifInterface exif;
-//        exif = new ExifInterface(path);
-//        int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION,
-//                ExifInterface.ORIENTATION_NORMAL);
-//        switch (orientation) {
-//            case ExifInterface.ORIENTATION_ROTATE_270:
-//                rotate = 270;
-//                break;
-//            case ExifInterface.ORIENTATION_ROTATE_180:
-//                rotate = 180;
-//                break;
-//            case ExifInterface.ORIENTATION_ROTATE_90:
-//                rotate = 90;
-//                break;
-//        }
-//        Matrix matrix = new Matrix();
-//        matrix.postRotate(rotate);
-//        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
-//                bitmap.getHeight(), matrix, true);
-//    }
-//}
-//
+    /*public static Bitmap rotateImage(Bitmap bitmap) throws IOException {
+        int rotate = 0;
+        ExifInterface exif;
+        exif = new ExifInterface(path);
+        int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION,
+                ExifInterface.ORIENTATION_NORMAL);
+        switch (orientation) {
+            case ExifInterface.ORIENTATION_ROTATE_270:
+                rotate = 270;
+                break;
+            case ExifInterface.ORIENTATION_ROTATE_180:
+                rotate = 180;
+                break;
+            case ExifInterface.ORIENTATION_ROTATE_90:
+                rotate = 90;
+                break;
+        }
+        Matrix matrix = new Matrix();
+        matrix.postRotate(rotate);
+        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
+                bitmap.getHeight(), matrix, true);
+    }*/
 
 
+    private String getBase64String(Bitmap bitmap) {
+
+        //BitmapFactory.Options options = new BitmapFactory.Options();
+        //bitmap = bitmap.decodeFile("ottoCash", options);
+        bitmap = resize(bitmap);
 
 
-private String getBase64String(Bitmap bitmap) {
-
-//    BitmapFactory.Options options = new BitmapFactory.Options();
-//     bitmap = bitmap.decodeFile("ottoCash", options);
-    bitmap = resize(bitmap);
-
-
-      ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
 
 

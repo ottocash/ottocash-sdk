@@ -223,8 +223,8 @@ public class PinPaymentActivity extends AppActivity implements IPinVerificationP
     @Override
     public void handleReviewCheckout(ReviewCheckOutResponse model) {
         if (model.getMeta().getCode() == 200) {
-//            Intent intent = new Intent(PinPaymentActivity.this, DashboardSDKActivity.class);
-//            startActivity(intent);
+            //Intent intent = new Intent(PinPaymentActivity.this, DashboardSDKActivity.class);
+            //startActivity(intent);
 
             model.getData().getResponseDescription();
             model.getData().getReferenceNumber();

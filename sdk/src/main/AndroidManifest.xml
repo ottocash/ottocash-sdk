@@ -4,6 +4,13 @@
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-feature
+        android:name="android.hardware.camera.flash"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -11,32 +18,25 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.FLASHLIGHT"/>
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
 
     <application android:name=".OttoCashSdk">
-
-
         <activity
             android:name=".ui.activity.history.HistoryActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.selfiewithktp.CaptureSelfieWithKTPActivity"/>
+        <activity android:name=".ui.activity.selfiewithktp.CaptureSelfieWithKTPActivity" />
         <activity
             android:name=".ui.activity.SdkActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.kycupgrade.CaptureKTPActivity"
-            android:screenOrientation="portrait"
-         />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.account.activation.PinLoginActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.dashboard.DashboardSDKActivity"
-            android:screenOrientation="portrait" >
-
-        </activity>
-
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.payment.CheckOutSuccessActivity"
             android:screenOrientation="portrait" />
@@ -48,10 +48,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.account.registration.RegistrationSuccessActivity"
-            android:screenOrientation="portrait"
-
-            />
-
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.account.registration.OtpRegistrationActivity"
             android:screenOrientation="portrait" />
@@ -106,27 +103,21 @@
         <activity
             android:name=".ui.activity.payment.PaymentSuccessActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.activity.kycupgrade.OttocashSuccesActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.selfiewithktp.ResultSelfieWithKtpActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.kycupgrade.KTPResultViewActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.kycupgrade.ActivityUpgradeNext"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.kycupgrade.UpgradeActivity"
-            android:screenOrientation="portrait"/>
-         </application>
-
-    <uses-feature android:name="android.hardware.camera.flash"
-        android:required="false" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+            android:screenOrientation="portrait" />
+    </application>
 
 </manifest>

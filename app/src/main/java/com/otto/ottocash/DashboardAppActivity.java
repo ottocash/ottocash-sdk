@@ -47,11 +47,13 @@ public class DashboardAppActivity extends BaseActivity implements ISdkView, IInq
     Button btnCheckOut;
     @BindView(R.id.btnClearCache)
     Button btnClearCache;
+
     public static String PackageName;
     private String account_number;
     private CheckPhoneNumberResponse checkPhoneNumberResponse;
     private final String KEY_EMONEY_BALANCE = "EMONEY";
     private SdkResourcePresenter presenterSDK;
+
     SharedPreferences sharedPreferences;
     String getDatasessi;
     String saldo;
