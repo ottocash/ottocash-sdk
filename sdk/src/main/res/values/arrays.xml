@@ -4,12 +4,12 @@
     <!-- Main Menu Name - Otto Cash Detail Activity -->
     <string-array name="otto_cash_main_menu" translatable="true">
         <item>Bayar</item>
-        <item>Merchant\nTerdekat</item>
+        <!--<item>Merchant\nTerdekat</item>-->
         <item>Top Up</item>
         <item>Riwayat\nTransaksi</item>
-        <item>Kirim\nHadiah</item>
+        <!--<item>Kirim\nHadiah</item>-->
         <item>Penarikan\nUang</item>
-        <item>Permintaan\nUang</item>
+        <!--<item>Permintaan\nUang</item>-->
         <item>Transfer\nUang</item>
     </string-array>
 
@@ -20,9 +20,9 @@
         <item>mm_3</item>
         <item>mm_4</item>
         <item>mm_5</item>
-        <item>mm_6</item>
+        <!--<item>mm_6</item>
         <item>mm_7</item>
-        <item>mm_8</item>
+        <item>mm_8</item>-->
     </string-array>
 
 </resources>
