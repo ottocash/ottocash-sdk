@@ -37,6 +37,7 @@ public class TransferToFriendSendActivity extends BaseActivity implements IInqui
     private String numberContact;
     private String nameContact;
     private String nominalTransferToFriend;
+    private String nameTujuanTransfer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +63,7 @@ public class TransferToFriendSendActivity extends BaseActivity implements IInqui
 
         tvName.setText(nameContact);
         tvHp.setText(numberContact);
-        Log.i("NAME", "name contact :" +nameContact );
+        Log.i("NAME", "name contact :" + nameContact);
 
 
         ivBack.setOnClickListener(new View.OnClickListener() {
@@ -105,9 +106,11 @@ public class TransferToFriendSendActivity extends BaseActivity implements IInqui
     public void handleInquiry(InquiryResponse model) {
         if (model.getMeta().getCode() == 200) {
 
+            nameTujuanTransfer = model.getData().getName();
+
             Intent intent = new Intent(TransferToFriendSendActivity.this, TransferToFriendReviewActivity.class);
+            intent.putExtra(IConfig.KEY_ACCOUNT_NAME_TUJUAN, nameTujuanTransfer);
             intent.putExtra(IConfig.KEY_NOMINAL_TRANSFER_TO_FRIEND, nominalTransferToFriend);
-            intent.putExtra(IConfig.KEY_NAME_CONTACT, nameContact);
             intent.putExtra(IConfig.KEY_NUMBER_CONTACT, numberContact);
             startActivity(intent);
 

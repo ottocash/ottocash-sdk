@@ -186,7 +186,7 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
                 dialogComingSoon();
                 break;
             case "mm_5":
-                dialogComingSoon();
+                goTransferToFriend();
                 break;
             /*case "mm_6":
                 dialogComingSoon();

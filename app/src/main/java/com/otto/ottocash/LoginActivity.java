@@ -38,12 +38,12 @@ public class LoginActivity extends SdkActivity {
 
         initClientSendCredentialstoSDK();
         sharedPreferences = getSharedPreferences("dataSesi", Context.MODE_PRIVATE);
-        saldo  = sharedPreferences.getString("saldo", null);
+        saldo = sharedPreferences.getString("saldo", null);
 
         getDatasessi = sharedPreferences.getString("session", null);
 
-        String token  = CacheUtil.getPreferenceString(IConfig.SESSION_ACCESS_TOKEN, LoginActivity.this);
-        if  (getDatasessi != null) {
+        String token = CacheUtil.getPreferenceString(IConfig.SESSION_ACCESS_TOKEN, LoginActivity.this);
+        if (getDatasessi != null) {
             Intent intent = new Intent(LoginActivity.this, DashboardAppActivity.class);
             startActivity(intent);
             finish();
@@ -63,8 +63,7 @@ public class LoginActivity extends SdkActivity {
         super.onBackPressed();
         Intent mainActivity = new Intent(Intent.ACTION_MAIN);
         mainActivity.addCategory(Intent.CATEGORY_HOME);
-        mainActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-       mainActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        mainActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(mainActivity);
         finish();
     }

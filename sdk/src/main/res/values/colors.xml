@@ -12,6 +12,7 @@
 
     //Grey
     <color name="Grey_e5e5e5">#e5e5e5</color>
+    <color name="Grey_EFEFEF">#EFEFEF</color>
     <color name="Grey_8b8b8b">#8b8b8b</color>
     <color name="Grey_C4C4C4">#C4C4C4</color>
     <color name="Grey_F1F1F1">#F1F1F1</color>
@@ -30,6 +31,7 @@
     <color name="Blue_1f204c">#1f204c</color>
     <color name="Blue_056fb6">#056fb6</color>
     <color name="Blue_2E70B1">#2E70B1</color>
+    <color name="Blue_4EA9F8">#4EA9F8</color>
 
     //White
     <color name="White_ffffff">#ffffff</color>

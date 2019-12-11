@@ -1,4 +1,4 @@
-package com.otto.sdk.ui.activity.payment;
+package com.otto.sdk.ui.activity.payment.pede;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,7 +18,7 @@ import com.otto.sdk.ui.component.support.UiUtil;
 import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.support.util.CacheUtil;
 
-public class PaymentSuccessActivity extends BaseActivity {
+public class PaymentSuccessPedeActivity extends BaseActivity {
 
     private String nominalTransferToFriend;
     private int total;
@@ -53,7 +53,7 @@ public class PaymentSuccessActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_payment_success);
+        setContentView(R.layout.activity_payment_success_pede);
 
         initComponent();
         initDisplayPaymentValue();
@@ -116,7 +116,7 @@ public class PaymentSuccessActivity extends BaseActivity {
         ivCloseReceipt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(PaymentSuccessActivity.this, DashboardSDKActivity.class);
+                Intent intent = new Intent(PaymentSuccessPedeActivity.this, DashboardSDKActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }
@@ -125,7 +125,7 @@ public class PaymentSuccessActivity extends BaseActivity {
         ivClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(PaymentSuccessActivity.this, DashboardSDKActivity.class);
+                Intent intent = new Intent(PaymentSuccessPedeActivity.this, DashboardSDKActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }
@@ -134,7 +134,7 @@ public class PaymentSuccessActivity extends BaseActivity {
     }
 
     private void initDisplayPaymentValue() {
-        total = CacheUtil.getPreferenceInteger(IConfig.SESSION_TOTAL, PaymentSuccessActivity.this);
+        total = CacheUtil.getPreferenceInteger(IConfig.SESSION_TOTAL, PaymentSuccessPedeActivity.this);
 
         Bundle extras = getIntent().getExtras();
         nominalTransferToFriend = extras.getString(IConfig.KEY_NOMINAL_TRANSFER_TO_FRIEND);

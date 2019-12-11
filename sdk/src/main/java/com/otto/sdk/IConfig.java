@@ -33,6 +33,16 @@ public interface IConfig {
     //KEY PAYMENT RECEIPT
     String KEY_REFERENCE_NUMBER_P2P = "reference_number_P2P";
     String KEY_DATE_P2P = "date_p2p";
+    String KEY_ACCOUNT_NAME_TUJUAN = "account_number_tujuan";
+
+    //KEY DATA TRANSFER FRIEND
+    String DATE_TRANSACTION = "date_transaction";
+    String SERVICE_TYPE_TRANSACTION = "service_type_transaction";
+    String NOMINAL_TRANSACTION = "nominal_transaction";
+    String DESTINATION_ACCOUNT_NUMBER_TRANSACTION = "destination_account_number_transaction";
+    String DESCRIPTION_TRANSACTION = "description_transaction";
+    String REFERENCE_NUMBER_TRANSACTION = "reference_number_transaction";
+    String STATUS_TRANSACTION = "status_transaction";
 
     //KEY REVIEW CHECKOUT
     String TOTAL_BILL_PAYMENT = "total_bill_checkout";

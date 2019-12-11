@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +29,7 @@ import com.otto.sdk.model.api.response.TransferToFriendResponse;
 import com.otto.sdk.presenter.PinVerificationPaymentPresenter;
 import com.otto.sdk.presenter.ReviewCheckoutPresenter;
 import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
+import com.otto.sdk.ui.activity.payment.otto.PaymentSuccessOttoActivity;
 import com.otto.sdk.ui.component.support.DeviceId;
 import com.otto.sdk.ui.component.support.Logging;
 import com.otto.sdk.ui.component.support.UiUtil;
@@ -43,6 +45,7 @@ public class PinPaymentActivity extends AppActivity implements IPinVerificationP
 
     private final String TAG = this.getClass().getSimpleName();
 
+    ImageView ivBack;
     TextView tvPaymentValue;
     LinePinField lineField;
     TextView errorMessage;
@@ -56,7 +59,7 @@ public class PinPaymentActivity extends AppActivity implements IPinVerificationP
     /*transfer to friend*/
     private String numberContact;
     private String nominalTransferToFriend;
-    private String nameContact;
+    private String nameTujuanTransfer;
     private String phone;
 
     /*key payment for receipt */
@@ -74,6 +77,14 @@ public class PinPaymentActivity extends AppActivity implements IPinVerificationP
     private PinVerificationPaymentPresenter pinVerificationPaymentPresenter;
     private String receiptReferenceNumber;
     private String receiptDate;
+
+    String dateTransaction;
+    String serviceTypeTransaction;
+    String nominalTransaction;
+    String destinationAccountNumberTransaction;
+    String descriptionTransaction;
+    String statusTransaction;
+    String referenceNumberTransaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,15 +105,23 @@ public class PinPaymentActivity extends AppActivity implements IPinVerificationP
             keyPinReviewCheckout = extras.getString(IConfig.KEY_PIN_CHECKOUT);
             nominalTransferToFriend = extras.getString(IConfig.KEY_NOMINAL_TRANSFER_TO_FRIEND);
             numberContact = extras.getString(IConfig.KEY_NUMBER_CONTACT);
-            nameContact = extras.getString(IConfig.KEY_NAME_CONTACT);
+            nameTujuanTransfer = extras.getString(IConfig.KEY_ACCOUNT_NAME_TUJUAN);
         }
     }
 
     private void initComponent() {
+        ivBack = findViewById(R.id.ivBack);
         tvPaymentValue = findViewById(R.id.tvPaymentValue);
         lineField = findViewById(R.id.lineField);
         errorMessage = findViewById(R.id.errorMessage);
         btnBack = findViewById(R.id.btn_back);
+
+        ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         //total = CacheUtil.getPreferenceInteger(IConfig.SESSION_TOTAL, PinPaymentActivity.this);
         emoneyBalance = Integer.parseInt(CacheUtil.getPreferenceString(IConfig.SESSION_EMONEY_BALANCE,
@@ -266,14 +285,29 @@ public class PinPaymentActivity extends AppActivity implements IPinVerificationP
             receiptReferenceNumber = model.getData().getReferenceNumber();
             receiptDate = model.getData().getDate();
 
-            Intent intent = new Intent(PinPaymentActivity.this, PaymentSuccessActivity.class);
-            intent.putExtra(IConfig.KEY_NOMINAL_TRANSFER_TO_FRIEND, nominalTransferToFriend);
+            dateTransaction = model.getData().getDate();
+            serviceTypeTransaction = model.getData().getServiceType();
+            nominalTransaction = model.getData().getNominal();
+            destinationAccountNumberTransaction = model.getData().getDestinationAccountNumber();
+            descriptionTransaction = model.getData().getDescription();
+            referenceNumberTransaction = model.getData().getReferenceNumber();
+            statusTransaction = model.getData().getStatus();
+
+            Intent intent = new Intent(PinPaymentActivity.this, PaymentSuccessOttoActivity.class);
             intent.putExtra(IConfig.KEY_PIN_TRANSFER_TO_FRIEND, keyPinTransferToFriend);
             intent.putExtra(IConfig.KEY_PIN_CHECKOUT, keyPinReviewCheckout);
-            intent.putExtra(IConfig.KEY_NAME_CONTACT, nameContact);
+            intent.putExtra(IConfig.KEY_ACCOUNT_NAME_TUJUAN, nameTujuanTransfer);
             intent.putExtra(IConfig.KEY_NUMBER_CONTACT, numberContact);
-            intent.putExtra(IConfig.KEY_REFERENCE_NUMBER_P2P, receiptReferenceNumber);
-            intent.putExtra(IConfig.KEY_DATE_P2P, receiptDate);
+
+            // Data Transfer to Friend
+            intent.putExtra(IConfig.DATE_TRANSACTION, dateTransaction);
+            intent.putExtra(IConfig.SERVICE_TYPE_TRANSACTION, serviceTypeTransaction);
+            intent.putExtra(IConfig.NOMINAL_TRANSACTION, nominalTransaction);
+            intent.putExtra(IConfig.DESTINATION_ACCOUNT_NUMBER_TRANSACTION, destinationAccountNumberTransaction);
+            intent.putExtra(IConfig.DESCRIPTION_TRANSACTION, descriptionTransaction);
+            intent.putExtra(IConfig.REFERENCE_NUMBER_TRANSACTION, referenceNumberTransaction);
+            intent.putExtra(IConfig.STATUS_TRANSACTION, statusTransaction);
+
 
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
