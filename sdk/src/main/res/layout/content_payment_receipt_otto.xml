@@ -165,7 +165,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:text="Gratis"
+                        android:text="Rp. 0"
                         android:textColor="@color/Black_484848"
                         android:textSize="14sp" />
                 </RelativeLayout>
