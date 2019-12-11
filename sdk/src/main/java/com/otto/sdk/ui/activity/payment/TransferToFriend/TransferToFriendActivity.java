@@ -1,21 +1,13 @@
 package com.otto.sdk.ui.activity.payment.TransferToFriend;
 
 import android.Manifest;
-import android.content.ContentResolver;
-import android.content.ContentUris;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.provider.ContactsContract;
 import android.provider.Settings;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,24 +19,20 @@ import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.multi.DialogOnAnyDeniedMultiplePermissionsListener;
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.karumi.dexter.listener.single.PermissionListener;
 import com.otto.sdk.IConfig;
+import com.otto.sdk.OttoCashSdk;
 import com.otto.sdk.R;
+import com.otto.sdk.interfaces.IInquiryView;
+import com.otto.sdk.model.api.request.InquiryRequest;
+import com.otto.sdk.model.api.response.InquiryResponse;
 import com.otto.sdk.model.general.PhoneContact;
+import com.otto.sdk.presenter.InquiryPresenter;
 import com.otto.sdk.ui.component.support.UiUtil;
-
-import org.greenrobot.eventbus.EventBus;
-
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.PriorityQueue;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 
-public class TransferToFriendActivity extends BaseActivity {
+public class TransferToFriendActivity extends BaseActivity implements IInquiryView {
 
     ImageView ivBack;
     EditText etSearch;
@@ -54,6 +42,9 @@ public class TransferToFriendActivity extends BaseActivity {
     private PhoneContact mPhoneContact;
     private String numberContact;
     private String nameContact;
+
+    private String nominalTransferToFriend;
+    private String nameTujuanTransfer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +83,7 @@ public class TransferToFriendActivity extends BaseActivity {
                     Toast.makeText(TransferToFriendActivity.this, "Masukkan nomor handphone", Toast.LENGTH_SHORT).show();
                 } else {
                     transferToFriend();
+                    onCallApiInquiry();
                 }
             }
         });
@@ -204,11 +196,44 @@ public class TransferToFriendActivity extends BaseActivity {
             nameContact = "-";
         }
 
-        Intent intent = new Intent(TransferToFriendActivity.this, TransferToFriendSendActivity.class);
+        /*Intent intent = new Intent(TransferToFriendActivity.this, TransferToFriendSendActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.putExtra(IConfig.KEY_NUMBER_CONTACT, numberContact);
         intent.putExtra(IConfig.KEY_NAME_CONTACT, nameContact);
-        startActivity(intent);
+        intent.putExtra(IConfig.KEY_ACCOUNT_NAME_TUJUAN, nameTujuanTransfer);
+        startActivity(intent);*/
     }
 
+
+    private void onCallApiInquiry() {
+
+        final InquiryRequest model = new InquiryRequest(numberContact);
+        model.setAccountNumber(numberContact);
+
+        showApiProgressDialog(OttoCashSdk.getAppComponent(), new InquiryPresenter(TransferToFriendActivity.this) {
+            @Override
+            public void call() {
+                getInquiry(model);
+
+            }
+        }, "Loading");
+    }
+
+
+    @Override
+    public void handleInquiry(InquiryResponse model) {
+        if (model.getMeta().getCode() == 200) {
+
+            nameTujuanTransfer = model.getData().getName();
+
+            Intent intent = new Intent(TransferToFriendActivity.this, TransferToFriendSendActivity.class);
+            intent.putExtra(IConfig.KEY_ACCOUNT_NAME_TUJUAN, nameTujuanTransfer);
+            intent.putExtra(IConfig.KEY_NOMINAL_TRANSFER_TO_FRIEND, nominalTransferToFriend);
+            intent.putExtra(IConfig.KEY_NUMBER_CONTACT, numberContact);
+            startActivity(intent);
+
+        } else {
+            Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
 }
