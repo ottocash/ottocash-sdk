@@ -1,14 +1,12 @@
 package com.otto.sdk.ui.activity.kycupgrade;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-
 import android.media.MediaScannerConnection;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -64,7 +62,6 @@ public class KTPResultViewActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(KTPResultViewActivity.this, CaptureSelfieWithKTPActivity.class);
                 intent.putExtra("account_number", number);
-//                intent.putExtra("base64", CaptureKTPActivity.base64String);
                 startActivity(intent);
             }
         });
@@ -83,16 +80,6 @@ public class KTPResultViewActivity extends AppCompatActivity {
 
         ivAvatar = findViewById(R.id.iv_avatar);
         ivAvatar.setImageBitmap(CaptureKTPActivity.bitmap);
-//        byteSizeOf(bitmap);
-//        Log.i("ROby", "ukuran : " + byteSizeOf(bitmap));
-//        ivAvatar.setRotation(450);
-      /*  try {
-            rotateImage(bitmap);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-
-
         Log.i("BITMAP", "INI BITMAP" + CaptureKTPActivity.bitmap);
     }
 

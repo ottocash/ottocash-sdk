@@ -41,7 +41,7 @@ public class ResultSelfieWithKtpActivity extends BaseActivity implements IUpgrad
     private String passpor_photo,ktp, number;
     private UpgradeAccountRequest upgradeAccountRequest;
     private UpgradeAccountResponse upgradeAccountResponse;
-//    Canvas canvas;
+    //Canvas canvas;
     Paint paint;
 
 
@@ -52,7 +52,7 @@ public class ResultSelfieWithKtpActivity extends BaseActivity implements IUpgrad
         passpor_photo = CaptureSelfieWithKTPActivity.base64String;
         Log.i("SELFIE", "foto selfie : " + passpor_photo);
 
-//        ktp = getIntent().getStringExtra("base64");
+        //ktp = getIntent().getStringExtra("base64");
         ktp = CaptureKTPActivity.base64String;
         Log.i("KTP", "ktp : " + ktp);
         number = getIntent().getStringExtra("account_number");

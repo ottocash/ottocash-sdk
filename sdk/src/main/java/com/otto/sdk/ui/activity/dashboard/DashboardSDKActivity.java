@@ -148,12 +148,12 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
 
         menuIcons = new Integer[]{
                 R.drawable.ic_bayar,
-                R.drawable.ic_merchant,
+                //R.drawable.ic_merchant,
                 R.drawable.ic_top_up,
                 R.drawable.ic_history,
-                R.drawable.ic_gift,
+                //R.drawable.ic_gift,
                 R.drawable.ic_tarik_duit,
-                R.drawable.ic_req_money,
+                //R.drawable.ic_req_money,
                 R.drawable.ic_transfer,
         };
 
@@ -175,20 +175,20 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
                 goPaymentWithQR();
                 break;
             case "mm_2":
-                dialogComingSoon();
-                break;
-            case "mm_3":
                 Intent intent = new Intent(this, TopUpActivity.class);
                 startActivity(intent);
                 break;
-            case "mm_4":
+            case "mm_3":
                 intent = new Intent(this, HistoryActivity.class);
                 startActivity(intent);
                 break;
-            case "mm_5":
+            case "mm_4":
                 dialogComingSoon();
                 break;
-            case "mm_6":
+            case "mm_5":
+                goTransferToFriend();
+                break;
+            /*case "mm_6":
                 dialogComingSoon();
                 break;
             case "mm_7":
@@ -196,7 +196,7 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
                 break;
             case "mm_8":
                 goTransferToFriend();
-                break;
+                break;*/
             default:
                 break;
         }

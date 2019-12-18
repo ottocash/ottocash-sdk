@@ -1,15 +1,12 @@
 package com.otto.sdk.ui.activity.kycupgrade;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.otto.sdk.Flag;
 import com.otto.sdk.R;
 
 import app.beelabs.com.codebase.base.BaseActivity;
@@ -69,6 +66,5 @@ public class UpgradeActivity extends BaseActivity {
 
 
     }
-
 
 }
