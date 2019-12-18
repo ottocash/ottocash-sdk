@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.otto.sdk.IConfig;
+import com.otto.sdk.OttoCash;
 import com.otto.sdk.OttoCashSdk;
 import com.otto.sdk.interfaces.IInquiryView;
 import com.otto.sdk.interfaces.ISdkView;
@@ -23,11 +25,13 @@ import com.otto.sdk.model.api.request.InquiryRequest;
 import com.otto.sdk.model.api.response.CheckPhoneNumberResponse;
 import com.otto.sdk.model.api.response.CreateTokenResponse;
 import com.otto.sdk.model.api.response.InquiryResponse;
+import com.otto.sdk.model.api.response.PaymentData;
 import com.otto.sdk.presenter.InquiryPresenter;
 import com.otto.sdk.presenter.SdkResourcePresenter;
 import com.otto.sdk.ui.activity.account.activation.ActivationActivity;
 import com.otto.sdk.ui.activity.account.registration.RegistrationActivity;
 import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
+import com.otto.sdk.ui.activity.payment.ReviewCheckoutActivity;
 import com.otto.sdk.ui.component.support.UiUtil;
 
 import app.beelabs.com.codebase.base.BaseActivity;
@@ -212,11 +216,25 @@ public class DashboardAppActivity extends BaseActivity implements ISdkView, IInq
     }
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK && requestCode == OttoCash.REQ_OTTOCASH_PAYMENT){
+            Intent intent = new Intent();
+            if(data.getParcelableExtra(OttoCash.OTTOCASH_PAYMENT_DATA)!=null){
+                PaymentData paymentData = data.getParcelableExtra(OttoCash.OTTOCASH_PAYMENT_DATA);
+                Toast.makeText(this,paymentData.getReferenceNumber(),Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
     @OnClick(R.id.btnCheckOut)
     public void onCheckOut() {
-        Intent intent = new Intent(DashboardAppActivity.this, CheckOutActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
+//        Intent intent = new Intent(DashboardAppActivity.this, CheckOutActivity.class);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//        startActivity(intent);
+        Toast.makeText(DashboardAppActivity.this, "Pembayaran OttoCash", Toast.LENGTH_SHORT).show();
+        OttoCash.callPayment(this,1000);
     }
 
     @OnClick(R.id.btnClearCache)

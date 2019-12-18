@@ -14,9 +14,11 @@ import app.beelabs.com.codebase.base.response.BaseResponse;
 public class ReviewCheckoutPresenter extends BasePresenter implements PaymentDao.IReviewCheckoutDao {
 
     private IReviewCheckoutView iReviewCheckoutView;
+    private Context context;
 
-    public ReviewCheckoutPresenter(IView view) {
+    public ReviewCheckoutPresenter(IView view,Context context) {
         this.iReviewCheckoutView = (IReviewCheckoutView) view;
+        this.context = context;
     }
 
 
@@ -34,11 +36,11 @@ public class ReviewCheckoutPresenter extends BasePresenter implements PaymentDao
 
     @Override
     public BasePresenter getPresenter() {
-        return this;
+        return BasePresenter.getInstance(iReviewCheckoutView,this);
     }
 
     @Override
     public Context getContext() {
-        return iReviewCheckoutView.getBaseActivity();
+        return context;
     }
 }

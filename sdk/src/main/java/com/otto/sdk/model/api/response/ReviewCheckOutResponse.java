@@ -6,14 +6,14 @@ import app.beelabs.com.codebase.base.response.BaseResponse;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ReviewCheckOutResponse extends BaseResponse {
-    private Data data;
+    private PaymentData data;
     private Meta meta;
 
-    public void setData(Data data) {
+    public void setData(PaymentData data) {
         this.data = data;
     }
 
-    public Data getData() {
+    public PaymentData getData() {
         return data;
     }
 
@@ -23,46 +23,6 @@ public class ReviewCheckOutResponse extends BaseResponse {
 
     public Meta getMeta() {
         return meta;
-    }
-
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    public class Data {
-        private String responseDescription;
-        private String referenceNumber;
-        private String transactionDate;
-        private String responseCode;
-
-        public String getResponseDescription() {
-            return responseDescription;
-        }
-
-        public void setResponseDescription(String responseDescription) {
-            this.responseDescription = responseDescription;
-        }
-
-        public String getReferenceNumber() {
-            return referenceNumber;
-        }
-
-        public void setReferenceNumber(String referenceNumber) {
-            this.referenceNumber = referenceNumber;
-        }
-
-        public String getTransactionDate() {
-            return transactionDate;
-        }
-
-        public void setTransactionDate(String transactionDate) {
-            this.transactionDate = transactionDate;
-        }
-
-        public String getResponseCode() {
-            return responseCode;
-        }
-
-        public void setResponseCode(String responseCode) {
-            this.responseCode = responseCode;
-        }
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)

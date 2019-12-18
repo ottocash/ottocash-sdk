@@ -306,5 +306,8 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
         }
     }
 
-
+    @Override
+    public BaseActivity getBaseActivity() {
+        return super.getBaseActivity();
+    }
 }

@@ -63,4 +63,5 @@ public interface IConfig {
     int KEY_API_TRANSFER_TO_FRIEND = 21;
     int KEY_API_UPGRADE = 22;
 
+
 }

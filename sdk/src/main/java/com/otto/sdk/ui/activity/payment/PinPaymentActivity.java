@@ -35,9 +35,11 @@ import com.poovam.pinedittextfield.LinePinField;
 
 import java.util.Random;
 
+import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.support.util.CacheUtil;
 
 import static app.beelabs.com.codebase.support.util.CacheUtil.getPreferenceString;
+import static com.otto.sdk.OttoCash.OTTOCASH_PAYMENT_DATA;
 
 public class PinPaymentActivity extends AppActivity implements IPinVerificationPaymentView, IReviewCheckoutView {
 
@@ -163,10 +165,10 @@ public class PinPaymentActivity extends AppActivity implements IPinVerificationP
 
             } else if (pinReviewCheckout.equals(keyPinReviewCheckout)) {
                 onCallApiReviewCheckOut();
-
-                Intent intent = new Intent(PinPaymentActivity.this, DashboardSDKActivity.class);
-                intent.putExtra(IConfig.KEY_PIN_CHECKOUT, keyPinReviewCheckout);
-                startActivity(intent);
+//
+//                Intent intent = new Intent(PinPaymentActivity.this, DashboardSDKActivity.class);
+//                intent.putExtra(IConfig.KEY_PIN_CHECKOUT, keyPinReviewCheckout);
+//                startActivity(intent);
             }
 
         } else {
@@ -185,6 +187,11 @@ public class PinPaymentActivity extends AppActivity implements IPinVerificationP
         if (customerReferenceNumber != null) {
             customerReferenceNumber = (generateRandom(12) + "");
         }
+    }
+
+    @Override
+    public BaseActivity getBaseActivity() {
+        return PinPaymentActivity.this;
     }
 
     public static long generateRandom(int length) {
@@ -211,7 +218,7 @@ public class PinPaymentActivity extends AppActivity implements IPinVerificationP
         reviewCheckOutRequest.setLongitude(String.valueOf(getMyLastLocation().getLongitude()));
         reviewCheckOutRequest.setDeviceId(DeviceId.getDeviceID(this));
 
-        showApiProgressDialog(OttoCashSdk.getAppComponent(), new ReviewCheckoutPresenter(this) {
+        showApiProgressDialog(OttoCashSdk.getAppComponent(), new ReviewCheckoutPresenter(this,this) {
             @Override
             public void call() {
                 getReviewCheckout(reviewCheckOutRequest);
@@ -223,13 +230,10 @@ public class PinPaymentActivity extends AppActivity implements IPinVerificationP
     @Override
     public void handleReviewCheckout(ReviewCheckOutResponse model) {
         if (model.getMeta().getCode() == 200) {
-//            Intent intent = new Intent(PinPaymentActivity.this, DashboardSDKActivity.class);
-//            startActivity(intent);
-
-            model.getData().getResponseDescription();
-            model.getData().getReferenceNumber();
-            model.getData().getTransactionDate();
-            model.getData().getResponseCode();
+            Intent intent = new Intent();
+            intent.putExtra(OTTOCASH_PAYMENT_DATA,model.getData());
+            setResult(RESULT_OK,intent);
+            finish();
 
         } else {
             Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
