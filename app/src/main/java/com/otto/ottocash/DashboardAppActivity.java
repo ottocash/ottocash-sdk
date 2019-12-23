@@ -80,16 +80,11 @@ public class DashboardAppActivity extends BaseActivity implements ISdkView, IInq
         if ( saldo != null) {
             Log.i("respon", " " + saldo);
             tvSaldoOttoCash.setText(UiUtil.formatMoneyIDR(Long.parseLong(saldo)));
-
         }
-
 
         onEmoneyBalanceWidget();
 
-
-//        initializeSDK();
         checkFirstRun();
-
 
     }
 
@@ -140,7 +135,6 @@ public class DashboardAppActivity extends BaseActivity implements ISdkView, IInq
 
     public void goDashboardSDK() {
         Intent intent = new Intent(DashboardAppActivity.this, DashboardSDKActivity.class);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
@@ -168,13 +162,6 @@ public class DashboardAppActivity extends BaseActivity implements ISdkView, IInq
                 initializeSDK();
             }
         });
-//        } else {
-//            lyWidgetSdk.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    goRegistration();
-//                }
-//            });
 //        }
     }
 
@@ -232,11 +219,8 @@ public class DashboardAppActivity extends BaseActivity implements ISdkView, IInq
 
     @OnClick(R.id.btnCheckOut)
     public void onCheckOut() {
-//        Intent intent = new Intent(DashboardAppActivity.this, CheckOutActivity.class);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//        startActivity(intent);
         Toast.makeText(DashboardAppActivity.this, "Pembayaran OttoCash", Toast.LENGTH_SHORT).show();
-        OttoCash.callPayment(this,1000);
+        OttoCash.onCallPayment(this,1000);
     }
 
     @OnClick(R.id.btnClearCache)
@@ -279,8 +263,6 @@ public class DashboardAppActivity extends BaseActivity implements ISdkView, IInq
             if (checkPhoneNumberResponse.getData().isIs_existing() == true) {
                 if (getDatasessi != null) {
                     startActivity(new Intent(getApplicationContext(), DashboardSDKActivity.class));
-
-
                 } else {
                     goActivation();
                 }
