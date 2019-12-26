@@ -23,6 +23,8 @@ import com.otto.sdk.ui.component.support.UiUtil;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 
+import static com.otto.sdk.IConfig.KEY_PAYMENT_QR;
+
 public class TransferToFriendSendActivity extends BaseActivity implements IInquiryView {
 
     ImageView ivBack;
@@ -31,6 +33,7 @@ public class TransferToFriendSendActivity extends BaseActivity implements IInqui
     EditText etAmount;
     Button btnSubmit;
     ImageView imgAvatar;
+    TextView title;
 
     private Long amount = 0L;
     private TextWatcher mTextWatcher;
@@ -54,15 +57,22 @@ public class TransferToFriendSendActivity extends BaseActivity implements IInqui
         etAmount = findViewById(R.id.et_amount);
         btnSubmit = findViewById(R.id.btn_submit);
         imgAvatar = findViewById(R.id.img_avatar);
+        title = findViewById(R.id.tv_title_pembayaran);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             numberContact = extras.getString(IConfig.KEY_NUMBER_CONTACT);
-            nameContact = extras.getString(IConfig.KEY_NAME_CONTACT);
+//            nameContact = extras.getString(IConfig.KEY_NAME_CONTACT);
             nameTujuanTransfer = extras.getString(IConfig.KEY_ACCOUNT_NAME_TUJUAN);
+            if(extras.getBoolean(KEY_PAYMENT_QR)){
+                title.setText("Pembayaran");
+            }
         }
-
-        tvName.setText(nameTujuanTransfer);
+        if(nameTujuanTransfer!=null){
+            tvName.setText(nameTujuanTransfer);
+        }else{
+            tvName.setText(numberContact);
+        }
         tvHp.setText(numberContact);
 
 
@@ -112,6 +122,7 @@ public class TransferToFriendSendActivity extends BaseActivity implements IInqui
             intent.putExtra(IConfig.KEY_ACCOUNT_NAME_TUJUAN, nameTujuanTransfer);
             intent.putExtra(IConfig.KEY_NOMINAL_TRANSFER_TO_FRIEND, nominalTransferToFriend);
             intent.putExtra(IConfig.KEY_NUMBER_CONTACT, numberContact);
+            intent.putExtra(KEY_PAYMENT_QR,getIntent().getExtras().getBoolean(KEY_PAYMENT_QR));
             startActivity(intent);
 
         } else {

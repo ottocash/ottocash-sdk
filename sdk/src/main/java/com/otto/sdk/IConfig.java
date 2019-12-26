@@ -34,6 +34,7 @@ public interface IConfig {
     String KEY_REFERENCE_NUMBER_P2P = "reference_number_P2P";
     String KEY_DATE_P2P = "date_p2p";
     String KEY_ACCOUNT_NAME_TUJUAN = "account_number_tujuan";
+    String KEY_PAYMENT_QR = "thisIsQRPayment";
 
     //KEY DATA TRANSFER FRIEND
     String DATE_TRANSACTION = "date_transaction";

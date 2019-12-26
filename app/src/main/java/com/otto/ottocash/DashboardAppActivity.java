@@ -180,7 +180,6 @@ public class DashboardAppActivity extends BaseActivity implements ISdkView, IInq
         }
     }
 
-
     public void initializeSDK() {
 
         final CheckPhoneNumberRequest model = new CheckPhoneNumberRequest();
@@ -189,11 +188,12 @@ public class DashboardAppActivity extends BaseActivity implements ISdkView, IInq
         clients.setEmail("ardi@clappingape.com");
         account_number = CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, DashboardAppActivity.this);
         model.setPhone(account_number);
-
         final Dialog loading = UiUtil.getProgressDialog(DashboardAppActivity.this);
         loading.show();
 
         new InquiryPresenter(this).getInquiry(new InquiryRequest(account_number));
+//        OttoCash ottoCash = OttoCash.getInstance();
+//        ottoCash.onCheckPhoneNumber(this,account_number);
         showApiProgressDialog(OttoCashSdk.getAppComponent(), new SdkResourcePresenter(DashboardAppActivity.this) {
             @Override
             public void call() {

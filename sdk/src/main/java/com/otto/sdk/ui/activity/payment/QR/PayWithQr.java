@@ -2,6 +2,7 @@ package com.otto.sdk.ui.activity.payment.QR;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,11 +15,14 @@ import android.widget.Toast;
 
 import com.google.zxing.Result;
 import com.otto.sdk.R;
+import com.otto.sdk.ui.activity.payment.TransferToFriend.TransferToFriendSendActivity;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 import static android.Manifest.permission.CAMERA;
+import static com.otto.sdk.IConfig.KEY_NUMBER_CONTACT;
+import static com.otto.sdk.IConfig.KEY_PAYMENT_QR;
 
 public class PayWithQr extends BaseActivity implements ZXingScannerView.ResultHandler {
 
@@ -44,7 +48,7 @@ public class PayWithQr extends BaseActivity implements ZXingScannerView.ResultHa
         }
     }
 
-    private void initComponent(){
+    private void initComponent() {
         ivBack = findViewById(R.id.ivBack);
 
         ivBack.setOnClickListener(new View.OnClickListener() {
@@ -139,7 +143,6 @@ public class PayWithQr extends BaseActivity implements ZXingScannerView.ResultHa
 //                integrator.setBeepEnabled(false);
 //                integrator.setBarcodeImageEnabled(true);
 //                integrator.initiateScan();
-//
 //            }
 //        });
 //    }
@@ -161,21 +164,35 @@ public class PayWithQr extends BaseActivity implements ZXingScannerView.ResultHa
 
     @Override
     public void handleResult(Result rawResult) {
+        // try {
+//                String[] res = result.toString().split("-");
+//                System.out.println("INI QR " + res[2]);
+//                test2(Integer.parseInt(res[2]));
+//                Log.d("QR RESULT", result.toString());
+//                Log.d("QR RESULT", res[2]);
+////                goToAppliedJob(Integer.parseInt(res[2]));
+////                new DialogQrCompany(QrScanActivity.this, 1).showDialog();
+//            } catch (Exception e) {
+//                showErrorDialog("", "Qr tidak dapat dibaca");
+//            }
         final String result = rawResult.getText();
         Log.d("QRCodeScanner", rawResult.getText());
         Log.d("QRCodeScanner", rawResult.getBarcodeFormat().toString());
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Scan Result");
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mScannerView.resumeCameraPreview(PayWithQr.this);
-            }
-        });
-        builder.setMessage(rawResult.getText());
-        AlertDialog alert1 = builder.create();
-        alert1.show();
+        Intent intent = new Intent(PayWithQr.this, TransferToFriendSendActivity.class);
+        intent.putExtra(KEY_PAYMENT_QR,true);
+        intent.putExtra(KEY_NUMBER_CONTACT,rawResult.toString());
+        startActivity(intent);
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        builder.setTitle("Scan Result");
+//        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                mScannerView.resumeCameraPreview(PayWithQr.this);
+//            }
+//        });
+//        builder.setMessage(rawResult.getText());
+//        AlertDialog alert1 = builder.create();
+//        alert1.show();
     }
 }
 

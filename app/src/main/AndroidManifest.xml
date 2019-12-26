@@ -3,34 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.otto.ottocash">
 
-    <application
-        android:name=".DemoApp"
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_otto_cash"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_otto_cash"
-        android:supportsRtl="true"
-        android:theme="@style/NoActionBarTheme"
-        tools:replace="android:name">
-
-        <activity android:name=".DashboardAppActivity"></activity>
-        <activity android:name=".CheckOutActivity" />
-        <activity android:name=".LoginActivity">
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-
-        </activity>
-
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="d5c708c2d660429c1483e5fe3cc04a0668139201" />
-    </application>
-
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
@@ -41,4 +13,31 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:name=".DemoApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_otto_cash"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_otto_cash"
+        android:supportsRtl="true"
+        android:theme="@style/NoActionBarTheme"
+        tools:replace="android:name">
+        <activity android:name=".LoadingActivity">
+        </activity>
+        <activity android:name=".DashboardAppActivity" />
+        <activity android:name=".CheckOutActivity" />
+        <activity android:name=".LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="d5c708c2d660429c1483e5fe3cc04a0668139201" />
+    </application>
+
 </manifest>
