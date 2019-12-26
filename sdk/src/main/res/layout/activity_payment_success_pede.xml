@@ -5,16 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".ui.activity.payment.PaymentSuccessActivity">
+    tools:context=".ui.activity.payment.pede.PaymentSuccessPedeActivity">
 
-    <include layout="@layout/content_payment_success" />
+    <include layout="@layout/content_payment_success_pede" />
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <include layout="@layout/fragment_receipt" />
+        <include layout="@layout/content_payment_receipt_pede" />
     </android.support.design.widget.CoordinatorLayout>
 
 </android.support.design.widget.CoordinatorLayout>

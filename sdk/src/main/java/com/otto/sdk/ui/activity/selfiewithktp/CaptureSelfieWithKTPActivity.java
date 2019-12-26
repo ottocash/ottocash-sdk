@@ -55,7 +55,7 @@ public class CaptureSelfieWithKTPActivity extends BaseActivity {
         setContentView(R.layout.activity_selfie_with_ktpcamera_kit);
         initpermission();
         myContext = this;
-//        ktp = getIntent().getStringExtra("base64");
+        //ktp = getIntent().getStringExtra("base64");
         Log.i("KTP", "ktp : " + ktp);
         ktp = KTPResultViewActivity.getBase64;
         number = getIntent().getStringExtra("account_number");
@@ -144,9 +144,8 @@ public class CaptureSelfieWithKTPActivity extends BaseActivity {
         mCamera = getCameraInstance();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-//        mCamera = Camera.open();
-//        requestAppPermissions();
-
+        //mCamera = Camera.open();
+        //requestAppPermissions();
 
         Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
         int cameraCount = Camera.getNumberOfCameras();
@@ -270,10 +269,10 @@ public class CaptureSelfieWithKTPActivity extends BaseActivity {
         int cameraId = findFrontFacingCamera();
 
         if (mCamera == null) {
-//            mCamera = Camera.open();
-//            mCamera.setDisplayOrientation(90);
-//            mPicture = getPictureCallback();
-//            mPreview.refreshCamera(mCamera);
+            /*mCamera = Camera.open();
+            mCamera.setDisplayOrientation(90);
+            mPicture = getPictureCallback();
+            mPreview.refreshCamera(mCamera);*/
 
             if (cameraId >= 0) {
                 mCamera = Camera.open(cameraId);
@@ -335,8 +334,8 @@ public class CaptureSelfieWithKTPActivity extends BaseActivity {
                 Log.i("BASE64", "ini base : " + getBase64String(bitmap));
                 Log.i("BITMAP", "itu bitmap" + bitmap);
                 Intent intent = new Intent(CaptureSelfieWithKTPActivity.this, ResultSelfieWithKtpActivity.class);
-//                intent.putExtra("base64selfie", getBase64String(bitmap));
-//                intent.putExtra("base64", ktp);
+                //intent.putExtra("base64selfie", getBase64String(bitmap));
+                //intent.putExtra("base64", ktp);
                 intent.putExtra("account_number", number);
 
                 startActivity(intent);

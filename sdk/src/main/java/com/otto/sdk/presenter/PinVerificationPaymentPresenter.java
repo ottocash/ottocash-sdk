@@ -50,7 +50,7 @@ public class PinVerificationPaymentPresenter extends BasePresenter implements Pi
 
     @Override
     public BasePresenter getPresenter() {
-        return this;
+        return BasePresenter.getInstance(iPinVerificationPaymentView,this);
     }
 
     @Override

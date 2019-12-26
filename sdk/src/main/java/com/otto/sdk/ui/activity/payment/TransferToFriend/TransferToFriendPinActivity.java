@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.otto.sdk.R;
-import com.otto.sdk.ui.activity.payment.PaymentSuccessActivity;
+import com.otto.sdk.ui.activity.payment.otto.PaymentSuccessOttoActivity;
 import com.poovam.pinedittextfield.LinePinField;
 
 import app.beelabs.com.codebase.base.BaseActivity;
@@ -59,7 +59,7 @@ public class TransferToFriendPinActivity extends BaseActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (charSequence.toString().length() == 6) {
-                    Intent intent = new Intent(TransferToFriendPinActivity.this, PaymentSuccessActivity.class);
+                    Intent intent = new Intent(TransferToFriendPinActivity.this, PaymentSuccessOttoActivity.class);
                     startActivity(intent);
                 }
             }
