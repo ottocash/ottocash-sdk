@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="peek_height">55dp</dimen>
+    <dimen name="code_fp_margin">5dp</dimen>
+    <dimen name="code_fp_size">10dp</dimen>
 </resources>

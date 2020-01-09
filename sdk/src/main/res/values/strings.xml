@@ -182,4 +182,8 @@
     <string name="dalam_proses_verifikasi">Dalam proses verifikasi</string>
     <string name="transfer_ke_rekening_bank_kamu">Transfer ke rekening bank kamu</string>
 
+    <string name="lupa_pin"><u>Lupa PIN?</u></string>
+    <string name="masukan_pin">Masukan PIN Anda</string>
+    <string name="masukan_pin_desc">Masukan PIN Anda untuk melanjutkan pembayaran.\n Informasi ini tidak dibagi dengan merchant. </string>
+
 </resources>

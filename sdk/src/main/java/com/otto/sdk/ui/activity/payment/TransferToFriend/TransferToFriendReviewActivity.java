@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.otto.sdk.IConfig;
 import com.otto.sdk.R;
+import com.otto.sdk.ui.activity.payment.NewPinPaymentActivty;
 import com.otto.sdk.ui.activity.payment.PinPaymentActivity;
 import com.otto.sdk.ui.component.support.UiUtil;
 
@@ -101,7 +102,8 @@ public class TransferToFriendReviewActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(TransferToFriendReviewActivity.this, PinPaymentActivity.class);
+//                Intent intent = new Intent(TransferToFriendReviewActivity.this, PinPaymentActivity.class);
+                Intent intent = new Intent(TransferToFriendReviewActivity.this, NewPinPaymentActivty.class);
                 intent.putExtra(IConfig.KEY_PIN_TRANSFER_TO_FRIEND, pinTransferToFriend);
                 intent.putExtra(IConfig.KEY_NOMINAL_TRANSFER_TO_FRIEND, nominalTransferToFriend);
                 intent.putExtra(IConfig.KEY_NUMBER_CONTACT, numberContact);

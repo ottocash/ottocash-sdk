@@ -62,7 +62,6 @@ public class TransferToFriendSendActivity extends BaseActivity implements IInqui
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             numberContact = extras.getString(IConfig.KEY_NUMBER_CONTACT);
-//            nameContact = extras.getString(IConfig.KEY_NAME_CONTACT);
             nameTujuanTransfer = extras.getString(IConfig.KEY_ACCOUNT_NAME_TUJUAN);
             if(extras.getBoolean(KEY_PAYMENT_QR)){
                 title.setText("Pembayaran");

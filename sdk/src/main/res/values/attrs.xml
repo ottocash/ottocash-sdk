@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <attr name="pf_code_view" format="reference|integer"/>
+
     <declare-styleable name="inputable">
         <attr name="title" format="string" />
         <attr name="hintText" format="string" />

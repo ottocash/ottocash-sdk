@@ -39,6 +39,8 @@
     <color name="White_ffffff">#ffffff</color>
 
     <color name="transparent">@android:color/transparent</color>
+    <color name="code_lock_screen_pf">#ffffff</color>
+
 
 
 </resources>

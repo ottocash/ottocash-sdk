@@ -47,7 +47,6 @@
     </style>
 
 
-
     <!-- Font specs configuration -->
     <!--<style name="BarlowBlack" parent="android:TextAppearance">-->
     <!--<item name="fontPath">fonts/Barlow-Black.ttf</item>-->
@@ -144,5 +143,14 @@
     <style name="DialogAnimation">
         <item name="android:windowEnterAnimation">@anim/slide_up_dialog</item>
         <item name="android:windowExitAnimation">@anim/slide_down_dialog</item>
+    </style>
+
+    <style name="PFCheckBox">
+        <item name="android:checkboxStyle">@style/PFLockScreenCodeStyle</item>
+        <item name="checkboxStyle">@style/PFLockScreenCodeStyle</item>
+    </style>
+
+    <style name="PFLockScreenCodeStyle">
+        <item name="android:button">@drawable/code_selector</item>
     </style>
 </resources>

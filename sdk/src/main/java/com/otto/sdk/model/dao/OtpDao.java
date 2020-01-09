@@ -18,6 +18,7 @@ import retrofit2.Response;
 public class OtpDao extends BaseDao {
 
 
+
     private OtpPresenter.OnPresenterResponseCallback onPresenterResponseCallback;
     private IOtpDao iOtpDao;
 
@@ -26,6 +27,8 @@ public class OtpDao extends BaseDao {
 
         void getOtpVerification(OtpVerificationRequest requestModel);
     }
+
+
 
     public OtpDao(IDao obj) {
         super(obj);

@@ -23,7 +23,11 @@
         android:supportsRtl="true"
         android:theme="@style/NoActionBarTheme"
         tools:replace="android:name">
+        <activity android:name=".PinActivity">
+
+        </activity>
         <activity android:name=".LoadingActivity">
+
         </activity>
         <activity android:name=".DashboardAppActivity" />
         <activity android:name=".CheckOutActivity" />
