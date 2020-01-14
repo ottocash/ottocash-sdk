@@ -16,9 +16,15 @@ import app.beelabs.com.codebase.base.response.BaseResponse;
 public class SdkResourcePresenter extends BasePresenter implements CheckPhoneNumberDao.ICheckPhoneDao {
 
     private ISdkView sdkView;
+    private Context context;
 
     public SdkResourcePresenter(IView view) {
         this.sdkView = (ISdkView) view;
+    }
+
+    public SdkResourcePresenter(ISdkView sdkView, Context context) {
+        this.sdkView = sdkView;
+        this.context = context;
     }
 
     @Override
@@ -51,6 +57,6 @@ public class SdkResourcePresenter extends BasePresenter implements CheckPhoneNum
 
     @Override
     public Context getContext() {
-        return sdkView.getBaseActivity();
+        return (sdkView.getBaseActivity()==null)?context : sdkView.getBaseActivity();
     }
 }
