@@ -10,7 +10,7 @@ public interface IConfig {
 
 
     //Session
-    String SESSION_LOGIN_KEY = "session_login";
+    String SESSION_LOGIN_KEY = "Ottocash-SessionLoginnnnnnn";
     String SESSION_USER_ID = "user_id";
     String SESSION_ACCOUNT_NUMBER = "account_number";
     String SESSION_EMONEY_BALANCE = "emoney_balance";

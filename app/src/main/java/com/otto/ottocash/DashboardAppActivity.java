@@ -227,10 +227,7 @@ public class DashboardAppActivity extends BaseActivity implements ISdkView, IInq
     @OnClick(R.id.btnClearCache)
     public void onClearCache() {
 //        SessionManager.getSessionLogin(false, DashboardAppActivity.this);
-        SharedPreferences.Editor editor = getSharedPreferences("dataSesi", Context.MODE_PRIVATE).edit();
-        editor.clear();
-        editor.commit();
-        SessionManager.putSessionLogin(false,this);
+        OttoCash.onLogoutOttoCash(this);
         Intent intent = new Intent(DashboardAppActivity.this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
