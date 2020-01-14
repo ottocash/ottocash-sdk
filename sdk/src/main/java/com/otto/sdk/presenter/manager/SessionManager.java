@@ -13,7 +13,7 @@ public class SessionManager {
         return isLogin;
     }
 
-    public static boolean getSessionLogin(boolean isLogin, Context context) {
+    public static boolean getSessionLogin(Context context) {
         return CacheUtil.getPreferenceBoolean(IConfig.SESSION_LOGIN_KEY, context);
     }
 

@@ -16,6 +16,7 @@ import com.otto.sdk.model.api.response.CreateTokenResponse;
 import com.otto.sdk.model.api.response.InquiryResponse;
 import com.otto.sdk.presenter.InquiryPresenter;
 import com.otto.sdk.presenter.SdkResourcePresenter;
+import com.otto.sdk.presenter.manager.SessionManager;
 import com.otto.sdk.ui.activity.SdkActivity;
 import com.otto.sdk.ui.activity.account.activation.ActivationActivity;
 import com.otto.sdk.ui.activity.account.registration.RegistrationActivity;
@@ -35,14 +36,14 @@ public class OttoCash extends BaseActivity implements IInquiryView, ISdkView {
         return new OttoCash();
     }
     public static void onCallPayment(Activity activity, int amount) {
-        if (onCheckIsActive(activity)) {
-            activity.startActivity(new Intent(activity, DashboardSDKActivity.class));
+        if (SessionManager.getSessionLogin(activity)) {
+//            activity.startActivity(new Intent(activity, DashboardSDKActivity.class));
+            Intent intent = new Intent(activity, ReviewCheckoutActivity.class);
+            intent.putExtra(BILL_PAYMENT, String.valueOf(amount));
+            activity.startActivityForResult(intent, REQ_OTTOCASH_PAYMENT);
         } else {
             onActivateAccount(activity);
         }
-        Intent intent = new Intent(activity, ReviewCheckoutActivity.class);
-        intent.putExtra(BILL_PAYMENT, String.valueOf(amount));
-        activity.startActivityForResult(intent, REQ_OTTOCASH_PAYMENT);
     }
 
     public static void onActivateAccount(Context context) {

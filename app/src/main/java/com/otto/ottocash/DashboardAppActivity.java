@@ -28,6 +28,7 @@ import com.otto.sdk.model.api.response.InquiryResponse;
 import com.otto.sdk.model.api.response.PaymentData;
 import com.otto.sdk.presenter.InquiryPresenter;
 import com.otto.sdk.presenter.SdkResourcePresenter;
+import com.otto.sdk.presenter.manager.SessionManager;
 import com.otto.sdk.ui.activity.account.activation.ActivationActivity;
 import com.otto.sdk.ui.activity.account.registration.RegistrationActivity;
 import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
@@ -229,6 +230,7 @@ public class DashboardAppActivity extends BaseActivity implements ISdkView, IInq
         SharedPreferences.Editor editor = getSharedPreferences("dataSesi", Context.MODE_PRIVATE).edit();
         editor.clear();
         editor.commit();
+        SessionManager.putSessionLogin(false,this);
         Intent intent = new Intent(DashboardAppActivity.this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);

@@ -101,6 +101,11 @@ public class NewPinPaymentActivty extends AppActivity implements PinAdapter.Call
 
         keyPinVerificationPayment();
 
+
+        emoneyBalance = Integer.parseInt(CacheUtil.getPreferenceString(IConfig.SESSION_EMONEY_BALANCE,
+                NewPinPaymentActivty.this));
+        amount = CacheUtil.getPreferenceInteger(IConfig.SESSION_TOTAL, NewPinPaymentActivty.this);
+
         pinList.setLayoutManager(new GridLayoutManager(this, 3));
         pinList.setAdapter(new PinAdapter(this));
     }
@@ -219,6 +224,7 @@ public class NewPinPaymentActivty extends AppActivity implements PinAdapter.Call
 //                            onBackPressed();
 //                        }
 //                    });
+                    Toast.makeText(NewPinPaymentActivty.this, "Insufficient balance.", Toast.LENGTH_LONG).show();
                 } else {
                     onCallApiTransferToFriend();
                 }

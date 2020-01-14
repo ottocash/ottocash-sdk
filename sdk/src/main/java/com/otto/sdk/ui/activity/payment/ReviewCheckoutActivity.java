@@ -98,7 +98,7 @@ public class ReviewCheckoutActivity extends AppActivity {
         if (saldoEmoneyOttocash < billPayment) {
             saldoDialog();
         } else {
-            Intent intent = new Intent(ReviewCheckoutActivity.this, PinPaymentActivity.class);
+            Intent intent = new Intent(ReviewCheckoutActivity.this, NewPinPaymentActivty.class);
             intent.putExtra(IConfig.TOTAL_BILL_PAYMENT, billPayment);
             intent.putExtra(IConfig.KEY_PIN_CHECKOUT, reviewCheckout);
             startActivityForResult(intent,REQ_OTTOCASH_PAYMENT);
