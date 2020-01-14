@@ -217,6 +217,7 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
         String btnLabel = getString(R.string.dialog_btn_close);
 
         CustomDialog.alertDialog(this, title, message, btnLabel, false);
+
     }
 
     public void goPaymentWithQR(){
@@ -231,7 +232,6 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
             startActivity(intent);
         }
     }
-
 
     private void onCallApiInquiry() {
 
