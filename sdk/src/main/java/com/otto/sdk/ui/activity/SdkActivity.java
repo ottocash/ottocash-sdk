@@ -82,7 +82,7 @@ public class SdkActivity extends BaseActivity implements ISdkView, IInquiryView 
 
     public void goDashboardSDK() {
         Intent intent = new Intent(SdkActivity.this, DashboardSDKActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 

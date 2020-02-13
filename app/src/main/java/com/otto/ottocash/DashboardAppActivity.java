@@ -221,7 +221,7 @@ public class DashboardAppActivity extends BaseActivity implements ISdkView, IInq
     @OnClick(R.id.btnCheckOut)
     public void onCheckOut() {
         Toast.makeText(DashboardAppActivity.this, "Pembayaran OttoCash", Toast.LENGTH_SHORT).show();
-        OttoCash.onCallPayment(this,account_number,1000);
+        OttoCash.onCallPayment(this,account_number,1);
     }
 
     @OnClick(R.id.btnClearCache)

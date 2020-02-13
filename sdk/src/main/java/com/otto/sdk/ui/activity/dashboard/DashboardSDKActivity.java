@@ -288,23 +288,28 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
         }
     }
 
-
     @Override
     public void onBackPressed() {
-        try {
-            String PackageName = CacheUtil.getPreferenceString(IConfig.SESSION_PACKAGE_NAME,
-                    DashboardSDKActivity.this);
-
-            Intent intent = new Intent(DashboardSDKActivity.this, Class.forName(PackageName));
-//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP );
-            intent.putExtra("EMONEY", emoneyBalance);
-            Log.i("Money", "emoney"+ emoneyBalance);
-            startActivity(intent);
-            finish();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        super.onBackPressed();
     }
+
+    //    @Override
+//    public void onBackPressed() {
+//
+////        try {
+////            String PackageName = CacheUtil.getPreferenceString(IConfig.SESSION_PACKAGE_NAME,
+////                    DashboardSDKActivity.this);
+////
+////            Intent intent = new Intent(DashboardSDKActivity.this, Class.forName(PackageName));
+//////            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP );
+////            intent.putExtra("EMONEY", emoneyBalance);
+////            Log.i("Money", "emoney"+ emoneyBalance);
+////            startActivity(intent);
+////            finish();
+////        } catch (ClassNotFoundException e) {
+////            e.printStackTrace();
+////        }
+//    }
 
     @Override
     public BaseActivity getBaseActivity() {

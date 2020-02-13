@@ -117,7 +117,7 @@ public class PaymentSuccessPedeActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(PaymentSuccessPedeActivity.this, DashboardSDKActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }
         });
@@ -126,7 +126,7 @@ public class PaymentSuccessPedeActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(PaymentSuccessPedeActivity.this, DashboardSDKActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }
         });

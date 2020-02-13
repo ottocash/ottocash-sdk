@@ -79,7 +79,7 @@ public class LoginActivity extends SdkActivity {
             String phone = edt_phone.getText().toString();
             CacheUtil.putPreferenceString(IConfig.SESSION_PHONE, phone, LoginActivity.this);
             Intent intent = new Intent(LoginActivity.this, DashboardAppActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             LoginActivity.this.startActivity(intent);
         }
     }

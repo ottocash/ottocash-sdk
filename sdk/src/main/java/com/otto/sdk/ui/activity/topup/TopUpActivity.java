@@ -76,7 +76,7 @@ public class TopUpActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TopUpActivity.this, DashboardSDKActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 TopUpActivity.this.startActivity(intent);
             }
         });

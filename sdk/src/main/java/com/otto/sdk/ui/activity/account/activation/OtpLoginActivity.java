@@ -192,7 +192,7 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
     public void handleVerificationOtp(OtpVerificationResponse model) {
         if (model.getBaseMeta().getCode() == 200) {
             Intent intent = new Intent(OtpLoginActivity.this, DashboardSDKActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
             saveSession();
