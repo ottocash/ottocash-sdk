@@ -23,7 +23,7 @@ public class DemoApp extends BaseApp {
         context = getApplicationContext();
         setupBuilder(DaggerAppComponent.builder(), this);
         setupDefaultFont("fonts/Barlow-Regular.ttf");
-        OttoCashSdk.setupComponent(getAppComponent());
+        OttoCashSdk.setupComponent();
     }
 
     public static AppComponent getAppComponent() {

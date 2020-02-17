@@ -14,6 +14,7 @@ public interface IConfig {
     String SESSION_USER_ID = "user_id";
     String SESSION_ACCOUNT_NUMBER = "account_number";
     String SESSION_EMONEY_BALANCE = "emoney_balance";
+    String SESSION_IS_ACTIVE = "isacktipppp";
     String SESSION_TOTAL = "total";
     String SESSION_PHONE = "phone";
     String SESSION_PACKAGE_NAME = "package_name";

@@ -28,6 +28,8 @@ public class InquiryPresenter extends BasePresenter implements InquiryDao.IInqui
                     InquiryResponse model = (InquiryResponse) br;
                     inquiryView.handleInquiry(model);
                 }
+
+
             }).onInquiry(requestModel, getContext());
         }
 

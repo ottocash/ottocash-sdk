@@ -33,25 +33,17 @@ public class OttoCash extends BaseActivity implements IInquiryView, ISdkView {
     public static final String OTTOCASH_PAYMENT_DATA = "paymentData";
     public static final int REQ_OTTOCASH_PAYMENT = 101;
 
-    public static OttoCash getInstance() {
-        return new OttoCash();
-    }
-
     public static void onCallPayment(Activity activity,String phoneNumber ,int amount) {
         if (SessionManager.getSessionLogin(activity)) {
-//            activity.startActivity(new Intent(activity, DashboardSDKActivity.class));
             Intent intent = new Intent(activity, ReviewCheckoutActivity.class);
             intent.putExtra(BILL_PAYMENT, String.valueOf(amount));
             activity.startActivityForResult(intent, REQ_OTTOCASH_PAYMENT);
         } else {
-//            onActivateAccount(activity);
             onCheckPhoneNumber(activity,phoneNumber);
         }
     }
 
-    public static void onActivateAccount(Boolean hasPhoneNumber,Context context) {
-//        boolean hasPhoneNumber = Boolean.parseBoolean(String.valueOf(CacheUtil.getPreferenceBoolean(String.valueOf(
-//                IConfig.SESSION_CHECK_PHONE_NUMBER), context)));
+    private static void onActivateAccount(Boolean hasPhoneNumber,Context context) {
         if (hasPhoneNumber) {
             context.startActivity(new Intent(context, ActivationActivity.class));
         } else {
@@ -59,7 +51,7 @@ public class OttoCash extends BaseActivity implements IInquiryView, ISdkView {
         }
     }
 
-    public static void onCheckPhoneNumber(final Context context, String phoneNumber) {
+    private static void onCheckPhoneNumber(final Context context, String phoneNumber) {
         final CheckPhoneNumberRequest model = new CheckPhoneNumberRequest();
         model.setPhone(phoneNumber);
         new SdkResourcePresenter(new ISdkView() {
@@ -102,16 +94,9 @@ handleFail(message);
                 return null;
             }
         }).getCheckPhone(model);
-//        showApiProgressDialog(OttoCashSdk.getAppComponent(), new SdkResourcePresenter(this) {
-//            @Override
-//            public void call() {
-//                getCheckPhone(model);
-////                loading.dismiss();
-//            }
-//        }, "Loading");
     }
 
-    public void onGetAccountData(String account_number) {
+    private void onGetAccountData(String account_number) {
         new InquiryPresenter(this).getInquiry(new InquiryRequest(account_number));
     }
 
@@ -124,11 +109,12 @@ handleFail(message);
         }
     }
 
-    public static Boolean onCheckIsActive(Context context) {
-        return !CacheUtil.getPreferenceString(IConfig.SESSION_EMONEY_BALANCE, context).isEmpty();
+    private static Boolean onCheckIsActive(Context context) {
+        return CacheUtil.getPreferenceBoolean(IConfig.SESSION_IS_ACTIVE, context);
     }
 
     public static void onLogoutOttoCash(Activity activity) {
+        CacheUtil.putPreferenceBoolean(IConfig.SESSION_IS_ACTIVE, false,activity);
         SharedPreferences.Editor editor = activity.getSharedPreferences("dataSesi", Context.MODE_PRIVATE).edit();
         editor.clear();
         editor.commit();

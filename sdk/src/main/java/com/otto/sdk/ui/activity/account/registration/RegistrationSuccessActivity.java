@@ -32,11 +32,14 @@ public class RegistrationSuccessActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(RegistrationSuccessActivity.this, DashboardSDKActivity.class);
-//                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
             }
         });
     }
 
+    @Override
+    public BaseActivity getBaseActivity() {
+        return RegistrationSuccessActivity.this;
+    }
 }

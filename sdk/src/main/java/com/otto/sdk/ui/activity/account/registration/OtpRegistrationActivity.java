@@ -125,26 +125,25 @@ public class OtpRegistrationActivity extends BaseActivity implements IOtpView {
 
         model = new OtpVerificationRequest(CacheUtil.getPreferenceInteger(IConfig.SESSION_USER_ID, OtpRegistrationActivity.this));
         model.setOtpCode(lineField.getText().toString());
-
-        showApiProgressDialog(OttoCashSdk.getAppComponent(), new OtpPresenter(this) {
-            @Override
-            public void call() {
-                getOtpVerification(model);
-
-            }
-        }, "Loading");
+        new OtpPresenter(this).getOtpVerification(model);
+//        showApiProgressDialog(OttoCashSdk.getAppComponent(), {
+//            @Override
+//            public void call() {
+//                getOtpVerification(model);
+//            }
+//        }, "Loading");
     }
 
     private void onCallApiOTPRequest() {
         modelOtpRequest = new OtpRequest(CacheUtil.getPreferenceString(SESSION_PHONE, OtpRegistrationActivity.this));
-
-        showApiProgressDialog(OttoCashSdk.getAppComponent(), new OtpPresenter(OtpRegistrationActivity.this) {
-            @Override
-            public void call() {
-                getOtpRequest(modelOtpRequest);
-
-            }
-        }, "Loading");
+        new OtpPresenter(OtpRegistrationActivity.this).getOtpRequest(modelOtpRequest);
+//        showApiProgressDialog(OttoCashSdk.getAppComponent(), new OtpPresenter(OtpRegistrationActivity.this) {
+//            @Override
+//            public void call() {
+//                getOtpRequest(modelOtpRequest);
+//
+//            }
+//        }, "Loading");
     }
 
 
@@ -204,5 +203,10 @@ public class OtpRegistrationActivity extends BaseActivity implements IOtpView {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("session", "aktivasi");
         editor.apply();
+    }
+
+    @Override
+    public BaseActivity getBaseActivity() {
+        return OtpRegistrationActivity.this;
     }
 }

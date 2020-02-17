@@ -73,12 +73,12 @@ public class DashboardAppActivity extends BaseActivity implements ISdkView, IInq
         onSetupAccountClick();
 
         sharedPreferences = getSharedPreferences("dataSesi", Context.MODE_PRIVATE);
-        saldo  = sharedPreferences.getString("saldo", null);
+        saldo = sharedPreferences.getString("saldo", null);
 
         getDatasessi = sharedPreferences.getString("session", null);
         Log.i("responData", " " + getDatasessi);
 
-        if ( saldo != null) {
+        if (saldo != null) {
             Log.i("respon", " " + saldo);
             tvSaldoOttoCash.setText(UiUtil.formatMoneyIDR(Long.parseLong(saldo)));
         }
@@ -86,6 +86,8 @@ public class DashboardAppActivity extends BaseActivity implements ISdkView, IInq
         onEmoneyBalanceWidget();
 
         checkFirstRun();
+
+//        OttoCash.onCallOttoCashDashboard(this,"08123456789");
 
     }
 
@@ -175,7 +177,10 @@ public class DashboardAppActivity extends BaseActivity implements ISdkView, IInq
             lyWidgetSdk.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    goDashboardSDK();
+//                    goDashboardSDK();
+                    OttoCash.onCallOttoCashDashboard(DashboardAppActivity.this,
+                            CacheUtil.getPreferenceString(IConfig.SESSION_PHONE,
+                                    DashboardAppActivity.this));
                 }
             });
         }
@@ -193,8 +198,7 @@ public class DashboardAppActivity extends BaseActivity implements ISdkView, IInq
         loading.show();
 
         new InquiryPresenter(this).getInquiry(new InquiryRequest(account_number));
-//        OttoCash ottoCash = OttoCash.getInstance();
-//        ottoCash.onCheckPhoneNumber(this,account_number);
+
         showApiProgressDialog(OttoCashSdk.getAppComponent(), new SdkResourcePresenter(DashboardAppActivity.this) {
             @Override
             public void call() {
@@ -209,11 +213,11 @@ public class DashboardAppActivity extends BaseActivity implements ISdkView, IInq
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == RESULT_OK && requestCode == OttoCash.REQ_OTTOCASH_PAYMENT){
+        if (resultCode == RESULT_OK && requestCode == OttoCash.REQ_OTTOCASH_PAYMENT) {
             Intent intent = new Intent();
-            if(data.getParcelableExtra(OttoCash.OTTOCASH_PAYMENT_DATA)!=null){
+            if (data.getParcelableExtra(OttoCash.OTTOCASH_PAYMENT_DATA) != null) {
                 PaymentData paymentData = data.getParcelableExtra(OttoCash.OTTOCASH_PAYMENT_DATA);
-                Toast.makeText(this,paymentData.getReferenceNumber(),Toast.LENGTH_LONG).show();
+                Toast.makeText(this, paymentData.getReferenceNumber(), Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -221,7 +225,7 @@ public class DashboardAppActivity extends BaseActivity implements ISdkView, IInq
     @OnClick(R.id.btnCheckOut)
     public void onCheckOut() {
         Toast.makeText(DashboardAppActivity.this, "Pembayaran OttoCash", Toast.LENGTH_SHORT).show();
-        OttoCash.onCallPayment(this,account_number,1);
+        OttoCash.onCallPayment(this, account_number, 1);
     }
 
     @OnClick(R.id.btnClearCache)

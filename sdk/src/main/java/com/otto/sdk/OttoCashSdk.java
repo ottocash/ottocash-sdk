@@ -14,14 +14,13 @@ public class OttoCashSdk extends BaseApp {
     @Override
     public void onCreate() {
         super.onCreate();
-
         context = getApplicationContext();
         setupBuilder(DaggerAppComponent.builder(), this);
         setupDefaultFont("fonts/Barlow-Regular.ttf");
     }
 
-    public static void setupComponent(AppComponent component){
-        appComponent = component;
+    public static void setupComponent(){
+        appComponent = getComponent();
     }
 
     public static AppComponent getAppComponent() {

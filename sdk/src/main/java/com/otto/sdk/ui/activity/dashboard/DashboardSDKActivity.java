@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCashSdk;
 import com.otto.sdk.R;
@@ -30,9 +31,13 @@ import com.otto.sdk.ui.adapter.MainMenuAdapter;
 import com.otto.sdk.ui.component.dialog.CustomDialog;
 import com.otto.sdk.ui.component.support.ItemClickSupport;
 import com.otto.sdk.ui.component.support.UiUtil;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import app.beelabs.com.codebase.base.BaseActivity;
+import app.beelabs.com.codebase.component.LoadingDialogComponent;
+import app.beelabs.com.codebase.component.ProgressDialogComponent;
 import app.beelabs.com.codebase.support.util.CacheUtil;
 
 public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
@@ -58,7 +63,7 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard_sdk);
-
+        CacheUtil.putPreferenceBoolean(IConfig.SESSION_IS_ACTIVE, true,this);
         initComponent();
         initRecyclerView();
         displayMainMenu();
@@ -220,7 +225,7 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
 
     }
 
-    public void goPaymentWithQR(){
+    public void goPaymentWithQR() {
         startActivity(new Intent(this, PayWithQr.class));
     }
 
@@ -242,7 +247,11 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
             @Override
             public void call() {
                 getInquiry(inquiryRequest);
+            }
 
+            @Override
+            public void done() {
+                super.done();
             }
         }, "Loading");
     }
@@ -257,26 +266,24 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
             CacheUtil.putPreferenceString(IConfig.SESSION_NAME, name, DashboardSDKActivity.this);
             verifyStatus = model.getData().getVerifyStatus();
             editor.putString("saldo", emoneyBalance);
-            Log.i("SALDO", "INI SALDO :"+ emoneyBalance);
+            Log.i("SALDO", "INI SALDO :" + emoneyBalance);
             editor.apply();
 
             tvEmoneyBalance.setText(UiUtil.formatMoneyIDR(Long.parseLong(emoneyBalance)));
 
-            if (model.getData().getVerifyStatus()== 2) {
+            if (model.getData().getVerifyStatus() == 2) {
                 tvUpgrade.setVisibility(View.GONE);
                 tvPending.setVisibility(View.GONE);
                 tvTitleOttoCash.setText("Hai " + name + ". Saldo OttoCash Plus");
-            } else if (model.getData().getVerifyStatus()== 1) {
+            } else if (model.getData().getVerifyStatus() == 1) {
                 tvUpgrade.setVisibility(View.GONE);
                 tvPending.setVisibility(View.VISIBLE);
                 tvTitleOttoCash.setText("Hai " + name + ". Saldo OttoCash Reguler");
-            } else if (model.getData().getVerifyStatus()== 0) {
+            } else if (model.getData().getVerifyStatus() == 0) {
                 tvUpgrade.setVisibility(View.VISIBLE);
                 tvPending.setVisibility(View.GONE);
                 tvTitleOttoCash.setText("Hai " + name + ". Saldo OttoCash Reguler");
-            }
-
-            else if (model.getData().getVerifyStatus()== 3) {
+            } else if (model.getData().getVerifyStatus() == 3) {
                 tvUpgrade.setVisibility(View.VISIBLE);
                 tvPending.setVisibility(View.GONE);
                 tvTitleOttoCash.setText("Hai " + name + ". Saldo OttoCash Reguler");
@@ -313,6 +320,6 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
 
     @Override
     public BaseActivity getBaseActivity() {
-        return super.getBaseActivity();
+        return DashboardSDKActivity.this;
     }
 }

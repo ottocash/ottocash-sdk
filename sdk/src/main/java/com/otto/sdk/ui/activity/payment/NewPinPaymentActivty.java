@@ -295,7 +295,6 @@ public class NewPinPaymentActivty extends AppActivity implements PinAdapter.Call
             intent.putExtra(OTTOCASH_PAYMENT_DATA, model.getData());
             setResult(RESULT_OK, intent);
             finish();
-
         } else {
             Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
                     Toast.LENGTH_LONG).show();
