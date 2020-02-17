@@ -104,7 +104,7 @@ handleFail(message);
     }
 
     public static void onCallOttoCashDashboard(Context context,String phoneNumber) {
-        CacheUtil.getPreferenceString(SESSION_PHONE, context);
+        CacheUtil.putPreferenceString(SESSION_PHONE, phoneNumber,context);
         if (onCheckIsActive(context)) {
             context.startActivity(new Intent(context, DashboardSDKActivity.class));
         } else {
