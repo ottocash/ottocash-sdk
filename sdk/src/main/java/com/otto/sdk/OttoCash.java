@@ -21,11 +21,14 @@ import com.otto.sdk.presenter.manager.SessionManager;
 import com.otto.sdk.ui.activity.SdkActivity;
 import com.otto.sdk.ui.activity.account.activation.ActivationActivity;
 import com.otto.sdk.ui.activity.account.registration.RegistrationActivity;
+import com.otto.sdk.ui.activity.account.registration.SetPinActivity;
 import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
 import com.otto.sdk.ui.activity.payment.ReviewCheckoutActivity;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.support.util.CacheUtil;
+
+import static com.otto.sdk.IConfig.SESSION_PHONE;
 
 public class OttoCash extends BaseActivity implements IInquiryView, ISdkView {
 
@@ -101,6 +104,7 @@ handleFail(message);
     }
 
     public static void onCallOttoCashDashboard(Context context,String phoneNumber) {
+        CacheUtil.getPreferenceString(SESSION_PHONE, context);
         if (onCheckIsActive(context)) {
             context.startActivity(new Intent(context, DashboardSDKActivity.class));
         } else {
