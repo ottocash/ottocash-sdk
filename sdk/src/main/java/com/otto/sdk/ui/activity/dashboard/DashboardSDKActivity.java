@@ -16,13 +16,14 @@ import android.widget.Toast;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCashSdk;
 import com.otto.sdk.R;
-import com.otto.sdk.ui.activity.kycupgrade.UpgradeActivity;
 import com.otto.sdk.interfaces.IInquiryView;
 import com.otto.sdk.model.api.request.InquiryRequest;
 import com.otto.sdk.model.api.response.InquiryResponse;
 import com.otto.sdk.model.general.MainMenuModel;
 import com.otto.sdk.presenter.InquiryPresenter;
+import com.otto.sdk.ui.activity.SdkActivity;
 import com.otto.sdk.ui.activity.history.HistoryActivity;
+import com.otto.sdk.ui.activity.kycupgrade.UpgradeActivity;
 import com.otto.sdk.ui.activity.payment.QR.PayWithQr;
 import com.otto.sdk.ui.activity.payment.TransferToFriend.TransferToFriendActivity;
 import com.otto.sdk.ui.activity.tac.TACOttoCashActivity;
@@ -36,11 +37,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.beelabs.com.codebase.base.BaseActivity;
-import app.beelabs.com.codebase.component.LoadingDialogComponent;
-import app.beelabs.com.codebase.component.ProgressDialogComponent;
 import app.beelabs.com.codebase.support.util.CacheUtil;
 
-public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
+public class DashboardSDKActivity extends SdkActivity implements IInquiryView {
 
     ImageView ivBack;
     TextView tvTitleOttoCash;
@@ -57,17 +56,21 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
     private int verifyStatus;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+    public static String nikmatinaja;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard_sdk);
-        CacheUtil.putPreferenceBoolean(IConfig.SESSION_IS_ACTIVE, true,this);
+
+        CacheUtil.putPreferenceBoolean(IConfig.SESSION_IS_ACTIVE, true, this);
         initComponent();
         initRecyclerView();
         displayMainMenu();
         onCallApiInquiry();
+
+        initializeSDK();
 
         sharedPreferences = getSharedPreferences("dataSesi", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
@@ -76,7 +79,7 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DashboardSDKActivity.this, UpgradeActivity.class);
-                intent.putExtra("account_number", inquiryResponse.getData().getAccountNumber());
+                intent.putExtra("account_number", nikmatinaja);
 
                 startActivity(intent);
             }
@@ -263,6 +266,7 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
             emoneyBalance = model.getData().getEmoneyBalance();
             CacheUtil.putPreferenceString(IConfig.SESSION_EMONEY_BALANCE, emoneyBalance, DashboardSDKActivity.this);
             name = model.getData().getName();
+            nikmatinaja = model.getData().getAccountNumber();
             CacheUtil.putPreferenceString(IConfig.SESSION_NAME, name, DashboardSDKActivity.this);
             verifyStatus = model.getData().getVerifyStatus();
             editor.putString("saldo", emoneyBalance);

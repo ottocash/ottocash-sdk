@@ -37,7 +37,7 @@ public class OttoCash extends BaseActivity implements IInquiryView, ISdkView {
     public static final int REQ_OTTOCASH_PAYMENT = 101;
 
     public static void onCallPayment(Activity activity,String phoneNumber ,int amount) {
-        if (SessionManager.getSessionLogin(activity)) {
+        if (onCheckIsActive(activity)) {
             Intent intent = new Intent(activity, ReviewCheckoutActivity.class);
             intent.putExtra(BILL_PAYMENT, String.valueOf(amount));
             activity.startActivityForResult(intent, REQ_OTTOCASH_PAYMENT);

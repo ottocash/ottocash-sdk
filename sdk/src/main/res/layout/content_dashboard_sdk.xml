@@ -14,9 +14,9 @@
 
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/nestedLayout"
-        android:layout_above="@id/bottom_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bottom_layout">
 
         <LinearLayout
             android:id="@+id/parent"
@@ -68,33 +68,33 @@
                     android:id="@+id/tv_upgrade"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
                     android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/background_upgrade"
                     android:gravity="center"
                     android:text="@string/upgrade"
-                    android:visibility="gone"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/background_upgrade"
                     android:textAppearance="@style/BarlowSemiBold"
                     android:textColor="@color/white"
-                    android:textSize="10dp" />
+                    android:textSize="10dp"
+                    android:visibility="visible" />
 
                 <TextView
                     android:id="@+id/tv_pending"
                     android:layout_width="124dp"
                     android:layout_height="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
                     android:layout_gravity="center"
-                    android:gravity="center"
-                    android:visibility="invisible"
+                    android:layout_marginLeft="20dp"
                     android:layout_marginTop="8dp"
-                    android:text="@string/dalam_proses_verifikasi"
+                    android:layout_marginRight="20dp"
                     android:background=" #F7F7F7"
+                    android:gravity="center"
+                    android:text="@string/dalam_proses_verifikasi"
                     android:textAppearance="@style/BarlowSemiBold"
                     android:textColor="#0671B6"
-                    android:textSize="10dp" />
+                    android:textSize="10dp"
+                    android:visibility="invisible" />
 
             </LinearLayout>
 
@@ -107,7 +107,8 @@
                 app:cardCornerRadius="10dp"
                 app:cardElevation="1dp"
                 app:cardMaxElevation="1dp">
-D
+                D
+
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
@@ -144,8 +145,8 @@ D
         android:id="@+id/bottom_layout"
         android:layout_width="match_parent"
         android:layout_height="?android:actionBarSize"
-        android:gravity="center_vertical"
         android:layout_alignParentBottom="true"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <include layout="@layout/partial_setting_ottocash" />

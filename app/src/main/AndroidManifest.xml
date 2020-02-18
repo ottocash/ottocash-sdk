@@ -29,7 +29,9 @@
         <activity android:name=".LoadingActivity">
 
         </activity>
-        <activity android:name=".DashboardAppActivity" />
+        <activity android:name=".DashboardAppActivity" >
+
+        </activity>
         <activity android:name=".CheckOutActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
