@@ -84,7 +84,15 @@ public class DashboardAppActivity extends BaseActivity implements ISdkView, IInq
         }
 
         onEmoneyBalanceWidget();
-
+        lyWidgetSdk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                    goDashboardSDK();
+                OttoCash.onCallOttoCashDashboard(DashboardAppActivity.this,
+                        CacheUtil.getPreferenceString(IConfig.SESSION_PHONE,
+                                DashboardAppActivity.this));
+            }
+        });
         checkFirstRun();
 
 //        OttoCash.onCallOttoCashDashboard(this,"08123456789");

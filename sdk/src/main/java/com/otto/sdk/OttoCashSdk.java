@@ -29,6 +29,7 @@ public class OttoCashSdk extends BaseApp {
                 Secret,
                 application
         );
+
         setupBuilder(DaggerAppComponent.builder(), application);
     }
 

@@ -19,11 +19,13 @@ public class DemoApp extends BaseApp {
     public void onCreate() {
         super.onCreate();
         Fabric.with(this, new Crashlytics());
-
         context = getApplicationContext();
         setupBuilder(DaggerAppComponent.builder(), this);
         setupDefaultFont("fonts/Barlow-Regular.ttf");
-        OttoCashSdk.setupComponent();
+        OttoCashSdk.setupComponent(
+                "31199fb491883361aab49e9e1210b6f0847d9bee83bce849062eeef234f12621",
+                "9ef53ece2353a5ae9497910a1de0c483608bdb75ede462407d78ad08ec4da49a",
+                this);
     }
 
     public static AppComponent getAppComponent() {
