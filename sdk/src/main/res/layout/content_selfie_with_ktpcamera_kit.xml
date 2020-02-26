@@ -10,29 +10,41 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-
-    <ImageView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/background_selfie2"/>
+        android:background="@drawable/background_selfie2"
+        android:orientation="vertical">
+
+        <com.camerakit.CameraKitView
+            android:id="@+id/cameraKitView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:keepScreenOn="true"
+            app:camera_facing="front"
+            app:camera_flash="auto"
+            app:camera_focus="continuous"
+            app:camera_permissions="camera" />
+
+    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="24dp"
         android:layout_alignParentBottom="true"
         android:gravity="center|center_horizontal"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="24dp">
+
 
         <ImageView
-            android:id="@+id/btnSwitch"
+            android:id="@+id/imgSwitch"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:visibility="gone"
-            android:src="@drawable/ic_circ"
             android:background="@drawable/circle_blue"
-            />
+            android:src="@drawable/ic_circ" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -43,7 +55,7 @@
             android:gravity="center">
 
             <ImageView
-                android:id="@+id/btnCam"
+                android:id="@+id/imgCamera"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -52,13 +64,12 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/iv_flash"
+            android:id="@+id/imgFlash"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="20dp"
-            android:src="@drawable/ic_light"
+            android:layout_marginStart="20dp"
             android:background="@drawable/circle_blue"
-            />
+            android:src="@drawable/ic_light" />
 
     </LinearLayout>
 

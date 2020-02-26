@@ -2,9 +2,9 @@ package com.otto.sdk.ui.activity.payment.pede;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomSheetBehavior;
-import android.support.v4.widget.NestedScrollView;
+import androidx.annotation.NonNull;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import androidx.core.widget.NestedScrollView;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageButton;

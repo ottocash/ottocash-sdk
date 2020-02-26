@@ -3,15 +3,13 @@ package com.otto.sdk.ui.component.dialog;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.Pulse;
 import com.otto.sdk.R;
 
-import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.base.BaseDialog;
 
 public class OttocashSDKDialog extends BaseDialog {

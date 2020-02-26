@@ -13,14 +13,14 @@ import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+import com.otto.sdk.AppActivity;
 import com.otto.sdk.Flag;
 import com.otto.sdk.R;
+import com.otto.sdk.ui.activity.kycupgrade.takeFotoKtp.TakeFotoKtpActivity;
 
 import java.util.List;
 
-import app.beelabs.com.codebase.base.BaseActivity;
-
-public class GoToUpgradeActivity extends BaseActivity {
+public class GoToUpgradeActivity extends AppActivity {
     Button btn_fotoKTP;
     ImageView ivback;
     private String number;
@@ -29,8 +29,9 @@ public class GoToUpgradeActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upgrade_next);
-        number = getIntent().getStringExtra(Flag.ACCOUNT_NUMBER);
-        btn_fotoKTP = findViewById(R.id.btn_fotoKTP);
+
+        //number = getIntent().getStringExtra(Flag.ACCOUNT_NUMBER);
+        btn_fotoKTP = findViewById(R.id.btnSubmit);
         ivback = findViewById(R.id.ivBack);
 
         btn_fotoKTP.setOnClickListener(new View.OnClickListener() {
@@ -46,8 +47,8 @@ public class GoToUpgradeActivity extends BaseActivity {
                 onBackPressed();
             }
         });
-        number = getIntent().getStringExtra("account_number");
-        Log.i("ACCOUNT", "Account number : " + number);
+        //number = getIntent().getStringExtra("account_number");
+        //Log.i("ACCOUNT", "Account number : " + number);
     }
 
     private void initpermission() {
@@ -59,7 +60,7 @@ public class GoToUpgradeActivity extends BaseActivity {
 
                         if (report.areAllPermissionsGranted()) {
                             Intent intent = new Intent(GoToUpgradeActivity.this, TakeFotoKtpActivity.class);
-                            intent.putExtra("account_number", number);
+                            //intent.putExtra("account_number", number);
                             startActivity(intent);
                         }
 

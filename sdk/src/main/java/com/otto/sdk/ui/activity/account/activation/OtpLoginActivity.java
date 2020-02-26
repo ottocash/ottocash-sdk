@@ -23,7 +23,6 @@ import com.otto.sdk.model.api.request.OtpVerificationRequest;
 import com.otto.sdk.model.api.response.RequestOtpResponse;
 import com.otto.sdk.model.api.response.VerifyOtpResponse;
 import com.otto.sdk.presenter.OtpPresenter;
-import com.otto.sdk.ui.activity.account.registration.OtpRegistrationActivity;
 import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
 import com.otto.sdk.ui.component.support.UiUtil;
 import com.poovam.pinedittextfield.LinePinField;

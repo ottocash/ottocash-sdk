@@ -1,6 +1,6 @@
 package com.otto.ottocash.livedata;
 
-import android.arch.lifecycle.LiveData;
+import androidx.lifecycle.LiveData;
 
 public class PinLiveData<T> extends LiveData<T> {
 

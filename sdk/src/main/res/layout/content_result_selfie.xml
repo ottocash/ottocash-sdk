@@ -1,85 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".ui.activity.payment.ReviewCheckoutActivity"
-    tools:ignore="MissingPrefix"
-    tools:showIn="@layout/dialog_preview_foto_ktp"
+    android:layout_height="wrap_content"
+    tools:showIn="@layout/dialog_preview_selfie">
 
-    >
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
         android:background="@color/white"
-        android:orientation="vertical"
-        android:paddingBottom="15dp"
-
-        >
-
-        <Button
-            android:id="@+id/btn_fotoKTP"
-            fontPath="fonts/SemiBold.otf"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tct"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="20dp"
-            android:background="#CF4A54"
-            android:text="@string/submit"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            tools:ignore="MissingPrefix" />
-
-        <Button
-            android:id="@+id/btn_data_belum_sesuai"
-            fontPath="fonts/SemiBold.otf"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/btn_fotoKTP"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
-            android:background="@drawable/bg_nanti_saja"
-            android:text="@string/data_belum_sesuai_ulangi_foto_selfie"
-            android:textAllCaps="false"
-            android:textColor=" #CF4A54"
-            tools:ignore="MissingPrefix" />
-
-        <Button
-            android:id="@+id/btn_batalkan"
-            fontPath="fonts/SemiBold.otf"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/btn_data_belum_sesuai"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
-            android:background="@drawable/bg_nanti_saja"
-            android:text="@string/batalkan_dan_kembali_ke_menu_utama"
-            android:textAllCaps="false"
-            android:textColor=" #CF4A54"
-            tools:ignore="MissingPrefix" />
+        android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/ll_capture"
-            android:layout_width="300dp"
-            android:layout_height="329dp"
-            android:layout_below="@+id/tv_plus"
-            android:layout_alignParentTop="true"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="25dp"
             android:background="#EBF6FE"
             android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/iv_avatar"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="350dp"
                 android:layout_gravity="center"
                 android:src="@drawable/bg_lanjut_upgrade" />
 
@@ -99,6 +45,53 @@
             android:textColor="@color/white"
             android:textSize="12sp" />
 
-    </RelativeLayout>
+        <Button
+            android:id="@+id/btnSubmit"
+            fontPath="fonts/SemiBold.otf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tct"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="20dp"
+            android:background="#CF4A54"
+            android:text="@string/submit"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            tools:ignore="MissingPrefix" />
 
-</android.support.v4.widget.NestedScrollView>
+        <Button
+            android:id="@+id/btnFotoUlang"
+            fontPath="fonts/SemiBold.otf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btnSubmit"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/bg_nanti_saja"
+            android:text="@string/data_belum_sesuai_ulangi_foto_selfie"
+            android:textAllCaps="false"
+            android:textColor=" #CF4A54"
+            tools:ignore="MissingPrefix" />
+
+        <Button
+            android:id="@+id/btnBatal"
+            fontPath="fonts/SemiBold.otf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btnFotoUlang"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/bg_nanti_saja"
+            android:text="@string/batalkan_dan_kembali_ke_menu_utama"
+            android:textAllCaps="false"
+            android:textColor=" #CF4A54"
+            tools:ignore="MissingPrefix" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

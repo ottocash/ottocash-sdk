@@ -2,7 +2,7 @@ package com.otto.ottocash;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -11,11 +11,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.otto.sdk.IConfig;
-import com.otto.sdk.model.api.response.InquiryResponse;
-import com.otto.sdk.ui.activity.payment.PinPaymentActivity;
 import com.otto.sdk.ui.activity.payment.ReviewCheckoutActivity;
 import com.otto.sdk.ui.component.support.UiUtil;
 

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -18,10 +17,8 @@ import com.otto.sdk.model.api.response.InquiryResponse;
 import com.otto.sdk.presenter.InquiryPresenter;
 import com.otto.sdk.presenter.SdkResourcePresenter;
 import com.otto.sdk.presenter.manager.SessionManager;
-import com.otto.sdk.ui.activity.SdkActivity;
 import com.otto.sdk.ui.activity.account.activation.ActivationActivity;
 import com.otto.sdk.ui.activity.account.registration.RegistrationActivity;
-import com.otto.sdk.ui.activity.account.registration.SetPinActivity;
 import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
 import com.otto.sdk.ui.activity.payment.ReviewCheckoutActivity;
 

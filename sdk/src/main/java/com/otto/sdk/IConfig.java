@@ -75,7 +75,7 @@ public interface IConfig {
     String KEY_DATA = "data";
 
     // folder file
-    String FOLDER_APP = "OttoCash";
+    String FOLDER_APP = "ottocash";
     String FOLDER_FOTO = FOLDER_APP + File.separator + "Foto";
 
     // file foto configuration
@@ -88,6 +88,7 @@ public interface IConfig {
     String FILE_NAME_FOTO_KTP = FOLDER_FOTO + File.separator + FILE_NAME_MAIN_FOTO_KTP + IConfig.FILE_SEPARATOR;
     int REQUEST_KTP = 112;
 
+    String KEY_BASE64_SELFIE = "value_base64_selfie";
     String FILE_NAME_MAIN_FOTO_SELFIE = "foto_selfie";
     String FILE_NAME_FOTO_SELFIE = FOLDER_FOTO + File.separator + FILE_NAME_MAIN_FOTO_SELFIE + IConfig.FILE_SEPARATOR;
     int REQUEST_SELFIE = 113;

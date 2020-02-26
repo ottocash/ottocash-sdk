@@ -2,7 +2,7 @@ package com.otto.sdk.ui.component.support;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.Base64;
 
 import java.io.ByteArrayOutputStream;

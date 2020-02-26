@@ -22,7 +22,7 @@
         android:roundIcon="@mipmap/ic_otto_cash"
         android:supportsRtl="true"
         android:theme="@style/NoActionBarTheme"
-        tools:replace="android:appComponentFactory"
+        tools:replace="android:name"
         android:hardwareAccelerated="true"
         tools:ignore="GoogleAppIndexingWarning">
 

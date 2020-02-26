@@ -27,12 +27,12 @@
         <activity
             android:name=".ui.activity.history.HistoryActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.activity.kycupgrade.CaptureSelfieWithKTPActivity" />
+        <activity android:name=".ui.activity.kycupgrade.takeFotoSelfie.TakeFotoSelfieActivity" />
         <activity
             android:name=".ui.activity.SdkActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.kycupgrade.TakeFotoKtpActivity"
+            android:name=".ui.activity.kycupgrade.takeFotoKtp.TakeFotoKtpActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.account.activation.PinLoginActivity"
@@ -110,10 +110,10 @@
             android:name=".ui.activity.kycupgrade.UpgradeSuccessActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.kycupgrade.PreviewFotoKtpSignUpDialog"
+            android:name=".ui.activity.kycupgrade.takeFotoKtp.PreviewFotoKtpDialog"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.kycupgrade.PreviewFotoKtpActivity"
+            android:name=".ui.activity.kycupgrade.takeFotoSelfie.PreviewFotoSelfieDialog"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.kycupgrade.GoToUpgradeActivity"

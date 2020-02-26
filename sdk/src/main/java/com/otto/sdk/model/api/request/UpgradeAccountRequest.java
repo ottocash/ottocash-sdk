@@ -2,23 +2,16 @@ package com.otto.sdk.model.api.request;
 
 public class UpgradeAccountRequest  {
 
-	private String passport_photo;
+
+	/**
+	 * account_number : 082128521827
+	 * id_card :
+	 * passport_photo :
+	 */
+
 	private String account_number;
 	private String id_card;
-
-	public UpgradeAccountRequest(String passport_photo, String account_number, String id_card) {
-		this.passport_photo = passport_photo;
-		this.account_number = account_number;
-		this.id_card = id_card;
-	}
-
-	public String getPassport_photo() {
-		return passport_photo;
-	}
-
-	public void setPassport_photo(String passport_photo) {
-		this.passport_photo = passport_photo;
-	}
+	private String passport_photo;
 
 	public String getAccount_number() {
 		return account_number;
@@ -34,5 +27,13 @@ public class UpgradeAccountRequest  {
 
 	public void setId_card(String id_card) {
 		this.id_card = id_card;
+	}
+
+	public String getPassport_photo() {
+		return passport_photo;
+	}
+
+	public void setPassport_photo(String passport_photo) {
+		this.passport_photo = passport_photo;
 	}
 }

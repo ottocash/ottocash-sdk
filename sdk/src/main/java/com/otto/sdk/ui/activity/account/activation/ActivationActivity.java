@@ -2,8 +2,6 @@ package com.otto.sdk.ui.activity.account.activation;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -11,17 +9,26 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.core.content.ContextCompat;
+
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+import com.otto.sdk.AppActivity;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.R;
-import com.otto.sdk.ui.component.support.FormValidation;
 import com.otto.sdk.ui.activity.tac.TACMitraActivity;
 import com.otto.sdk.ui.activity.tac.TACOttoCashActivity;
+import com.otto.sdk.ui.component.support.FormValidation;
 import com.otto.sdk.ui.component.support.UiUtil;
 
-import app.beelabs.com.codebase.base.BaseActivity;
+import java.util.List;
+
 import app.beelabs.com.codebase.support.util.CacheUtil;
 
-public class ActivationActivity extends BaseActivity implements View.OnClickListener {
+public class ActivationActivity extends AppActivity implements View.OnClickListener {
 
     CheckBox cboxTACOttoCash;
     CheckBox cboxTACMitra;
@@ -41,6 +48,18 @@ public class ActivationActivity extends BaseActivity implements View.OnClickList
 
         initComponent();
         initContent();
+
+        initPermissionMultiple(new MultiplePermissionsListener() {
+            @Override
+            public void onPermissionsChecked(MultiplePermissionsReport report) {
+
+            }
+
+            @Override
+            public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+
+            }
+        });
     }
 
     private void initComponent() {

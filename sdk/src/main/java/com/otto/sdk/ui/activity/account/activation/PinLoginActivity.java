@@ -3,7 +3,7 @@ package com.otto.sdk.ui.activity.account.activation;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -26,7 +26,6 @@ import com.otto.sdk.presenter.manager.SessionManager;
 import com.otto.sdk.ui.component.support.DeviceId;
 import com.poovam.pinedittextfield.LinePinField;
 
-import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.support.util.CacheUtil;
 
 public class PinLoginActivity extends AppActivity implements IAuthView {

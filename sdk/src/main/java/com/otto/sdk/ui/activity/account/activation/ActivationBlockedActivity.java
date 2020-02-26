@@ -1,7 +1,7 @@
 package com.otto.sdk.ui.activity.account.activation;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.otto.sdk.R;
 

@@ -2,8 +2,8 @@ package com.otto.sdk.ui.activity.account.registration;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.AppCompatTextView;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.widget.AppCompatTextView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
