@@ -39,7 +39,6 @@ public class SetPinActivity extends AppActivity implements IAuthView {
 
     private boolean isFormValidationSuccess = false;
     private RegisterRequest model;
-    private AuthPresenter authPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

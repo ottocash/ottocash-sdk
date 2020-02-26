@@ -4,8 +4,8 @@ import com.otto.sdk.IConfig;
 import com.otto.sdk.model.api.Api;
 import com.otto.sdk.model.api.request.OtpRequest;
 import com.otto.sdk.model.api.request.OtpVerificationRequest;
-import com.otto.sdk.model.api.response.OtpResponse;
-import com.otto.sdk.model.api.response.OtpVerificationResponse;
+import com.otto.sdk.model.api.response.RequestOtpResponse;
+import com.otto.sdk.model.api.response.VerifyOtpResponse;
 import com.otto.sdk.presenter.AuthPresenter;
 import com.otto.sdk.presenter.OtpPresenter;
 
@@ -53,10 +53,10 @@ public class OtpDao extends BaseDao {
     public void onApiResponseCallback(BaseResponse br, int responseCode, Response response) {
         if (response.isSuccessful()) {
             if (responseCode == IConfig.KEY_API_OTP_REQUEST) {
-                OtpResponse otpResponse = (OtpResponse) br;
+                RequestOtpResponse otpResponse = (RequestOtpResponse) br;
                 onPresenterResponseCallback.call(otpResponse);
             } else if (responseCode == IConfig.KEY_API_OTP_VERIFICATION) {
-                OtpVerificationResponse otpVerificationResponse = (OtpVerificationResponse) br;
+                VerifyOtpResponse otpVerificationResponse = (VerifyOtpResponse) br;
                 onPresenterResponseCallback.call(otpVerificationResponse);
             }
         }

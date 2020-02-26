@@ -1,57 +1,58 @@
 package com.otto.sdk.model.api.request;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class LoginRequest{
-	private String pin;
-	@JsonProperty("device_id")
-	private String deviceId;
+
+	/**
+	 * phone : 085659791134
+	 * pin : 333333
+	 * latitude : 10.232444
+	 * longitude : -6.4312323
+	 * device_id : 1121
+	 */
+
 	private String phone;
+	private String pin;
 	private String latitude;
 	private String longitude;
+	private String device_id;
 
-    public LoginRequest(String phone, String pin) {
-    	this.phone = phone;
-		this.pin = pin;
-    }
-
-	public void setPin(String pin){
-		this.pin = pin;
-	}
-
-	public String getPin(){
-		return pin;
-	}
-
-	public void setDeviceId(String deviceId){
-		this.deviceId = deviceId;
-	}
-
-	public String getDeviceId(){
-		return deviceId;
-	}
-
-	public void setPhone(String phone){
-		this.phone = phone;
-	}
-
-	public String getPhone(){
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setLatitude(String latitude){
-		this.latitude = latitude;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
-	public String getLatitude(){
+	public String getPin() {
+		return pin;
+	}
+
+	public void setPin(String pin) {
+		this.pin = pin;
+	}
+
+	public String getLatitude() {
 		return latitude;
 	}
 
-	public void setLongitude(String longitude){
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
+	public String getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(String longitude) {
 		this.longitude = longitude;
 	}
 
-	public String getLongitude(){
-		return longitude;
+	public String getDevice_id() {
+		return device_id;
+	}
+
+	public void setDevice_id(String device_id) {
+		this.device_id = device_id;
 	}
 }

@@ -20,8 +20,8 @@ import com.otto.sdk.model.api.response.CheckPhoneNumberResponse;
 import com.otto.sdk.model.api.response.CreateTokenResponse;
 import com.otto.sdk.model.api.response.InquiryResponse;
 import com.otto.sdk.model.api.response.LoginResponse;
-import com.otto.sdk.model.api.response.OtpResponse;
-import com.otto.sdk.model.api.response.OtpVerificationResponse;
+import com.otto.sdk.model.api.response.RequestOtpResponse;
+import com.otto.sdk.model.api.response.VerifyOtpResponse;
 import com.otto.sdk.model.api.response.PaymentValidateResponse;
 import com.otto.sdk.model.api.response.RegisterResponse;
 import com.otto.sdk.model.api.response.ReviewCheckOutResponse;
@@ -73,12 +73,14 @@ public class Api extends BaseApi {
 //        return (ApiService) getInstance().setupApi(OttoCashSdk.getAppComponent(), ApiService.class, true, 60);
 //    }
 
+
+
     synchronized private static ApiService initApiDomain() {
         return (ApiService) getInstance()
                 .setupApiDomain(IConfig.API_BASE_URL, OttoCashSdk.getAppComponent(),
                         ApiService.class,
                         true,
-                        app.beelabs.com.codebase.IConfig.TIMEOUT_SHORT_INSECOND);
+                        60);
 
     }
 
@@ -102,12 +104,12 @@ public class Api extends BaseApi {
 
     //OTP VERIFICATION
     synchronized public static void onOtpVerification(OtpVerificationRequest otpVerificationRequest, Callback callback) {
-        initApiDomain().callApiOtpVerification(initHeader(), otpVerificationRequest).enqueue((Callback<OtpVerificationResponse>) callback);
+        initApiDomain().callApiOtpVerification(initHeader(), otpVerificationRequest).enqueue((Callback<VerifyOtpResponse>) callback);
     }
 
     //OTP REQUEST
     synchronized public static void onOtpRequest(OtpRequest otpRequest, Callback callback) {
-        initApiDomain().callApiOtpRequest(initHeader(), otpRequest).enqueue((Callback<OtpResponse>) callback);
+        initApiDomain().callApiOtpRequest(initHeader(), otpRequest).enqueue((Callback<RequestOtpResponse>) callback);
     }
 
     synchronized public static void onReviewCheckOut(ReviewCheckOutRequest reviewCheckOutRequest, Context context, Callback callback) {

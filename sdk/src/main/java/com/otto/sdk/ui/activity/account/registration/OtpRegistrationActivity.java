@@ -20,8 +20,8 @@ import com.otto.sdk.R;
 import com.otto.sdk.interfaces.IOtpView;
 import com.otto.sdk.model.api.request.OtpRequest;
 import com.otto.sdk.model.api.request.OtpVerificationRequest;
-import com.otto.sdk.model.api.response.OtpResponse;
-import com.otto.sdk.model.api.response.OtpVerificationResponse;
+import com.otto.sdk.model.api.response.RequestOtpResponse;
+import com.otto.sdk.model.api.response.VerifyOtpResponse;
 import com.otto.sdk.presenter.OtpPresenter;
 import com.otto.sdk.ui.component.support.UiUtil;
 import com.poovam.pinedittextfield.LinePinField;
@@ -121,11 +121,34 @@ public class OtpRegistrationActivity extends BaseActivity implements IOtpView {
     }
 
 
-    private void onCallApiOTP(final String otp) {
+    /**
+     * Call Api Request Otp
+     */
+    private void onCallApiOTPRequest() {
+        String phone = CacheUtil.getPreferenceString(SESSION_PHONE, OtpRegistrationActivity.this);
+        final  OtpRequest otpRequest = new OtpRequest();
+        otpRequest.setPhone(phone);
 
-        model = new OtpVerificationRequest(CacheUtil.getPreferenceInteger(IConfig.SESSION_USER_ID, OtpRegistrationActivity.this));
-        model.setOtpCode(lineField.getText().toString());
-//        new OtpPresenter(this).getOtpVerification(model);
+        showApiProgressDialog(OttoCashSdk.getAppComponent(), new OtpPresenter(OtpRegistrationActivity.this) {
+            @Override
+            public void call() {
+                getOtpRequest(otpRequest);
+
+            }
+        }, "Loading");
+    }
+
+
+    /**
+     * Call Api Verify Otp
+     */
+    private void onCallApiOTP() {
+        int user_id = CacheUtil.getPreferenceInteger(IConfig.SESSION_USER_ID, OtpRegistrationActivity.this);
+        final OtpVerificationRequest otpVerificationRequest = new OtpVerificationRequest();
+
+        otpVerificationRequest.setUser_id(user_id);
+        otpVerificationRequest.setOtp_code(lineField.getText().toString());
+
         showApiProgressDialog(OttoCashSdk.getAppComponent(), new OtpPresenter(OtpRegistrationActivity.this) {
             @Override
             public void call() {
@@ -134,18 +157,33 @@ public class OtpRegistrationActivity extends BaseActivity implements IOtpView {
         }, "Loading");
     }
 
-    private void onCallApiOTPRequest() {
-        modelOtpRequest = new OtpRequest(CacheUtil.getPreferenceString(SESSION_PHONE, OtpRegistrationActivity.this));
-//        new OtpPresenter(OtpRegistrationActivity.this).getOtpRequest(modelOtpRequest);
 
-        showApiProgressDialog(OttoCashSdk.getAppComponent(), new OtpPresenter(OtpRegistrationActivity.this) {
-            @Override
-            public void call() {
-                getOtpRequest(modelOtpRequest);
+    /**
+     * Handle Response Call Request Otp
+     */
+    @Override
+    public void handleOtpRequest(RequestOtpResponse model) {
 
-            }
-        }, "Loading");
     }
+
+
+    /**
+     * Handle Response Call Verify Otp
+     */
+    @Override
+    public void handleOtpVerify(VerifyOtpResponse model) {
+        if (model.getBaseMeta().getCode() == 200) {
+            Intent intent = new Intent(OtpRegistrationActivity.this, RegistrationSuccessActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+            saveSession();
+        } else {
+            Toast.makeText(this, model.getBaseMeta().getCode() + ":" + model.getBaseMeta().getMessage(),
+                    Toast.LENGTH_LONG).show();
+        }
+    }
+
 
 
     public void addTextWatcher(EditText input) {
@@ -159,7 +197,7 @@ public class OtpRegistrationActivity extends BaseActivity implements IOtpView {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (charSequence.toString().length() == 6) {
-                    onCallApiOTP(charSequence.toString());
+                    onCallApiOTP();
                     hideSoftKeyboard(lineField);
                 }
             }
@@ -180,24 +218,6 @@ public class OtpRegistrationActivity extends BaseActivity implements IOtpView {
         imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
     }
 
-    @Override
-    public void handleRequestOtp(OtpResponse model) {
-
-    }
-
-    @Override
-    public void handleVerificationOtp(OtpVerificationResponse model) {
-        if (model.getBaseMeta().getCode() == 200) {
-            Intent intent = new Intent(OtpRegistrationActivity.this, RegistrationSuccessActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            finish();
-            saveSession();
-        } else {
-            Toast.makeText(this, model.getBaseMeta().getCode() + ":" + model.getBaseMeta().getMessage(),
-                    Toast.LENGTH_LONG).show();
-        }
-    }
 
     private void saveSession() {
         SharedPreferences sharedPreferences = getSharedPreferences("dataSesi", Context.MODE_PRIVATE);

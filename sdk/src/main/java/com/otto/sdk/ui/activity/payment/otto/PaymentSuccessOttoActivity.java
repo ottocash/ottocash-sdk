@@ -54,38 +54,6 @@ public class PaymentSuccessOttoActivity extends BaseActivity {
         tvPaymentValue = findViewById(R.id.tvPaymentValue);
     }
 
-    private void actionComponent() {
-        ivBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
-
-        lyDetailTransaction.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(PaymentSuccessOttoActivity.this, PaymentReceiptOttoActivity.class);
-
-                intent.putExtra(IConfig.KEY_ACCOUNT_NAME_TUJUAN, nameTujuanTransfer);
-                intent.putExtra(IConfig.KEY_NUMBER_CONTACT, numberContact);
-
-                // Data Transfer to Friend
-                intent.putExtra(IConfig.DATE_TRANSACTION, dateTransaction);
-                intent.putExtra(IConfig.SERVICE_TYPE_TRANSACTION, serviceTypeTransaction);
-                intent.putExtra(IConfig.NOMINAL_TRANSACTION, nominalTransaction);
-                intent.putExtra(IConfig.DESTINATION_ACCOUNT_NUMBER_TRANSACTION, destinationAccountNumberTransaction);
-                intent.putExtra(IConfig.DESCRIPTION_TRANSACTION, descriptionTransaction);
-                intent.putExtra(IConfig.REFERENCE_NUMBER_TRANSACTION, referenceNumberTransaction);
-                intent.putExtra(IConfig.STATUS_TRANSACTION, statusTransaction);
-
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-
-            }
-        });
-    }
-
     private void contentUI() {
         total = CacheUtil.getPreferenceInteger(IConfig.SESSION_TOTAL, PaymentSuccessOttoActivity.this);
 
@@ -112,4 +80,39 @@ public class PaymentSuccessOttoActivity extends BaseActivity {
             tvPaymentValue.setText(nominalTransaction);
         }
     }
+
+    private void actionComponent() {
+        ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
+        lyDetailTransaction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PaymentSuccessOttoActivity.this, PaymentReceiptOttoActivity.class);
+
+                intent.putExtra(IConfig.KEY_PIN_TRANSFER_TO_FRIEND, keyPinTransferToFriend);
+                intent.putExtra(IConfig.KEY_PIN_CHECKOUT, keyPinReviewCheckout);
+                intent.putExtra(IConfig.KEY_ACCOUNT_NAME_TUJUAN, nameTujuanTransfer);
+                intent.putExtra(IConfig.KEY_NUMBER_CONTACT, numberContact);
+
+                // Data Transfer to Friend
+                intent.putExtra(IConfig.DATE_TRANSACTION, dateTransaction);
+                intent.putExtra(IConfig.SERVICE_TYPE_TRANSACTION, serviceTypeTransaction);
+                intent.putExtra(IConfig.NOMINAL_TRANSACTION, nominalTransaction);
+                intent.putExtra(IConfig.DESTINATION_ACCOUNT_NUMBER_TRANSACTION, destinationAccountNumberTransaction);
+                intent.putExtra(IConfig.DESCRIPTION_TRANSACTION, descriptionTransaction);
+                intent.putExtra(IConfig.REFERENCE_NUMBER_TRANSACTION, referenceNumberTransaction);
+                intent.putExtra(IConfig.STATUS_TRANSACTION, statusTransaction);
+
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+
+            }
+        });
+    }
+
 }

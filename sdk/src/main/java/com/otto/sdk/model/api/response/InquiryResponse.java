@@ -2,89 +2,72 @@ package com.otto.sdk.model.api.response;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import app.beelabs.com.codebase.base.response.BaseResponse;
+import app.beelabs.com.codebase.base.response.DefaultMetaResponse;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class InquiryResponse extends BaseResponse {
-    private Data data;
-    private Meta meta;
 
-    public void setData(Data data) {
-        this.data = data;
-    }
+    /**
+     * data : {"id":499,"name":"ardi","phone":"085880507999","email":"ardi@clappingape.com","account_number":"085880507999","birth_date":-25200,"latitude":"37.4219983333333","longitude":"-122.084","emoney_balance":"600000","account_type":"Registered","currency":"IDR","verify_status":0}
+     * meta : {"status":true,"code":200,"message":"Data didapatkan."}
+     */
 
-    public Data getData() {
+    private DataBean data;
+    private DefaultMetaResponse meta;
+
+    public DataBean getData() {
         return data;
     }
 
-    public void setMeta(Meta meta) {
-        this.meta = meta;
+    public void setData(DataBean data) {
+        this.data = data;
     }
 
-    public Meta getMeta() {
+    public DefaultMetaResponse getMeta() {
         return meta;
     }
 
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    public class Data {
-        @JsonProperty("account_number")
-        private String accountNumber;
-        @JsonProperty("account_type")
-        private String accountType;
-        private String phone;
-        @JsonProperty("birth_date")
-        private int birthDate;
-        private String latitude;
-        private String name;
-        @JsonProperty("emoney_balance")
-        private String emoneyBalance;
-        private String currency;
-        @JsonProperty("verify_status")
-        private int verifyStatus;
+    public void setMeta(DefaultMetaResponse meta) {
+        this.meta = meta;
+    }
+
+    public static class DataBean {
+        /**
+         * id : 499
+         * name : ardi
+         * phone : 085880507999
+         * email : ardi@clappingape.com
+         * account_number : 085880507999
+         * birth_date : -25200
+         * latitude : 37.4219983333333
+         * longitude : -122.084
+         * emoney_balance : 600000
+         * account_type : Registered
+         * currency : IDR
+         * verify_status : 0
+         */
+
         private int id;
+        private String name;
+        private String phone;
         private String email;
+        private String account_number;
+        private int birth_date;
+        private String latitude;
         private String longitude;
+        private String emoney_balance;
+        private String account_type;
+        private String currency;
+        private int verify_status;
 
-        public String getAccountNumber() {
-            return accountNumber;
+        public int getId() {
+            return id;
         }
 
-        public void setAccountNumber(String accountNumber) {
-            this.accountNumber = accountNumber;
-        }
-
-        public String getAccountType() {
-            return accountType;
-        }
-
-        public void setAccountType(String accountType) {
-            this.accountType = accountType;
-        }
-
-        public String getPhone() {
-            return phone;
-        }
-
-        public void setPhone(String phone) {
-            this.phone = phone;
-        }
-
-        public int getBirthDate() {
-            return birthDate;
-        }
-
-        public void setBirthDate(int birthDate) {
-            this.birthDate = birthDate;
-        }
-
-        public String getLatitude() {
-            return latitude;
-        }
-
-        public void setLatitude(String latitude) {
-            this.latitude = latitude;
+        public void setId(int id) {
+            this.id = id;
         }
 
         public String getName() {
@@ -95,36 +78,12 @@ public class InquiryResponse extends BaseResponse {
             this.name = name;
         }
 
-        public String getEmoneyBalance() {
-            return emoneyBalance;
+        public String getPhone() {
+            return phone;
         }
 
-        public void setEmoneyBalance(String emoneyBalance) {
-            this.emoneyBalance = emoneyBalance;
-        }
-
-        public String getCurrency() {
-            return currency;
-        }
-
-        public void setCurrency(String currency) {
-            this.currency = currency;
-        }
-
-        public int getVerifyStatus() {
-            return verifyStatus;
-        }
-
-        public void setVerifyStatus(int verifyStatus) {
-            this.verifyStatus = verifyStatus;
-        }
-
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
+        public void setPhone(String phone) {
+            this.phone = phone;
         }
 
         public String getEmail() {
@@ -135,6 +94,30 @@ public class InquiryResponse extends BaseResponse {
             this.email = email;
         }
 
+        public String getAccount_number() {
+            return account_number;
+        }
+
+        public void setAccount_number(String account_number) {
+            this.account_number = account_number;
+        }
+
+        public int getBirth_date() {
+            return birth_date;
+        }
+
+        public void setBirth_date(int birth_date) {
+            this.birth_date = birth_date;
+        }
+
+        public String getLatitude() {
+            return latitude;
+        }
+
+        public void setLatitude(String latitude) {
+            this.latitude = latitude;
+        }
+
         public String getLongitude() {
             return longitude;
         }
@@ -142,36 +125,37 @@ public class InquiryResponse extends BaseResponse {
         public void setLongitude(String longitude) {
             this.longitude = longitude;
         }
-    }
 
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    public class Meta {
-        private int code;
-        private String message;
-        private boolean status;
-
-        public int getCode() {
-            return code;
+        public String getEmoney_balance() {
+            return emoney_balance;
         }
 
-        public void setCode(int code) {
-            this.code = code;
+        public void setEmoney_balance(String emoney_balance) {
+            this.emoney_balance = emoney_balance;
         }
 
-        public String getMessage() {
-            return message;
+        public String getAccount_type() {
+            return account_type;
         }
 
-        public void setMessage(String message) {
-            this.message = message;
+        public void setAccount_type(String account_type) {
+            this.account_type = account_type;
         }
 
-        public boolean isStatus() {
-            return status;
+        public String getCurrency() {
+            return currency;
         }
 
-        public void setStatus(boolean status) {
-            this.status = status;
+        public void setCurrency(String currency) {
+            this.currency = currency;
+        }
+
+        public int getVerify_status() {
+            return verify_status;
+        }
+
+        public void setVerify_status(int verify_status) {
+            this.verify_status = verify_status;
         }
     }
 }

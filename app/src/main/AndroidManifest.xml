@@ -22,7 +22,9 @@
         android:roundIcon="@mipmap/ic_otto_cash"
         android:supportsRtl="true"
         android:theme="@style/NoActionBarTheme"
-        tools:replace="android:name">
+        tools:replace="android:name"
+        android:hardwareAccelerated="true"
+        tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".PinActivity">
 
         </activity>
@@ -33,6 +35,7 @@
 
         </activity>
         <activity android:name=".CheckOutActivity" />
+
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

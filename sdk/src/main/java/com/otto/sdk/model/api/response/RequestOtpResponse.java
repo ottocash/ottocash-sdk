@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import app.beelabs.com.codebase.base.response.BaseResponse;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class OtpVerificationResponse extends BaseResponse {
+public class RequestOtpResponse extends BaseResponse {
     private int code;
     private String message;
     private boolean status;

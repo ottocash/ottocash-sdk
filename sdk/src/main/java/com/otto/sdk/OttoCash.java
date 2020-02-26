@@ -36,17 +36,17 @@ public class OttoCash extends BaseActivity implements IInquiryView, ISdkView {
     public static final String OTTOCASH_PAYMENT_DATA = "paymentData";
     public static final int REQ_OTTOCASH_PAYMENT = 101;
 
-    public static void onCallPayment(Activity activity,String phoneNumber ,int amount) {
+    public static void onCallPayment(Activity activity, String phoneNumber, int amount) {
         if (onCheckIsActive(activity)) {
             Intent intent = new Intent(activity, ReviewCheckoutActivity.class);
             intent.putExtra(BILL_PAYMENT, String.valueOf(amount));
             activity.startActivityForResult(intent, REQ_OTTOCASH_PAYMENT);
         } else {
-            onCheckPhoneNumber(activity,phoneNumber);
+            onCheckPhoneNumber(activity, phoneNumber);
         }
     }
 
-    private static void onActivateAccount(Boolean hasPhoneNumber,Context context) {
+    private static void onActivateAccount(Boolean hasPhoneNumber, Context context) {
         if (hasPhoneNumber) {
             context.startActivity(new Intent(context, ActivationActivity.class));
         } else {
@@ -59,12 +59,12 @@ public class OttoCash extends BaseActivity implements IInquiryView, ISdkView {
         model.setPhone(phoneNumber);
         new SdkResourcePresenter(new ISdkView() {
             @Override
-            public void handleCheckPhoneNumber(CheckPhoneNumberResponse model) {
+            public void handleCheckIsExistingPhoneNumber(CheckPhoneNumberResponse model) {
                 if (model.getMeta().getCode() == 200) {
                     boolean is_existing = model.getData().isIs_existing();
                     CacheUtil.putPreferenceBoolean(String.valueOf(Boolean.valueOf(IConfig.SESSION_CHECK_PHONE_NUMBER)),
                             is_existing, context);
-            onActivateAccount(is_existing,context);
+                    onActivateAccount(is_existing, context);
 
                     Log.i("ISEX", "isExisting" + is_existing);
 
@@ -89,7 +89,7 @@ public class OttoCash extends BaseActivity implements IInquiryView, ISdkView {
 
             @Override
             public void handleFail(String message) {
-handleFail(message);
+                handleFail(message);
             }
 
             @Override
@@ -99,17 +99,17 @@ handleFail(message);
         }).getCheckPhone(model);
     }
 
-    private void onGetAccountData(String account_number) {
-        new InquiryPresenter(this).getInquiry(new InquiryRequest(account_number));
+    private void onGetAccountData() {
+        new InquiryPresenter(this).getInquiry(new InquiryRequest());
     }
 
-    public static void onCallOttoCashDashboard(Context context,String phoneNumber) {
-        CacheUtil.putPreferenceString(SESSION_PHONE, phoneNumber,context);
+    public static void onCallOttoCashDashboard(Context context, String phoneNumber) {
+        CacheUtil.putPreferenceString(SESSION_PHONE, phoneNumber, context);
         if (onCheckIsActive(context)) {
             context.startActivity(new Intent(context, DashboardSDKActivity.class));
         } else {
 //            onActivateAccount(context);
-            onCheckPhoneNumber(context,phoneNumber);
+            onCheckPhoneNumber(context, phoneNumber);
         }
     }
 
@@ -118,7 +118,7 @@ handleFail(message);
     }
 
     public static void onLogoutOttoCash(Activity activity) {
-        CacheUtil.putPreferenceBoolean(IConfig.SESSION_IS_ACTIVE, false,activity);
+        CacheUtil.putPreferenceBoolean(IConfig.SESSION_IS_ACTIVE, false, activity);
         SharedPreferences.Editor editor = activity.getSharedPreferences("dataSesi", Context.MODE_PRIVATE).edit();
         editor.clear();
         editor.commit();
@@ -128,7 +128,7 @@ handleFail(message);
     @Override
     public void handleInquiry(InquiryResponse model) {
         if (model.getMeta().getCode() == 200) {
-            CacheUtil.putPreferenceString(IConfig.SESSION_EMONEY_BALANCE, model.getData().getEmoneyBalance(), this);
+            CacheUtil.putPreferenceString(IConfig.SESSION_EMONEY_BALANCE, model.getData().getEmoney_balance(), this);
         } else {
             Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
                     Toast.LENGTH_LONG).show();
@@ -136,7 +136,7 @@ handleFail(message);
     }
 
     @Override
-    public void handleCheckPhoneNumber(CheckPhoneNumberResponse model) {
+    public void handleCheckIsExistingPhoneNumber(CheckPhoneNumberResponse model) {
 
     }
 

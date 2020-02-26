@@ -184,10 +184,6 @@ public class PinPaymentActivity extends AppActivity implements IPinVerificationP
 
             } else if (pinReviewCheckout.equals(keyPinReviewCheckout)) {
                 onCallApiReviewCheckOut();
-//
-//                Intent intent = new Intent(PinPaymentActivity.this, DashboardSDKActivity.class);
-//                intent.putExtra(IConfig.KEY_PIN_CHECKOUT, keyPinReviewCheckout);
-//                startActivity(intent);
             }
 
         } else {
@@ -285,15 +281,15 @@ public class PinPaymentActivity extends AppActivity implements IPinVerificationP
     public void handlePaymentTransferToFriend(TransferToFriendResponse model) {
         if (model.getMeta().getCode() == 200) {
 
-            receiptReferenceNumber = model.getData().getReferenceNumber();
+            receiptReferenceNumber = model.getData().getReference_number();
             receiptDate = model.getData().getDate();
 
             dateTransaction = model.getData().getDate();
-            serviceTypeTransaction = model.getData().getServiceType();
+            serviceTypeTransaction = model.getData().getService_type();
             nominalTransaction = model.getData().getNominal();
-            destinationAccountNumberTransaction = model.getData().getDestinationAccountNumber();
+            destinationAccountNumberTransaction = model.getData().getDestination_account_number();
             descriptionTransaction = model.getData().getDescription();
-            referenceNumberTransaction = model.getData().getReferenceNumber();
+            referenceNumberTransaction = model.getData().getReference_number();
             statusTransaction = model.getData().getStatus();
 
             Intent intent = new Intent(PinPaymentActivity.this, PaymentSuccessOttoActivity.class);

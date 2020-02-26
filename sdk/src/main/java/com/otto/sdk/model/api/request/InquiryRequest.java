@@ -1,21 +1,18 @@
 package com.otto.sdk.model.api.request;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class InquiryRequest {
 
-    @JsonProperty("account_number")
-    private String accountNumber;
+    /**
+     * account_number : 0895327779773
+     */
 
-    public InquiryRequest(String accountNumber) {
-        this.accountNumber = accountNumber;
+    private String account_number;
+
+    public String getAccount_number() {
+        return account_number;
     }
 
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
-    }
-
-    public String getAccountNumber() {
-        return accountNumber;
+    public void setAccount_number(String account_number) {
+        this.account_number = account_number;
     }
 }

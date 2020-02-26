@@ -65,26 +65,31 @@ public class PinLoginActivity extends AppActivity implements IAuthView {
     }
 
 
-    private void onCallApiSetPin(final String pin) {
+    /**
+     * Call Api Login
+     */
+    private void onCallApiLogin() {
         phone = CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, PinLoginActivity.this);
-        model = new LoginRequest(String.valueOf(CacheUtil.getPreferenceString(
-                IConfig.SESSION_PHONE, this)), pin);
-        model.setPhone(phone);
-        model.setPin(pin);
-        model.setLatitude(String.valueOf(getMyLastLocation().getLatitude()));
-        model.setLongitude(String.valueOf(getMyLastLocation().getLongitude()));
-        model.setDeviceId(DeviceId.getDeviceID(this));
+        final LoginRequest loginRequest = new LoginRequest();
 
+        loginRequest.setPhone(phone);
+        loginRequest.setPin(lineField.getText().toString());
+        loginRequest.setLatitude(String.valueOf(getMyLastLocation().getLatitude()));
+        loginRequest.setLongitude(String.valueOf(getMyLastLocation().getLongitude()));
+        loginRequest.setDevice_id(DeviceId.getDeviceID(this));
 
         showApiProgressDialog(OttoCashSdk.getAppComponent(), new AuthPresenter(PinLoginActivity.this) {
             @Override
             public void call() {
-                getLogin(model);
+                getLogin(loginRequest);
             }
         }, "Loading");
     }
 
 
+    /**
+     * Handle Response Api Login
+     */
     @Override
     public void handleLogin(LoginResponse data) {
         if (data.getMeta().getCode() == 200) {
@@ -94,7 +99,6 @@ public class PinLoginActivity extends AppActivity implements IAuthView {
             String account_number = data.getData().getAccountNumber();
             String name = data.getData().getName();
             String phone = data.getData().getPhone();
-
 
             boolean isLogin = data.getMeta().isStatus();
             CacheUtil.putPreferenceBoolean(String.valueOf(Boolean.valueOf(IConfig.SESSION_IS_LOGIN)),
@@ -106,10 +110,10 @@ public class PinLoginActivity extends AppActivity implements IAuthView {
             CacheUtil.putPreferenceString(IConfig.SESSION_PHONE, phone, PinLoginActivity.this);
 
             Intent intent = new Intent(PinLoginActivity.this, OtpLoginActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             intent.putExtra(IConfig.SESSION_PHONE, phone);
             startActivity(intent);
-            finish();
+            //finish();
         } else if (data.getMeta().getCode() == 400) {
             messagePIN = data.getMeta().getMessage();
             if (messagePIN.equals(errorMessagePin)) {
@@ -143,7 +147,7 @@ public class PinLoginActivity extends AppActivity implements IAuthView {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (charSequence.toString().length() == 6) {
-                    onCallApiSetPin(charSequence.toString());
+                    onCallApiLogin();
                     hideSoftKeyboard(lineField);
                 }
             }
@@ -164,8 +168,4 @@ public class PinLoginActivity extends AppActivity implements IAuthView {
         imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
     }
 
-    @Override
-    public BaseActivity getBaseActivity() {
-        return PinLoginActivity.this;
-    }
 }

@@ -5,8 +5,8 @@ import android.content.Context;
 import com.otto.sdk.interfaces.IOtpView;
 import com.otto.sdk.model.api.request.OtpRequest;
 import com.otto.sdk.model.api.request.OtpVerificationRequest;
-import com.otto.sdk.model.api.response.OtpResponse;
-import com.otto.sdk.model.api.response.OtpVerificationResponse;
+import com.otto.sdk.model.api.response.RequestOtpResponse;
+import com.otto.sdk.model.api.response.VerifyOtpResponse;
 import com.otto.sdk.model.dao.OtpDao;
 
 import app.beelabs.com.codebase.base.BasePresenter;
@@ -26,8 +26,8 @@ public class OtpPresenter extends BasePresenter implements OtpDao.IOtpDao {
         new OtpDao(this, new OnPresenterResponseCallback() {
             @Override
             public void call(BaseResponse br) {
-                OtpResponse model = (OtpResponse) br;
-                otpView.handleRequestOtp(model);
+                RequestOtpResponse model = (RequestOtpResponse) br;
+                otpView.handleOtpRequest(model);
             }
         }).onOtpRequest(requestModel);
     }
@@ -37,19 +37,29 @@ public class OtpPresenter extends BasePresenter implements OtpDao.IOtpDao {
         new OtpDao(this, new OnPresenterResponseCallback() {
             @Override
             public void call(BaseResponse br) {
-                OtpVerificationResponse model = (OtpVerificationResponse) br;
-                otpView.handleVerificationOtp(model);
+                VerifyOtpResponse model = (VerifyOtpResponse) br;
+                otpView.handleOtpVerify(model);
             }
         }).onOtpVerification(requestModel);
     }
 
     @Override
     public BasePresenter getPresenter() {
-        return this;
+        return BasePresenter.getInstance(otpView, this);
     }
 
     @Override
     public Context getContext() {
         return otpView.getBaseActivity();
     }
+
+//    @Override
+//    public BasePresenter getPresenter() {
+//        return this;
+//    }
+//
+//    @Override
+//    public Context getContext() {
+//        return otpView.getBaseActivity();
+//    }
 }

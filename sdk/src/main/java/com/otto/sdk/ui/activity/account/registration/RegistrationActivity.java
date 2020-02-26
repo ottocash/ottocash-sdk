@@ -46,7 +46,6 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
 
         initComponent();
         initContent();
-//        requestFocus();
     }
 
     private void initComponent() {
@@ -118,15 +117,6 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
     }
 
 
-    private  void requestFocus() {
-
-//        edtNameKtp.requestFocus();
-//        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-//        inputMethodManager.showSoftInput(edtNameKtp,InputMethodManager.SHOW_IMPLICIT);
-//
-
-
-    }
     private void initContent() {
         String phone = CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, RegistrationActivity.this);
         edtNoHp.setText(phone);
@@ -151,7 +141,8 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
 
 
         if (FormValidation.required(name) && FormValidation.validName(name)
-                && FormValidation.required(email) && FormValidation.validEmail(email) && TACOttoCash && TACMitra && FormValidation.validUsername(name)) {
+                && FormValidation.required(email) && FormValidation.validEmail(email)
+                && TACOttoCash && TACMitra) {
             isFormValidationSuccess = true;
             btnBottom.setBackground(ContextCompat.getDrawable(this, R.drawable.button_primary_selector));
         } else {

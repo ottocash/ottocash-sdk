@@ -93,7 +93,7 @@ public class ActivationActivity extends BaseActivity implements View.OnClickList
 
                 if (isFormValidationSuccess) {
                     Intent intent = new Intent(ActivationActivity.this, PinLoginActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     finish();
                 } else {

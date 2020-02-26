@@ -1,57 +1,62 @@
 package com.otto.sdk.model.api.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.google.gson.annotations.SerializedName;
 
 import app.beelabs.com.codebase.base.response.BaseResponse;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TransferToFriendResponse extends BaseResponse {
 
-    @SerializedName("data")
-    private Data data;
+    /**
+     * data : {"reference_number":"OA1Q00000014","date":"26-Feb-2020 16:33","service_type":"Transfer OTTOCASH","destination_account_number":"OTTOCASH|085880507999","nominal":"Rp 1","description":"overbook","status":"Sukses"}
+     * meta : {"status":true,"code":200,"message":"OK"}
+     */
 
-    @SerializedName("meta")
-    private Meta meta;
+    private DataBean data;
+    private MetaBean meta;
 
-    public Data getData() {
+    public DataBean getData() {
         return data;
     }
 
-    public void setData(Data data) {
+    public void setData(DataBean data) {
         this.data = data;
     }
 
-    public Meta getMeta() {
+    public MetaBean getMeta() {
         return meta;
     }
 
-    public void setMeta(Meta meta) {
+    public void setMeta(MetaBean meta) {
         this.meta = meta;
     }
 
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    public class Data {
-        @SerializedName("date")
+    public static class DataBean {
+        /**
+         * reference_number : OA1Q00000014
+         * date : 26-Feb-2020 16:33
+         * service_type : Transfer OTTOCASH
+         * destination_account_number : OTTOCASH|085880507999
+         * nominal : Rp 1
+         * description : overbook
+         * status : Sukses
+         */
+
+        private String reference_number;
         private String date;
-
-        @SerializedName("service_type")
-        private String serviceType;
-
-        @SerializedName("nominal")
+        private String service_type;
+        private String destination_account_number;
         private String nominal;
-
-        @SerializedName("destination_account_number")
-        private String destinationAccountNumber;
-
-        @SerializedName("description")
         private String description;
-
-        @SerializedName("reference_number")
-        private String referenceNumber;
-
-        @SerializedName("status")
         private String status;
+
+        public String getReference_number() {
+            return reference_number;
+        }
+
+        public void setReference_number(String reference_number) {
+            this.reference_number = reference_number;
+        }
 
         public String getDate() {
             return date;
@@ -61,12 +66,20 @@ public class TransferToFriendResponse extends BaseResponse {
             this.date = date;
         }
 
-        public String getServiceType() {
-            return serviceType;
+        public String getService_type() {
+            return service_type;
         }
 
-        public void setServiceType(String serviceType) {
-            this.serviceType = serviceType;
+        public void setService_type(String service_type) {
+            this.service_type = service_type;
+        }
+
+        public String getDestination_account_number() {
+            return destination_account_number;
+        }
+
+        public void setDestination_account_number(String destination_account_number) {
+            this.destination_account_number = destination_account_number;
         }
 
         public String getNominal() {
@@ -77,28 +90,12 @@ public class TransferToFriendResponse extends BaseResponse {
             this.nominal = nominal;
         }
 
-        public String getDestinationAccountNumber() {
-            return destinationAccountNumber;
-        }
-
-        public void setDestinationAccountNumber(String destinationAccountNumber) {
-            this.destinationAccountNumber = destinationAccountNumber;
-        }
-
         public String getDescription() {
             return description;
         }
 
         public void setDescription(String description) {
             this.description = description;
-        }
-
-        public String getReferenceNumber() {
-            return referenceNumber;
-        }
-
-        public void setReferenceNumber(String referenceNumber) {
-            this.referenceNumber = referenceNumber;
         }
 
         public String getStatus() {
@@ -110,16 +107,24 @@ public class TransferToFriendResponse extends BaseResponse {
         }
     }
 
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    public class Meta {
-        @SerializedName("code")
-        private int code;
+    public static class MetaBean {
+        /**
+         * status : true
+         * code : 200
+         * message : OK
+         */
 
-        @SerializedName("message")
+        private boolean status;
+        private int code;
         private String message;
 
-        @SerializedName("status")
-        private boolean status;
+        public boolean isStatus() {
+            return status;
+        }
+
+        public void setStatus(boolean status) {
+            this.status = status;
+        }
 
         public int getCode() {
             return code;
@@ -135,14 +140,6 @@ public class TransferToFriendResponse extends BaseResponse {
 
         public void setMessage(String message) {
             this.message = message;
-        }
-
-        public boolean isStatus() {
-            return status;
-        }
-
-        public void setStatus(boolean status) {
-            this.status = status;
         }
     }
 }

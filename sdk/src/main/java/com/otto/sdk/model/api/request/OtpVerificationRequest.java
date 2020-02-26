@@ -1,30 +1,29 @@
 package com.otto.sdk.model.api.request;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class OtpVerificationRequest {
-    @JsonProperty("user_id")
-    private int userId;
-    @JsonProperty("otp_code")
-    private String otpCode;
 
-    public OtpVerificationRequest(int userId) {
-        this.userId = userId;
+
+    /**
+     * user_id : 323
+     * otp_code : 918139
+     */
+
+    private int user_id;
+    private String otp_code;
+
+    public int getUser_id() {
+        return user_id;
     }
 
-    public int getUserId() {
-        return userId;
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public String getOtp_code() {
+        return otp_code;
     }
 
-    public String getOtpCode() {
-        return otpCode;
-    }
-
-    public void setOtpCode(String otpCode) {
-        this.otpCode = otpCode;
+    public void setOtp_code(String otp_code) {
+        this.otp_code = otp_code;
     }
 }

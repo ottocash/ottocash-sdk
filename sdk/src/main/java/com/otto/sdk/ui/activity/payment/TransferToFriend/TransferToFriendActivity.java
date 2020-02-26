@@ -195,20 +195,13 @@ public class TransferToFriendActivity extends BaseActivity implements IInquiryVi
             numberContact = etSearch.getText().toString();
             nameContact = "-";
         }
-
-        /*Intent intent = new Intent(TransferToFriendActivity.this, TransferToFriendSendActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        intent.putExtra(IConfig.KEY_NUMBER_CONTACT, numberContact);
-        intent.putExtra(IConfig.KEY_NAME_CONTACT, nameContact);
-        intent.putExtra(IConfig.KEY_ACCOUNT_NAME_TUJUAN, nameTujuanTransfer);
-        startActivity(intent);*/
     }
 
 
     private void onCallApiInquiry() {
 
-        final InquiryRequest model = new InquiryRequest(numberContact);
-        model.setAccountNumber(numberContact);
+        final InquiryRequest model = new InquiryRequest();
+        model.setAccount_number(numberContact);
 
         showApiProgressDialog(OttoCashSdk.getAppComponent(), new InquiryPresenter(TransferToFriendActivity.this) {
             @Override

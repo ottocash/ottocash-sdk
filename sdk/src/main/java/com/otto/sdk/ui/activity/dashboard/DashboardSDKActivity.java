@@ -1,13 +1,11 @@
 package com.otto.sdk.ui.activity.dashboard;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -39,7 +37,7 @@ import java.util.List;
 import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.support.util.CacheUtil;
 
-public class DashboardSDKActivity extends SdkActivity implements IInquiryView {
+public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
 
     ImageView ivBack;
     TextView tvTitleOttoCash;
@@ -49,13 +47,9 @@ public class DashboardSDKActivity extends SdkActivity implements IInquiryView {
     TextView tvTacOttocash;
     TextView tvUpgrade;
     TextView tvPending;
-    private InquiryRequest inquiryRequest;
-    private InquiryResponse inquiryResponse;
     private String emoneyBalance;
-    private String name;
+    private String user_name;
     private int verifyStatus;
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
     public static String nikmatinaja;
 
 
@@ -64,16 +58,27 @@ public class DashboardSDKActivity extends SdkActivity implements IInquiryView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard_sdk);
 
-        CacheUtil.putPreferenceBoolean(IConfig.SESSION_IS_ACTIVE, true, this);
+        onCallApiInquiry();
+
         initComponent();
         initRecyclerView();
         displayMainMenu();
-        onCallApiInquiry();
+    }
 
-        initializeSDK();
 
-        sharedPreferences = getSharedPreferences("dataSesi", Context.MODE_PRIVATE);
-        editor = sharedPreferences.edit();
+    public void initComponent() {
+        ivBack = findViewById(R.id.ivBack);
+        tvTitleOttoCash = findViewById(R.id.tvTitleOttoCash);
+        tvEmoneyBalance = findViewById(R.id.tvEmoneyBalance);
+        rvMainMenu = findViewById(R.id.rvMainMenu);
+        tvPending = findViewById(R.id.tv_pending);
+
+        tvSetPinOttocash = findViewById(R.id.tvSetPinOttocash);
+        tvTacOttocash = findViewById(R.id.tvTacOttocash);
+        tvUpgrade = findViewById(R.id.tv_upgrade);
+
+        tvSetPinOttocash.setText(UiUtil.getHTMLContent(getString(R.string.set_pin_ottocash)));
+        tvTacOttocash.setText(UiUtil.getHTMLContent(getString(R.string.tac_ottocash)));
 
         tvUpgrade.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,29 +99,15 @@ public class DashboardSDKActivity extends SdkActivity implements IInquiryView {
             }
         });
 
-    }
-
-    public void initComponent() {
-        ivBack = findViewById(R.id.ivBack);
-        tvTitleOttoCash = findViewById(R.id.tvTitleOttoCash);
-        tvEmoneyBalance = findViewById(R.id.tvEmoneyBalance);
-        rvMainMenu = findViewById(R.id.rvMainMenu);
-        tvPending = findViewById(R.id.tv_pending);
-
-        tvSetPinOttocash = findViewById(R.id.tvSetPinOttocash);
-        tvTacOttocash = findViewById(R.id.tvTacOttocash);
-        tvUpgrade = findViewById(R.id.tv_upgrade);
-
-        tvSetPinOttocash.setText(UiUtil.getHTMLContent(getString(R.string.set_pin_ottocash)));
-        tvTacOttocash.setText(UiUtil.getHTMLContent(getString(R.string.tac_ottocash)));
-
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
+
     }
+
 
     private void initRecyclerView() {
         rvMainMenu.setHasFixedSize(true);
@@ -241,56 +232,59 @@ public class DashboardSDKActivity extends SdkActivity implements IInquiryView {
         }
     }
 
+
+    /**
+     * Call Api Inquiry
+     */
     private void onCallApiInquiry() {
+        String phone = String.valueOf(CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, DashboardSDKActivity.this));
+        final InquiryRequest inquiryRequest = new InquiryRequest();
 
-        inquiryRequest = new InquiryRequest(String.valueOf(CacheUtil.getPreferenceString(
-                IConfig.SESSION_PHONE, DashboardSDKActivity.this)));
+        inquiryRequest.setAccount_number(phone);
 
-        showApiProgressDialog(OttoCashSdk.getAppComponent(), new InquiryPresenter(DashboardSDKActivity.this) {
+        showApiProgressDialog(OttoCashSdk.getAppComponent(), new InquiryPresenter(this) {
             @Override
             public void call() {
                 getInquiry(inquiryRequest);
             }
 
-            @Override
-            public void done() {
-                super.done();
-            }
         }, "Loading");
     }
 
 
+    /**
+     * Handle Response Api Inquiry
+     */
     public void handleInquiry(InquiryResponse model) {
         if (model.getMeta().getCode() == 200) {
-            inquiryResponse = model;
-            emoneyBalance = model.getData().getEmoneyBalance();
+
+            emoneyBalance = model.getData().getEmoney_balance();
             CacheUtil.putPreferenceString(IConfig.SESSION_EMONEY_BALANCE, emoneyBalance, DashboardSDKActivity.this);
-            name = model.getData().getName();
-            nikmatinaja = model.getData().getAccountNumber();
-            CacheUtil.putPreferenceString(IConfig.SESSION_NAME, name, DashboardSDKActivity.this);
-            verifyStatus = model.getData().getVerifyStatus();
-            editor.putString("saldo", emoneyBalance);
-            Log.i("SALDO", "INI SALDO :" + emoneyBalance);
-            editor.apply();
+
+            user_name = model.getData().getName();
+            nikmatinaja = model.getData().getAccount_number();
+
+            CacheUtil.putPreferenceString(IConfig.SESSION_NAME, user_name, DashboardSDKActivity.this);
+            verifyStatus = model.getData().getVerify_status();
 
             tvEmoneyBalance.setText(UiUtil.formatMoneyIDR(Long.parseLong(emoneyBalance)));
 
-            if (model.getData().getVerifyStatus() == 2) {
+            if (model.getData().getVerify_status() == 2) {
                 tvUpgrade.setVisibility(View.GONE);
                 tvPending.setVisibility(View.GONE);
-                tvTitleOttoCash.setText("Hai " + name + ". Saldo OttoCash Plus");
-            } else if (model.getData().getVerifyStatus() == 1) {
+                tvTitleOttoCash.setText("Hai " + user_name + ". Saldo OttoCash Plus");
+            } else if (model.getData().getVerify_status() == 1) {
                 tvUpgrade.setVisibility(View.GONE);
                 tvPending.setVisibility(View.VISIBLE);
-                tvTitleOttoCash.setText("Hai " + name + ". Saldo OttoCash Reguler");
-            } else if (model.getData().getVerifyStatus() == 0) {
+                tvTitleOttoCash.setText("Hai " + user_name + ". Saldo OttoCash Reguler");
+            } else if (model.getData().getVerify_status() == 0) {
                 tvUpgrade.setVisibility(View.VISIBLE);
                 tvPending.setVisibility(View.GONE);
-                tvTitleOttoCash.setText("Hai " + name + ". Saldo OttoCash Reguler");
-            } else if (model.getData().getVerifyStatus() == 3) {
+                tvTitleOttoCash.setText("Hai " + user_name + ". Saldo OttoCash Reguler");
+            } else if (model.getData().getVerify_status() == 3) {
                 tvUpgrade.setVisibility(View.VISIBLE);
                 tvPending.setVisibility(View.GONE);
-                tvTitleOttoCash.setText("Hai " + name + ". Saldo OttoCash Reguler");
+                tvTitleOttoCash.setText("Hai " + user_name + ". Saldo OttoCash Reguler");
             }
 
         } else {
@@ -304,26 +298,4 @@ public class DashboardSDKActivity extends SdkActivity implements IInquiryView {
         super.onBackPressed();
     }
 
-    //    @Override
-//    public void onBackPressed() {
-//
-////        try {
-////            String PackageName = CacheUtil.getPreferenceString(IConfig.SESSION_PACKAGE_NAME,
-////                    DashboardSDKActivity.this);
-////
-////            Intent intent = new Intent(DashboardSDKActivity.this, Class.forName(PackageName));
-//////            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP );
-////            intent.putExtra("EMONEY", emoneyBalance);
-////            Log.i("Money", "emoney"+ emoneyBalance);
-////            startActivity(intent);
-////            finish();
-////        } catch (ClassNotFoundException e) {
-////            e.printStackTrace();
-////        }
-//    }
-
-    @Override
-    public BaseActivity getBaseActivity() {
-        return DashboardSDKActivity.this;
-    }
 }

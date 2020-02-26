@@ -1,14 +1,14 @@
 package com.otto.sdk.interfaces;
 
-import com.otto.sdk.model.api.response.OtpResponse;
-import com.otto.sdk.model.api.response.OtpVerificationResponse;
+import com.otto.sdk.model.api.response.RequestOtpResponse;
+import com.otto.sdk.model.api.response.VerifyOtpResponse;
 
 import app.beelabs.com.codebase.base.IView;
 
 public interface IOtpView extends IView {
 
-    void handleRequestOtp(OtpResponse model);
+    void handleOtpRequest(RequestOtpResponse model);
 
-    void handleVerificationOtp(OtpVerificationResponse model);
+    void handleOtpVerify(VerifyOtpResponse model);
 }
 

@@ -78,7 +78,7 @@ public class TransferToFriendReviewActivity extends BaseActivity {
             grandTotal = UiUtil.removeAllCharacterNumbers(nominalTransferToFriend);
             numberContact = extras.getString(IConfig.KEY_NUMBER_CONTACT);
             nameTujuanTransfer = extras.getString(IConfig.KEY_ACCOUNT_NAME_TUJUAN);
-            if(extras.getBoolean(KEY_PAYMENT_QR)){
+            if (extras.getBoolean(KEY_PAYMENT_QR)) {
                 tvTitle.setText("Pembayaran");
             }
         }
@@ -102,7 +102,6 @@ public class TransferToFriendReviewActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
 
-//                Intent intent = new Intent(TransferToFriendReviewActivity.this, PinPaymentActivity.class);
                 Intent intent = new Intent(TransferToFriendReviewActivity.this, NewPinPaymentActivty.class);
                 intent.putExtra(IConfig.KEY_PIN_TRANSFER_TO_FRIEND, pinTransferToFriend);
                 intent.putExtra(IConfig.KEY_NOMINAL_TRANSFER_TO_FRIEND, nominalTransferToFriend);
@@ -111,19 +110,6 @@ public class TransferToFriendReviewActivity extends BaseActivity {
                 intent.putExtra(IConfig.KEY_NUMBER_CONTACT, numberContact);
                 intent.putExtra(IConfig.KEY_ACCOUNT_NAME_TUJUAN, nameTujuanTransfer);
                 startActivity(intent);
-
-                /*int totalBalance = Integer.parseInt(CacheUtil.getPreferenceString(IConfig.SESSION_EMONEY_BALANCE, TransferToFriendReviewActivity.this));
-                if (totalBalance < grandTotal) {
-                    Toast.makeText(TransferToFriendReviewActivity.this, "Saldo Anda tidak mencukupi", Toast.LENGTH_LONG).show();
-                } else {
-                    Intent intent = new Intent(TransferToFriendReviewActivity.this, PinPaymentActivity.class);
-                    intent.putExtra(IConfig.KEY_PIN_TRANSFER_TO_FRIEND, pinTransferToFriend);
-                    intent.putExtra(IConfig.KEY_NOMINAL_TRANSFER_TO_FRIEND, nominalTransferToFriend);
-                    intent.putExtra(IConfig.KEY_NUMBER_CONTACT, numberContact);
-                    intent.putExtra(IConfig.KEY_NAME_CONTACT, nameContact);
-                    startActivity(intent);
-                }*/
-
 
             }
         });

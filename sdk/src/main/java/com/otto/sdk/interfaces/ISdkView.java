@@ -8,6 +8,6 @@ import app.beelabs.com.codebase.base.IView;
 
 public interface ISdkView extends IView {
 
-    void handleCheckPhoneNumber(CheckPhoneNumberResponse model);
+    void handleCheckIsExistingPhoneNumber(CheckPhoneNumberResponse model);
     void handleToken(CreateTokenResponse model);
 }

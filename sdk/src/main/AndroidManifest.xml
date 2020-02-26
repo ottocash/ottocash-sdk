@@ -20,9 +20,15 @@
     <uses-permission android:name="android.permission.FLASHLIGHT" />
 
     <application android:name=".OttoCashSdk">
-        <activity android:name=".ui.activity.payment.NewPinPaymentActivty"></activity>
-        <activity android:name=".ui.activity.payment.otto.PaymentSuccessOttoActivity" />
-        <activity android:name=".ui.activity.payment.otto.PaymentReceiptOttoActivity" />
+        <activity
+            android:name=".ui.activity.payment.NewPinPaymentActivty"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.payment.otto.PaymentSuccessOttoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.payment.otto.PaymentReceiptOttoActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.history.HistoryActivity"
             android:screenOrientation="portrait" />

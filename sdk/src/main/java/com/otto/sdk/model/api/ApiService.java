@@ -1,7 +1,6 @@
 package com.otto.sdk.model.api;
 
 import com.otto.sdk.model.api.request.CheckPhoneNumberRequest;
-import com.otto.sdk.model.api.request.ClientsRequest;
 import com.otto.sdk.model.api.request.CreateTokenRequest;
 import com.otto.sdk.model.api.request.InquiryRequest;
 import com.otto.sdk.model.api.request.LoginRequest;
@@ -14,12 +13,11 @@ import com.otto.sdk.model.api.request.TransactionHistoryRequest;
 import com.otto.sdk.model.api.request.TransferToFriendRequest;
 import com.otto.sdk.model.api.request.UpgradeAccountRequest;
 import com.otto.sdk.model.api.response.CheckPhoneNumberResponse;
-import com.otto.sdk.model.api.response.ClientsResponse;
 import com.otto.sdk.model.api.response.CreateTokenResponse;
 import com.otto.sdk.model.api.response.InquiryResponse;
 import com.otto.sdk.model.api.response.LoginResponse;
-import com.otto.sdk.model.api.response.OtpResponse;
-import com.otto.sdk.model.api.response.OtpVerificationResponse;
+import com.otto.sdk.model.api.response.RequestOtpResponse;
+import com.otto.sdk.model.api.response.VerifyOtpResponse;
 import com.otto.sdk.model.api.response.PaymentValidateResponse;
 import com.otto.sdk.model.api.response.RegisterResponse;
 import com.otto.sdk.model.api.response.ReviewCheckOutResponse;
@@ -30,7 +28,6 @@ import com.otto.sdk.model.api.response.UpgradeAccountResponse;
 
 import java.util.Map;
 
-import app.beelabs.com.codebase.base.response.BaseResponse;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -55,12 +52,12 @@ public interface ApiService {
                                          @Body InquiryRequest inquiryRequest);
 
     @POST("v1/auth/otp-verification")
-    Call<OtpVerificationResponse> callApiOtpVerification(@HeaderMap Map<String, String> headers,
-                                                         @Body OtpVerificationRequest otpVerificationRequest);
+    Call<VerifyOtpResponse> callApiOtpVerification(@HeaderMap Map<String, String> headers,
+                                                   @Body OtpVerificationRequest otpVerificationRequest);
 
     @POST("v1/auth/otp-request")
-    Call<OtpResponse> callApiOtpRequest(@HeaderMap Map<String, String> headers,
-                                        @Body OtpRequest otpRequest);
+    Call<RequestOtpResponse> callApiOtpRequest(@HeaderMap Map<String, String> headers,
+                                               @Body OtpRequest otpRequest);
 
     @POST("v1/payment/journal")
     Call<ReviewCheckOutResponse> callApiReviewCheckOut(@HeaderMap Map<String, Object> headers,

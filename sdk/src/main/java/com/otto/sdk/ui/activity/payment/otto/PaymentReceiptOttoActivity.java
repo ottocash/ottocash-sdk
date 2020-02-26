@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.R;
 import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
+import com.otto.sdk.ui.component.support.UiUtil;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 
@@ -35,6 +36,11 @@ public class PaymentReceiptOttoActivity extends BaseActivity {
     String descriptionTransaction;
     String statusTransaction;
     String referenceNumberTransaction;
+
+    private String pinTransferToFriend = "P2P";
+    private String pinReviewCheckout = "ReviewCheckout";
+    private String keyPinTransferToFriend;
+    private String keyPinReviewCheckout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,17 +84,36 @@ public class PaymentReceiptOttoActivity extends BaseActivity {
         nameTujuanTransfer = extras.getString(IConfig.KEY_ACCOUNT_NAME_TUJUAN);
         numberContact = extras.getString(IConfig.KEY_NUMBER_CONTACT);
 
+        keyPinReviewCheckout = extras.getString(IConfig.KEY_PIN_CHECKOUT);
+        keyPinTransferToFriend = extras.getString(IConfig.KEY_PIN_TRANSFER_TO_FRIEND);
 
-        tvTransactionIdTujuan.setText("ID Tujuan : "+nameTujuanTransfer+" ("+numberContact+")");
-        tvTransactionPelanggan.setText("Nama Pelanggan : ");
 
-        tvTransactionTujuan.setText("Transfer ke "+nameTujuanTransfer);
-        tvTransactionAmount.setText(nominalTransaction);
 
-        tvTransactionDate.setText(dateTransaction);
-        tvTransactionID.setText("ID Transaksi : "+referenceNumberTransaction);
+        if (pinReviewCheckout.equals(keyPinReviewCheckout)) {
+            tvTransactionIdTujuan.setText("ID Tujuan : "+nameTujuanTransfer+" ("+numberContact+")");
+            tvTransactionPelanggan.setText("Nama Pelanggan : ");
 
-        tvTransactionAmount2.setText(nominalTransaction);
-        tvTransactionTotal.setText(nominalTransaction);
+            tvTransactionTujuan.setText("Transfer ke "+nameTujuanTransfer);
+            tvTransactionAmount.setText(nominalTransaction);
+
+            tvTransactionDate.setText(dateTransaction);
+            tvTransactionID.setText("ID Transaksi : "+referenceNumberTransaction);
+
+            tvTransactionAmount2.setText(nominalTransaction);
+            tvTransactionTotal.setText(nominalTransaction);
+
+        } else if (pinTransferToFriend.equals(keyPinTransferToFriend)) {
+            tvTransactionIdTujuan.setText("ID Tujuan : "+nameTujuanTransfer+" ("+numberContact+")");
+            tvTransactionPelanggan.setText("ID Transaksi : "+referenceNumberTransaction);
+
+            tvTransactionTujuan.setText("Transfer ke "+nameTujuanTransfer);
+            tvTransactionAmount.setText(nominalTransaction);
+
+            tvTransactionDate.setText(dateTransaction);
+            tvTransactionID.setVisibility(View.GONE);
+
+            tvTransactionAmount2.setText(nominalTransaction);
+            tvTransactionTotal.setText(nominalTransaction);
+        }
     }
 }

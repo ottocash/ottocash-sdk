@@ -1,45 +1,39 @@
 package com.otto.sdk.model.api.request;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class CreateTokenRequest {
-    @JsonProperty("grant_type")
-    private String grantType;
-    @JsonProperty("client_secret")
-    private String clientSecret;
-    @JsonProperty("client_id")
-    private String clientId;
 
-    public CreateTokenRequest(String clientId, String clientSecret) {
-        this.clientId = clientId;
-        this.clientSecret = clientSecret;
+
+    /**
+     * grant_type : client_credentials
+     * client_id : 95eeb55af545c9ae295e8a6b772b2344abf11080ae0f3134ad850e79b49244ef
+     * client_secret : 6517eb6f89378e987d3f508db0f1cbbb317d571e557a9a0c1d07108ba6e0e588
+     */
+
+    private String grant_type;
+    private String client_id;
+    private String client_secret;
+
+    public String getGrant_type() {
+        return grant_type;
     }
 
-    public CreateTokenRequest() {
-
+    public void setGrant_type(String grant_type) {
+        this.grant_type = grant_type;
     }
 
-    public void setGrantType(String grantType) {
-        this.grantType = grantType;
+    public String getClient_id() {
+        return client_id;
     }
 
-    public String getGrantType() {
-        return grantType;
+    public void setClient_id(String client_id) {
+        this.client_id = client_id;
     }
 
-    public void setClientSecret(String clientSecret) {
-        this.clientSecret = clientSecret;
+    public String getClient_secret() {
+        return client_secret;
     }
 
-    public String getClientSecret() {
-        return clientSecret;
-    }
-
-    public void setClientId(String clientId) {
-        this.clientId = clientId;
-    }
-
-    public String getClientId() {
-        return clientId;
+    public void setClient_secret(String client_secret) {
+        this.client_secret = client_secret;
     }
 }

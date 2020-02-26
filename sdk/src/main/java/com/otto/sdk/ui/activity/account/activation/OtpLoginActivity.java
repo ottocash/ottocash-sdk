@@ -20,9 +20,10 @@ import com.otto.sdk.R;
 import com.otto.sdk.interfaces.IOtpView;
 import com.otto.sdk.model.api.request.OtpRequest;
 import com.otto.sdk.model.api.request.OtpVerificationRequest;
-import com.otto.sdk.model.api.response.OtpResponse;
-import com.otto.sdk.model.api.response.OtpVerificationResponse;
+import com.otto.sdk.model.api.response.RequestOtpResponse;
+import com.otto.sdk.model.api.response.VerifyOtpResponse;
 import com.otto.sdk.presenter.OtpPresenter;
+import com.otto.sdk.ui.activity.account.registration.OtpRegistrationActivity;
 import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
 import com.otto.sdk.ui.component.support.UiUtil;
 import com.poovam.pinedittextfield.LinePinField;
@@ -65,6 +66,7 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
             }
         });
 
+        onCallApiOtpRequest();
 
     }
 
@@ -100,7 +102,7 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
             public void onClick(View v) {
                 initDisableClickResendOtp();
                 setupCountdownview();
-                onCallApiOTPRequest();
+                onCallApiOtpRequest();
             }
         });
 
@@ -113,43 +115,71 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
 
     }
 
-    private void initEnableClickResendOtp() {
-        tvResend.setEnabled(true);
-        tvResend.setText(UiUtil.getHTMLContent(getString(R.string.resend_otp)));
-    }
-
-    private void initDisableClickResendOtp() {
-        tvResend.setEnabled(false);
-        tvResend.setText(UiUtil.getHTMLContent(getString(R.string.describe_qa_otp)));
-    }
 
 
-    private void onCallApiOTP(final String otp) {
+    /**
+     * Call Api Otp Request
+     */
+    private void onCallApiOtpRequest() {
+        String phone = CacheUtil.getPreferenceString(SESSION_PHONE, OtpLoginActivity.this);
 
-        model = new OtpVerificationRequest(CacheUtil.getPreferenceInteger(IConfig.SESSION_USER_ID, OtpLoginActivity.this));
-        model.setOtpCode(lineField.getText().toString());
-
-        showApiProgressDialog(OttoCashSdk.getAppComponent(), new OtpPresenter(this) {
-            @Override
-            public void call() {
-                getOtpVerification(model);
-
-            }
-        }, "Loading");
-    }
-
-    private void onCallApiOTPRequest() {
-        modelOtpRequest = new OtpRequest(CacheUtil.getPreferenceString(SESSION_PHONE, OtpLoginActivity.this));
+        final OtpRequest otpRequest = new OtpRequest();
+        otpRequest.setPhone(phone);
 
         showApiProgressDialog(OttoCashSdk.getAppComponent(), new OtpPresenter(OtpLoginActivity.this) {
             @Override
             public void call() {
-                getOtpRequest(modelOtpRequest);
+                getOtpRequest(otpRequest);
 
+            }
+        }, "loading");
+    }
+
+
+    /**
+     * Call Api Otp Verify
+     */
+    private void onCallApiOtpVerify() {
+        int user_id = CacheUtil.getPreferenceInteger(IConfig.SESSION_USER_ID, OtpLoginActivity.this);
+        final OtpVerificationRequest otpVerificationRequest = new OtpVerificationRequest();
+
+        otpVerificationRequest.setUser_id(user_id);
+        otpVerificationRequest.setOtp_code(lineField.getText().toString());
+
+        showApiProgressDialog(OttoCashSdk.getAppComponent(), new OtpPresenter(OtpLoginActivity.this) {
+            @Override
+            public void call() {
+                getOtpVerification(otpVerificationRequest);
             }
         }, "Loading");
     }
 
+
+    /**
+     * Handle Response Call Request Otp
+     */
+    @Override
+    public void handleOtpRequest(RequestOtpResponse model) {
+
+    }
+
+
+    /**
+     * Hansle Response Call Verify Otp
+     */
+    @Override
+    public void handleOtpVerify(VerifyOtpResponse model) {
+        if (model.getBaseMeta().getCode() == 200) {
+            Intent intent = new Intent(OtpLoginActivity.this, DashboardSDKActivity.class);
+            //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            //finish();
+            //saveSession();
+        } else {
+            Toast.makeText(this, model.getBaseMeta().getCode() + ":" + model.getBaseMeta().getMessage(),
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
 
     public void addTextWatcher(EditText input) {
         input.addTextChangedListener(new TextWatcher() {
@@ -162,8 +192,8 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (charSequence.toString().length() == 6) {
-                    onCallApiOTP(charSequence.toString());
                     hideSoftKeyboard(lineField);
+                    onCallApiOtpVerify();
                 }
             }
 
@@ -183,23 +213,15 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
         imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
     }
 
-    @Override
-    public void handleRequestOtp(OtpResponse model) {
 
+    private void initEnableClickResendOtp() {
+        tvResend.setEnabled(true);
+        tvResend.setText(UiUtil.getHTMLContent(getString(R.string.resend_otp)));
     }
 
-    @Override
-    public void handleVerificationOtp(OtpVerificationResponse model) {
-        if (model.getBaseMeta().getCode() == 200) {
-            Intent intent = new Intent(OtpLoginActivity.this, DashboardSDKActivity.class);
-//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            finish();
-            saveSession();
-        } else {
-            Toast.makeText(this, model.getBaseMeta().getCode() + ":" + model.getBaseMeta().getMessage(),
-                    Toast.LENGTH_LONG).show();
-        }
+    private void initDisableClickResendOtp() {
+        tvResend.setEnabled(false);
+        tvResend.setText(UiUtil.getHTMLContent(getString(R.string.describe_qa_otp)));
     }
 
     private void saveSession() {

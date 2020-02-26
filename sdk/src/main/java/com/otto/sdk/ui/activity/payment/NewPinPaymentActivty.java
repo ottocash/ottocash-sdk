@@ -247,15 +247,15 @@ public class NewPinPaymentActivty extends AppActivity implements PinAdapter.Call
     public void handlePaymentTransferToFriend(TransferToFriendResponse model) {
         if (model.getMeta().getCode() == 200) {
 
-            receiptReferenceNumber = model.getData().getReferenceNumber();
+            receiptReferenceNumber = model.getData().getReference_number();
             receiptDate = model.getData().getDate();
 
             dateTransaction = model.getData().getDate();
-            serviceTypeTransaction = model.getData().getServiceType();
+            serviceTypeTransaction = model.getData().getService_type();
             nominalTransaction = model.getData().getNominal();
-            destinationAccountNumberTransaction = model.getData().getDestinationAccountNumber();
+            destinationAccountNumberTransaction = model.getData().getDestination_account_number();
             descriptionTransaction = model.getData().getDescription();
-            referenceNumberTransaction = model.getData().getReferenceNumber();
+            referenceNumberTransaction = model.getData().getReference_number();
             statusTransaction = model.getData().getStatus();
 
             Intent intent = new Intent(NewPinPaymentActivty.this, PaymentSuccessOttoActivity.class);
@@ -274,7 +274,7 @@ public class NewPinPaymentActivty extends AppActivity implements PinAdapter.Call
             intent.putExtra(IConfig.STATUS_TRANSACTION, statusTransaction);
 
 
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         } else {
             Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),

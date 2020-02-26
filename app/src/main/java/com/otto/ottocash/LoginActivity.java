@@ -24,10 +24,6 @@ public class LoginActivity extends SdkActivity {
     Button btnNextWidget;
     @BindView(R.id.edt_phone)
     EditText edt_phone;
-    public static String PackageName;
-    SharedPreferences sharedPreferences;
-    String getDatasessi;
-    String saldo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,34 +33,18 @@ public class LoginActivity extends SdkActivity {
         ButterKnife.bind(this);
 
         initClientSendCredentialstoSDK();
-        sharedPreferences = getSharedPreferences("dataSesi", Context.MODE_PRIVATE);
-        saldo = sharedPreferences.getString("saldo", null);
-
-        getDatasessi = sharedPreferences.getString("session", null);
-
-        String token = CacheUtil.getPreferenceString(IConfig.SESSION_ACCESS_TOKEN, LoginActivity.this);
-        if (getDatasessi != null) {
-            Intent intent = new Intent(LoginActivity.this, DashboardAppActivity.class);
-            startActivity(intent);
-            finish();
-        }
     }
 
     private void initClientSendCredentialstoSDK() {
-        String id = "31199fb491883361aab49e9e1210b6f0847d9bee83bce849062eeef234f12621";
+        String id = "b7f45e6bf8091a16107f9b524fe498fae1201c8d412fb61be380177eb383d4a7";
         CacheUtil.putPreferenceString(IConfig.SESSION_ID, id, LoginActivity.this);
-        String secret = "9ef53ece2353a5ae9497910a1de0c483608bdb75ede462407d78ad08ec4da49a";
+        String secret = "c1b79f3316cd0f4f6240c75644d84a7de574be713ceaf8a8dd8a33f27c9f3594";
         CacheUtil.putPreferenceString(IConfig.SESSION_SECRET, secret, LoginActivity.this);
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent mainActivity = new Intent(Intent.ACTION_MAIN);
-        mainActivity.addCategory(Intent.CATEGORY_HOME);
-        mainActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(mainActivity);
-        finish();
     }
 
     @OnClick(R.id.btnNextWidget)
@@ -81,13 +61,5 @@ public class LoginActivity extends SdkActivity {
             LoginActivity.this.startActivity(intent);
         }
     }
-
-    /*@OnClick(R.id.btnTransfer)
-    public void onTransfer() {
-        Intent intent = new Intent(LoginActivity.this, TransferToFriendActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-    }*/
-
 
 }
