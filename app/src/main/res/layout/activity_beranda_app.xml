@@ -50,6 +50,17 @@
                 android:text="Clear Cache"
                 android:textAppearance="@style/BarlowRegular"
                 android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/btnUpgrade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/Red_d04a55"
+                android:padding="5dp"
+                android:layout_marginTop="20dp"
+                android:text="Upgrade"
+                android:textAppearance="@style/BarlowRegular"
+                android:textColor="@color/white" />
         </LinearLayout>
 
     </LinearLayout>

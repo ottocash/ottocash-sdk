@@ -11,7 +11,7 @@ import com.otto.sdk.R;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 
-public class UpgradeActivity extends BaseActivity {
+public class IntroductionUpgradeActivity extends BaseActivity {
 
     Button btnCancel;
     Button btnNext;
@@ -21,11 +21,18 @@ public class UpgradeActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_upgrade_plus);
+        setContentView(R.layout.activity_introduction_upgrade);
         initComponent();
 
         number = getIntent().getStringExtra("account_number");
         Log.i("ACCOUNT", "Account number : " + number);
+
+    }
+
+    public void initComponent() {
+        btnCancel = findViewById(R.id.btn_nanti_saja);
+        btnNext = findViewById(R.id.btn_next_upgrade);
+        ivback = findViewById(R.id.ivBack);
 
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,7 +44,7 @@ public class UpgradeActivity extends BaseActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(UpgradeActivity.this, ActivityUpgradeNext.class);
+                Intent intent = new Intent(IntroductionUpgradeActivity.this, GoToUpgradeActivity.class);
                 intent.putExtra("account_number", number);
                 startActivity(intent);
             }
@@ -57,13 +64,6 @@ public class UpgradeActivity extends BaseActivity {
                 onBackPressed();
             }
         });
-    }
-
-    public void initComponent() {
-        btnCancel = findViewById(R.id.btn_nanti_saja);
-        btnNext = findViewById(R.id.btn_next_upgrade);
-        ivback = findViewById(R.id.ivBack);
-
 
     }
 

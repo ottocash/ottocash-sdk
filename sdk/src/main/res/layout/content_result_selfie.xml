@@ -7,7 +7,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".ui.activity.payment.ReviewCheckoutActivity"
     tools:ignore="MissingPrefix"
-    tools:showIn="@layout/activity_result_selfie_with_ktp"
+    tools:showIn="@layout/dialog_preview_foto_ktp"
 
     >
 
@@ -67,7 +67,7 @@
 
         <LinearLayout
             android:id="@+id/ll_capture"
-            android:layout_width="285dp"
+            android:layout_width="300dp"
             android:layout_height="329dp"
             android:layout_below="@+id/tv_plus"
             android:layout_alignParentTop="true"
@@ -78,11 +78,9 @@
 
             <ImageView
                 android:id="@+id/iv_avatar"
-                android:layout_width="260dp"
-                android:layout_height="280dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
-
-                android:layout_marginTop="25dp"
                 android:src="@drawable/bg_lanjut_upgrade" />
 
         </LinearLayout>

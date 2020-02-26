@@ -22,9 +22,10 @@
         android:roundIcon="@mipmap/ic_otto_cash"
         android:supportsRtl="true"
         android:theme="@style/NoActionBarTheme"
-        tools:replace="android:name"
+        tools:replace="android:appComponentFactory"
         android:hardwareAccelerated="true"
         tools:ignore="GoogleAppIndexingWarning">
+
         <activity android:name=".PinActivity">
 
         </activity>

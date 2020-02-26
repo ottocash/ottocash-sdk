@@ -24,6 +24,11 @@
         <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
     </style>
 
+    <!--Style Progress-->
+    <style name="AppTheme.ProgressBlue">
+        <item name="colorAccent">@color/Blue_1f204c</item>
+    </style>
+
     <style name="NoActionBarTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorControlActivated">@color/Blue_1f204c</item>

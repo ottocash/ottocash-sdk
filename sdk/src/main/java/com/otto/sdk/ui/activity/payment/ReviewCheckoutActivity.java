@@ -117,7 +117,7 @@ public class ReviewCheckoutActivity extends AppActivity {
         if(resultCode == RESULT_OK && requestCode == REQ_OTTOCASH_PAYMENT){
             Intent intent = new Intent();
             if(data.getParcelableExtra(OTTOCASH_PAYMENT_DATA)!=null){
-                intent.putExtra(OTTOCASH_PAYMENT_DATA,data.getParcelableExtra(OTTOCASH_PAYMENT_DATA));
+                intent.putExtra(OTTOCASH_PAYMENT_DATA, (Bundle) data.getParcelableExtra(OTTOCASH_PAYMENT_DATA));
                 setResult(RESULT_OK,intent);
             }
             finish();

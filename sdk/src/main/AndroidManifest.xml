@@ -2,11 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.otto.sdk">
 
-    <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.camera.autofocus" />
-    <uses-feature
-        android:name="android.hardware.camera.flash"
-        android:required="false" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -32,12 +27,12 @@
         <activity
             android:name=".ui.activity.history.HistoryActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.activity.selfiewithktp.CaptureSelfieWithKTPActivity" />
+        <activity android:name=".ui.activity.kycupgrade.CaptureSelfieWithKTPActivity" />
         <activity
             android:name=".ui.activity.SdkActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.kycupgrade.CaptureKTPActivity"
+            android:name=".ui.activity.kycupgrade.TakeFotoKtpActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.account.activation.PinLoginActivity"
@@ -112,19 +107,19 @@
             android:name=".ui.activity.payment.pede.PaymentSuccessPedeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.kycupgrade.OttocashSuccesActivity"
+            android:name=".ui.activity.kycupgrade.UpgradeSuccessActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.selfiewithktp.ResultSelfieWithKtpActivity"
+            android:name=".ui.activity.kycupgrade.PreviewFotoKtpSignUpDialog"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.kycupgrade.KTPResultViewActivity"
+            android:name=".ui.activity.kycupgrade.PreviewFotoKtpActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.kycupgrade.ActivityUpgradeNext"
+            android:name=".ui.activity.kycupgrade.GoToUpgradeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.kycupgrade.UpgradeActivity"
+            android:name=".ui.activity.kycupgrade.IntroductionUpgradeActivity"
             android:screenOrientation="portrait" />
     </application>
 

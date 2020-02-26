@@ -1,31 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <FrameLayout
         android:id="@+id/cPreview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/frame_capture_ktp"
+        android:orientation="vertical">
 
-        ></LinearLayout>
+        <com.camerakit.CameraKitView
+            android:id="@+id/cameraKitView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:keepScreenOn="true"
+            app:camera_facing="back"
+            app:camera_flash="auto"
+            app:camera_focus="continuous"
+            app:camera_permissions="camera" />
 
-<!--    <com.dlazaro66.qrcodereaderview.QRCodeReaderView-->
-<!--        android:id="@+id/qrdecoderview"-->
-<!--        android:layout_width="240dp"-->
-<!--        android:layout_height="240dp"-->
-<!--        android:layout_centerInParent="true"-->
-<!--        android:layout_gravity="center" />-->
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,30 +46,30 @@
             android:background="@drawable/circle_blue"
             android:src="@drawable/ic_circ" />
 
-        <ImageView
-            android:id="@+id/btnCam"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="20dp"
             android:background="@drawable/bg_capture_blue_light"
-            android:src="@drawable/ic_capture_white" />
+            android:gravity="center">
 
+            <ImageView
+                android:id="@+id/imgCamera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_capture_white" />
+
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/iv_flash"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
             android:background="@drawable/circle_blue"
             android:src="@drawable/ic_light" />
-
-<!--        <ToggleButton-->
-<!--            android:id="@+id/iv_flash"-->
-<!--            android:layout_width="50dp"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:layout_marginLeft="20dp"-->
-<!--            android:background="@drawable/circle_blue"-->
-<!--            android:src="@drawable/ic_light"/>-->
 
     </LinearLayout>
 

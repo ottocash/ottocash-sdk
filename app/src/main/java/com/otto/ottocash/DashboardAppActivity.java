@@ -14,6 +14,7 @@ import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCash;
 import com.otto.sdk.model.api.response.PaymentData;
 import com.otto.sdk.ui.activity.SdkActivity;
+import com.otto.sdk.ui.activity.kycupgrade.IntroductionUpgradeActivity;
 import com.otto.sdk.ui.component.support.UiUtil;
 
 import app.beelabs.com.codebase.support.util.CacheUtil;
@@ -102,6 +103,11 @@ public class DashboardAppActivity extends SdkActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
 
+    }
+
+    @OnClick(R.id.btnUpgrade)
+    public void onUpgrade(){
+        startActivity(new Intent(this, IntroductionUpgradeActivity.class));
     }
 
     @Override

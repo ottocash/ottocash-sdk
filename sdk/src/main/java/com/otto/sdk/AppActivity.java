@@ -1,18 +1,32 @@
 package com.otto.sdk;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.DexterError;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.PermissionRequestErrorListener;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+import com.otto.sdk.custom.CustomProgressDialog;
 import com.otto.sdk.model.general.MyLastLocation;
 import com.otto.sdk.ui.component.support.Logging;
 import com.otto.sdk.ui.component.support.Preferences;
@@ -120,6 +134,46 @@ public class AppActivity extends BaseActivity {
 
     public MyLastLocation getMyLastLocation() {
         return myLastLocation;
+    }
+
+
+    /**
+     * LOADING PROGRESS
+     */
+    public void showProgress(Context context) {
+        CustomProgressDialog.showDialog(context);
+    }
+
+    public void showProgress(Context context, String loadingText) {
+        CustomProgressDialog.showDialog(context, loadingText);
+    }
+
+    public void closeProgress() {
+        CustomProgressDialog.closeDialog();
+    }
+
+    /**
+     * PERMISSION
+     */
+    public void initPermissionMultiple(MultiplePermissionsListener listener){
+        Dexter.withActivity(this)
+                .withPermissions(
+                        Manifest.permission.CAMERA,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE
+                ).withListener(new MultiplePermissionsListener() {
+            @Override public void onPermissionsChecked(MultiplePermissionsReport report) {/* ... */}
+            @Override public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {/* ... */}
+        }).check();
+    }
+
+
+
+    private void openSettings() {
+        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        Uri uri = Uri.fromParts("package", getPackageName(), null);
+        intent.setData(uri);
+        startActivityForResult(intent, 101);
     }
 }
 

@@ -20,7 +20,7 @@ import java.util.List;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 
-public class ActivityUpgradeNext extends BaseActivity {
+public class GoToUpgradeActivity extends BaseActivity {
     Button btn_fotoKTP;
     ImageView ivback;
     private String number;
@@ -58,7 +58,7 @@ public class ActivityUpgradeNext extends BaseActivity {
                     public void onPermissionsChecked(MultiplePermissionsReport report) {
 
                         if (report.areAllPermissionsGranted()) {
-                            Intent intent = new Intent(ActivityUpgradeNext.this, CaptureKTPActivity.class);
+                            Intent intent = new Intent(GoToUpgradeActivity.this, TakeFotoKtpActivity.class);
                             intent.putExtra("account_number", number);
                             startActivity(intent);
                         }

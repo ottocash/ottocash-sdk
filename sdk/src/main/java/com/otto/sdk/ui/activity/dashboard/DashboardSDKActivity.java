@@ -1,7 +1,6 @@
 package com.otto.sdk.ui.activity.dashboard;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.GridLayoutManager;
@@ -19,9 +18,8 @@ import com.otto.sdk.model.api.request.InquiryRequest;
 import com.otto.sdk.model.api.response.InquiryResponse;
 import com.otto.sdk.model.general.MainMenuModel;
 import com.otto.sdk.presenter.InquiryPresenter;
-import com.otto.sdk.ui.activity.SdkActivity;
 import com.otto.sdk.ui.activity.history.HistoryActivity;
-import com.otto.sdk.ui.activity.kycupgrade.UpgradeActivity;
+import com.otto.sdk.ui.activity.kycupgrade.IntroductionUpgradeActivity;
 import com.otto.sdk.ui.activity.payment.QR.PayWithQr;
 import com.otto.sdk.ui.activity.payment.TransferToFriend.TransferToFriendActivity;
 import com.otto.sdk.ui.activity.tac.TACOttoCashActivity;
@@ -83,7 +81,7 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
         tvUpgrade.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DashboardSDKActivity.this, UpgradeActivity.class);
+                Intent intent = new Intent(DashboardSDKActivity.this, IntroductionUpgradeActivity.class);
                 intent.putExtra("account_number", nikmatinaja);
 
                 startActivity(intent);

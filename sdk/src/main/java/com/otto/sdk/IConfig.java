@@ -1,5 +1,7 @@
 package com.otto.sdk;
 
+import java.io.File;
+
 public interface IConfig {
 
     //Development
@@ -7,7 +9,6 @@ public interface IConfig {
 
     //Production
     //String API_BASE_URL = "https://sdkmw.ottocash.id/";
-
 
     //Session
     String SESSION_LOGIN_KEY = "Ottocash-SessionLoginnnnnnn";
@@ -52,14 +53,9 @@ public interface IConfig {
     //KEY PIN PAYMENT
     String KEY_PIN_TRANSFER_TO_FRIEND = "pin_transfer_to_friend";
     String KEY_PIN_CHECKOUT = "pin_checkout";
-    String KEY_BASE64_SELFIE_CAMERA_KTP = "selfie_camera_ktp_base64";
-    String BASE64_CAMERA_PERSONA_KEY = "camera_persona64";
-    boolean REMOVE_CAMERA_PHOTO_TAKEN_CONFIG = true;
 
     boolean SESSION_CHECK_PHONE_NUMBER = false;
     boolean SESSION_IS_LOGIN = false;
-    int CAMERA_KTP_SELFIE_TYPE = 110;
-    int CAMERA_KTP_TYPE = 100;
 
     //API 11 - ?
     int KEY_API_REGISTER = 11;
@@ -75,5 +71,24 @@ public interface IConfig {
     int KEY_API_TRANSFER_TO_FRIEND = 21;
     int KEY_API_UPGRADE = 22;
 
+    //Document File foto
+    String KEY_DATA = "data";
 
+    // folder file
+    String FOLDER_APP = "OttoCash";
+    String FOLDER_FOTO = FOLDER_APP + File.separator + "Foto";
+
+    // file foto configuration
+    String FILE_NAME_MAIN_FOTO = "foto";
+    String EXTENSION_FILE_FOTO = ".jpg";
+    String FILE_SEPARATOR = "_";
+
+    String KEY_BASE64_KTP = "value_base64_ktp";
+    String FILE_NAME_MAIN_FOTO_KTP = "foto_ktp_sign";
+    String FILE_NAME_FOTO_KTP = FOLDER_FOTO + File.separator + FILE_NAME_MAIN_FOTO_KTP + IConfig.FILE_SEPARATOR;
+    int REQUEST_KTP = 112;
+
+    String FILE_NAME_MAIN_FOTO_SELFIE = "foto_selfie";
+    String FILE_NAME_FOTO_SELFIE = FOLDER_FOTO + File.separator + FILE_NAME_MAIN_FOTO_SELFIE + IConfig.FILE_SEPARATOR;
+    int REQUEST_SELFIE = 113;
 }
