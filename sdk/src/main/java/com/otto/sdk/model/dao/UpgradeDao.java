@@ -19,7 +19,7 @@ public class UpgradeDao extends BaseDao {
     private  YUpgrade idao;
 
     public interface YUpgrade extends IDaoPresenter {
-        void getUpgrade(UpgradeAccountRequest requestModel);
+        void getUpgrade(UpgradeAccountRequest upgradeAccountRequest, Context context);
 
     }
 

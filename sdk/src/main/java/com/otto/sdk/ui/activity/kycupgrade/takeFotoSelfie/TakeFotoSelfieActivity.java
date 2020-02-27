@@ -16,15 +16,11 @@ import com.camerakit.CameraKitView;
 import com.otto.sdk.AppActivity;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.R;
-import com.otto.sdk.ui.activity.kycupgrade.takeFotoKtp.PreviewFotoKtpDialog;
-import com.otto.sdk.ui.activity.kycupgrade.takeFotoKtp.TakeFotoKtpActivity;
 import com.otto.sdk.ui.component.support.DateUtil;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
-import app.beelabs.com.codebase.base.BaseActivity;
 
 
 public class TakeFotoSelfieActivity extends AppActivity {

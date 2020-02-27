@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#49A5F8"
-    tools:context=".ui.activity.kycupgrade.UpgradeSuccessActivity">
+    tools:context=".ui.activity.kycupgrade.UpgradeStatusActivity">
 
     <ImageView
         android:id="@+id/image_succes"
@@ -16,10 +16,11 @@
         android:background="@drawable/icon_succesp" />
 
     <TextView
+        android:id="@+id/tvStatus"
         android:layout_width="303dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/image_succes"
-        android:text="Pengajuan OttoCash Plus telah berhasil"
+        android:text=""
         android:gravity="center"
         android:layout_marginTop="52dp"
         android:layout_centerInParent="true"

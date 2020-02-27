@@ -19,7 +19,7 @@ public class UpgradePresenter  extends BasePresenter implements UpgradeDao.YUpgr
     }
 
     @Override
-    public void getUpgrade(UpgradeAccountRequest upgradeAccountRequest) {
+    public void getUpgrade(UpgradeAccountRequest upgradeAccountRequest, Context context) {
         new UpgradeDao(this, new OnPresenterResponseCallback() {
             @Override
             public void call(BaseResponse br) {

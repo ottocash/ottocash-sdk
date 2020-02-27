@@ -107,7 +107,7 @@
             android:name=".ui.activity.payment.pede.PaymentSuccessPedeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.kycupgrade.UpgradeSuccessActivity"
+            android:name=".ui.activity.kycupgrade.UpgradeStatusActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.kycupgrade.takeFotoKtp.PreviewFotoKtpDialog"
