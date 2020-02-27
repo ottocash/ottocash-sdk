@@ -109,7 +109,7 @@ public class PinLoginActivity extends AppActivity implements IAuthView {
             CacheUtil.putPreferenceString(IConfig.SESSION_PHONE, phone, PinLoginActivity.this);
 
             Intent intent = new Intent(PinLoginActivity.this, OtpLoginActivity.class);
-            //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             intent.putExtra(IConfig.SESSION_PHONE, phone);
             startActivity(intent);
             //finish();

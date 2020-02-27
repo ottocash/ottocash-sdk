@@ -45,7 +45,7 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
     TextView tvTacOttocash;
     TextView tvUpgrade;
     TextView tvPending;
-    private String emoneyBalance;
+    private String saldo_ottocash;
     private String user_name;
     private int verifyStatus;
     public static String nikmatinaja;
@@ -256,8 +256,8 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
     public void handleInquiry(InquiryResponse model) {
         if (model.getMeta().getCode() == 200) {
 
-            emoneyBalance = model.getData().getEmoney_balance();
-            CacheUtil.putPreferenceString(IConfig.SESSION_EMONEY_BALANCE, emoneyBalance, DashboardSDKActivity.this);
+            saldo_ottocash = model.getData().getEmoney_balance();
+            CacheUtil.putPreferenceString(IConfig.SESSION_EMONEY_BALANCE, saldo_ottocash, DashboardSDKActivity.this);
 
             user_name = model.getData().getName();
             nikmatinaja = model.getData().getAccount_number();
@@ -265,7 +265,7 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
             CacheUtil.putPreferenceString(IConfig.SESSION_NAME, user_name, DashboardSDKActivity.this);
             verifyStatus = model.getData().getVerify_status();
 
-            tvEmoneyBalance.setText(UiUtil.formatMoneyIDR(Long.parseLong(emoneyBalance)));
+            tvEmoneyBalance.setText(UiUtil.formatMoneyIDR(Long.parseLong(saldo_ottocash)));
 
             if (model.getData().getVerify_status() == 2) {
                 tvUpgrade.setVisibility(View.GONE);
@@ -294,6 +294,11 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+    }
+
+    @Override
+    public BaseActivity getBaseActivity() {
+        return DashboardSDKActivity.this;
     }
 
 }

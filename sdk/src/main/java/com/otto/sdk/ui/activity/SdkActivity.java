@@ -48,7 +48,7 @@ public class SdkActivity extends BaseActivity implements ISdkView, IInquiryView 
 
     public void goActivation() {
         Intent intent = new Intent(SdkActivity.this, ActivationActivity.class);
-        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         SdkActivity.this.startActivity(intent);
     }
 
