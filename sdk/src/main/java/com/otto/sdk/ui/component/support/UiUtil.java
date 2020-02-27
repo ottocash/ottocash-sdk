@@ -82,4 +82,10 @@ public class UiUtil {
         String result = input.replaceAll("[^0-9]","");
         return Integer.parseInt(result);
     }
+
+    public static int formatMoneyIDR(String saldo_ottocash) {
+        DecimalFormat formatter = new DecimalFormat("###,###,###");
+        int result = Integer.parseInt("Rp " + formatter.format(saldo_ottocash).replaceAll(",", "."));
+        return result;
+    }
 }

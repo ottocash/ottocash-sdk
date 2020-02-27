@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+
 import android.widget.ProgressBar;
 
 import com.github.ybq.android.spinkit.sprite.Sprite;
@@ -30,7 +32,7 @@ public class OttocashSDKDialog extends BaseDialog {
         progressBar = findViewById(R.id.process);
         Sprite pulse = new Pulse();
         progressBar.setIndeterminateDrawable(pulse);
-        progressBar.getIndeterminateDrawable().setColorFilter(context.getResources().getColor(R.color.Grey_C4C4C4),android.graphics.PorterDuff.Mode.SRC_IN);
+        progressBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(context, R.color.Grey_C4C4C4),android.graphics.PorterDuff.Mode.SRC_IN);
 
         dialog = this;
     }

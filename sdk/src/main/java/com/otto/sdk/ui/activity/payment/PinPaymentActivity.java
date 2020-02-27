@@ -28,7 +28,6 @@ import com.otto.sdk.model.api.response.ReviewCheckOutResponse;
 import com.otto.sdk.model.api.response.TransferToFriendResponse;
 import com.otto.sdk.presenter.PinVerificationPaymentPresenter;
 import com.otto.sdk.presenter.ReviewCheckoutPresenter;
-import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
 import com.otto.sdk.ui.activity.payment.otto.PaymentSuccessOttoActivity;
 import com.otto.sdk.ui.component.support.DeviceId;
 import com.otto.sdk.ui.component.support.Logging;
@@ -125,15 +124,15 @@ public class PinPaymentActivity extends AppActivity implements IPinVerificationP
             }
         });
 
-        //total = CacheUtil.getPreferenceInteger(IConfig.SESSION_TOTAL, PinPaymentActivity.this);
-        emoneyBalance = Integer.parseInt(CacheUtil.getPreferenceString(IConfig.SESSION_EMONEY_BALANCE,
+        //total = CacheUtil.getPreferenceInteger(IConfig.OC_SESSION_TOTAL, PinPaymentActivity.this);
+        emoneyBalance = Integer.parseInt(CacheUtil.getPreferenceString(IConfig.OC_SESSION_EMONEY_BALANCE,
                 PinPaymentActivity.this));
-        amount = CacheUtil.getPreferenceInteger(IConfig.SESSION_TOTAL, PinPaymentActivity.this);
+        amount = CacheUtil.getPreferenceInteger(IConfig.OC_SESSION_TOTAL, PinPaymentActivity.this);
 
         if (pinTransferToFriend.equals(keyPinTransferToFriend)) {
             tvPaymentValue.setText(nominalTransferToFriend);
         } else if (pinReviewCheckout.equals(keyPinReviewCheckout)) {
-            tvPaymentValue.setText(UiUtil.formatMoneyIDR(amount));
+            tvPaymentValue.setText(UiUtil.formatMoneyIDR((amount)));
         }
     }
 
@@ -144,8 +143,8 @@ public class PinPaymentActivity extends AppActivity implements IPinVerificationP
 
         final PaymentValidateRequest model = new PaymentValidateRequest();
 
-        user_id = CacheUtil.getPreferenceInteger(IConfig.SESSION_USER_ID, PinPaymentActivity.this);
-        phone = CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, PinPaymentActivity.this);
+        user_id = CacheUtil.getPreferenceInteger(IConfig.OC_SESSION_USER_ID, PinPaymentActivity.this);
+        phone = CacheUtil.getPreferenceString(IConfig.OC_SESSION_PHONE, PinPaymentActivity.this);
 
         model.setUserId(user_id);
         model.setPhone(phone);
@@ -221,7 +220,7 @@ public class PinPaymentActivity extends AppActivity implements IPinVerificationP
 
     private void onCallApiReviewCheckOut() {
         reviewCheckOutRequest = new ReviewCheckOutRequest(String.valueOf(getPreferenceString(
-                IConfig.SESSION_ACCOUNT_NUMBER, PinPaymentActivity.this)));
+                IConfig.OC_SESSION_ACCOUNT_NUMBER, PinPaymentActivity.this)));
         reviewCheckOutRequest.setAmount(amount);
         reviewCheckOutRequest.setFee(0);
         reviewCheckOutRequest.setProductName("Pembayaran");
@@ -262,7 +261,7 @@ public class PinPaymentActivity extends AppActivity implements IPinVerificationP
     private void onCallApiTransferToFriend() {
 
         final TransferToFriendRequest model = new TransferToFriendRequest();
-        phone = CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, PinPaymentActivity.this);
+        phone = CacheUtil.getPreferenceString(IConfig.OC_SESSION_PHONE, PinPaymentActivity.this);
 
         model.setAccountNumber(phone);
         model.setCustomerReference(numberContact);

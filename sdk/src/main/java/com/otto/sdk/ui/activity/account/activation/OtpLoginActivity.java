@@ -31,7 +31,7 @@ import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.support.util.CacheUtil;
 import cn.iwgang.countdownview.CountdownView;
 
-import static com.otto.sdk.IConfig.SESSION_PHONE;
+import static com.otto.sdk.IConfig.OC_SESSION_PHONE;
 
 public class OtpLoginActivity extends BaseActivity implements IOtpView {
 
@@ -55,7 +55,7 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
         setupCountdownview();
         addTextWatcher(lineField);
 
-        phone = CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, OtpLoginActivity.this);
+        phone = CacheUtil.getPreferenceString(IConfig.OC_SESSION_PHONE, OtpLoginActivity.this);
         tvNoHpOtp.setText("6 Digit kode OTP telah dikirimkan ke nomor " + phone + ", Silahkan cek HP Anda");
 
         ivBack.setOnClickListener(new View.OnClickListener() {
@@ -120,7 +120,7 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
      * Call Api Otp Request
      */
     private void onCallApiOtpRequest() {
-        String phone = CacheUtil.getPreferenceString(SESSION_PHONE, OtpLoginActivity.this);
+        String phone = CacheUtil.getPreferenceString(OC_SESSION_PHONE, OtpLoginActivity.this);
 
         final OtpRequest otpRequest = new OtpRequest();
         otpRequest.setPhone(phone);
@@ -139,7 +139,7 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
      * Call Api Otp Verify
      */
     private void onCallApiOtpVerify() {
-        int user_id = CacheUtil.getPreferenceInteger(IConfig.SESSION_USER_ID, OtpLoginActivity.this);
+        int user_id = CacheUtil.getPreferenceInteger(IConfig.OC_SESSION_USER_ID, OtpLoginActivity.this);
         final OtpVerificationRequest otpVerificationRequest = new OtpVerificationRequest();
 
         otpVerificationRequest.setUser_id(user_id);
@@ -164,7 +164,7 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
 
 
     /**
-     * Hansle Response Call Verify Otp
+     * Handle Response Call Verify Otp
      */
     @Override
     public void handleOtpVerify(VerifyOtpResponse model) {
@@ -172,7 +172,7 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
             Intent intent = new Intent(OtpLoginActivity.this, DashboardSDKActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
-            //finish();
+            finish();
             //saveSession();
         } else {
             Toast.makeText(this, model.getBaseMeta().getCode() + ":" + model.getBaseMeta().getMessage(),

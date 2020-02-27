@@ -1,33 +1,40 @@
 package com.otto.sdk.model.api.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import app.beelabs.com.codebase.base.response.BaseResponse;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CheckPhoneNumberResponse extends BaseResponse {
-    private Data data;
-    private Meta meta;
 
-    public void setData(Data data) {
-        this.data = data;
-    }
+    /**
+     * data : {"is_existing":true}
+     * meta : {"status":true,"code":200,"message":"OK"}
+     */
 
-    public Data getData() {
+    private DataBean data;
+    private MetaBean meta;
+
+    public DataBean getData() {
         return data;
     }
 
-    public void setMeta(Meta meta) {
-        this.meta = meta;
+    public void setData(DataBean data) {
+        this.data = data;
     }
 
-    public Meta getMeta() {
+    public MetaBean getMeta() {
         return meta;
     }
 
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    public class Data {
+    public void setMeta(MetaBean meta) {
+        this.meta = meta;
+    }
+
+    public static class DataBean {
+        /**
+         * is_existing : true
+         */
 
         private boolean is_existing;
 
@@ -40,11 +47,24 @@ public class CheckPhoneNumberResponse extends BaseResponse {
         }
     }
 
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    public class Meta {
+    public static class MetaBean {
+        /**
+         * status : true
+         * code : 200
+         * message : OK
+         */
+
+        private boolean status;
         private int code;
         private String message;
-        private boolean status;
+
+        public boolean isStatus() {
+            return status;
+        }
+
+        public void setStatus(boolean status) {
+            this.status = status;
+        }
 
         public int getCode() {
             return code;
@@ -60,14 +80,6 @@ public class CheckPhoneNumberResponse extends BaseResponse {
 
         public void setMessage(String message) {
             this.message = message;
-        }
-
-        public boolean isStatus() {
-            return status;
-        }
-
-        public void setStatus(boolean status) {
-            this.status = status;
         }
     }
 }

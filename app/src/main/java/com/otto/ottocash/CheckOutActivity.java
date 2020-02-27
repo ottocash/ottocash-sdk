@@ -85,8 +85,8 @@ public class CheckOutActivity extends BaseActivity {
 
     private void initContent() {
         try {
-            emoney = CacheUtil.getPreferenceString(IConfig.SESSION_EMONEY_BALANCE, CheckOutActivity.this);
-            tvSaldoOttoCash.setText(UiUtil.formatMoneyIDR(Long.parseLong(emoney)));
+            emoney = CacheUtil.getPreferenceString(IConfig.OC_SESSION_EMONEY_BALANCE, CheckOutActivity.this);
+            tvSaldoOttoCash.setText(UiUtil.formatMoneyIDR(Long.parseLong((emoney))));
         }
 
         catch (Exception e) {

@@ -50,7 +50,7 @@ public class Api extends BaseApi {
 
     private static Map<String, Object> initHeaderForRequest(Context context) {
         Map<String, Object> map = new HashMap<>();
-        map.put("Authorization", "Bearer " + CacheUtil.getPreferenceString(IConfig.SESSION_ACCESS_TOKEN, context));
+        map.put("Authorization", "Bearer " + CacheUtil.getPreferenceString(IConfig.OC_SESSION_ACCESS_TOKEN, context));
         map.put("Accept", "application/json");
         map.put("Content-Type", "application/json");
 
@@ -59,7 +59,7 @@ public class Api extends BaseApi {
 
 //    private static Map<String, String> initHeaderPartner(Context context) {
 //        Map<String, String> map = new HashMap<>();
-//        map.put("Authorization", "Bearer " + CacheUtil.getPreferenceString(IConfig.SESSION_ACCESS_TOKEN, context));
+//        map.put("Authorization", "Bearer " + CacheUtil.getPreferenceString(IConfig.OC_SESSION_ACCESS_TOKEN, context));
 //        map.put("Cache-Control", "no-store");
 //        map.put("Content-Type", "application/json");
 //        map.put("Institution-ID", "OTTOCASH");

@@ -30,7 +30,7 @@ import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.support.util.CacheUtil;
 import cn.iwgang.countdownview.CountdownView;
 
-import static com.otto.sdk.IConfig.SESSION_PHONE;
+import static com.otto.sdk.IConfig.OC_SESSION_PHONE;
 
 public class OtpRegistrationActivity extends BaseActivity implements IOtpView {
 
@@ -54,7 +54,7 @@ public class OtpRegistrationActivity extends BaseActivity implements IOtpView {
         setupCountdownview();
         addTextWatcher(lineField);
 
-        phone = CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, OtpRegistrationActivity.this);
+        phone = CacheUtil.getPreferenceString(IConfig.OC_SESSION_PHONE, OtpRegistrationActivity.this);
         tvNoHpOtp.setText("6 Digit kode OTP telah dikirimkan ke nomor " + phone + ", Silahkan cek HP Anda");
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,7 +125,7 @@ public class OtpRegistrationActivity extends BaseActivity implements IOtpView {
      * Call Api Request Otp
      */
     private void onCallApiOTPRequest() {
-        String phone = CacheUtil.getPreferenceString(SESSION_PHONE, OtpRegistrationActivity.this);
+        String phone = CacheUtil.getPreferenceString(OC_SESSION_PHONE, OtpRegistrationActivity.this);
         final  OtpRequest otpRequest = new OtpRequest();
         otpRequest.setPhone(phone);
 
@@ -143,7 +143,7 @@ public class OtpRegistrationActivity extends BaseActivity implements IOtpView {
      * Call Api Verify Otp
      */
     private void onCallApiOTP() {
-        int user_id = CacheUtil.getPreferenceInteger(IConfig.SESSION_USER_ID, OtpRegistrationActivity.this);
+        int user_id = CacheUtil.getPreferenceInteger(IConfig.OC_SESSION_USER_ID, OtpRegistrationActivity.this);
         final OtpVerificationRequest otpVerificationRequest = new OtpVerificationRequest();
 
         otpVerificationRequest.setUser_id(user_id);

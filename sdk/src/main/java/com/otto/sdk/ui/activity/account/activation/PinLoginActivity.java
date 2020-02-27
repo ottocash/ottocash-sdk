@@ -68,7 +68,7 @@ public class PinLoginActivity extends AppActivity implements IAuthView {
      * Call Api Login
      */
     private void onCallApiLogin() {
-        phone = CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, PinLoginActivity.this);
+        phone = CacheUtil.getPreferenceString(IConfig.OC_SESSION_PHONE, PinLoginActivity.this);
         final LoginRequest loginRequest = new LoginRequest();
 
         loginRequest.setPhone(phone);
@@ -103,16 +103,16 @@ public class PinLoginActivity extends AppActivity implements IAuthView {
             CacheUtil.putPreferenceBoolean(String.valueOf(Boolean.valueOf(IConfig.SESSION_IS_LOGIN)),
                     isLogin, PinLoginActivity.this);
 
-            CacheUtil.putPreferenceInteger(IConfig.SESSION_USER_ID, user_id, PinLoginActivity.this);
-            CacheUtil.putPreferenceString(IConfig.SESSION_ACCOUNT_NUMBER, account_number, PinLoginActivity.this);
-            CacheUtil.putPreferenceString(IConfig.SESSION_NAME, name, PinLoginActivity.this);
-            CacheUtil.putPreferenceString(IConfig.SESSION_PHONE, phone, PinLoginActivity.this);
+            CacheUtil.putPreferenceInteger(IConfig.OC_SESSION_USER_ID, user_id, PinLoginActivity.this);
+            CacheUtil.putPreferenceString(IConfig.OC_SESSION_ACCOUNT_NUMBER, account_number, PinLoginActivity.this);
+            CacheUtil.putPreferenceString(IConfig.OC_SESSION_NAME, name, PinLoginActivity.this);
+            CacheUtil.putPreferenceString(IConfig.OC_SESSION_PHONE, phone, PinLoginActivity.this);
 
             Intent intent = new Intent(PinLoginActivity.this, OtpLoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            intent.putExtra(IConfig.SESSION_PHONE, phone);
+            intent.putExtra(IConfig.OC_SESSION_PHONE, phone);
             startActivity(intent);
-            //finish();
+            finish();
         } else if (data.getMeta().getCode() == 400) {
             messagePIN = data.getMeta().getMessage();
             if (messagePIN.equals(errorMessagePin)) {

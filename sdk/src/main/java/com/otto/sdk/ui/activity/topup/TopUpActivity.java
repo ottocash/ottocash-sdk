@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+
 import com.otto.sdk.IConfig;
 import com.otto.sdk.R;
 import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
@@ -48,17 +50,17 @@ public class TopUpActivity extends BaseActivity {
         tvAtm4.setText(UiUtil.getHTMLContent(getString(R.string.atm_4)));
         tvMbank3.setText(UiUtil.getHTMLContent(getString(R.string.mbank_3)));
 
-        String phone = CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, TopUpActivity.this);
+        String phone = CacheUtil.getPreferenceString(IConfig.OC_SESSION_PHONE, TopUpActivity.this);
         SpannableStringBuilder builder = new SpannableStringBuilder();
 
         String black = "5. Masukkan nomor virtual account Kamu : ";
         SpannableString blackSpannable = new SpannableString(black);
-        blackSpannable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.Black_000000)), 0, black.length(), 0);
+        blackSpannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(this, R.color.Black_000000)), 0, black.length(), 0);
         builder.append(blackSpannable);
 
         SpannableString blueSpannable = new SpannableString(phone);
         blueSpannable.setSpan(new StyleSpan(Typeface.BOLD), 0, phone.length(), 0);
-        blueSpannable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.Blue_056fb6)), 0, phone.length(), 0);
+        blueSpannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(this, R.color.Blue_056fb6)), 0, phone.length(), 0);
         builder.append(blueSpannable);
         tvAtm5.setText(builder, TextView.BufferType.SPANNABLE);
         tvMbank5.setText(builder, TextView.BufferType.SPANNABLE);

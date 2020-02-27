@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/Grey_F1F1F1"
     tools:context=".LoginActivity">
 
     <LinearLayout
@@ -47,20 +48,10 @@
                 android:background="@color/Red_d04a55"
                 android:padding="5dp"
                 android:layout_marginTop="20dp"
-                android:text="Clear Cache"
+                android:text="Log Out"
                 android:textAppearance="@style/BarlowRegular"
                 android:textColor="@color/white" />
 
-            <Button
-                android:id="@+id/btnUpgrade"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/Red_d04a55"
-                android:padding="5dp"
-                android:layout_marginTop="20dp"
-                android:text="Upgrade"
-                android:textAppearance="@style/BarlowRegular"
-                android:textColor="@color/white" />
         </LinearLayout>
 
     </LinearLayout>

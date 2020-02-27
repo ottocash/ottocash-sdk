@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">OttoCash-Host</string>
+    <string name="main_activity_msg_double_back_to_exit">Tekan sekali lagi untuk keluar</string>
 
 </resources>

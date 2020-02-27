@@ -134,7 +134,7 @@ public class PaymentSuccessPedeActivity extends BaseActivity {
     }
 
     private void initDisplayPaymentValue() {
-        total = CacheUtil.getPreferenceInteger(IConfig.SESSION_TOTAL, PaymentSuccessPedeActivity.this);
+        total = CacheUtil.getPreferenceInteger(IConfig.OC_SESSION_TOTAL, PaymentSuccessPedeActivity.this);
 
         Bundle extras = getIntent().getExtras();
         nominalTransferToFriend = extras.getString(IConfig.KEY_NOMINAL_TRANSFER_TO_FRIEND);
@@ -147,7 +147,7 @@ public class PaymentSuccessPedeActivity extends BaseActivity {
         nameContact = extras.getString(IConfig.KEY_NAME_CONTACT);
 
         if (pinReviewCheckout.equals(keyPinReviewCheckout)) {
-            tvPaymentValue.setText(UiUtil.formatMoneyIDR(total));
+            tvPaymentValue.setText(UiUtil.formatMoneyIDR((total)));
         } else if (pinTransferToFriend.equals(keyPinTransferToFriend)) {
             tvTitleReceipt.setText("TRANSFER BERHASIL");
             tvDescTitleReceipt.setText(R.string.desc_title_receipt);

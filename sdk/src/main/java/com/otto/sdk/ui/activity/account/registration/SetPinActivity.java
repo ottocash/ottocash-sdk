@@ -26,9 +26,9 @@ import com.otto.sdk.ui.component.support.FormValidation;
 
 import app.beelabs.com.codebase.support.util.CacheUtil;
 
-import static com.otto.sdk.IConfig.SESSION_EMAIL;
-import static com.otto.sdk.IConfig.SESSION_NAME;
-import static com.otto.sdk.IConfig.SESSION_PHONE;
+import static com.otto.sdk.IConfig.OC_SESSION_EMAIL;
+import static com.otto.sdk.IConfig.OC_SESSION_NAME;
+import static com.otto.sdk.IConfig.OC_SESSION_PHONE;
 
 public class SetPinActivity extends AppActivity implements IAuthView {
 
@@ -84,9 +84,9 @@ public class SetPinActivity extends AppActivity implements IAuthView {
     private void onCallApiSetPin() {
         if (Connectivity.isNetworkAvailable(this)) {
             model = new RegisterRequest(
-                    CacheUtil.getPreferenceString(SESSION_PHONE, SetPinActivity.this),
-                    CacheUtil.getPreferenceString(SESSION_NAME, SetPinActivity.this),
-                    CacheUtil.getPreferenceString(SESSION_EMAIL, SetPinActivity.this));
+                    CacheUtil.getPreferenceString(OC_SESSION_PHONE, SetPinActivity.this),
+                    CacheUtil.getPreferenceString(OC_SESSION_NAME, SetPinActivity.this),
+                    CacheUtil.getPreferenceString(OC_SESSION_EMAIL, SetPinActivity.this));
 
             model.setPin(edtPin.getText().toString());
             model.setSecurityQuestionId("1");
@@ -157,11 +157,11 @@ public class SetPinActivity extends AppActivity implements IAuthView {
             String name = model.getData().getName();
             String email = model.getData().getEmail();
 
-            CacheUtil.putPreferenceInteger(IConfig.SESSION_USER_ID, user_id, SetPinActivity.this);
-            CacheUtil.putPreferenceString(IConfig.SESSION_PHONE, phone, SetPinActivity.this);
-            CacheUtil.putPreferenceString(IConfig.SESSION_ACCOUNT_NUMBER, account_number, SetPinActivity.this);
-            CacheUtil.putPreferenceString(IConfig.SESSION_NAME, name, SetPinActivity.this);
-            CacheUtil.putPreferenceString(IConfig.SESSION_EMAIL, email, SetPinActivity.this);
+            CacheUtil.putPreferenceInteger(IConfig.OC_SESSION_USER_ID, user_id, SetPinActivity.this);
+            CacheUtil.putPreferenceString(IConfig.OC_SESSION_PHONE, phone, SetPinActivity.this);
+            CacheUtil.putPreferenceString(IConfig.OC_SESSION_ACCOUNT_NUMBER, account_number, SetPinActivity.this);
+            CacheUtil.putPreferenceString(IConfig.OC_SESSION_NAME, name, SetPinActivity.this);
+            CacheUtil.putPreferenceString(IConfig.OC_SESSION_EMAIL, email, SetPinActivity.this);
 
             Intent intent = new Intent(SetPinActivity.this, OtpRegistrationActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);

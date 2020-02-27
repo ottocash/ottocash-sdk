@@ -23,9 +23,9 @@ public class OttoCashSdk extends BaseApp {
 
     public static void setupComponent(String id, String Secret, Application application) {
         appComponent = getComponent();
-        CacheUtil.putPreferenceString(IConfig.SESSION_ID, id, application);
+        CacheUtil.putPreferenceString(IConfig.OC_SESSION_CLIENT_ID, id, application);
         CacheUtil.putPreferenceString(
-                IConfig.SESSION_SECRET,
+                IConfig.OC_SESSION_CLIENT_SECRET,
                 Secret,
                 application
         );

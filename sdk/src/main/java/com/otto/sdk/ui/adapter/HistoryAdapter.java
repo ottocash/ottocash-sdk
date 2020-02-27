@@ -2,6 +2,7 @@ package com.otto.sdk.ui.adapter;
 
 import android.content.Context;
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,11 +40,11 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyViewHo
         switch (data.getTransactionType()){
             case "D":
                 holder.ivIcon.setImageResource(R.drawable.ic_history_red);
-                holder.tvPrice.setTextColor(context.getResources().getColor(R.color.Red_d04a55));
+                holder.tvPrice.setTextColor(ContextCompat.getColor(context, R.color.Red_d04a55));
                 break;
             case "C":
                 holder.ivIcon.setImageResource(R.drawable.ic_history_green);
-                holder.tvPrice.setTextColor(context.getResources().getColor(R.color.Green_0CB04A));
+                holder.tvPrice.setTextColor(ContextCompat.getColor(context, R.color.Green_0CB04A));
 
                 break;
         }
@@ -53,7 +54,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyViewHo
                 "dd MM yyyy hh:mm:ss","dd/MM/yyyy"));
         holder.tvTime.setText(DateUtil.formatDateToString(data.getValueDate(),
                 "dd MM yyyy hh:mm:ss","hh:mm:ss"));
-        holder.tvPrice.setText(UiUtil.formatMoneyIDR(Long.valueOf(data.getAmount())));
+        holder.tvPrice.setText(UiUtil.formatMoneyIDR(data.getAmount()));
         holder.tvDesc.setText(data.getDescription());
     }
 

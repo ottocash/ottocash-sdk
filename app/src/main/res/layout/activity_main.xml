@@ -34,7 +34,7 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/btnNextWidget"
+            android:id="@+id/btnLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/Red_d04a55"
@@ -62,7 +62,7 @@
         android:layout_gravity="bottom"
         android:layout_margin="20dp"
         android:gravity="bottom"
-        android:text="ottocash-sdk | Development 1.0.30"
+        android:text="ottocash-sdk | Development x.x.xx"
         android:textAppearance="@style/RobotoRegular"
         android:textColor="@color/Black_484848" />
 

@@ -55,7 +55,7 @@ public class PaymentSuccessOttoActivity extends BaseActivity {
     }
 
     private void contentUI() {
-        total = CacheUtil.getPreferenceInteger(IConfig.SESSION_TOTAL, PaymentSuccessOttoActivity.this);
+        total = CacheUtil.getPreferenceInteger(IConfig.OC_SESSION_TOTAL, PaymentSuccessOttoActivity.this);
 
         Bundle extras = getIntent().getExtras();
         nominalTransaction = extras.getString(IConfig.NOMINAL_TRANSACTION);
@@ -75,7 +75,7 @@ public class PaymentSuccessOttoActivity extends BaseActivity {
 
 
         if (pinReviewCheckout.equals(keyPinReviewCheckout)) {
-            tvPaymentValue.setText(UiUtil.formatMoneyIDR(total));
+            tvPaymentValue.setText(UiUtil.formatMoneyIDR((total)));
         } else if (pinTransferToFriend.equals(keyPinTransferToFriend)) {
             tvPaymentValue.setText(nominalTransaction);
         }

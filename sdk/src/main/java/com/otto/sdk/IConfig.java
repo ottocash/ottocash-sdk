@@ -11,26 +11,19 @@ public interface IConfig {
     //String API_BASE_URL = "https://sdkmw.ottocash.id/";
 
     //Session
-    String SESSION_LOGIN_KEY = "Ottocash-SessionLoginnnnnnn";
-    String SESSION_USER_ID = "user_id";
-    String SESSION_ACCOUNT_NUMBER = "account_number";
-    String SESSION_EMONEY_BALANCE = "emoney_balance";
-    String SESSION_IS_ACTIVE = "isacktipppp";
-    String SESSION_TOTAL = "total";
-    String SESSION_PHONE = "phone";
-    String SESSION_PACKAGE_NAME = "package_name";
-    String SESSION_NAME = "name";
-    String SESSION_EMAIL = "email";
-    String SESSION_ID = "id";
-    String SESSION_SECRET = "secret";
-    String SESSION_ACCESS_TOKEN = "access_token";
-    String SESSION_ID_CARD = "id_card";
-    String SESSION_PASSPORT_PHOTO = "passport_photo";
+    String OC_SESSION_LOGIN_KEY = "Ottocash-SDK-Login";
+    String OC_SESSION_USER_ID = "user_id";
+    String OC_SESSION_ACCOUNT_NUMBER = "account_number";
+    String OC_SESSION_EMONEY_BALANCE = "emoney_balance";
+    String OC_SESSION_IS_ACTIVE = "is_active";
+    String OC_SESSION_TOTAL = "total";
+    String OC_SESSION_PHONE = "phone";
+    String OC_SESSION_NAME = "name";
+    String OC_SESSION_EMAIL = "email";
+    String OC_SESSION_CLIENT_ID = "id";
+    String OC_SESSION_CLIENT_SECRET = "secret";
+    String OC_SESSION_ACCESS_TOKEN = "access_token";
 
-    String KEY_NUMBER_CONTACT = "number_contact";
-    String KEY_NAME_CONTACT = "name_contact";
-    String KEY_NOMINAL_TRANSFER_TO_FRIEND = "nominal";
-    String KEY_DESTINATION = "destination_number";
 
     //KEY PAYMENT RECEIPT
     String KEY_REFERENCE_NUMBER_P2P = "reference_number_P2P";
@@ -39,6 +32,9 @@ public interface IConfig {
     String KEY_PAYMENT_QR = "thisIsQRPayment";
 
     //KEY DATA TRANSFER FRIEND
+    String KEY_NUMBER_CONTACT = "number_contact";
+    String KEY_NAME_CONTACT = "name_contact";
+    String KEY_NOMINAL_TRANSFER_TO_FRIEND = "nominal";
     String DATE_TRANSACTION = "date_transaction";
     String SERVICE_TYPE_TRANSACTION = "service_type_transaction";
     String NOMINAL_TRANSACTION = "nominal_transaction";
@@ -79,17 +75,16 @@ public interface IConfig {
     String FOLDER_FOTO = FOLDER_APP + File.separator + "Foto";
 
     // file foto configuration
-    String FILE_NAME_MAIN_FOTO = "foto";
     String EXTENSION_FILE_FOTO = ".jpg";
     String FILE_SEPARATOR = "_";
 
     String KEY_BASE64_KTP = "value_base64_ktp";
     String FILE_NAME_MAIN_FOTO_KTP = "foto_ktp_sign";
     String FILE_NAME_FOTO_KTP = FOLDER_FOTO + File.separator + FILE_NAME_MAIN_FOTO_KTP + IConfig.FILE_SEPARATOR;
-    int REQUEST_KTP = 112;
+
 
     String KEY_BASE64_SELFIE = "value_base64_selfie";
     String FILE_NAME_MAIN_FOTO_SELFIE = "foto_selfie";
     String FILE_NAME_FOTO_SELFIE = FOLDER_FOTO + File.separator + FILE_NAME_MAIN_FOTO_SELFIE + IConfig.FILE_SEPARATOR;
-    int REQUEST_SELFIE = 113;
+
 }

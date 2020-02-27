@@ -17,7 +17,7 @@ import com.otto.sdk.ui.adapter.HistoryAdapter;
 import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.support.util.CacheUtil;
 
-import static com.otto.sdk.IConfig.SESSION_PHONE;
+import static com.otto.sdk.IConfig.OC_SESSION_PHONE;
 
 public class HistoryActivity extends BaseActivity implements IHistoryView {
     private RecyclerView rvHistory;
@@ -52,7 +52,7 @@ public class HistoryActivity extends BaseActivity implements IHistoryView {
 
     private void callApiGetHistories() {
         model = new TransactionHistoryRequest(
-                CacheUtil.getPreferenceString(SESSION_PHONE, HistoryActivity.this));
+                CacheUtil.getPreferenceString(OC_SESSION_PHONE, HistoryActivity.this));
 
         showApiProgressDialog(OttoCashSdk.getAppComponent(), new HistoryTransactionPresenter(this) {
             @Override

@@ -7,15 +7,11 @@ import android.util.Log;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCashSdk;
 import com.otto.sdk.R;
-import com.otto.sdk.interfaces.IInquiryView;
 import com.otto.sdk.interfaces.ISdkView;
 import com.otto.sdk.model.api.request.CheckPhoneNumberRequest;
 import com.otto.sdk.model.api.request.CreateTokenRequest;
-import com.otto.sdk.model.api.request.InquiryRequest;
 import com.otto.sdk.model.api.response.CheckPhoneNumberResponse;
 import com.otto.sdk.model.api.response.CreateTokenResponse;
-import com.otto.sdk.model.api.response.InquiryResponse;
-import com.otto.sdk.presenter.InquiryPresenter;
 import com.otto.sdk.presenter.SdkResourcePresenter;
 import com.otto.sdk.ui.activity.account.activation.ActivationActivity;
 import com.otto.sdk.ui.activity.account.registration.RegistrationActivity;
@@ -25,7 +21,7 @@ import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.base.BasePresenter;
 import app.beelabs.com.codebase.support.util.CacheUtil;
 
-public class SdkActivity extends BaseActivity implements ISdkView, IInquiryView {
+public class SdkActivity extends BaseActivity implements ISdkView {
 
     private String account_number;
     private SdkResourcePresenter presenterSDK;
@@ -43,6 +39,7 @@ public class SdkActivity extends BaseActivity implements ISdkView, IInquiryView 
 
     public void goDashboardSDK() {
         Intent intent = new Intent(SdkActivity.this, DashboardSDKActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
@@ -54,7 +51,7 @@ public class SdkActivity extends BaseActivity implements ISdkView, IInquiryView 
 
     public void goRegistration() {
         Intent intent = new Intent(SdkActivity.this, RegistrationActivity.class);
-        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         SdkActivity.this.startActivity(intent);
     }
 
@@ -66,10 +63,10 @@ public class SdkActivity extends BaseActivity implements ISdkView, IInquiryView 
 
         final CheckPhoneNumberRequest model = new CheckPhoneNumberRequest();
 
-        account_number = CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, SdkActivity.this);
+        account_number = CacheUtil.getPreferenceString(IConfig.OC_SESSION_PHONE, SdkActivity.this);
         model.setPhone(account_number);
 
-        new InquiryPresenter(this).getInquiry(new InquiryRequest());
+        //new InquiryPresenter(this).getInquiry(new InquiryRequest());
         showApiProgressDialog(OttoCashSdk.getAppComponent(), new SdkResourcePresenter(SdkActivity.this) {
             @Override
             public void call() {
@@ -85,8 +82,8 @@ public class SdkActivity extends BaseActivity implements ISdkView, IInquiryView 
      */
     public void onCreateToken() {
 
-        String client_id = CacheUtil.getPreferenceString(IConfig.SESSION_ID, SdkActivity.this);
-        String client_secret = CacheUtil.getPreferenceString(IConfig.SESSION_SECRET, SdkActivity.this);
+        String client_id = CacheUtil.getPreferenceString(IConfig.OC_SESSION_CLIENT_ID, SdkActivity.this);
+        String client_secret = CacheUtil.getPreferenceString(IConfig.OC_SESSION_CLIENT_SECRET, SdkActivity.this);
 
         final CreateTokenRequest token = new CreateTokenRequest();
         token.setGrant_type("client_credentials");
@@ -98,17 +95,15 @@ public class SdkActivity extends BaseActivity implements ISdkView, IInquiryView 
     }
 
 
-
     /**
-     * RESPONSE REQUEST FROM CALL API
+     * RESPONSE REQUEST FROM CALL API CHECK PHONE NUMBER
      */
     @Override
     public void handleCheckIsExistingPhoneNumber(CheckPhoneNumberResponse model) {
         checkPhoneNumberResponse = model;
         if (model.getMeta().getCode() == 200) {
             boolean is_existing = model.getData().isIs_existing();
-            CacheUtil.putPreferenceBoolean(String.valueOf(Boolean.valueOf(IConfig.SESSION_CHECK_PHONE_NUMBER)),
-                    is_existing, SdkActivity.this);
+            CacheUtil.putPreferenceBoolean(String.valueOf(IConfig.SESSION_CHECK_PHONE_NUMBER), is_existing, SdkActivity.this);
 
             Log.i("IS_EX", "isExisting" + is_existing);
 
@@ -119,12 +114,16 @@ public class SdkActivity extends BaseActivity implements ISdkView, IInquiryView 
         }
     }
 
+
+    /**
+     * RESPONSE REQUEST FROM CALL API CREATE TOKEN
+     */
     @Override
     public void handleToken(CreateTokenResponse model) {
         if (model.getMeta().getCode() == 200) {
 
             String accessToken = model.getData().getClient().getAccessToken();
-            CacheUtil.putPreferenceString(IConfig.SESSION_ACCESS_TOKEN, accessToken, SdkActivity.this);
+            CacheUtil.putPreferenceString(IConfig.OC_SESSION_ACCESS_TOKEN, accessToken, SdkActivity.this);
 
         } else {
             //Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
@@ -132,17 +131,21 @@ public class SdkActivity extends BaseActivity implements ISdkView, IInquiryView 
         }
     }
 
-    @Override
-    public void handleInquiry(InquiryResponse model) {
-        if (model.getMeta().getCode() == 200) {
 
-            CacheUtil.putPreferenceString(IConfig.SESSION_EMONEY_BALANCE, model.getData().getEmoney_balance(), this);
-
-        } else {
-            //Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
-            //        Toast.LENGTH_LONG).show();
-        }
-    }
+//    /**
+//     * RESPONSE REQUEST FROM CALL API INQUIRY OR ACCOUNT
+//     */
+//    @Override
+//    public void handleInquiry(InquiryResponse model) {
+//        if (model.getMeta().getCode() == 200) {
+//
+//            CacheUtil.putPreferenceString(IConfig.OC_SESSION_EMONEY_BALANCE, model.getData().getEmoney_balance(), this);
+//
+//        } else {
+//            //Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
+//            //        Toast.LENGTH_LONG).show();
+//        }
+//    }
 
 
 }

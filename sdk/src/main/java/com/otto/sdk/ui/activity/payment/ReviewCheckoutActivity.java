@@ -69,12 +69,12 @@ public class ReviewCheckoutActivity extends AppActivity {
 
         Bundle extras = getIntent().getExtras();
         billPayment = Integer.parseInt(extras.getString(BILL_PAYMENT));
-        tvBill.setText(UiUtil.formatMoneyIDR(Long.parseLong(String.valueOf(billPayment))));
-        tvPembayaranMitra.setText(UiUtil.formatMoneyIDR(Long.parseLong(String.valueOf(billPayment))));
-        tvTotalBayar.setText(UiUtil.formatMoneyIDR(Long.parseLong(String.valueOf(billPayment))));
+        tvBill.setText(UiUtil.formatMoneyIDR((billPayment)));
+        tvPembayaranMitra.setText(UiUtil.formatMoneyIDR((billPayment)));
+        tvTotalBayar.setText(UiUtil.formatMoneyIDR((billPayment)));
 
         int total = billPayment;
-        CacheUtil.putPreferenceInteger(IConfig.SESSION_TOTAL, total, ReviewCheckoutActivity.this);
+        CacheUtil.putPreferenceInteger(IConfig.OC_SESSION_TOTAL, total, ReviewCheckoutActivity.this);
     }
 
     private void initContent() {
@@ -94,7 +94,7 @@ public class ReviewCheckoutActivity extends AppActivity {
     }
 
     private void onCheckSaldo() {
-        saldoEmoneyOttocash = Integer.parseInt(CacheUtil.getPreferenceString(IConfig.SESSION_EMONEY_BALANCE, ReviewCheckoutActivity.this));
+        saldoEmoneyOttocash = Integer.parseInt(CacheUtil.getPreferenceString(IConfig.OC_SESSION_EMONEY_BALANCE, ReviewCheckoutActivity.this));
         if (saldoEmoneyOttocash < billPayment) {
             saldoDialog();
         } else {

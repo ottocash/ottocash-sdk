@@ -77,8 +77,8 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
                     String name = edtNameKtp.getText().toString();
                     String email = edtEmail.getText().toString();
 
-                    CacheUtil.putPreferenceString(IConfig.SESSION_NAME, name, RegistrationActivity.this);
-                    CacheUtil.putPreferenceString(IConfig.SESSION_EMAIL, email, RegistrationActivity.this);
+                    CacheUtil.putPreferenceString(IConfig.OC_SESSION_NAME, name, RegistrationActivity.this);
+                    CacheUtil.putPreferenceString(IConfig.OC_SESSION_EMAIL, email, RegistrationActivity.this);
 
                     Intent intent = new Intent(RegistrationActivity.this, SetPinActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -118,7 +118,7 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
 
 
     private void initContent() {
-        String phone = CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, RegistrationActivity.this);
+        String phone = CacheUtil.getPreferenceString(IConfig.OC_SESSION_PHONE, RegistrationActivity.this);
         edtNoHp.setText(phone);
     }
 

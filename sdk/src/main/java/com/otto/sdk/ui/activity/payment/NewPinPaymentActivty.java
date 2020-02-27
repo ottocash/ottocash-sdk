@@ -2,8 +2,9 @@ package com.otto.sdk.ui.activity.payment;
 
 import android.content.Intent;
 import android.os.Build;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -91,7 +92,7 @@ public class NewPinPaymentActivty extends AppActivity implements PinAdapter.Call
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_pin_payment_activty);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(getResources().getColor(R.color.Blue_4EA9F8));
+            getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.Blue_4EA9F8));
         }
         pinCodeTitle = findViewById(R.id.pinCodeTitle);
         desc = findViewById(R.id.desc);
@@ -102,9 +103,9 @@ public class NewPinPaymentActivty extends AppActivity implements PinAdapter.Call
         keyPinVerificationPayment();
 
 
-        emoneyBalance = Integer.parseInt(CacheUtil.getPreferenceString(IConfig.SESSION_EMONEY_BALANCE,
+        emoneyBalance = Integer.parseInt(CacheUtil.getPreferenceString(IConfig.OC_SESSION_EMONEY_BALANCE,
                 NewPinPaymentActivty.this));
-        amount = CacheUtil.getPreferenceInteger(IConfig.SESSION_TOTAL, NewPinPaymentActivty.this);
+        amount = CacheUtil.getPreferenceInteger(IConfig.OC_SESSION_TOTAL, NewPinPaymentActivty.this);
 
         pinList.setLayoutManager(new GridLayoutManager(this, 3));
         pinList.setAdapter(new PinAdapter(this));
@@ -135,7 +136,7 @@ public class NewPinPaymentActivty extends AppActivity implements PinAdapter.Call
 
     private void onCallApiReviewCheckOut() {
         reviewCheckOutRequest = new ReviewCheckOutRequest(String.valueOf(getPreferenceString(
-                IConfig.SESSION_ACCOUNT_NUMBER, NewPinPaymentActivty.this)));
+                IConfig.OC_SESSION_ACCOUNT_NUMBER, NewPinPaymentActivty.this)));
         reviewCheckOutRequest.setAmount(amount);
         reviewCheckOutRequest.setFee(0);
         reviewCheckOutRequest.setProductName("Pembayaran");
@@ -160,8 +161,8 @@ public class NewPinPaymentActivty extends AppActivity implements PinAdapter.Call
 
         final PaymentValidateRequest model = new PaymentValidateRequest();
 
-        user_id = CacheUtil.getPreferenceInteger(IConfig.SESSION_USER_ID, NewPinPaymentActivty.this);
-        phone = CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, NewPinPaymentActivty.this);
+        user_id = CacheUtil.getPreferenceInteger(IConfig.OC_SESSION_USER_ID, NewPinPaymentActivty.this);
+        phone = CacheUtil.getPreferenceString(IConfig.OC_SESSION_PHONE, NewPinPaymentActivty.this);
 
         model.setUserId(user_id);
         model.setPhone(phone);
@@ -185,7 +186,7 @@ public class NewPinPaymentActivty extends AppActivity implements PinAdapter.Call
     private void onCallApiTransferToFriend() {
 
         final TransferToFriendRequest model = new TransferToFriendRequest();
-        phone = CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, NewPinPaymentActivty.this);
+        phone = CacheUtil.getPreferenceString(IConfig.OC_SESSION_PHONE, NewPinPaymentActivty.this);
 
         model.setAccountNumber(phone);
         model.setCustomerReference(numberContact);

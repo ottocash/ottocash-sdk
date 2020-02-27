@@ -1,7 +1,6 @@
 package com.otto.sdk.ui.activity.kycupgrade;
 
 import android.content.Intent;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,12 +13,9 @@ import com.otto.sdk.R;
 import com.otto.sdk.interfaces.IUpgradeView;
 import com.otto.sdk.model.api.request.UpgradeAccountRequest;
 import com.otto.sdk.model.api.response.UpgradeAccountResponse;
-import com.otto.sdk.presenter.AuthPresenter;
 import com.otto.sdk.presenter.UpgradePresenter;
-import com.otto.sdk.ui.activity.account.activation.PinLoginActivity;
 import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
 
-import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.support.util.CacheUtil;
 
 public class UpgradeStatusActivity extends AppActivity implements IUpgradeView {
@@ -50,7 +46,7 @@ public class UpgradeStatusActivity extends AppActivity implements IUpgradeView {
 
     private void onCallApiUpgrade(){
 
-        String phone_number = CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, this);
+        String phone_number = CacheUtil.getPreferenceString(IConfig.OC_SESSION_PHONE, this);
         String ktp = CacheUtil.getPreferenceString(IConfig.KEY_BASE64_KTP, this);
         String selfie_ktp = CacheUtil.getPreferenceString(IConfig.KEY_BASE64_SELFIE, this);
 

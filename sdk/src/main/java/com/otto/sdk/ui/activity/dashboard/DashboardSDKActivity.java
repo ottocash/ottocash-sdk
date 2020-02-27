@@ -235,7 +235,7 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
      * Call Api Inquiry
      */
     private void onCallApiInquiry() {
-        String phone = String.valueOf(CacheUtil.getPreferenceString(IConfig.SESSION_PHONE, DashboardSDKActivity.this));
+        String phone = String.valueOf(CacheUtil.getPreferenceString(IConfig.OC_SESSION_PHONE, DashboardSDKActivity.this));
         final InquiryRequest inquiryRequest = new InquiryRequest();
 
         inquiryRequest.setAccount_number(phone);
@@ -253,16 +253,18 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
     /**
      * Handle Response Api Inquiry
      */
+    @Override
     public void handleInquiry(InquiryResponse model) {
         if (model.getMeta().getCode() == 200) {
+            CacheUtil.putPreferenceBoolean(IConfig.OC_SESSION_LOGIN_KEY, true, DashboardSDKActivity.this);
 
             saldo_ottocash = model.getData().getEmoney_balance();
-            CacheUtil.putPreferenceString(IConfig.SESSION_EMONEY_BALANCE, saldo_ottocash, DashboardSDKActivity.this);
+            CacheUtil.putPreferenceString(IConfig.OC_SESSION_EMONEY_BALANCE, saldo_ottocash, DashboardSDKActivity.this);
 
             user_name = model.getData().getName();
             nikmatinaja = model.getData().getAccount_number();
 
-            CacheUtil.putPreferenceString(IConfig.SESSION_NAME, user_name, DashboardSDKActivity.this);
+            CacheUtil.putPreferenceString(IConfig.OC_SESSION_NAME, user_name, DashboardSDKActivity.this);
             verifyStatus = model.getData().getVerify_status();
 
             tvEmoneyBalance.setText(UiUtil.formatMoneyIDR(Long.parseLong(saldo_ottocash)));
