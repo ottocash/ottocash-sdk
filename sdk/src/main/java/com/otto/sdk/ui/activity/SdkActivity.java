@@ -26,7 +26,7 @@ public class SdkActivity extends BaseActivity implements ISdkView {
     private String account_number;
     private SdkResourcePresenter presenterSDK;
     private CheckPhoneNumberResponse checkPhoneNumberResponse;
-
+    boolean is_existing = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,12 +102,11 @@ public class SdkActivity extends BaseActivity implements ISdkView {
     public void handleCheckIsExistingPhoneNumber(CheckPhoneNumberResponse model) {
         checkPhoneNumberResponse = model;
         if (model.getMeta().getCode() == 200) {
-            boolean is_existing = model.getData().isIs_existing();
+            is_existing = model.getData().isIs_existing();
             CacheUtil.putPreferenceBoolean(String.valueOf(IConfig.SESSION_CHECK_PHONE_NUMBER), is_existing, SdkActivity.this);
 
-            Log.i("IS_EX", "isExisting" + is_existing);
-
             onCreateToken();
+
         } else {
             //Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
             //       Toast.LENGTH_LONG).show();

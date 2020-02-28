@@ -1,132 +1,119 @@
 package com.otto.sdk.model.api.request;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class ReviewCheckOutRequest {
-    @JsonProperty("account_number")
-    private String accountNumber;
+
+
+    /**
+     * account_number : 085880507999
+     * amount : 55000
+     * fee : 500
+     * product_name : Pembayaran
+     * biller_id : PURCHASE_ELEVENIA
+     * customer_reference_number : UPN00d000458
+     * product_code : PYMNT
+     * partner_code : P000001
+     * latitude : 10.232444
+     * longitude : -6.4312323
+     * device_id : 213123123123123
+     */
+
+    private String account_number;
     private int amount;
-    @JsonProperty("device_id")
-    private String deviceId;
-    @JsonProperty("customer_reference_number")
-    private String customerReferenceNumber;
     private int fee;
+    private String product_name;
+    private String biller_id;
+    private String customer_reference_number;
+    private String product_code;
+    private String partner_code;
     private String latitude;
-    @JsonProperty("biller_id")
-    private String billerId;
-    @JsonProperty("partner_code")
-    private String partnerCode;
-    @JsonProperty("product_code")
-    private String productCode;
-    @JsonProperty("product_name")
-    private String productName;
     private String longitude;
+    private String device_id;
 
-    public ReviewCheckOutRequest(String accountNumber, int amount, String deviceId, String customerReferenceNumber,
-                                 int fee, String latitude, String partnerCode, String productCode, String productName,
-                                 String longitude) {
-        this.accountNumber = accountNumber;
-        this.amount = amount;
-        this.deviceId = deviceId;
-        this.customerReferenceNumber = customerReferenceNumber;
-        this.fee = fee;
-        this.latitude = latitude;
-        this.partnerCode = partnerCode;
-        this.productCode = productCode;
-        this.productName = productName;
-        this.longitude = longitude;
+    public String getAccount_number() {
+        return account_number;
     }
 
-    public ReviewCheckOutRequest(String accountNumber) {
-        this.accountNumber = accountNumber;
-    }
-
-
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
-    }
-
-    public String getAccountNumber() {
-        return accountNumber;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
+    public void setAccount_number(String account_number) {
+        this.account_number = account_number;
     }
 
     public int getAmount() {
         return amount;
     }
 
-    public void setDeviceId(String deviceId) {
-        this.deviceId = deviceId;
-    }
-
-    public String getDeviceId() {
-        return deviceId;
-    }
-
-    public void setCustomerReferenceNumber(String customerReferenceNumber) {
-        this.customerReferenceNumber = customerReferenceNumber;
-    }
-
-    public String getCustomerReferenceNumber() {
-        return customerReferenceNumber;
-    }
-
-    public void setFee(int fee) {
-        this.fee = fee;
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     public int getFee() {
         return fee;
     }
 
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
+    public void setFee(int fee) {
+        this.fee = fee;
+    }
+
+    public String getProduct_name() {
+        return product_name;
+    }
+
+    public void setProduct_name(String product_name) {
+        this.product_name = product_name;
+    }
+
+    public String getBiller_id() {
+        return biller_id;
+    }
+
+    public void setBiller_id(String biller_id) {
+        this.biller_id = biller_id;
+    }
+
+    public String getCustomer_reference_number() {
+        return customer_reference_number;
+    }
+
+    public void setCustomer_reference_number(String customer_reference_number) {
+        this.customer_reference_number = customer_reference_number;
+    }
+
+    public String getProduct_code() {
+        return product_code;
+    }
+
+    public void setProduct_code(String product_code) {
+        this.product_code = product_code;
+    }
+
+    public String getPartner_code() {
+        return partner_code;
+    }
+
+    public void setPartner_code(String partner_code) {
+        this.partner_code = partner_code;
     }
 
     public String getLatitude() {
         return latitude;
     }
 
-    public void setBillerId(String billerId) {
-        this.billerId = billerId;
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
     }
 
-    public String getBillerId() {
-        return billerId;
-    }
-
-    public void setPartnerCode(String partnerCode) {
-        this.partnerCode = partnerCode;
-    }
-
-    public String getPartnerCode() {
-        return partnerCode;
-    }
-
-    public void setProductCode(String productCode) {
-        this.productCode = productCode;
-    }
-
-    public String getProductCode() {
-        return productCode;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public String getProductName() {
-        return productName;
+    public String getLongitude() {
+        return longitude;
     }
 
     public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
 
-    public String getLongitude() {
-        return longitude;
+    public String getDevice_id() {
+        return device_id;
+    }
+
+    public void setDevice_id(String device_id) {
+        this.device_id = device_id;
     }
 }

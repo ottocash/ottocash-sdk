@@ -24,6 +24,8 @@ public class SplashScreenActivity extends AppCompatActivity {
         handler.postDelayed(this::onBoarding, 1000);
     }
 
+
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

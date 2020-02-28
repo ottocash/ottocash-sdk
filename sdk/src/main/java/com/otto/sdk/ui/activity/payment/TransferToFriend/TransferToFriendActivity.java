@@ -224,6 +224,7 @@ public class TransferToFriendActivity extends BaseActivity implements IInquiryVi
             intent.putExtra(IConfig.KEY_NOMINAL_TRANSFER_TO_FRIEND, nominalTransferToFriend);
             intent.putExtra(IConfig.KEY_NUMBER_CONTACT, numberContact);
             startActivity(intent);
+            finish();
 
         } else {
             Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(), Toast.LENGTH_LONG).show();

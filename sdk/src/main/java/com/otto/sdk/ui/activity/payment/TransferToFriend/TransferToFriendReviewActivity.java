@@ -110,6 +110,7 @@ public class TransferToFriendReviewActivity extends BaseActivity {
                 intent.putExtra(IConfig.KEY_NUMBER_CONTACT, numberContact);
                 intent.putExtra(IConfig.KEY_ACCOUNT_NAME_TUJUAN, nameTujuanTransfer);
                 startActivity(intent);
+                finish();
 
             }
         });

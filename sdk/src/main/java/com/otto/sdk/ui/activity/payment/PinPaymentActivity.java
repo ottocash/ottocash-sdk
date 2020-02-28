@@ -28,6 +28,7 @@ import com.otto.sdk.model.api.response.ReviewCheckOutResponse;
 import com.otto.sdk.model.api.response.TransferToFriendResponse;
 import com.otto.sdk.presenter.PinVerificationPaymentPresenter;
 import com.otto.sdk.presenter.ReviewCheckoutPresenter;
+import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
 import com.otto.sdk.ui.activity.payment.otto.PaymentSuccessOttoActivity;
 import com.otto.sdk.ui.component.support.DeviceId;
 import com.otto.sdk.ui.component.support.Logging;
@@ -39,8 +40,6 @@ import java.util.Random;
 import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.support.util.CacheUtil;
 
-import static app.beelabs.com.codebase.support.util.CacheUtil.getPreferenceString;
-import static com.otto.sdk.OttoCash.OTTOCASH_PAYMENT_DATA;
 
 public class PinPaymentActivity extends AppActivity implements IPinVerificationPaymentView, IReviewCheckoutView {
 
@@ -219,18 +218,21 @@ public class PinPaymentActivity extends AppActivity implements IPinVerificationP
     }
 
     private void onCallApiReviewCheckOut() {
-        reviewCheckOutRequest = new ReviewCheckOutRequest(String.valueOf(getPreferenceString(
-                IConfig.OC_SESSION_ACCOUNT_NUMBER, PinPaymentActivity.this)));
+        String account_number = CacheUtil.getPreferenceString(IConfig.OC_SESSION_ACCOUNT_NUMBER, PinPaymentActivity.this);
+
+        final ReviewCheckOutRequest reviewCheckOutRequest = new ReviewCheckOutRequest();
+
+        reviewCheckOutRequest.setAccount_number(account_number);
         reviewCheckOutRequest.setAmount(amount);
         reviewCheckOutRequest.setFee(0);
-        reviewCheckOutRequest.setProductName("Pembayaran");
-        reviewCheckOutRequest.setBillerId("PURCHASE_ELEVENIA");
-        reviewCheckOutRequest.setCustomerReferenceNumber("UPN" + generateRandom(9) + "");
-        reviewCheckOutRequest.setProductCode("PYMNT");
-        reviewCheckOutRequest.setPartnerCode("P000001");
+        reviewCheckOutRequest.setProduct_name("Pembayaran");
+        reviewCheckOutRequest.setBiller_id("PURCHASE_ELEVENIA");
+        reviewCheckOutRequest.setCustomer_reference_number("UPN" + generateRandom(9) + "");
+        reviewCheckOutRequest.setProduct_code("PYMNT");
+        reviewCheckOutRequest.setPartner_code("P000001");
         reviewCheckOutRequest.setLatitude(String.valueOf(getMyLastLocation().getLatitude()));
         reviewCheckOutRequest.setLongitude(String.valueOf(getMyLastLocation().getLongitude()));
-        reviewCheckOutRequest.setDeviceId(DeviceId.getDeviceID(this));
+        reviewCheckOutRequest.setDevice_id(DeviceId.getDeviceID(this));
 
         showApiProgressDialog(OttoCashSdk.getAppComponent(), new ReviewCheckoutPresenter(this,this) {
             @Override
@@ -244,9 +246,10 @@ public class PinPaymentActivity extends AppActivity implements IPinVerificationP
     @Override
     public void handleReviewCheckout(ReviewCheckOutResponse model) {
         if (model.getMeta().getCode() == 200) {
-            Intent intent = new Intent();
-            intent.putExtra(OTTOCASH_PAYMENT_DATA,model.getData());
-            setResult(RESULT_OK,intent);
+            //Intent intent = new Intent();
+            //intent.putExtra(OTTOCASH_PAYMENT_DATA,model.getData());
+            //setResult(RESULT_OK,intent);
+            startActivity(new Intent(this, DashboardSDKActivity.class));
             finish();
         } else {
             Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),

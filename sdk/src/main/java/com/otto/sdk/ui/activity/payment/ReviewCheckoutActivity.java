@@ -2,7 +2,6 @@ package com.otto.sdk.ui.activity.payment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -15,9 +14,6 @@ import com.otto.sdk.ui.component.dialog.SaldoDialog;
 import com.otto.sdk.ui.component.support.UiUtil;
 
 import app.beelabs.com.codebase.support.util.CacheUtil;
-
-import static com.otto.sdk.OttoCash.OTTOCASH_PAYMENT_DATA;
-import static com.otto.sdk.OttoCash.REQ_OTTOCASH_PAYMENT;
 
 public class ReviewCheckoutActivity extends AppActivity {
 
@@ -77,6 +73,7 @@ public class ReviewCheckoutActivity extends AppActivity {
         CacheUtil.putPreferenceInteger(IConfig.OC_SESSION_TOTAL, total, ReviewCheckoutActivity.this);
     }
 
+
     private void initContent() {
         btnPay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,10 +95,17 @@ public class ReviewCheckoutActivity extends AppActivity {
         if (saldoEmoneyOttocash < billPayment) {
             saldoDialog();
         } else {
+
+            //String account_number = CacheUtil.getPreferenceString(IConfig.OC_SESSION_PHONE, ReviewCheckoutActivity.this);
+
+            //OttoCash.onCallPayment(ReviewCheckoutActivity.this, account_number, billPayment);
+
             Intent intent = new Intent(ReviewCheckoutActivity.this, NewPinPaymentActivty.class);
             intent.putExtra(IConfig.TOTAL_BILL_PAYMENT, billPayment);
             intent.putExtra(IConfig.KEY_PIN_CHECKOUT, reviewCheckout);
-            startActivityForResult(intent,REQ_OTTOCASH_PAYMENT);
+            startActivity(intent);
+            finish();
+            //startActivityForResult(intent,REQ_OTTOCASH_PAYMENT);
         }
     }
 
@@ -111,16 +115,17 @@ public class ReviewCheckoutActivity extends AppActivity {
         saldoDialog.show();
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == RESULT_OK && requestCode == REQ_OTTOCASH_PAYMENT){
-            Intent intent = new Intent();
-            if(data.getParcelableExtra(OTTOCASH_PAYMENT_DATA)!=null){
-                intent.putExtra(OTTOCASH_PAYMENT_DATA, (Bundle) data.getParcelableExtra(OTTOCASH_PAYMENT_DATA));
-                setResult(RESULT_OK,intent);
-            }
-            finish();
-        }
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if(resultCode == RESULT_OK && requestCode == REQ_OTTOCASH_PAYMENT){
+//            Intent intent = new Intent();
+//            //assert data != null;
+//            if((data != null ? data.getParcelableExtra(OTTOCASH_PAYMENT_DATA) : null) !=null){
+//                intent.putExtra(OTTOCASH_PAYMENT_DATA, (Bundle) data.getParcelableExtra(OTTOCASH_PAYMENT_DATA));
+//                setResult(RESULT_OK,intent);
+//            }
+//            finish();
+//        }
+//    }
 }

@@ -3,29 +3,33 @@ package com.otto.sdk.ui.activity.payment;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.otto.sdk.AppActivity;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCashSdk;
 import com.otto.sdk.R;
+import com.otto.sdk.interfaces.IInquiryView;
 import com.otto.sdk.interfaces.IPinVerificationPaymentView;
 import com.otto.sdk.interfaces.IReviewCheckoutView;
+import com.otto.sdk.model.api.request.InquiryRequest;
 import com.otto.sdk.model.api.request.PaymentValidateRequest;
 import com.otto.sdk.model.api.request.ReviewCheckOutRequest;
 import com.otto.sdk.model.api.request.TransferToFriendRequest;
+import com.otto.sdk.model.api.response.InquiryResponse;
 import com.otto.sdk.model.api.response.PaymentValidateResponse;
 import com.otto.sdk.model.api.response.ReviewCheckOutResponse;
 import com.otto.sdk.model.api.response.TransferToFriendResponse;
+import com.otto.sdk.presenter.InquiryPresenter;
 import com.otto.sdk.presenter.PinVerificationPaymentPresenter;
 import com.otto.sdk.presenter.ReviewCheckoutPresenter;
+import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
 import com.otto.sdk.ui.activity.payment.otto.PaymentSuccessOttoActivity;
 import com.otto.sdk.ui.adapter.PinAdapter;
 import com.otto.sdk.ui.component.support.DeviceId;
@@ -35,13 +39,11 @@ import com.otto.sdk.ui.view.PinCodeView;
 
 import java.util.Random;
 
+import app.beelabs.com.codebase.base.BasePresenter;
 import app.beelabs.com.codebase.support.util.CacheUtil;
 
-import static app.beelabs.com.codebase.support.util.CacheUtil.getPreferenceString;
-import static com.otto.sdk.OttoCash.OTTOCASH_PAYMENT_DATA;
 
-
-public class NewPinPaymentActivty extends AppActivity implements PinAdapter.Callback, IPinVerificationPaymentView, IReviewCheckoutView {
+public class NewPinPaymentActivty extends AppActivity implements PinAdapter.Callback, IPinVerificationPaymentView, IReviewCheckoutView, IInquiryView {
 
     TextView pinCodeTitle;
     TextView desc;
@@ -84,6 +86,9 @@ public class NewPinPaymentActivty extends AppActivity implements PinAdapter.Call
     String statusTransaction;
     String referenceNumberTransaction;
 
+
+    private String saldo_ottocash;
+    private InquiryPresenter inquiryPresenter;
 
     private final String TAG = this.getClass().getSimpleName();
 
@@ -135,18 +140,21 @@ public class NewPinPaymentActivty extends AppActivity implements PinAdapter.Call
     }
 
     private void onCallApiReviewCheckOut() {
-        reviewCheckOutRequest = new ReviewCheckOutRequest(String.valueOf(getPreferenceString(
-                IConfig.OC_SESSION_ACCOUNT_NUMBER, NewPinPaymentActivty.this)));
+        String account_number = CacheUtil.getPreferenceString(IConfig.OC_SESSION_ACCOUNT_NUMBER, NewPinPaymentActivty.this);
+
+        final ReviewCheckOutRequest reviewCheckOutRequest = new ReviewCheckOutRequest();
+
+        reviewCheckOutRequest.setAccount_number(account_number);
         reviewCheckOutRequest.setAmount(amount);
         reviewCheckOutRequest.setFee(0);
-        reviewCheckOutRequest.setProductName("Pembayaran");
-        reviewCheckOutRequest.setBillerId("PURCHASE_ELEVENIA");
-        reviewCheckOutRequest.setCustomerReferenceNumber("UPN" + generateRandom(9) + "");
-        reviewCheckOutRequest.setProductCode("PYMNT");
-        reviewCheckOutRequest.setPartnerCode("P000001");
+        reviewCheckOutRequest.setProduct_name("Pembayaran");
+        reviewCheckOutRequest.setBiller_id("PURCHASE_ELEVENIA");
+        reviewCheckOutRequest.setCustomer_reference_number("UPN" + generateRandom(9) + "");
+        reviewCheckOutRequest.setProduct_code("PYMNT");
+        reviewCheckOutRequest.setPartner_code("P000001");
         reviewCheckOutRequest.setLatitude(String.valueOf(getMyLastLocation().getLatitude()));
         reviewCheckOutRequest.setLongitude(String.valueOf(getMyLastLocation().getLongitude()));
-        reviewCheckOutRequest.setDeviceId(DeviceId.getDeviceID(this));
+        reviewCheckOutRequest.setDevice_id(DeviceId.getDeviceID(this));
 
         showApiProgressDialog(OttoCashSdk.getAppComponent(), new ReviewCheckoutPresenter(this, this) {
             @Override
@@ -277,6 +285,7 @@ public class NewPinPaymentActivty extends AppActivity implements PinAdapter.Call
 
             //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
+            finish();
         } else {
             Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
                     Toast.LENGTH_LONG).show();
@@ -292,13 +301,44 @@ public class NewPinPaymentActivty extends AppActivity implements PinAdapter.Call
     @Override
     public void handleReviewCheckout(ReviewCheckOutResponse model) {
         if (model.getMeta().getCode() == 200) {
-            Intent intent = new Intent();
-            intent.putExtra(OTTOCASH_PAYMENT_DATA, model.getData());
-            setResult(RESULT_OK, intent);
+
+            //Intent intent = new Intent();
+            //intent.putExtra(OTTOCASH_PAYMENT_DATA, model.getData());
+            //setResult(RESULT_OK, intent);
+            //finish();
+
+            //onCallApiInquiry();
+            Intent intent = new Intent(this, DashboardSDKActivity.class);
+            startActivity(intent);
             finish();
         } else {
             Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
                     Toast.LENGTH_LONG).show();
         }
+    }
+
+    /**
+     * Call Api Inquiry
+     */
+    private void onCallApiInquiry() {
+        String phone = String.valueOf(CacheUtil.getPreferenceString(IConfig.OC_SESSION_PHONE, NewPinPaymentActivty.this));
+        final InquiryRequest inquiryRequest = new InquiryRequest();
+
+        inquiryRequest.setAccount_number(phone);
+
+        inquiryPresenter = ((InquiryPresenter) BasePresenter.getInstance(NewPinPaymentActivty.this, new InquiryPresenter(NewPinPaymentActivty.this)));
+        inquiryPresenter.getInquiry(inquiryRequest);
+    }
+
+    @Override
+    public void handleInquiry(InquiryResponse model) {
+        if (model.getMeta().getCode() == 200) {
+            CacheUtil.putPreferenceBoolean(IConfig.OC_SESSION_LOGIN_KEY, true, NewPinPaymentActivty.this);
+            CacheUtil.putPreferenceString(IConfig.OC_SESSION_ACCOUNT_NUMBER, model.getData().getAccount_number(), NewPinPaymentActivty.this);
+
+            saldo_ottocash = model.getData().getEmoney_balance();
+            CacheUtil.putPreferenceString(IConfig.OC_SESSION_EMONEY_BALANCE, saldo_ottocash, NewPinPaymentActivty.this);
+        }
+
     }
 }

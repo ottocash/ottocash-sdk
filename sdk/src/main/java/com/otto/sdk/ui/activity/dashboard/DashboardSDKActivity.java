@@ -18,6 +18,7 @@ import com.otto.sdk.model.api.request.InquiryRequest;
 import com.otto.sdk.model.api.response.InquiryResponse;
 import com.otto.sdk.model.general.MainMenuModel;
 import com.otto.sdk.presenter.InquiryPresenter;
+import com.otto.sdk.ui.activity.account.activation.PinLoginActivity;
 import com.otto.sdk.ui.activity.history.HistoryActivity;
 import com.otto.sdk.ui.activity.kycupgrade.IntroductionUpgradeActivity;
 import com.otto.sdk.ui.activity.payment.QR.PayWithQr;
@@ -88,21 +89,13 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
             }
         });
 
-        tvTacOttocash.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DashboardSDKActivity.this, TACOttoCashActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-            }
+        tvTacOttocash.setOnClickListener(v -> {
+            Intent intent = new Intent(DashboardSDKActivity.this, TACOttoCashActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
         });
 
-        ivBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        ivBack.setOnClickListener(v -> onBackPressed());
 
     }
 
@@ -257,6 +250,8 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
     public void handleInquiry(InquiryResponse model) {
         if (model.getMeta().getCode() == 200) {
             CacheUtil.putPreferenceBoolean(IConfig.OC_SESSION_LOGIN_KEY, true, DashboardSDKActivity.this);
+
+            CacheUtil.putPreferenceString(IConfig.OC_SESSION_ACCOUNT_NUMBER, model.getData().getAccount_number(), DashboardSDKActivity.this);
 
             saldo_ottocash = model.getData().getEmoney_balance();
             CacheUtil.putPreferenceString(IConfig.OC_SESSION_EMONEY_BALANCE, saldo_ottocash, DashboardSDKActivity.this);

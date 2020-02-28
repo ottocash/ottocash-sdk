@@ -123,6 +123,7 @@ public class TransferToFriendSendActivity extends BaseActivity implements IInqui
             intent.putExtra(IConfig.KEY_NUMBER_CONTACT, numberContact);
             intent.putExtra(KEY_PAYMENT_QR,getIntent().getExtras().getBoolean(KEY_PAYMENT_QR));
             startActivity(intent);
+            finish();
 
         } else {
             Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(), Toast.LENGTH_LONG).show();
