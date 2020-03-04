@@ -7,11 +7,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+import com.otto.sdk.AppActivity;
 import com.otto.sdk.R;
+
+import java.util.List;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 
-public class IntroductionUpgradeActivity extends BaseActivity {
+public class IntroductionUpgradeActivity extends AppActivity {
 
     Button btnCancel;
     Button btnNext;
@@ -26,6 +33,18 @@ public class IntroductionUpgradeActivity extends BaseActivity {
 
         number = getIntent().getStringExtra("account_number");
         Log.i("ACCOUNT", "Account number : " + number);
+
+        initPermissionMultiple(new MultiplePermissionsListener() {
+            @Override
+            public void onPermissionsChecked(MultiplePermissionsReport report) {
+
+            }
+
+            @Override
+            public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+
+            }
+        });
 
     }
 
@@ -46,7 +65,10 @@ public class IntroductionUpgradeActivity extends BaseActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(IntroductionUpgradeActivity.this, GoToUpgradeActivity.class);
                 intent.putExtra("account_number", number);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
+                finish();
             }
         });
 

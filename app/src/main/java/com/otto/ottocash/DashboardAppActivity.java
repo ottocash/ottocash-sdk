@@ -19,6 +19,7 @@ import com.otto.sdk.model.api.response.CheckPhoneNumberResponse;
 import com.otto.sdk.model.api.response.CreateTokenResponse;
 import com.otto.sdk.presenter.SdkResourcePresenter;
 import com.otto.sdk.ui.activity.SdkActivity;
+import com.otto.sdk.ui.activity.kycupgrade.IntroductionUpgradeActivity;
 import com.otto.sdk.ui.component.support.UiUtil;
 
 import app.beelabs.com.codebase.base.BasePresenter;
@@ -174,6 +175,13 @@ public class DashboardAppActivity extends SdkActivity implements ISdkView {
     @OnClick(R.id.btnCheckOut)
     public void onCheckOut() {
         startActivity(new Intent(this, CheckOutActivity.class));
+        //Toast.makeText(DashboardAppActivity.this, "Pembayaran OttoCash", Toast.LENGTH_SHORT).show();
+        //OttoCash.onCallPayment(this, account_number, 1);
+    }
+
+    @OnClick(R.id.btnUpgrade)
+    public void onUpgrade() {
+        startActivity(new Intent(this, IntroductionUpgradeActivity.class));
         //Toast.makeText(DashboardAppActivity.this, "Pembayaran OttoCash", Toast.LENGTH_SHORT).show();
         //OttoCash.onCallPayment(this, account_number, 1);
     }

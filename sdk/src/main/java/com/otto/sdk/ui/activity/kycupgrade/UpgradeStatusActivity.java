@@ -39,6 +39,7 @@ public class UpgradeStatusActivity extends AppActivity implements IUpgradeView {
             public void onClick(View v) {
                 Intent intent = new Intent(UpgradeStatusActivity.this, DashboardSDKActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

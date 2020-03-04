@@ -61,7 +61,10 @@ public class GoToUpgradeActivity extends AppActivity {
                         if (report.areAllPermissionsGranted()) {
                             Intent intent = new Intent(GoToUpgradeActivity.this, TakeFotoKtpActivity.class);
                             //intent.putExtra("account_number", number);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
+                            finish();
                         }
 
                     }

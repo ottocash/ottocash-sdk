@@ -63,6 +63,7 @@ public class OtpRegistrationActivity extends BaseActivity implements IOtpView {
             }
         });
 
+        onCallApiOTPRequest();
     }
 
 
@@ -140,9 +141,9 @@ public class OtpRegistrationActivity extends BaseActivity implements IOtpView {
 
 
     /**
-     * Call Api Verify Otp
+     * Call Api Otp Verify
      */
-    private void onCallApiOTP() {
+    private void onCallApiOtpVerify() {
         int user_id = CacheUtil.getPreferenceInteger(IConfig.OC_SESSION_USER_ID, OtpRegistrationActivity.this);
         final OtpVerificationRequest otpVerificationRequest = new OtpVerificationRequest();
 
@@ -152,7 +153,7 @@ public class OtpRegistrationActivity extends BaseActivity implements IOtpView {
         showApiProgressDialog(OttoCashSdk.getAppComponent(), new OtpPresenter(OtpRegistrationActivity.this) {
             @Override
             public void call() {
-                getOtpVerification(model);
+                getOtpVerification(otpVerificationRequest);
             }
         }, "Loading");
     }
@@ -197,7 +198,7 @@ public class OtpRegistrationActivity extends BaseActivity implements IOtpView {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (charSequence.toString().length() == 6) {
-                    onCallApiOTP();
+                    onCallApiOtpVerify();
                     hideSoftKeyboard(lineField);
                 }
             }

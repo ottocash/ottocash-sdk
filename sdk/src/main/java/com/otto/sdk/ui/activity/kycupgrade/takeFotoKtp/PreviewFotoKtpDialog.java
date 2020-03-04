@@ -103,6 +103,8 @@ public class PreviewFotoKtpDialog extends BaseDialog{
             public void onClick(View view) {
                 callback.updateAction(null);
                 Intent intent = new Intent(getContext(), TakeFotoSelfieActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 getContext().startActivity(intent);
                 dismiss();
             }
