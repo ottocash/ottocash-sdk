@@ -14,6 +14,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+import com.otto.sdk.AppActivity;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.R;
 import com.otto.sdk.ui.activity.tac.TACMitraActivity;
@@ -21,10 +26,12 @@ import com.otto.sdk.ui.activity.tac.TACOttoCashActivity;
 import com.otto.sdk.ui.component.support.FormValidation;
 import com.otto.sdk.ui.component.support.UiUtil;
 
+import java.util.List;
+
 import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.support.util.CacheUtil;
 
-public class RegistrationActivity extends BaseActivity implements View.OnClickListener {
+public class RegistrationActivity extends AppActivity implements View.OnClickListener {
 
     ImageView ivBack;
     TextView edtNoHp;
@@ -46,6 +53,18 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
 
         initComponent();
         initContent();
+
+        initPermissionMultiple(new MultiplePermissionsListener() {
+            @Override
+            public void onPermissionsChecked(MultiplePermissionsReport report) {
+
+            }
+
+            @Override
+            public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+
+            }
+        });
     }
 
     private void initComponent() {

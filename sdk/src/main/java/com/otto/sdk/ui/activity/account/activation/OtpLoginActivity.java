@@ -65,7 +65,7 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
             }
         });
 
-        //onCallApiOtpRequest();
+        onCallApiOtpRequest();
 
     }
 
