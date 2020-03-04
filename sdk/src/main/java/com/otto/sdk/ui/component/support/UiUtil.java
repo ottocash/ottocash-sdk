@@ -88,4 +88,9 @@ public class UiUtil {
         int result = Integer.parseInt("Rp " + formatter.format(saldo_ottocash).replaceAll(",", "."));
         return result;
     }
+
+    public static String formatMoneyIDRString(String number) {
+        if (number.contains("Rp ") || number.equals("")) return number;
+        else return formatMoneyIDR(Long.valueOf(number));
+    }
 }

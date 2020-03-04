@@ -3,8 +3,10 @@ package com.otto.sdk.ui.activity.dashboard;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -57,6 +59,7 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard_sdk);
 
+        CacheUtil.putPreferenceBoolean(IConfig.OC_SESSION_IS_ACTIVE, true, this);
         onCallApiInquiry();
 
         initComponent();

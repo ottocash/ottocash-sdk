@@ -12,15 +12,14 @@ import android.widget.Toast;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCash;
 import com.otto.sdk.OttoCashSdk;
-import com.otto.sdk.interfaces.IInquiryView;
 import com.otto.sdk.interfaces.ISdkView;
 import com.otto.sdk.model.api.request.CheckPhoneNumberRequest;
 import com.otto.sdk.model.api.request.CreateTokenRequest;
 import com.otto.sdk.model.api.response.CheckPhoneNumberResponse;
 import com.otto.sdk.model.api.response.CreateTokenResponse;
-import com.otto.sdk.model.api.response.InquiryResponse;
 import com.otto.sdk.presenter.SdkResourcePresenter;
 import com.otto.sdk.ui.activity.SdkActivity;
+import com.otto.sdk.ui.component.support.UiUtil;
 
 import app.beelabs.com.codebase.base.BasePresenter;
 import app.beelabs.com.codebase.support.util.CacheUtil;
@@ -28,7 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class DashboardAppActivity extends SdkActivity implements ISdkView, IInquiryView {
+public class DashboardAppActivity extends SdkActivity implements ISdkView {
 
     @BindView(R.id.tvSaldoOttoCash)
     TextView tvSaldoOttoCash;
@@ -40,10 +39,12 @@ public class DashboardAppActivity extends SdkActivity implements ISdkView, IInqu
     Button btnClearCache;
 
     private String account_number;
-    private String saldo_ottocash;
+    String saldo_ottocash;
+    String isEmpty = "";
     boolean mDoubleBackToExitPressedOnce = false;
     boolean checkIsExistingPhoneNumber = false;
 
+    private Boolean session_active = false;
     private Boolean sessionLogin = false;
     private SdkResourcePresenter sdkResourcePresenter;
 
@@ -53,76 +54,33 @@ public class DashboardAppActivity extends SdkActivity implements ISdkView, IInqu
         setContentView(R.layout.activity_beranda_app);
         ButterKnife.bind(this);
 
-        //checkIsExistingPhoneNumber();
-        //onGetSaldoOttoCash();
-        saldo_ottocash = CacheUtil.getPreferenceString(IConfig.OC_SESSION_EMONEY_BALANCE, this);
-        if (saldo_ottocash!=null){
-            tvSaldoOttoCash.setText(saldo_ottocash);
-        }else {
-            tvSaldoOttoCash.setText("Aktivasi Akun");
-        }
-
         onCheckPhoneNumber();
+        onGetSaldoOttoCash();
     }
 
 
     @Override
     protected void onResume() {
-        //checkIsExistingPhoneNumber();
-        //onGetSaldoOttoCash();
-        saldo_ottocash = CacheUtil.getPreferenceString(IConfig.OC_SESSION_EMONEY_BALANCE, this);
-
-        if (saldo_ottocash!=null){
-            tvSaldoOttoCash.setText(saldo_ottocash);
-        }else{
-            tvSaldoOttoCash.setText("Aktivasi Akun");
-        }
-
         onCheckPhoneNumber();
+        onGetSaldoOttoCash();
         super.onResume();
     }
 
 
     @Override
     protected void onStart() {
-        //checkIsExistingPhoneNumber();
-        //onGetSaldoOttoCash();
-        saldo_ottocash = CacheUtil.getPreferenceString(IConfig.OC_SESSION_EMONEY_BALANCE, this);
-
-        if (saldo_ottocash!=null){
-            tvSaldoOttoCash.setText(saldo_ottocash);
-        }else {
-            tvSaldoOttoCash.setText("Aktivasi Akun");
-        }
-
-
         onCheckPhoneNumber();
+        onGetSaldoOttoCash();
         super.onStart();
     }
 
-//    /**
-//     * Call Function Check Account
-//     */
-//    private void onSetupAccountClick() {
-//        checkIsExistingPhoneNumber = CacheUtil.getPreferenceBoolean(String.valueOf(IConfig.SESSION_CHECK_PHONE_NUMBER),
-//                DashboardAppActivity.this);
-//
-//        if (checkIsExistingPhoneNumber) {
-//            lyWidgetSdk.setOnClickListener(v -> goActivation());
-//        } else {
-//            lyWidgetSdk.setOnClickListener(v -> goRegistration());
-//        }
-//    }
 
-
-    /**
-     * Call Function Get Saldo
-     */
     private void onGetSaldoOttoCash() {
         saldo_ottocash = OttoCash.getBalance(this);
-        if (saldo_ottocash != null) {
-            tvSaldoOttoCash.setText(saldo_ottocash);
-            lyWidgetSdk.setOnClickListener(v -> checkIsExistingPhoneNumber());
+        if (saldo_ottocash.equals(isEmpty)){
+            tvSaldoOttoCash.setText("Aktivasi Akun");
+        }else {
+            tvSaldoOttoCash.setText(UiUtil.formatMoneyIDRString(saldo_ottocash));
         }
     }
 
@@ -174,12 +132,14 @@ public class DashboardAppActivity extends SdkActivity implements ISdkView, IInqu
 
             checkIsExistingPhoneNumber = model.getData().isIs_existing();
             sessionLogin = CacheUtil.getPreferenceBoolean(IConfig.OC_SESSION_LOGIN_KEY, DashboardAppActivity.this);
+            session_active = CacheUtil.getPreferenceBoolean(IConfig.OC_SESSION_IS_ACTIVE, DashboardAppActivity.this);
+
 
             lyWidgetSdk.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (checkIsExistingPhoneNumber) {
-                        if (sessionLogin) {
+                        if (sessionLogin && session_active) {
                             goDashboardSDK();
                         } else {
                             goActivation();
@@ -210,85 +170,6 @@ public class DashboardAppActivity extends SdkActivity implements ISdkView, IInqu
         }
     }
 
-
-//    @Override
-//    protected void onResume() {
-//        saldo_ottocash = OttoCash.getBalance(this);
-//        onSetupAccountClick();
-//        onSaldoOttocash();
-//        super.onResume();
-//    }
-//
-//    @Override
-//    protected void onStart() {
-//        saldo_ottocash = OttoCash.getBalance(this);
-//        onSetupAccountClick();
-//        onSaldoOttocash();
-//        super.onStart();
-//    }
-//
-//    private void onSaldoOttocash() {
-//        if (saldo_ottocash != null) {
-//            tvSaldoOttoCash.setText(saldo_ottocash);
-//            lyWidgetSdk.setOnClickListener(v -> goDashboardSDK());
-//        }else {
-//            tvSaldoOttoCash.setText("Aktivasi Akun");
-//        }
-//    }
-//
-//    private void onSetupAccountClick() {
-//        boolean checkIsExistingPhoneNumber = CacheUtil.getPreferenceBoolean(String.valueOf(IConfig.SESSION_CHECK_PHONE_NUMBER),
-//                DashboardAppActivity.this);
-//
-//        if (checkIsExistingPhoneNumber) {
-//            lyWidgetSdk.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    goActivation();
-//                }
-//            });
-//        } else {
-//            lyWidgetSdk.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    goRegistration();
-//                }
-//            });
-//        }
-//    }
-
-
-//    @Override
-//    protected void onResume() {
-//        tvSaldoOttoCash.setText(UiUtil.formatMoneyIDR(Long.parseLong(OttoCash.getBalance(this))));
-//        super.onResume();
-//    }
-
-
-//    public void onSaldoOttocash() {
-//        tvSaldoOttoCash.setText(UiUtil.formatMoneyIDR(Long.parseLong(OttoCash.getBalance(this))));
-//
-//        lyWidgetSdk.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                OttoCash.onCallOttoCashDashboard(DashboardAppActivity.this,
-//                        CacheUtil.getPreferenceString(IConfig.OC_SESSION_PHONE,
-//                                DashboardAppActivity.this));
-//            }
-//        });
-//    }
-
-
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (resultCode == RESULT_OK && requestCode == OttoCash.REQ_OTTOCASH_PAYMENT) {
-//            if (data.getParcelableExtra(OttoCash.OTTOCASH_PAYMENT_DATA) != null) {
-//                PaymentData paymentData = data.getParcelableExtra(OttoCash.OTTOCASH_PAYMENT_DATA);
-//                Toast.makeText(this, paymentData.getReferenceNumber(), Toast.LENGTH_LONG).show();
-//            }
-//        }
-//    }
 
     @OnClick(R.id.btnCheckOut)
     public void onCheckOut() {
@@ -325,10 +206,5 @@ public class DashboardAppActivity extends SdkActivity implements ISdkView, IInqu
         new Handler().postDelayed(() -> mDoubleBackToExitPressedOnce = false, 2000);
     }
 
-
-    @Override
-    public void handleInquiry(InquiryResponse model) {
-
-    }
 }
 

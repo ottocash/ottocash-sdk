@@ -23,7 +23,7 @@ import app.beelabs.com.codebase.support.util.CacheUtil;
 
 import static com.otto.sdk.IConfig.OC_SESSION_PHONE;
 
-public class OttoCash extends BaseActivity implements IInquiryView, ISdkView {
+public class OttoCash extends BaseActivity implements ISdkView {
 
     private static final String BILL_PAYMENT = "bill_payment";
     public static final String OTTOCASH_PAYMENT_DATA = "paymentData";
@@ -142,15 +142,15 @@ public class OttoCash extends BaseActivity implements IInquiryView, ISdkView {
 
 
 
-    @Override
-    public void handleInquiry(InquiryResponse model) {
-        if (model.getMeta().getCode() == 200) {
-            CacheUtil.putPreferenceString(IConfig.OC_SESSION_EMONEY_BALANCE, model.getData().getEmoney_balance(), this);
-        } else {
-            Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
-                    Toast.LENGTH_LONG).show();
-        }
-    }
+//    @Override
+//    public void handleInquiry(InquiryResponse model) {
+//        if (model.getMeta().getCode() == 200) {
+//            CacheUtil.putPreferenceString(IConfig.OC_SESSION_EMONEY_BALANCE, model.getData().getEmoney_balance(), this);
+//        } else {
+//            Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
+//                    Toast.LENGTH_LONG).show();
+//        }
+//    }
 
 
     @Override
