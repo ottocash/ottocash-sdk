@@ -78,9 +78,9 @@ public class DashboardAppActivity extends SdkActivity implements ISdkView {
 
     private void onGetSaldoOttoCash() {
         saldo_ottocash = OttoCash.getBalance(this);
-        if (saldo_ottocash.equals(isEmpty)){
+        if (saldo_ottocash.equals(isEmpty)) {
             tvSaldoOttoCash.setText("Aktivasi Akun");
-        }else {
+        } else {
             tvSaldoOttoCash.setText(UiUtil.formatMoneyIDRString(saldo_ottocash));
         }
     }
@@ -174,17 +174,23 @@ public class DashboardAppActivity extends SdkActivity implements ISdkView {
 
     @OnClick(R.id.btnCheckOut)
     public void onCheckOut() {
-        startActivity(new Intent(this, CheckOutActivity.class));
+
+        if (sessionLogin && session_active) {
+            startActivity(new Intent(this, CheckOutActivity.class));
+        } else {
+            Toast.makeText(DashboardAppActivity.this, "Login terlebih dahulu...", Toast.LENGTH_SHORT).show();
+        }
+
         //Toast.makeText(DashboardAppActivity.this, "Pembayaran OttoCash", Toast.LENGTH_SHORT).show();
         //OttoCash.onCallPayment(this, account_number, 1);
     }
 
-    @OnClick(R.id.btnUpgrade)
-    public void onUpgrade() {
-        startActivity(new Intent(this, IntroductionUpgradeActivity.class));
-        //Toast.makeText(DashboardAppActivity.this, "Pembayaran OttoCash", Toast.LENGTH_SHORT).show();
-        //OttoCash.onCallPayment(this, account_number, 1);
-    }
+//    @OnClick(R.id.btnUpgrade)
+//    public void onUpgrade() {
+//        startActivity(new Intent(this, IntroductionUpgradeActivity.class));
+//        //Toast.makeText(DashboardAppActivity.this, "Pembayaran OttoCash", Toast.LENGTH_SHORT).show();
+//        //OttoCash.onCallPayment(this, account_number, 1);
+//    }
 
     @OnClick(R.id.btnClearCache)
     public void onClearCache() {
