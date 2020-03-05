@@ -11,15 +11,16 @@ import app.beelabs.com.codebase.base.BasePresenter;
 import app.beelabs.com.codebase.base.IView;
 import app.beelabs.com.codebase.base.response.BaseResponse;
 
-public class UpgradePresenter  extends BasePresenter implements UpgradeDao.YUpgrade{
+public class UpgradePresenter  extends BasePresenter implements UpgradeDao.IUpgradeDao {
 
     private IUpgradeView iUpgrade;
+
     public UpgradePresenter(IView view) {
         this.iUpgrade = (IUpgradeView) view;
     }
 
     @Override
-    public void getUpgrade(UpgradeAccountRequest upgradeAccountRequest, Context context) {
+    public void getUpgrade(UpgradeAccountRequest upgradeAccountRequest) {
         new UpgradeDao(this, new OnPresenterResponseCallback() {
             @Override
             public void call(BaseResponse br) {
@@ -31,7 +32,7 @@ public class UpgradePresenter  extends BasePresenter implements UpgradeDao.YUpgr
 
     @Override
     public BasePresenter getPresenter() {
-        return this;
+        return BasePresenter.getInstance(iUpgrade, this);
     }
 
     @Override

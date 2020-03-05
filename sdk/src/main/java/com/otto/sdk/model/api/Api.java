@@ -98,7 +98,7 @@ public class Api extends BaseApi {
         initApiDomain().callApiLogin(initHeader(), loginRequest).enqueue((Callback<LoginResponse>) callback);
     }
 
-    synchronized public static void onUpgrade(UpgradeAccountRequest upgradeAccountRequest,Context context, Callback callback) {
+    synchronized public static void onUpgrade (UpgradeAccountRequest upgradeAccountRequest, Context context, Callback callback) {
         initApiDomain().callApiUpgrade(initHeaderForRequest(context), upgradeAccountRequest).enqueue((Callback<UpgradeAccountResponse>) callback);
     }
 

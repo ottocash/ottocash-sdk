@@ -15,6 +15,7 @@ import com.otto.sdk.model.api.request.UpgradeAccountRequest;
 import com.otto.sdk.model.api.response.UpgradeAccountResponse;
 import com.otto.sdk.presenter.UpgradePresenter;
 import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
+import com.otto.sdk.ui.activity.history.HistoryActivity;
 
 import app.beelabs.com.codebase.support.util.CacheUtil;
 
@@ -29,10 +30,14 @@ public class UpgradeStatusActivity extends AppActivity implements IUpgradeView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upgrade_status);
 
+        onCallApiUpgrade();
+        initView();
+    }
+
+
+    private void initView(){
         btn_done = findViewById(R.id.btn_done);
         tvStatus = findViewById(R.id.tvStatus);
-
-        onCallApiUpgrade();
 
         btn_done.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,7 +64,7 @@ public class UpgradeStatusActivity extends AppActivity implements IUpgradeView {
         showApiProgressDialog(OttoCashSdk.getAppComponent(), new UpgradePresenter(UpgradeStatusActivity.this) {
             @Override
             public void call() {
-                getUpgrade(upgradeAccountRequest, getContext());
+                getUpgrade(upgradeAccountRequest);
             }
         }, "Loading");
 

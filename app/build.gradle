@@ -96,6 +96,9 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
 
+    implementation 'io.github.inflationx:calligraphy3:3.1.1'
+    implementation 'io.github.inflationx:viewpump:2.0.3'
+
     //ButterKnife
     implementation 'com.google.dagger:dagger:2.16'
     annotationProcessor "com.google.dagger:dagger-compiler:2.16"

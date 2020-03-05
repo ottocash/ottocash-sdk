@@ -9,6 +9,7 @@ import com.otto.sdk.model.api.response.UpgradeAccountResponse;
 import com.otto.sdk.presenter.UpgradePresenter;
 
 import app.beelabs.com.codebase.base.BaseDao;
+import app.beelabs.com.codebase.base.IDao;
 import app.beelabs.com.codebase.base.IDaoPresenter;
 import app.beelabs.com.codebase.base.response.BaseResponse;
 import retrofit2.Response;
@@ -16,21 +17,25 @@ import retrofit2.Response;
 public class UpgradeDao extends BaseDao {
 
     private UpgradePresenter.OnPresenterResponseCallback onPresenterResponseCallback;
-    private  YUpgrade idao;
+    private IUpgradeDao idao;
 
-    public interface YUpgrade extends IDaoPresenter {
-        void getUpgrade(UpgradeAccountRequest upgradeAccountRequest, Context context);
+    public interface IUpgradeDao extends IDaoPresenter {
+        void getUpgrade(UpgradeAccountRequest upgradeAccountRequest);
 
     }
 
-    public UpgradeDao (YUpgrade idao, UpgradePresenter.OnPresenterResponseCallback onPresenterResponseCallback){
+    public UpgradeDao(IDao obj){
+        super(obj);
+    }
+
+    public UpgradeDao(IUpgradeDao idao, UpgradePresenter.OnPresenterResponseCallback onPresenterResponseCallback) {
         this.idao = idao;
         this.onPresenterResponseCallback = onPresenterResponseCallback;
 
     }
 
     public void onUpgrade(UpgradeAccountRequest model, Context context) {
-        Api.onUpgrade(model, context,BaseDao.getInstance(this, idao.getPresenter(), IConfig.KEY_API_UPGRADE).callback);
+        Api.onUpgrade(model, context, BaseDao.getInstance(this, idao.getPresenter(), IConfig.KEY_API_UPGRADE).callback);
     }
 
     @Override
