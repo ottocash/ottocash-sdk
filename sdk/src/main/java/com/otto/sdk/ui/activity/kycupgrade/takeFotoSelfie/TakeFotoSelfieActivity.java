@@ -13,6 +13,10 @@ import android.widget.Toast;
 
 import com.camerakit.CameraKit;
 import com.camerakit.CameraKitView;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.otto.sdk.AppActivity;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.R;
@@ -21,6 +25,7 @@ import com.otto.sdk.ui.component.support.DateUtil;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 
 public class TakeFotoSelfieActivity extends AppActivity {
@@ -40,7 +45,20 @@ public class TakeFotoSelfieActivity extends AppActivity {
         setContentView(R.layout.activity_take_foto_selfie);
 
         initContentUI();
-        cameraKitView.setFacing(CameraKit.FACING_FRONT);
+
+        initPermissionMultiple(new MultiplePermissionsListener() {
+            @Override
+            public void onPermissionsChecked(MultiplePermissionsReport report) {
+
+            }
+
+            @Override
+            public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+
+            }
+        });
+
+        //cameraKitView.setFacing(CameraKit.FACING_BACK);
     }
 
     @Override
@@ -85,6 +103,13 @@ public class TakeFotoSelfieActivity extends AppActivity {
         ivBack.setOnClickListener(view -> {
             setResult(Activity.RESULT_CANCELED);
             finish();
+        });
+
+        imgSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cameraKitView.toggleFacing();
+            }
         });
 
         imgFlash.setOnClickListener(new View.OnClickListener() {

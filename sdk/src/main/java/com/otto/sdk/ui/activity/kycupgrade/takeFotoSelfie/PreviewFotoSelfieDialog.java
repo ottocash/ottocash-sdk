@@ -100,8 +100,8 @@ public class PreviewFotoSelfieDialog extends BaseDialog {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), UpgradeStatusActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 getContext().startActivity(intent);
 
             }

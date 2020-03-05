@@ -75,6 +75,9 @@ dependencies {
 //    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
 //    implementation 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
 
+    //implementation 'io.github.inflationx:calligraphy3:3.1.1'
+    //implementation 'io.github.inflationx:viewpump:2.0.3'
+
     // CameraKit
     implementation 'com.camerakit:camerakit:1.0.0-beta3.10'
     implementation 'com.wonderkiln:camerakit:0.13.1'

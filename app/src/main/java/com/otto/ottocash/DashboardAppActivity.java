@@ -185,12 +185,12 @@ public class DashboardAppActivity extends SdkActivity implements ISdkView {
         //OttoCash.onCallPayment(this, account_number, 1);
     }
 
-//    @OnClick(R.id.btnUpgrade)
-//    public void onUpgrade() {
-//        startActivity(new Intent(this, IntroductionUpgradeActivity.class));
-//        //Toast.makeText(DashboardAppActivity.this, "Pembayaran OttoCash", Toast.LENGTH_SHORT).show();
-//        //OttoCash.onCallPayment(this, account_number, 1);
-//    }
+    @OnClick(R.id.btnUpgrade)
+    public void onUpgrade() {
+        startActivity(new Intent(this, IntroductionUpgradeActivity.class));
+        //Toast.makeText(DashboardAppActivity.this, "Pembayaran OttoCash", Toast.LENGTH_SHORT).show();
+        //OttoCash.onCallPayment(this, account_number, 1);
+    }
 
     @OnClick(R.id.btnClearCache)
     public void onClearCache() {
