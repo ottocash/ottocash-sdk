@@ -33,6 +33,9 @@ public class CheckOutActivity extends AppActivity {
     private String billPayment;
     private String servicesFee;
     private String emoney;
+    private Long amount = 0L;
+
+    private TextWatcher mTextWatcher;
 
     @BindView(R.id.PaymentOttoCash)
     LinearLayout PaymentOttoCash;
@@ -77,7 +80,7 @@ public class CheckOutActivity extends AppActivity {
                 if (TextUtils.isEmpty(inputSubTotal)) {
                     edtSubTotal.setError("Input Sample Sub Total");
                 } else {
-                    billPayment = edtSubTotal.getText().toString();
+                    billPayment = UiUtil.removeCurrencyFormat(edtSubTotal.getText().toString());
                     Intent intent = new Intent(CheckOutActivity.this, ReviewCheckoutActivity.class);
                     intent.putExtra(BILL_PAYMENT, billPayment);
                     intent.putExtra(SERVICES_FEE, servicesFee);
@@ -114,27 +117,27 @@ public class CheckOutActivity extends AppActivity {
     }
 
 
-    public void addTextWatcher(EditText input) {
-        input.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                String inputSubTotal = edtSubTotal.getText().toString();
-                tvGrandTotal.setText(inputSubTotal);
-            }
-
-        });
-    }
+//    public void addTextWatcher(EditText input) {
+//        input.addTextChangedListener(new TextWatcher() {
+//
+//            @Override
+//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable editable) {
+//                String inputSubTotal = edtSubTotal.getText().toString();
+//                tvGrandTotal.setText(inputSubTotal);
+//            }
+//
+//        });
+//    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -148,6 +151,43 @@ public class CheckOutActivity extends AppActivity {
             }
             finish();
         }
+    }
+
+
+    public void addTextWatcher(EditText input) {
+        mTextWatcher = new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (!charSequence.toString().equals("")) {
+                    edtSubTotal.removeTextChangedListener(mTextWatcher);
+                    String currentInput = UiUtil.removeAllCharacterExpectNumbers(edtSubTotal.getText().toString());
+                    if (currentInput.equals("")) {
+                        edtSubTotal.setText(currentInput);
+                        amount = 0L;
+                    } else {
+                        edtSubTotal.setText(UiUtil.numberToIDR(Long.valueOf(currentInput), true));
+                        edtSubTotal.setSelection(edtSubTotal.getText().toString().length());
+                        amount = Long.valueOf(UiUtil.removeCurrencyFormat(edtSubTotal.getText().toString()));
+                    }
+                    edtSubTotal.addTextChangedListener(mTextWatcher);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String inputSubTotal = edtSubTotal.getText().toString();
+                tvGrandTotal.setText(inputSubTotal);
+            }
+
+        };
+
+        input.addTextChangedListener(mTextWatcher);
     }
 
 }

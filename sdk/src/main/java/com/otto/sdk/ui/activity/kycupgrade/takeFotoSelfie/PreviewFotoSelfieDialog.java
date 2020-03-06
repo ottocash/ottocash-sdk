@@ -99,10 +99,14 @@ public class PreviewFotoSelfieDialog extends BaseDialog {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                callback.updateAction(null);
                 Intent intent = new Intent(getContext(), UpgradeStatusActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 getContext().startActivity(intent);
+                dismiss();
+                //Intent intent = new Intent(getContext(), UpgradeStatusActivity.class);
+                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                //getContext().startActivity(intent);
 
             }
         });

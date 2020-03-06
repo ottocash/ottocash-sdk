@@ -63,7 +63,7 @@ public class OtpRegistrationActivity extends BaseActivity implements IOtpView {
             }
         });
 
-        onCallApiOTPRequest();
+        //onCallApiOTPRequest();
     }
 
 
