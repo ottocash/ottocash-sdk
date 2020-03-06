@@ -109,10 +109,9 @@ public class ReviewCheckoutActivity extends AppActivity {
         }
     }
 
-    public void saldoDialog() {
-        SaldoDialog saldoDialog;
-        saldoDialog = new SaldoDialog(this, R.style.AppDialogFullScreen);
-        saldoDialog.show();
+    private void saldoDialog() {
+        SaldoDialog dialog = new SaldoDialog(this, 200);
+        dialog.show();
     }
 
 //    @Override
