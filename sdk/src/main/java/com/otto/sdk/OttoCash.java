@@ -6,12 +6,10 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.otto.sdk.interfaces.IInquiryView;
 import com.otto.sdk.interfaces.ISdkView;
 import com.otto.sdk.model.api.request.CheckPhoneNumberRequest;
 import com.otto.sdk.model.api.response.CheckPhoneNumberResponse;
 import com.otto.sdk.model.api.response.CreateTokenResponse;
-import com.otto.sdk.model.api.response.InquiryResponse;
 import com.otto.sdk.presenter.SdkResourcePresenter;
 import com.otto.sdk.ui.activity.account.activation.ActivationActivity;
 import com.otto.sdk.ui.activity.account.registration.RegistrationActivity;
@@ -19,6 +17,7 @@ import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
 import com.otto.sdk.ui.activity.payment.ReviewCheckoutActivity;
 
 import app.beelabs.com.codebase.base.BaseActivity;
+import app.beelabs.com.codebase.base.IView;
 import app.beelabs.com.codebase.support.util.CacheUtil;
 
 import static com.otto.sdk.IConfig.OC_SESSION_PHONE;
@@ -50,7 +49,7 @@ public class OttoCash extends BaseActivity implements ISdkView {
             intent.putExtra(BILL_PAYMENT, String.valueOf(amount));
             activity.startActivityForResult(intent, REQ_OTTOCASH_PAYMENT);
         } else {
-            onCheckPhoneNumber(activity, phoneNumber);
+            onCheckPhoneNumber((IView) activity, phoneNumber);
         }
     }
 
@@ -70,12 +69,12 @@ public class OttoCash extends BaseActivity implements ISdkView {
     /**
      * Function GoTo DashBoard OttoCash SDK IF ?
      */
-    public static void onCallOttoCashDashboard(Context context, String phoneNumber) {
-        CacheUtil.putPreferenceString(OC_SESSION_PHONE, phoneNumber, context);
-        if (onCheckIsActive(context)) {
-            context.startActivity(new Intent(context, DashboardSDKActivity.class));
+    public static void onCallOttoCashDashboard(Activity activity, String phoneNumber) {
+        CacheUtil.putPreferenceString(OC_SESSION_PHONE, phoneNumber, activity);
+        if (onCheckIsActive(activity)) {
+            activity.startActivity(new Intent(activity, DashboardSDKActivity.class));
         } else {
-            onCheckPhoneNumber(context, phoneNumber);
+            onCheckPhoneNumber((IView) activity, phoneNumber);
         }
     }
 
@@ -96,50 +95,50 @@ public class OttoCash extends BaseActivity implements ISdkView {
     /**
      * Call Api Check Account Number and Call Api Create Token
      */
-    private static void onCheckPhoneNumber(final Context context, String phoneNumber) {
+    private static void onCheckPhoneNumber(final IView iView, String phoneNumber) {
         final CheckPhoneNumberRequest model = new CheckPhoneNumberRequest();
         model.setPhone(phoneNumber);
-        new SdkResourcePresenter(new ISdkView() {
-            @Override
-            public void handleCheckIsExistingPhoneNumber(CheckPhoneNumberResponse model) {
-                if (model.getMeta().getCode() == 200) {
-                    boolean is_existing = model.getData().isIs_existing();
-                    CacheUtil.putPreferenceBoolean(String.valueOf(IConfig.SESSION_CHECK_PHONE_NUMBER), is_existing, context);
-                    onActivateAccount(is_existing, context);
-
-                    Log.i("ISEX", "isExisting" + is_existing);
-
-                } else {
-                    Toast.makeText(context, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
-                            Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void handleToken(CreateTokenResponse model) {
-                if (model.getMeta().getCode() == 200) {
-
-                    String accessToken = model.getData().getClient().getAccessToken();
-                    CacheUtil.putPreferenceString(IConfig.OC_SESSION_ACCESS_TOKEN, accessToken, context);
-
-                } else {
-                    Toast.makeText(context, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
-                            Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void handleFail(String message) {
-                handleFail(message);
-            }
-
-            @Override
-            public BaseActivity getBaseActivity() {
-                return null;
-            }
-        }).getCheckPhone(model);
+        new SdkResourcePresenter(iView).getCheckPhone(model);
+//        new SdkResourcePresenter(new ISdkView() {
+//            @Override
+//            public void handleCheckIsExistingPhoneNumber(CheckPhoneNumberResponse model) {
+//                if (model.getMeta().getCode() == 200) {
+//                    boolean is_existing = model.getData().isIs_existing();
+//                    CacheUtil.putPreferenceBoolean(String.valueOf(IConfig.SESSION_CHECK_PHONE_NUMBER), is_existing, context);
+//                    onActivateAccount(is_existing, context);
+//
+//                    Log.i("ISEX", "isExisting" + is_existing);
+//
+//                } else {
+//                    Toast.makeText(context, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
+//                            Toast.LENGTH_LONG).show();
+//                }
+//            }
+//
+//            @Override
+//            public void handleToken(CreateTokenResponse model) {
+//                if (model.getMeta().getCode() == 200) {
+//
+//                    String accessToken = model.getData().getClient().getAccessToken();
+//                    CacheUtil.putPreferenceString(IConfig.OC_SESSION_ACCESS_TOKEN, accessToken, context);
+//
+//                } else {
+//                    Toast.makeText(context, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
+//                            Toast.LENGTH_LONG).show();
+//                }
+//            }
+//
+//            @Override
+//            public void handleFail(String message) {
+//                handleFail(message);
+//            }
+//
+//            @Override
+//            public BaseActivity getBaseActivity() {
+//                return null;
+//            }
+//        }).getCheckPhone(model);
     }
-
 
 
 //    @Override
@@ -155,11 +154,29 @@ public class OttoCash extends BaseActivity implements ISdkView {
 
     @Override
     public void handleCheckIsExistingPhoneNumber(CheckPhoneNumberResponse model) {
+        if (model.getMeta().getCode() == 200) {
+            boolean is_existing = model.getData().isIs_existing();
+            CacheUtil.putPreferenceBoolean(String.valueOf(IConfig.SESSION_CHECK_PHONE_NUMBER), is_existing, this);
+            onActivateAccount(is_existing, this);
 
+            Log.i("ISEX", "isExisting" + is_existing);
+
+        } else {
+            Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
+                    Toast.LENGTH_LONG).show();
+        }
     }
+
 
     @Override
     public void handleToken(CreateTokenResponse model) {
+        if (model.getMeta().getCode() == 200) {
+            String accessToken = model.getData().getClient().getAccessToken();
+            CacheUtil.putPreferenceString(IConfig.OC_SESSION_ACCESS_TOKEN, accessToken, this);
 
+        } else {
+            Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
+                    Toast.LENGTH_LONG).show();
+        }
     }
 }

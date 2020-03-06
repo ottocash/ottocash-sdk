@@ -37,6 +37,6 @@ public class UpgradePresenter  extends BasePresenter implements UpgradeDao.IUpgr
 
     @Override
     public Context getContext() {
-        return iUpgrade.getBaseActivity();
+        return iUpgrade.getCurrentActivity();
     }
 }

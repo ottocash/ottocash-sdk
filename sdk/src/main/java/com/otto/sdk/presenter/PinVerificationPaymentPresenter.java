@@ -55,6 +55,6 @@ public class PinVerificationPaymentPresenter extends BasePresenter implements Pi
 
     @Override
     public Context getContext() {
-        return iPinVerificationPaymentView.getBaseActivity();
+        return iPinVerificationPaymentView.getCurrentActivity();
     }
 }
