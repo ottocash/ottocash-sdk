@@ -49,7 +49,7 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
 
     //Third Party
-    implementation 'com.github.acan12:coconut:2.0.13'
+    implementation 'com.github.acan12:coconut:2.0.12'
     implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
     implementation 'com.github.iwgang:countdownview:2.1.6'
     implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
