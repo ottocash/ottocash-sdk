@@ -102,6 +102,8 @@ public class OttoCash extends BaseActivity {
         model.setPhone(phoneNumber);
 
         new SdkResourcePresenter(new ISdkView() {
+
+
             @Override
             public void handleError(String message) {
 
@@ -109,7 +111,7 @@ public class OttoCash extends BaseActivity {
 
             @Override
             public BaseActivity getCurrentActivity() {
-                return getCurrentActivity();
+                return null;
             }
 
             @Override
