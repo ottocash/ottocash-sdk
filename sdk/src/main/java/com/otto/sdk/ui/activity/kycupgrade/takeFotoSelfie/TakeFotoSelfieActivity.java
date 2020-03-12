@@ -58,7 +58,7 @@ public class TakeFotoSelfieActivity extends AppActivity {
             }
         });
 
-        //cameraKitView.setFacing(CameraKit.FACING_BACK);
+        cameraKitView.setFacing(CameraKit.FACING_FRONT);
     }
 
     @Override
