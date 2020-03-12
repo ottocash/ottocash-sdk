@@ -5,7 +5,7 @@ import java.io.File;
 public interface IConfig {
 
     //Development
-    String API_BASE_URL = "https://ottocash-sdk.clappingape.com/";
+    String API_BASE_URL = "https://ottocash-sdk.ptape.com/";
 
     //Production
     //String API_BASE_URL = "https://sdkmw.ottocash.id/";
