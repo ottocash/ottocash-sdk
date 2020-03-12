@@ -38,6 +38,7 @@ public class LoginResponse extends BaseResponse {
 		private int id;
 		private String email;
 		private String longitude;
+		private Boolean need_otp;
 
 		public String getAccountNumber() {
 			return accountNumber;
@@ -101,6 +102,14 @@ public class LoginResponse extends BaseResponse {
 
 		public void setLongitude(String longitude) {
 			this.longitude = longitude;
+		}
+
+		public Boolean getNeed_otp() {
+			return need_otp;
+		}
+
+		public void setNeed_otp(Boolean need_otp) {
+			this.need_otp = need_otp;
 		}
 	}
 

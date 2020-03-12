@@ -23,6 +23,7 @@ public interface IConfig {
     String OC_SESSION_CLIENT_ID = "id";
     String OC_SESSION_CLIENT_SECRET = "secret";
     String OC_SESSION_ACCESS_TOKEN = "access_token";
+    String OC_NEED_OTP = "need_otp";
 
 
     //KEY PAYMENT RECEIPT

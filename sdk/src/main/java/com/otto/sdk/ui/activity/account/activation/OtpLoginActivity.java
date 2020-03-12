@@ -27,6 +27,8 @@ import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
 import com.otto.sdk.ui.component.support.UiUtil;
 import com.poovam.pinedittextfield.LinePinField;
 
+import java.util.Objects;
+
 import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.support.util.CacheUtil;
 import cn.iwgang.countdownview.CountdownView;
@@ -65,8 +67,10 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
             }
         });
 
-        onCallApiOtpRequest();
-
+        boolean need_otp = Objects.requireNonNull(getIntent().getExtras()).getBoolean(IConfig.OC_NEED_OTP);
+        if (!need_otp){
+            onCallApiOtpRequest();
+        }
     }
 
 

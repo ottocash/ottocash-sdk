@@ -99,6 +99,8 @@ public class PinLoginActivity extends AppActivity implements IAuthView {
             String name = data.getData().getName();
             String phone = data.getData().getPhone();
 
+            boolean need_otp = data.getData().getNeed_otp();
+
             boolean isLogin = data.getMeta().isStatus();
             CacheUtil.putPreferenceBoolean(String.valueOf(Boolean.valueOf(IConfig.SESSION_IS_LOGIN)),
                     isLogin, PinLoginActivity.this);
@@ -111,6 +113,7 @@ public class PinLoginActivity extends AppActivity implements IAuthView {
             Intent intent = new Intent(PinLoginActivity.this, OtpLoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             intent.putExtra(IConfig.OC_SESSION_PHONE, phone);
+            intent.putExtra(IConfig.OC_NEED_OTP, need_otp);
             startActivity(intent);
             finish();
         } else if (data.getMeta().getCode() == 400) {
