@@ -53,12 +53,15 @@ public class PaymentReceiptOttoActivity extends BaseActivity {
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(PaymentReceiptOttoActivity.this, DashboardSDKActivity.class));
+                Intent intent = new Intent(PaymentReceiptOttoActivity.this, DashboardSDKActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
             }
         });
     }
 
-    private void initComponent(){
+    private void initComponent() {
         ivBack = findViewById(R.id.ivBack);
         tvTransactionTujuan = findViewById(R.id.tvTransactionTujuan);
         tvTransactionAmount = findViewById(R.id.tvTransactionAmount);
@@ -72,7 +75,7 @@ public class PaymentReceiptOttoActivity extends BaseActivity {
     }
 
 
-    private void initContentUI(){
+    private void initContentUI() {
         Bundle extras = getIntent().getExtras();
         dateTransaction = extras.getString(IConfig.DATE_TRANSACTION);
         serviceTypeTransaction = extras.getString(IConfig.SERVICE_TYPE_TRANSACTION);
@@ -88,25 +91,24 @@ public class PaymentReceiptOttoActivity extends BaseActivity {
         keyPinTransferToFriend = extras.getString(IConfig.KEY_PIN_TRANSFER_TO_FRIEND);
 
 
-
         if (pinReviewCheckout.equals(keyPinReviewCheckout)) {
-            tvTransactionIdTujuan.setText("ID Tujuan : "+nameTujuanTransfer+" ("+numberContact+")");
+            tvTransactionIdTujuan.setText("ID Tujuan : " + nameTujuanTransfer + " (" + numberContact + ")");
             tvTransactionPelanggan.setText("Nama Pelanggan : ");
 
-            tvTransactionTujuan.setText("Transfer ke "+nameTujuanTransfer);
+            tvTransactionTujuan.setText("Transfer ke " + nameTujuanTransfer);
             tvTransactionAmount.setText(nominalTransaction);
 
             tvTransactionDate.setText(dateTransaction);
-            tvTransactionID.setText("ID Transaksi : "+referenceNumberTransaction);
+            tvTransactionID.setText("ID Transaksi : " + referenceNumberTransaction);
 
             tvTransactionAmount2.setText(nominalTransaction);
             tvTransactionTotal.setText(nominalTransaction);
 
         } else if (pinTransferToFriend.equals(keyPinTransferToFriend)) {
-            tvTransactionIdTujuan.setText("ID Tujuan : "+nameTujuanTransfer+" ("+numberContact+")");
-            tvTransactionPelanggan.setText("ID Transaksi : "+referenceNumberTransaction);
+            tvTransactionIdTujuan.setText("ID Tujuan : " + nameTujuanTransfer + " (" + numberContact + ")");
+            tvTransactionPelanggan.setText("ID Transaksi : " + referenceNumberTransaction);
 
-            tvTransactionTujuan.setText("Transfer ke "+nameTujuanTransfer);
+            tvTransactionTujuan.setText("Transfer ke " + nameTujuanTransfer);
             tvTransactionAmount.setText(nominalTransaction);
 
             tvTransactionDate.setText(dateTransaction);

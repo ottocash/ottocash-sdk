@@ -283,7 +283,7 @@ public class NewPinPaymentActivty extends AppActivity implements PinAdapter.Call
             intent.putExtra(IConfig.STATUS_TRANSACTION, statusTransaction);
 
 
-            //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
         } else {

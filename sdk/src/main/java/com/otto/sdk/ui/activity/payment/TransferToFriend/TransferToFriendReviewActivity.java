@@ -109,6 +109,7 @@ public class TransferToFriendReviewActivity extends BaseActivity {
 
                 intent.putExtra(IConfig.KEY_NUMBER_CONTACT, numberContact);
                 intent.putExtra(IConfig.KEY_ACCOUNT_NAME_TUJUAN, nameTujuanTransfer);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
 

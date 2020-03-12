@@ -122,6 +122,7 @@ public class TransferToFriendSendActivity extends BaseActivity implements IInqui
             intent.putExtra(IConfig.KEY_NOMINAL_TRANSFER_TO_FRIEND, nominalTransferToFriend);
             intent.putExtra(IConfig.KEY_NUMBER_CONTACT, numberContact);
             intent.putExtra(KEY_PAYMENT_QR,getIntent().getExtras().getBoolean(KEY_PAYMENT_QR));
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
 

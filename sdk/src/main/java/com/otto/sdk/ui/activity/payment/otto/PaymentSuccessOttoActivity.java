@@ -110,6 +110,7 @@ public class PaymentSuccessOttoActivity extends BaseActivity {
 
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                finish();
 
             }
         });
