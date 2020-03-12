@@ -6,6 +6,7 @@ import android.os.Handler;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.View;
 import android.widget.ImageView;
@@ -40,6 +41,7 @@ import app.beelabs.com.codebase.support.util.CacheUtil;
 
 public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
 
+    SwipeRefreshLayout lySwipeRefresh;
     ImageView ivBack;
     TextView tvTitleOttoCash;
     TextView tvEmoneyBalance;
@@ -67,8 +69,14 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
         displayMainMenu();
     }
 
+    @Override
+    protected void onResume() {
+        onCallApiInquiry();
+        super.onResume();
+    }
 
     public void initComponent() {
+        lySwipeRefresh = findViewById(R.id.lySwipeRefresh);
         ivBack = findViewById(R.id.ivBack);
         tvTitleOttoCash = findViewById(R.id.tvTitleOttoCash);
         tvEmoneyBalance = findViewById(R.id.tvEmoneyBalance);
@@ -87,8 +95,9 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
             public void onClick(View v) {
                 Intent intent = new Intent(DashboardSDKActivity.this, IntroductionUpgradeActivity.class);
                 intent.putExtra("account_number", nikmatinaja);
-
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -99,6 +108,20 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
         });
 
         ivBack.setOnClickListener(v -> onBackPressed());
+
+
+        lySwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        onCallApiInquiry();
+                        //lySwipeRefresh.setRefreshing(false);
+                    }
+                }, 5000);
+            }
+        });
 
     }
 
@@ -252,6 +275,8 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
     @Override
     public void handleInquiry(InquiryResponse model) {
         if (model.getMeta().getCode() == 200) {
+            lySwipeRefresh.setRefreshing(false);
+
             CacheUtil.putPreferenceBoolean(IConfig.OC_SESSION_LOGIN_KEY, true, DashboardSDKActivity.this);
 
             CacheUtil.putPreferenceString(IConfig.OC_SESSION_ACCOUNT_NUMBER, model.getData().getAccount_number(), DashboardSDKActivity.this);
