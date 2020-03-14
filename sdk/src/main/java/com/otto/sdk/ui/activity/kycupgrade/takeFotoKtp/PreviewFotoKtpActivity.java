@@ -1,30 +1,18 @@
 package com.otto.sdk.ui.activity.kycupgrade.takeFotoKtp;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-
-import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
 import com.otto.sdk.AppActivity;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.R;
-import com.otto.sdk.ui.activity.kycupgrade.UpdateFotoDialog;
 import com.otto.sdk.ui.activity.kycupgrade.takeFotoSelfie.TakeFotoSelfieActivity;
-import com.otto.sdk.ui.component.support.Base64ImageUtil;
-import com.otto.sdk.ui.component.support.DownloadImageUtil;
 
-import java.io.File;
-
-import app.beelabs.com.codebase.base.IView;
 import app.beelabs.com.codebase.support.util.CacheUtil;
-
-import static com.otto.sdk.OttoCashSdk.getContext;
 
 public class PreviewFotoKtpActivity extends AppActivity {
 

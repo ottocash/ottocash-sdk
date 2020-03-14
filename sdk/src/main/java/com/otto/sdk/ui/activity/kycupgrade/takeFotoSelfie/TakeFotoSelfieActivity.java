@@ -1,11 +1,9 @@
 package com.otto.sdk.ui.activity.kycupgrade.takeFotoSelfie;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,7 +18,6 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.otto.sdk.AppActivity;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.R;
-import com.otto.sdk.ui.activity.kycupgrade.takeFotoKtp.PreviewFotoKtpActivity;
 import com.otto.sdk.ui.component.support.Base64ImageUtil;
 import com.otto.sdk.ui.component.support.DateUtil;
 

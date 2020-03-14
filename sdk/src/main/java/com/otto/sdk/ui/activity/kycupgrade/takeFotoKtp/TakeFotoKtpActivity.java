@@ -1,11 +1,9 @@
 package com.otto.sdk.ui.activity.kycupgrade.takeFotoKtp;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -29,8 +27,6 @@ import java.io.IOException;
 import java.util.List;
 
 import app.beelabs.com.codebase.support.util.CacheUtil;
-
-import static com.otto.sdk.OttoCashSdk.getContext;
 
 
 public class TakeFotoKtpActivity extends AppActivity {
