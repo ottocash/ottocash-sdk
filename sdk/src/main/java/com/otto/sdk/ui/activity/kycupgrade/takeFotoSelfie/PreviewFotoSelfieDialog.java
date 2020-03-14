@@ -14,6 +14,7 @@ import com.otto.sdk.IConfig;
 import com.otto.sdk.R;
 import com.otto.sdk.ui.activity.kycupgrade.UpdateFotoDialog;
 import com.otto.sdk.ui.activity.kycupgrade.UpgradeStatusActivity;
+import com.otto.sdk.ui.activity.kycupgrade.takeFotoKtp.TakeFotoKtpActivity;
 import com.otto.sdk.ui.component.support.Base64ImageUtil;
 import com.otto.sdk.ui.component.support.DownloadImageUtil;
 

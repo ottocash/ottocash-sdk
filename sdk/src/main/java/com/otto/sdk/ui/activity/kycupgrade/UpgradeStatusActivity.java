@@ -35,7 +35,7 @@ public class UpgradeStatusActivity extends AppActivity implements IUpgradeView {
     }
 
 
-    private void initView(){
+    private void initView() {
         btn_done = findViewById(R.id.btn_done);
         tvStatus = findViewById(R.id.tvStatus);
 
@@ -43,6 +43,7 @@ public class UpgradeStatusActivity extends AppActivity implements IUpgradeView {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(UpgradeStatusActivity.this, DashboardSDKActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
             }
@@ -50,7 +51,7 @@ public class UpgradeStatusActivity extends AppActivity implements IUpgradeView {
     }
 
 
-    private void onCallApiUpgrade(){
+    private void onCallApiUpgrade() {
 
         String phone_number = CacheUtil.getPreferenceString(IConfig.OC_SESSION_PHONE, this);
         String ktp = CacheUtil.getPreferenceString(IConfig.KEY_BASE64_KTP, this);
@@ -73,9 +74,9 @@ public class UpgradeStatusActivity extends AppActivity implements IUpgradeView {
 
     @Override
     public void handleUpgrade(UpgradeAccountResponse model) {
-        if (model.getMeta().getCode()==200){
+        if (model.getMeta().getCode() == 200) {
             tvStatus.setText("Pengajuan OttoCash Plus telah Berhasil");
-        }else {
+        } else {
             tvStatus.setText("Pengajuan OttoCash Plus telah Gagal");
         }
 

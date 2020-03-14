@@ -56,7 +56,6 @@
 
                 <Button
                     android:id="@+id/btnSubmit"
-                    fontPath="fonts/SemiBold.otf"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/ll_capture"
@@ -71,7 +70,6 @@
 
                 <Button
                     android:id="@+id/btnFotoUlang"
-                    fontPath="fonts/SemiBold.otf"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/btnSubmit"
@@ -86,7 +84,6 @@
 
                 <Button
                     android:id="@+id/btnBatal"
-                    fontPath="fonts/SemiBold.otf"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/btnFotoUlang"
