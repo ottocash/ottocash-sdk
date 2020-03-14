@@ -1,4 +1,4 @@
-package com.otto.sdk.ui.activity.kycupgrade.takeFotoSelfie;
+package com.otto.sdk.ui.activity.kycupgrade.takeFotoKtp;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,21 +10,23 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 
+import com.bumptech.glide.Glide;
+import com.otto.sdk.AppActivity;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.R;
 import com.otto.sdk.ui.activity.kycupgrade.UpdateFotoDialog;
-import com.otto.sdk.ui.activity.kycupgrade.UpgradeStatusActivity;
-import com.otto.sdk.ui.activity.kycupgrade.takeFotoKtp.TakeFotoKtpActivity;
+import com.otto.sdk.ui.activity.kycupgrade.takeFotoSelfie.TakeFotoSelfieActivity;
 import com.otto.sdk.ui.component.support.Base64ImageUtil;
 import com.otto.sdk.ui.component.support.DownloadImageUtil;
 
 import java.io.File;
 
-import app.beelabs.com.codebase.base.BaseDialog;
+import app.beelabs.com.codebase.base.IView;
 import app.beelabs.com.codebase.support.util.CacheUtil;
 
-public class PreviewFotoSelfieDialog extends BaseDialog {
+import static com.otto.sdk.OttoCashSdk.getContext;
 
+public class PreviewFotoKtpActivity extends AppActivity {
 
     ImageView iv_avatar;
     ImageView ivBack;
@@ -32,21 +34,12 @@ public class PreviewFotoSelfieDialog extends BaseDialog {
     Button btnFotoUlang;
     Button btnBatal;
 
-    private UpdateFotoDialog callback;
-    private String fileName;
-
-    private PreviewFotoSelfieDialog(@NonNull Context context, String fileName, UpdateFotoDialog callback) {
-        super(context, 200);
-
-        this.callback = callback;
-        this.fileName = fileName;
-    }
-
+    private String base64Ktp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.dialog_preview_selfie);
+        setContentView(R.layout.activity_preview_foto_ktp);
 
         iv_avatar = findViewById(R.id.iv_avatar);
         ivBack = findViewById(R.id.ivBack);
@@ -54,25 +47,16 @@ public class PreviewFotoSelfieDialog extends BaseDialog {
         btnFotoUlang = findViewById(R.id.btnFotoUlang);
         btnBatal = findViewById(R.id.btnBatal);
 
-        // do something in here
-        File fileImage = new File(Environment.getExternalStorageDirectory(), fileName);
 
-        String base64Selfie = Base64ImageUtil.createImageBase64(fileImage);
-        CacheUtil.putPreferenceString(IConfig.KEY_BASE64_SELFIE, base64Selfie, getContext());
+        base64Ktp = CacheUtil.getPreferenceString(IConfig.KEY_BASE64_KTP, this);
+        Glide.with(this)
+                .load(base64Ktp)
+                .centerCrop()
+                .into(iv_avatar);
 
-        if (fileImage.exists()) {
-            new DownloadImageUtil(getContext())
-                    .target(iv_avatar)
-                    .start(fileImage);
-        }
+
         initAction();
-
     }
-
-    public static void showPageDialog(Context context, String fileName, UpdateFotoDialog callback) {
-        new PreviewFotoSelfieDialog(context, fileName, callback).show();
-    }
-
 
     private void initAction() {
 
@@ -100,18 +84,11 @@ public class PreviewFotoSelfieDialog extends BaseDialog {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                callback.updateAction(null);
-                Intent intent = new Intent(getContext(), UpgradeStatusActivity.class);
-                getContext().startActivity(intent);
-                dismiss();
-                //Intent intent = new Intent(getContext(), UpgradeStatusActivity.class);
-                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                //getContext().startActivity(intent);
-
+                Intent intent = new Intent(PreviewFotoKtpActivity.this, TakeFotoSelfieActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                //finish();
             }
         });
-
     }
-
 }

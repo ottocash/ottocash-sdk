@@ -64,7 +64,7 @@ public class GoToUpgradeActivity extends AppActivity {
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
-                            finish();
+                            //finish();
                         }
 
                     }

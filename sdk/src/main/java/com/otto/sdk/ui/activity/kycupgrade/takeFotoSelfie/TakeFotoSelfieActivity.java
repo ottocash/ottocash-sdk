@@ -20,12 +20,16 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.otto.sdk.AppActivity;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.R;
+import com.otto.sdk.ui.activity.kycupgrade.takeFotoKtp.PreviewFotoKtpActivity;
+import com.otto.sdk.ui.component.support.Base64ImageUtil;
 import com.otto.sdk.ui.component.support.DateUtil;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
+
+import app.beelabs.com.codebase.support.util.CacheUtil;
 
 
 public class TakeFotoSelfieActivity extends AppActivity {
@@ -38,6 +42,7 @@ public class TakeFotoSelfieActivity extends AppActivity {
     ImageView ivBack;
     ImageView imgFlash;
     ImageView imgSwitch;
+    private String fileName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,7 +130,7 @@ public class TakeFotoSelfieActivity extends AppActivity {
             cameraKitView.captureImage((cameraKitView, bytes) -> {
 
                 // process save file
-                String fileName = IConfig.FILE_NAME_FOTO_SELFIE + DateUtil.getTimestamp() + IConfig.EXTENSION_FILE_FOTO;
+                fileName = IConfig.FILE_NAME_FOTO_SELFIE + DateUtil.getTimestamp() + IConfig.EXTENSION_FILE_FOTO;
                 try {
                     // check if folder foto is exist
                     File folderFoto = new File(Environment.getExternalStorageDirectory(), IConfig.FOLDER_FOTO);
@@ -154,9 +159,7 @@ public class TakeFotoSelfieActivity extends AppActivity {
                         return;
                     }
 
-                    new Handler().postDelayed(() ->
-                                    PreviewFotoSelfieDialog.showPageDialog(TakeFotoSelfieActivity.this, fileName, data -> actionFinish(fileName))
-                            , 500);
+                    actionFinish();
                 });
             });
 
@@ -164,18 +167,18 @@ public class TakeFotoSelfieActivity extends AppActivity {
 
     }
 
-    private void actionFinish(String fileName) {
-        Intent intent = new Intent();
-        intent.putExtra(IConfig.KEY_DATA, fileName);
-        setResult(Activity.RESULT_OK, intent);
-        finish();
-    }
+    private void actionFinish() {
+        // do something in here
+        File fileImage = new File(Environment.getExternalStorageDirectory(), fileName);
 
 
-    public static void showPageDialog(Context context, int requestCode) {
-        if (context instanceof Activity) {
-            ((Activity) context).startActivityForResult(new Intent(context, TakeFotoSelfieActivity.class), requestCode);
-        }
+        String base64Selfie = Base64ImageUtil.createImageBase64(fileImage);
+        CacheUtil.putPreferenceString(IConfig.KEY_BASE64_SELFIE, base64Selfie, this);
+
+        Intent intent = new Intent(this, PreviewFotoSelfieActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        //finish();
     }
 
 }
