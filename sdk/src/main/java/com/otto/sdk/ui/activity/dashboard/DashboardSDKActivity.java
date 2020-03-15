@@ -75,6 +75,12 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
         super.onResume();
     }
 
+    @Override
+    protected void onStart() {
+        onCallApiInquiry();
+        super.onStart();
+    }
+
     public void initComponent() {
         lySwipeRefresh = findViewById(R.id.lySwipeRefresh);
         ivBack = findViewById(R.id.ivBack);
