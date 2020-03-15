@@ -31,6 +31,7 @@ import com.otto.sdk.presenter.PinVerificationPaymentPresenter;
 import com.otto.sdk.presenter.ReviewCheckoutPresenter;
 import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
 import com.otto.sdk.ui.activity.payment.otto.PaymentSuccessOttoActivity;
+import com.otto.sdk.ui.activity.payment.pede.PaymentSuccessPedeActivity;
 import com.otto.sdk.ui.adapter.PinAdapter;
 import com.otto.sdk.ui.component.support.DeviceId;
 import com.otto.sdk.ui.component.support.Logging;
@@ -267,7 +268,7 @@ public class NewPinPaymentActivty extends AppActivity implements PinAdapter.Call
             referenceNumberTransaction = model.getData().getReference_number();
             statusTransaction = model.getData().getStatus();
 
-            Intent intent = new Intent(NewPinPaymentActivty.this, PaymentSuccessOttoActivity.class);
+            Intent intent = new Intent(NewPinPaymentActivty.this, PaymentSuccessPedeActivity.class);
             intent.putExtra(IConfig.KEY_PIN_TRANSFER_TO_FRIEND, keyPinTransferToFriend);
             intent.putExtra(IConfig.KEY_PIN_CHECKOUT, keyPinReviewCheckout);
             intent.putExtra(IConfig.KEY_ACCOUNT_NAME_TUJUAN, nameTujuanTransfer);
