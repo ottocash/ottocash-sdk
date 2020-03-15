@@ -18,6 +18,7 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.otto.sdk.AppActivity;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.R;
+import com.otto.sdk.ui.activity.kycupgrade.takeFotoKtp.PreviewFotoKtpActivity;
 import com.otto.sdk.ui.component.support.Base64ImageUtil;
 import com.otto.sdk.ui.component.support.DateUtil;
 
@@ -104,7 +105,8 @@ public class TakeFotoSelfieActivity extends AppActivity {
 
         ivBack.setOnClickListener(view -> {
             setResult(Activity.RESULT_CANCELED);
-            finish();
+            onBackPressed();
+            //finish();
         });
 
         imgSwitch.setOnClickListener(new View.OnClickListener() {
@@ -173,9 +175,16 @@ public class TakeFotoSelfieActivity extends AppActivity {
         CacheUtil.putPreferenceString(IConfig.KEY_BASE64_SELFIE, base64Selfie, this);
 
         Intent intent = new Intent(this, PreviewFotoSelfieActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         //finish();
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(TakeFotoSelfieActivity.this, PreviewFotoKtpActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
 }

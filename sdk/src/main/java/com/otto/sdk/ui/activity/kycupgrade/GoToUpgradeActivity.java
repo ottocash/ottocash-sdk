@@ -45,6 +45,7 @@ public class GoToUpgradeActivity extends AppActivity {
             @Override
             public void onClick(View v) {
                 onBackPressed();
+                //onBackPressed();
             }
         });
         //number = getIntent().getStringExtra("account_number");
@@ -64,7 +65,7 @@ public class GoToUpgradeActivity extends AppActivity {
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
-                            //finish();
+                            finish();
                         }
 
                     }
@@ -76,5 +77,13 @@ public class GoToUpgradeActivity extends AppActivity {
 
 
                 }).onSameThread().check();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(GoToUpgradeActivity.this, IntroductionUpgradeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 }

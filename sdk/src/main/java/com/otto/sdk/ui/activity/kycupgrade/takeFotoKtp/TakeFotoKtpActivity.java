@@ -18,6 +18,7 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.otto.sdk.AppActivity;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.R;
+import com.otto.sdk.ui.activity.kycupgrade.GoToUpgradeActivity;
 import com.otto.sdk.ui.component.support.Base64ImageUtil;
 import com.otto.sdk.ui.component.support.DateUtil;
 
@@ -105,7 +106,8 @@ public class TakeFotoKtpActivity extends AppActivity {
 
         ivBack.setOnClickListener(view -> {
             setResult(Activity.RESULT_CANCELED);
-            finish();
+            onBackPressed();
+            //finish();
         });
 
         imgFlash.setOnClickListener(new View.OnClickListener() {
@@ -166,9 +168,16 @@ public class TakeFotoKtpActivity extends AppActivity {
         CacheUtil.putPreferenceString(IConfig.KEY_BASE64_KTP, base64Ktp, this);
 
         Intent intent = new Intent(this, PreviewFotoKtpActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-        //finish();
+        finish();
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(TakeFotoKtpActivity.this, GoToUpgradeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
 }

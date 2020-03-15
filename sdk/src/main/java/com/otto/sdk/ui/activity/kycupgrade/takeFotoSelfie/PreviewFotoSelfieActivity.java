@@ -63,6 +63,10 @@ public class PreviewFotoSelfieActivity extends AppActivity {
         btnBatal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                Intent intent = new Intent(PreviewFotoSelfieActivity.this, DashboardSDKActivity.class);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                startActivity(intent);
+//                finish();
                 onBackPressed();
             }
         });
@@ -71,11 +75,19 @@ public class PreviewFotoSelfieActivity extends AppActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(PreviewFotoSelfieActivity.this, UpgradeStatusActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
-                //finish();
+                finish();
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(PreviewFotoSelfieActivity.this, TakeFotoSelfieActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 }

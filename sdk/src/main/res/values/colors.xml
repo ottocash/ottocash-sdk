@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#1f204c</color>
-    <color name="colorPrimaryDark">#1f204c</color>
+    <color name="colorPrimarySdk">#1f204c</color>
+    <color name="colorPrimaryDarkSdk">#1f204c</color>
     
     
     //Black

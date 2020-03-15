@@ -98,9 +98,9 @@
             app:suffixMillisecond=""
             app:suffixMinute=":"
             app:suffixSecond=""
-            app:suffixTextColor="@color/colorPrimaryDark"
+            app:suffixTextColor="@color/colorPrimaryDarkSdk"
             app:suffixTextSize="18sp"
-            app:timeTextColor="@color/colorPrimaryDark"
+            app:timeTextColor="@color/colorPrimaryDarkSdk"
             app:timeTextSize="18sp" />
 
         <TextView
@@ -109,7 +109,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="00:00"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/colorPrimaryDarkSdk"
             android:textSize="18sp"
             android:visibility="gone" />
 
