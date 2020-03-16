@@ -177,7 +177,7 @@ public class TakeFotoSelfieActivity extends AppActivity {
         Intent intent = new Intent(this, PreviewFotoSelfieActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-        //finish();
+        finish();
     }
 
     @Override
