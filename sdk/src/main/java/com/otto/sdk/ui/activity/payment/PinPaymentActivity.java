@@ -203,7 +203,7 @@ public class PinPaymentActivity extends AppActivity implements IPinVerificationP
     }
 
     @Override
-    public BaseActivity getBaseActivity() {
+    public BaseActivity getCurrentActivity() {
         return PinPaymentActivity.this;
     }
 

@@ -227,7 +227,7 @@ public class OtpRegistrationActivity extends BaseActivity implements IOtpView {
     }
 
     @Override
-    public BaseActivity getBaseActivity() {
+    public BaseActivity getCurrentActivity() {
         return OtpRegistrationActivity.this;
     }
 }

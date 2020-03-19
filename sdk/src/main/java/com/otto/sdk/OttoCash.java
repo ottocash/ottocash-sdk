@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.otto.sdk.interfaces.IInquiryView;
@@ -101,6 +102,26 @@ public class OttoCash extends BaseActivity implements ISdkView {
         model.setPhone(phoneNumber);
         new SdkResourcePresenter(new ISdkView() {
             @Override
+            public void handleError(String message) {
+
+            }
+
+            @Override
+            public BaseActivity getCurrentActivity() {
+                return null;
+            }
+
+            @Override
+            public View getContentView() {
+                return null;
+            }
+
+            @Override
+            public void handleRetryConnection() {
+
+            }
+
+            @Override
             public void handleCheckIsExistingPhoneNumber(CheckPhoneNumberResponse model) {
                 if (model.getMeta().getCode() == 200) {
                     boolean is_existing = model.getData().isIs_existing();
@@ -126,15 +147,7 @@ public class OttoCash extends BaseActivity implements ISdkView {
                 }
             }
 
-            @Override
-            public void handleFail(String message) {
-                handleFail(message);
-            }
 
-            @Override
-            public BaseActivity getBaseActivity() {
-                return null;
-            }
         }).getCheckPhone(model);
     }
 

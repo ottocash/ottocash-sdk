@@ -39,7 +39,7 @@ public class RegistrationSuccessActivity extends BaseActivity {
     }
 
     @Override
-    public BaseActivity getBaseActivity() {
+    public BaseActivity getCurrentActivity() {
         return RegistrationSuccessActivity.this;
     }
 }

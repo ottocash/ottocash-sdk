@@ -50,7 +50,7 @@ public class OtpPresenter extends BasePresenter implements OtpDao.IOtpDao {
 
     @Override
     public Context getContext() {
-        return otpView.getBaseActivity();
+        return otpView.getCurrentActivity();
     }
 
 //    @Override
