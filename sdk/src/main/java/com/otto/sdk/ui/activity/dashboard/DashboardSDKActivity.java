@@ -320,8 +320,7 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
             }
 
         } else {
-            Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
-                    Toast.LENGTH_LONG).show();
+            Toast.makeText(this, model.getMeta().getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 

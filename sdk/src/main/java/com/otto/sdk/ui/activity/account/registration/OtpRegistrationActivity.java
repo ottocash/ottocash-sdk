@@ -180,8 +180,7 @@ public class OtpRegistrationActivity extends BaseActivity implements IOtpView {
             finish();
             saveSession();
         } else {
-            Toast.makeText(this, model.getBaseMeta().getCode() + ":" + model.getBaseMeta().getMessage(),
-                    Toast.LENGTH_LONG).show();
+            Toast.makeText(this, model.getBaseMeta().getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 

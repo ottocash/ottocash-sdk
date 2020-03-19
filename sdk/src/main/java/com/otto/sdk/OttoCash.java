@@ -110,8 +110,7 @@ public class OttoCash extends BaseActivity implements ISdkView {
                     Log.i("ISEX", "isExisting" + is_existing);
 
                 } else {
-                    Toast.makeText(context, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
-                            Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, model.getMeta().getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -123,8 +122,7 @@ public class OttoCash extends BaseActivity implements ISdkView {
                     CacheUtil.putPreferenceString(IConfig.OC_SESSION_ACCESS_TOKEN, accessToken, context);
 
                 } else {
-                    Toast.makeText(context, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
-                            Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, model.getMeta().getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
 

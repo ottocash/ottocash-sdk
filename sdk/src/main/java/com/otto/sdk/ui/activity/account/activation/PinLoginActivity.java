@@ -122,8 +122,7 @@ public class PinLoginActivity extends AppActivity implements IAuthView {
                 initErrorInvalid();
             }
         } else {
-            Toast.makeText(this, data.getMeta().getCode() + ":" + data.getMeta().getMessage(),
-                    Toast.LENGTH_LONG).show();
+            Toast.makeText(this, data.getMeta().getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 

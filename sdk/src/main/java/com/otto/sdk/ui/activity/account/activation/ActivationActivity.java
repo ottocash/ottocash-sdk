@@ -116,7 +116,7 @@ public class ActivationActivity extends AppActivity implements View.OnClickListe
                     startActivity(intent);
                     finish();
                 } else {
-                    Toast.makeText(ActivationActivity.this, "Checklist Box TAC", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ActivationActivity.this, "Mohon Checklist Box TAC", Toast.LENGTH_SHORT).show();
                 }
 
             }
