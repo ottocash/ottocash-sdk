@@ -60,14 +60,13 @@
     <string name="activation">Aktifkan</string>
 
     <!--ACTIVATION BLOCK-->
-    <string name="account_block">Akun Anda Terblokir</string>
-    <string name="describe_account_block">Hubungi call center OttoCash untuk membuka blokir akun Anda\n Email : halo@ottocash.id\n No telp : (021) 5020 0909\n Senin - Jumat ( 08.00 - 20.00 )\n Website : ottocash.id\n</string>
-
+    <string name="account_block">Akun Anda terblokir.\nMohon menghubungi Call Center OttoCash :\nemail : halo@ottocash.id atau\nNo Telepon : 021-5020 0909\nSenin-Jumat : 08.00 s.d 20.00\nSabtu : 08.00 s.d 18.00\nWebsite : www.ottocash.id\n</string>
+    <string name="describe_account_block"> </string>
 
     <!--PIN LOGIN-->
     <string name="pin_login">Masukkan PIN OttoCash</string>
     <string name="desc_pin_login">Masukkan 6 digit PIN OttoCash Anda</string>
-    <string name="invalid_pin">PIN tidak Valid</string>
+    <string name="invalid_pin">PIN tidak valid. Silahkan masukkan PIN dengan benar.</string>
 
 
     <!--PIN PAYMENT-->

@@ -234,7 +234,7 @@ public class NewPinPaymentActivty extends AppActivity implements PinAdapter.Call
 //                            onBackPressed();
 //                        }
 //                    });
-                    Toast.makeText(NewPinPaymentActivty.this, "Insufficient balance.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(NewPinPaymentActivty.this, model.getMeta().getMessage(), Toast.LENGTH_SHORT).show();
                 } else {
                     onCallApiTransferToFriend();
                 }
@@ -248,8 +248,7 @@ public class NewPinPaymentActivty extends AppActivity implements PinAdapter.Call
             }
 
         } else {
-            Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
-                    Toast.LENGTH_LONG).show();
+            Toast.makeText(this, model.getMeta().getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -288,8 +287,7 @@ public class NewPinPaymentActivty extends AppActivity implements PinAdapter.Call
             startActivity(intent);
             finish();
         } else {
-            Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
-                    Toast.LENGTH_LONG).show();
+            Toast.makeText(this, model.getMeta().getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -313,8 +311,7 @@ public class NewPinPaymentActivty extends AppActivity implements PinAdapter.Call
             startActivity(intent);
             finish();
         } else {
-            Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
-                    Toast.LENGTH_LONG).show();
+            Toast.makeText(this, model.getMeta().getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 

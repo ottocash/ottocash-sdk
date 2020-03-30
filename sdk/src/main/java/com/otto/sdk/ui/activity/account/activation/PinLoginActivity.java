@@ -3,7 +3,9 @@ package com.otto.sdk.ui.activity.account.activation;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.core.content.ContextCompat;
+
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -24,6 +26,7 @@ import com.otto.sdk.model.api.response.RegisterResponse;
 import com.otto.sdk.presenter.AuthPresenter;
 import com.otto.sdk.presenter.manager.SessionManager;
 import com.otto.sdk.ui.component.support.DeviceId;
+import com.otto.sdk.ui.component.support.UiUtil;
 import com.poovam.pinedittextfield.LinePinField;
 
 import app.beelabs.com.codebase.support.util.CacheUtil;
@@ -37,7 +40,8 @@ public class PinLoginActivity extends AppActivity implements IAuthView {
     private LoginRequest model;
 
     private String phone;
-    private String errorMessagePin = "PIN yang Anda masukkan salah.";
+    private String errorMessagePinInvalid = "PIN tidak valid. Silahkan masukkan PIN dengan benar.";
+    private String errorMessagePinBlock = String.valueOf(R.string.account_block);
     private AuthPresenter authPresenter;
 
     @Override
@@ -118,8 +122,10 @@ public class PinLoginActivity extends AppActivity implements IAuthView {
             finish();
         } else if (data.getMeta().getCode() == 400) {
             messagePIN = data.getMeta().getMessage();
-            if (messagePIN.equals(errorMessagePin)) {
-                initErrorInvalid();
+            if (messagePIN.equals(errorMessagePinInvalid)) {
+                errorMessagePinInvalid();
+            } else {
+                errorMessageBlock();
             }
         } else {
             Toast.makeText(this, data.getMeta().getMessage(), Toast.LENGTH_SHORT).show();
@@ -127,8 +133,13 @@ public class PinLoginActivity extends AppActivity implements IAuthView {
     }
 
 
-    private void initErrorInvalid() {
+    private void errorMessagePinInvalid() {
         errorMessage.setText(getString(R.string.invalid_pin));
+        errorMessage.setTextColor(ContextCompat.getColor(this, R.color.Blue_2E70B1));
+    }
+
+    private void errorMessageBlock() {
+        errorMessage.setText(getString(R.string.account_block));
         errorMessage.setTextColor(ContextCompat.getColor(this, R.color.Blue_2E70B1));
     }
 
