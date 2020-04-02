@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "403415030424",
+    "firebase_url": "https://ottocash-sdk.firebaseio.com",
+    "project_id": "ottocash-sdk",
+    "storage_bucket": "ottocash-sdk.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:403415030424:android:376c1ceb4c530004eb8eed",
+        "android_client_info": {
+          "package_name": "com.otto.ottocash"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "403415030424-lkk695omgvorubsvmeh7ag1n2sjui21p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.otto.ottocash",
+            "certificate_hash": "435101e35d5d41d2c21d86b91489b6589e54fa23"
+          }
+        },
+        {
+          "client_id": "403415030424-g7q7vtusi7nm4p0adilh76guhfhto2o5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCctEOxgUWbotuEc1SxtuzRYNuuML4DQ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "403415030424-g7q7vtusi7nm4p0adilh76guhfhto2o5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

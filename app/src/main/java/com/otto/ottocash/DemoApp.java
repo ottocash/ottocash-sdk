@@ -2,14 +2,11 @@ package com.otto.ottocash;
 
 import android.content.Context;
 
-import com.crashlytics.android.Crashlytics;
 import com.otto.sdk.OttoCashSdk;
-import com.otto.sdk.model.api.Api;
 
 import app.beelabs.com.codebase.base.BaseApp;
 import app.beelabs.com.codebase.di.component.AppComponent;
 import app.beelabs.com.codebase.di.component.DaggerAppComponent;
-import io.fabric.sdk.android.Fabric;
 
 public class DemoApp extends BaseApp {
 
@@ -18,7 +15,6 @@ public class DemoApp extends BaseApp {
     @Override
     public void onCreate() {
         super.onCreate();
-        Fabric.with(this, new Crashlytics());
         context = getApplicationContext();
         setupBuilder(DaggerAppComponent.builder(), this);
         setupDefaultFont("fonts/Barlow-Regular.ttf");
