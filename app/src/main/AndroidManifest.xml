@@ -25,10 +25,10 @@
         android:theme="@style/NoActionBarTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:name">
-        <activity android:name=".LoginActivity"></activity>
-        <activity android:name=".PinActivity"></activity>
-        <activity android:name=".LoadingActivity"></activity>
-        <activity android:name=".DashboardAppActivity"></activity>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".PinActivity" />
+        <!--        <activity android:name=".LoadingActivity"></activity>-->
+        <activity android:name=".DashboardAppActivity" />
         <activity android:name=".CheckOutActivity" />
         <activity android:name=".SplashScreenActivity">
             <intent-filter>
@@ -38,9 +38,9 @@
             </intent-filter>
         </activity>
 
-<!--        <meta-data-->
-<!--            android:name="io.fabric.ApiKey"-->
-<!--            android:value="d5c708c2d660429c1483e5fe3cc04a0668139201" />-->
+        <!--        <meta-data-->
+        <!--            android:name="io.fabric.ApiKey"-->
+        <!--            android:value="d5c708c2d660429c1483e5fe3cc04a0668139201" />-->
     </application>
 
 </manifest>

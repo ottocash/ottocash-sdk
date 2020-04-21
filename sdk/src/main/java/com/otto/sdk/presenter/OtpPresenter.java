@@ -10,7 +10,7 @@ import com.otto.sdk.model.api.response.VerifyOtpResponse;
 import com.otto.sdk.model.dao.OtpDao;
 
 import app.beelabs.com.codebase.base.BasePresenter;
-import app.beelabs.com.codebase.base.IView;
+import app.beelabs.com.codebase.base.contract.IView;
 import app.beelabs.com.codebase.base.response.BaseResponse;
 
 public class OtpPresenter extends BasePresenter implements OtpDao.IOtpDao {
@@ -45,21 +45,6 @@ public class OtpPresenter extends BasePresenter implements OtpDao.IOtpDao {
 
     @Override
     public BasePresenter getPresenter() {
-        return BasePresenter.getInstance(otpView, this);
+        return null;
     }
-
-    @Override
-    public Context getContext() {
-        return otpView.getBaseActivity();
-    }
-
-//    @Override
-//    public BasePresenter getPresenter() {
-//        return this;
-//    }
-//
-//    @Override
-//    public Context getContext() {
-//        return otpView.getBaseActivity();
-//    }
 }

@@ -8,8 +8,10 @@ import com.otto.sdk.model.api.response.TransactionHistoryResponse;
 import com.otto.sdk.model.dao.TransactionDao;
 
 import app.beelabs.com.codebase.base.BasePresenter;
-import app.beelabs.com.codebase.base.IView;
+import app.beelabs.com.codebase.base.contract.IView;
 import app.beelabs.com.codebase.base.response.BaseResponse;
+
+import static com.otto.sdk.OttoCashSdk.getContext;
 
 public class HistoryTransactionPresenter extends BasePresenter implements TransactionDao.IHistoryDao {
 
@@ -35,8 +37,4 @@ public class HistoryTransactionPresenter extends BasePresenter implements Transa
         return this;
     }
 
-    @Override
-    public Context getContext() {
-        return iHistoryView.getBaseActivity();
-    }
 }

@@ -328,10 +328,4 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
     public void onBackPressed() {
         super.onBackPressed();
     }
-
-    @Override
-    public BaseActivity getBaseActivity() {
-        return DashboardSDKActivity.this;
-    }
-
 }

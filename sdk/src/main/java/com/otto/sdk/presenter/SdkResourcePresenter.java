@@ -10,7 +10,7 @@ import com.otto.sdk.model.dao.CheckPhoneNumberDao;
 import com.otto.sdk.interfaces.ISdkView;
 
 import app.beelabs.com.codebase.base.BasePresenter;
-import app.beelabs.com.codebase.base.IView;
+import app.beelabs.com.codebase.base.contract.IView;
 import app.beelabs.com.codebase.base.response.BaseResponse;
 
 public class SdkResourcePresenter extends BasePresenter implements CheckPhoneNumberDao.ICheckPhoneDao {
@@ -55,8 +55,4 @@ public class SdkResourcePresenter extends BasePresenter implements CheckPhoneNum
         return this;
     }
 
-    @Override
-    public Context getContext() {
-        return (sdkView.getBaseActivity()==null)?context : sdkView.getBaseActivity();
-    }
 }

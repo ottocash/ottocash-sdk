@@ -10,8 +10,10 @@ import com.otto.sdk.model.api.response.TransferToFriendResponse;
 import com.otto.sdk.model.dao.PinVerificationPaymentDao;
 
 import app.beelabs.com.codebase.base.BasePresenter;
-import app.beelabs.com.codebase.base.IView;
+import app.beelabs.com.codebase.base.contract.IView;
 import app.beelabs.com.codebase.base.response.BaseResponse;
+
+import static com.otto.sdk.OttoCashSdk.getContext;
 
 public class PinVerificationPaymentPresenter extends BasePresenter implements PinVerificationPaymentDao.IPinVerificationPaymentDao {
 
@@ -53,8 +55,4 @@ public class PinVerificationPaymentPresenter extends BasePresenter implements Pi
         return BasePresenter.getInstance(iPinVerificationPaymentView,this);
     }
 
-    @Override
-    public Context getContext() {
-        return iPinVerificationPaymentView.getBaseActivity();
-    }
 }

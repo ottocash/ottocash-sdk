@@ -37,9 +37,4 @@ public class RegistrationSuccessActivity extends BaseActivity {
             }
         });
     }
-
-    @Override
-    public BaseActivity getBaseActivity() {
-        return RegistrationSuccessActivity.this;
-    }
 }

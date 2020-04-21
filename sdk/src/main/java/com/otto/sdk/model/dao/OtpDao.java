@@ -10,8 +10,8 @@ import com.otto.sdk.presenter.AuthPresenter;
 import com.otto.sdk.presenter.OtpPresenter;
 
 import app.beelabs.com.codebase.base.BaseDao;
-import app.beelabs.com.codebase.base.IDao;
-import app.beelabs.com.codebase.base.IDaoPresenter;
+import app.beelabs.com.codebase.base.contract.IDao;
+import app.beelabs.com.codebase.base.contract.IDaoPresenter;
 import app.beelabs.com.codebase.base.response.BaseResponse;
 import retrofit2.Response;
 

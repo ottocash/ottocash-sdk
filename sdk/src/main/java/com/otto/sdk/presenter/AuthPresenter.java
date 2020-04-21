@@ -13,7 +13,7 @@ import com.otto.sdk.model.dao.AuthDao;
 import com.otto.sdk.presenter.manager.SessionManager;
 
 import app.beelabs.com.codebase.base.BasePresenter;
-import app.beelabs.com.codebase.base.IView;
+import app.beelabs.com.codebase.base.contract.IView;
 import app.beelabs.com.codebase.base.response.BaseResponse;
 import app.beelabs.com.codebase.support.util.CacheUtil;
 
@@ -52,8 +52,4 @@ public class AuthPresenter extends BasePresenter implements AuthDao.ILoginDao {
         return getInstance(authView,this);
     }
 
-    @Override
-    public Context getContext() {
-        return authView.getBaseActivity();
-    }
 }

@@ -8,15 +8,17 @@ import com.otto.sdk.model.api.response.ReviewCheckOutResponse;
 import com.otto.sdk.model.dao.PaymentDao;
 
 import app.beelabs.com.codebase.base.BasePresenter;
-import app.beelabs.com.codebase.base.IView;
+import app.beelabs.com.codebase.base.contract.IView;
 import app.beelabs.com.codebase.base.response.BaseResponse;
+
+import static com.otto.sdk.OttoCashSdk.getContext;
 
 public class ReviewCheckoutPresenter extends BasePresenter implements PaymentDao.IReviewCheckoutDao {
 
     private IReviewCheckoutView iReviewCheckoutView;
     private Context context;
 
-    public ReviewCheckoutPresenter(IView view,Context context) {
+    public ReviewCheckoutPresenter(IView view, Context context) {
         this.iReviewCheckoutView = (IReviewCheckoutView) view;
         this.context = context;
     }
@@ -33,14 +35,8 @@ public class ReviewCheckoutPresenter extends BasePresenter implements PaymentDao
         }).onReviewCheckOut(requestModel, getContext());
     }
 
-
     @Override
     public BasePresenter getPresenter() {
-        return BasePresenter.getInstance(iReviewCheckoutView,this);
-    }
-
-    @Override
-    public Context getContext() {
-        return context;
+        return null;
     }
 }

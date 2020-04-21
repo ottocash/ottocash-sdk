@@ -4,15 +4,13 @@ import android.content.Context;
 
 import com.otto.sdk.IConfig;
 import com.otto.sdk.model.api.Api;
-import com.otto.sdk.model.api.request.PaymentValidateRequest;
 import com.otto.sdk.model.api.request.ReviewCheckOutRequest;
-import com.otto.sdk.model.api.response.PaymentValidateResponse;
 import com.otto.sdk.model.api.response.ReviewCheckOutResponse;
 import com.otto.sdk.presenter.ReviewCheckoutPresenter;
 
 import app.beelabs.com.codebase.base.BaseDao;
-import app.beelabs.com.codebase.base.IDao;
-import app.beelabs.com.codebase.base.IDaoPresenter;
+import app.beelabs.com.codebase.base.contract.IDao;
+import app.beelabs.com.codebase.base.contract.IDaoPresenter;
 import app.beelabs.com.codebase.base.response.BaseResponse;
 import retrofit2.Response;
 

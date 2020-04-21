@@ -202,11 +202,6 @@ public class PinPaymentActivity extends AppActivity implements IPinVerificationP
         }
     }
 
-    @Override
-    public BaseActivity getBaseActivity() {
-        return PinPaymentActivity.this;
-    }
-
     public static long generateRandom(int length) {
         Random random = new Random();
         char[] digits = new char[length];
