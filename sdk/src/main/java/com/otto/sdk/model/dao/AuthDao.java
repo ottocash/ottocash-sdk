@@ -1,5 +1,7 @@
 package com.otto.sdk.model.dao;
 
+import android.content.Context;
+
 import com.otto.sdk.IConfig;
 import com.otto.sdk.model.api.Api;
 import com.otto.sdk.model.api.request.LoginRequest;
@@ -37,16 +39,14 @@ public class AuthDao extends BaseDao {
     }
 
 
-    public void onRegister(RegisterRequest model) {
-        Api.onRegister(model, BaseDao.getInstance(this, adao.getPresenter(), IConfig.KEY_API_REGISTER).callback);
+    public void onRegister(RegisterRequest model, Context context) {
+        Api.onRegister(model, context, BaseDao.getInstance(this, adao.getPresenter(), IConfig.KEY_API_REGISTER).callback);
     }
 
 
-    public void onLogin(LoginRequest model) {
-        Api.onLogin(model, BaseDao.getInstance(this, adao.getPresenter(), IConfig.KEY_API_LOGIN).callback);
+    public void onLogin(LoginRequest model, Context context) {
+        Api.onLogin(model, context, BaseDao.getInstance(this, adao.getPresenter(), IConfig.KEY_API_LOGIN).callback);
     }
-
-
 
 
     @Override

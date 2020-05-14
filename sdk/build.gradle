@@ -78,8 +78,8 @@ dependencies {
     implementation 'com.google.dagger:dagger:2.16'
     //implementation 'me.dm7.barcodescanner:zbar:1.9.8'
 
-    //implementation 'io.github.inflationx:calligraphy3:3.1.1'
-    //implementation 'io.github.inflationx:viewpump:2.0.3'
+    implementation 'io.github.inflationx:calligraphy3:3.1.1'
+    implementation 'io.github.inflationx:viewpump:2.0.3'
 
     annotationProcessor "com.google.dagger:dagger-compiler:2.16"
 

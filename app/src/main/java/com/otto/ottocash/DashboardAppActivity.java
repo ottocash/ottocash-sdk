@@ -55,14 +55,14 @@ public class DashboardAppActivity extends SdkActivity implements ISdkView {
         setContentView(R.layout.activity_beranda_app);
         ButterKnife.bind(this);
 
-        onCheckPhoneNumber();
+        onCreateToken();
         onGetSaldoOttoCash();
     }
 
 
     @Override
     protected void onResume() {
-        onCheckPhoneNumber();
+        onCreateToken();
         onGetSaldoOttoCash();
         super.onResume();
     }
@@ -70,7 +70,7 @@ public class DashboardAppActivity extends SdkActivity implements ISdkView {
 
     @Override
     protected void onStart() {
-        onCheckPhoneNumber();
+        onCreateToken();
         onGetSaldoOttoCash();
         super.onStart();
     }
@@ -129,7 +129,7 @@ public class DashboardAppActivity extends SdkActivity implements ISdkView {
     @Override
     public void handleCheckIsExistingPhoneNumber(CheckPhoneNumberResponse model) {
         if (model.getMeta().getCode() == 200) {
-            onCreateToken();
+            //onCreateToken();
 
             checkIsExistingPhoneNumber = model.getData().isIs_existing();
             sessionLogin = CacheUtil.getPreferenceBoolean(IConfig.OC_SESSION_LOGIN_KEY, DashboardAppActivity.this);
@@ -161,6 +161,7 @@ public class DashboardAppActivity extends SdkActivity implements ISdkView {
     @Override
     public void handleToken(CreateTokenResponse model) {
         if (model.getMeta().getCode() == 200) {
+            onCheckPhoneNumber();
 
             String accessToken = model.getData().getClient().getAccessToken();
             CacheUtil.putPreferenceString(IConfig.OC_SESSION_ACCESS_TOKEN, accessToken, DashboardAppActivity.this);

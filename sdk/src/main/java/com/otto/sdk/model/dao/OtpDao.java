@@ -1,5 +1,7 @@
 package com.otto.sdk.model.dao;
 
+import android.content.Context;
+
 import com.otto.sdk.IConfig;
 import com.otto.sdk.model.api.Api;
 import com.otto.sdk.model.api.request.OtpRequest;
@@ -13,10 +15,10 @@ import app.beelabs.com.codebase.base.BaseDao;
 import app.beelabs.com.codebase.base.IDao;
 import app.beelabs.com.codebase.base.IDaoPresenter;
 import app.beelabs.com.codebase.base.response.BaseResponse;
+import app.beelabs.com.codebase.support.util.CacheUtil;
 import retrofit2.Response;
 
 public class OtpDao extends BaseDao {
-
 
 
     private OtpPresenter.OnPresenterResponseCallback onPresenterResponseCallback;
@@ -29,7 +31,6 @@ public class OtpDao extends BaseDao {
     }
 
 
-
     public OtpDao(IDao obj) {
         super(obj);
     }
@@ -39,13 +40,13 @@ public class OtpDao extends BaseDao {
         this.onPresenterResponseCallback = onPresenterResponseCallback;
     }
 
-    public void onOtpRequest(OtpRequest model) {
-        Api.onOtpRequest(model, BaseDao.getInstance(this, iOtpDao.getPresenter(), IConfig.KEY_API_OTP_REQUEST).callback);
+    public void onOtpRequest(OtpRequest model, Context context) {
+        Api.onOtpRequest(model, context, BaseDao.getInstance(this, iOtpDao.getPresenter(), IConfig.KEY_API_OTP_REQUEST).callback);
     }
 
 
-    public void onOtpVerification(OtpVerificationRequest model) {
-        Api.onOtpVerification(model, BaseDao.getInstance(this, iOtpDao.getPresenter(), IConfig.KEY_API_OTP_VERIFICATION).callback);
+    public void onOtpVerification(OtpVerificationRequest model, Context context) {
+        Api.onOtpVerification(model, context, BaseDao.getInstance(this, iOtpDao.getPresenter(), IConfig.KEY_API_OTP_VERIFICATION).callback);
     }
 
 

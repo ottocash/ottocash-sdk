@@ -33,7 +33,7 @@ public class AuthPresenter extends BasePresenter implements AuthDao.ILoginDao {
                 LoginResponse model = (LoginResponse) br;
                 authView.handleLogin(model);
             }
-        }).onLogin(requestModel);
+        }).onLogin(requestModel, getContext());
     }
 
     @Override
@@ -44,7 +44,7 @@ public class AuthPresenter extends BasePresenter implements AuthDao.ILoginDao {
                 RegisterResponse model = (RegisterResponse) br;
                 authView.handleRegister(model);
             }
-        }).onRegister(requestModel);
+        }).onRegister(requestModel, getContext());
     }
 
     @Override

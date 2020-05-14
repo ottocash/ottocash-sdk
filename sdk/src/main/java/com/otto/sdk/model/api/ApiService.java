@@ -45,10 +45,10 @@ public interface ApiService {
                                      @Body LoginRequest loginRequest);
 
     @POST("v1/account/upgrade")
-    Call<UpgradeAccountResponse> callApiUpgrade(@HeaderMap Map<String, Object> headers,
+    Call<UpgradeAccountResponse> callApiUpgrade(@HeaderMap Map<String, String> headers,
                                               @Body UpgradeAccountRequest upgradeAccountRequest);
     @POST("v1/account")
-    Call<InquiryResponse> callApiInquiry(@HeaderMap Map<String, Object> headers,
+    Call<InquiryResponse> callApiInquiry(@HeaderMap Map<String, String> headers,
                                          @Body InquiryRequest inquiryRequest);
 
     @POST("v1/auth/otp-verification")
@@ -60,11 +60,11 @@ public interface ApiService {
                                                @Body OtpRequest otpRequest);
 
     @POST("v1/payment/journal")
-    Call<ReviewCheckOutResponse> callApiReviewCheckOut(@HeaderMap Map<String, Object> headers,
+    Call<ReviewCheckOutResponse> callApiReviewCheckOut(@HeaderMap Map<String, String> headers,
                                                        @Body ReviewCheckOutRequest reviewCheckOutRequest);
 
     @POST("v1/payment/validate")
-    Call<PaymentValidateResponse> callApiPaymentValidate(@HeaderMap Map<String, Object> headers,
+    Call<PaymentValidateResponse> callApiPaymentValidate(@HeaderMap Map<String, String> headers,
                                                          @Body PaymentValidateRequest paymentValidateRequest);
 
 
@@ -85,11 +85,11 @@ public interface ApiService {
                                                            @Body CheckPhoneNumberRequest checkPhoneNumberRequest);
 
     @POST("v1/account/history")
-    Call<TransactionHistoryResponse> callApiGetHistories(@HeaderMap Map<String, Object> headers,
+    Call<TransactionHistoryResponse> callApiGetHistories(@HeaderMap Map<String, String> headers,
                                                          @Body TransactionHistoryRequest model);
 
     @POST("v1/transfer")
-    Call<TransferToFriendResponse> callApiTransferToFriend(@HeaderMap Map<String, Object> headers,
+    Call<TransferToFriendResponse> callApiTransferToFriend(@HeaderMap Map<String, String> headers,
                                                            @Body TransferToFriendRequest transferToFriendRequest);
 
 }

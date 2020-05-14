@@ -115,12 +115,6 @@
             android:name=".ui.activity.kycupgrade.UpgradeStatusActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.kycupgrade.takeFotoKtp.PreviewFotoKtpDialog"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.kycupgrade.takeFotoSelfie.PreviewFotoSelfieDialog"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".ui.activity.kycupgrade.GoToUpgradeActivity"
             android:screenOrientation="portrait" />
         <activity

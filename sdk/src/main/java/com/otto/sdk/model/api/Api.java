@@ -48,31 +48,14 @@ public class Api extends BaseApi {
         return map;
     }
 
-    private static Map<String, Object> initHeaderForRequest(Context context) {
-        Map<String, Object> map = new HashMap<>();
+    private static Map<String, String> initHeaderForRequestAuth(Context context) {
+        Map<String, String> map = new HashMap<>();
         map.put("Authorization", "Bearer " + CacheUtil.getPreferenceString(IConfig.OC_SESSION_ACCESS_TOKEN, context));
         map.put("Accept", "application/json");
         map.put("Content-Type", "application/json");
 
         return map;
     }
-
-//    private static Map<String, String> initHeaderPartner(Context context) {
-//        Map<String, String> map = new HashMap<>();
-//        map.put("Authorization", "Bearer " + CacheUtil.getPreferenceString(IConfig.OC_SESSION_ACCESS_TOKEN, context));
-//        map.put("Cache-Control", "no-store");
-//        map.put("Content-Type", "application/json");
-//        map.put("Institution-ID", "OTTOCASH");
-//        map.put("Partner-ID", "MRMONTIR");
-//
-//        return map;
-//    }
-
-//    private static ApiService initApiDomain() {
-//        getInstance().setApiDomain(IConfig.API_BASE_URL);
-//        return (ApiService) getInstance().setupApi(OttoCashSdk.getAppComponent(), ApiService.class, true, 60);
-//    }
-
 
 
     synchronized private static ApiService initApiDomain() {
@@ -85,43 +68,41 @@ public class Api extends BaseApi {
     }
 
 
-    synchronized public static void onRegister(RegisterRequest registerRequest, Callback callback) {
-        initApiDomain().callApiRegister(initHeader(), registerRequest).enqueue((Callback<RegisterResponse>) callback);
+    synchronized public static void onRegister(RegisterRequest registerRequest, Context context, Callback callback) {
+        initApiDomain().callApiRegister(initHeaderForRequestAuth(context), registerRequest).enqueue((Callback<RegisterResponse>) callback);
     }
 
 
     synchronized public static void onInquiry(InquiryRequest inquiryRequest, Context context, Callback callback) {
-        initApiDomain().callApiInquiry(initHeaderForRequest(context), inquiryRequest).enqueue((Callback<InquiryResponse>) callback);
+        initApiDomain().callApiInquiry(initHeaderForRequestAuth(context), inquiryRequest).enqueue((Callback<InquiryResponse>) callback);
     }
 
-    synchronized public static void onLogin(LoginRequest loginRequest, Callback callback) {
-        initApiDomain().callApiLogin(initHeader(), loginRequest).enqueue((Callback<LoginResponse>) callback);
+    synchronized public static void onLogin(LoginRequest loginRequest, Context context, Callback callback) {
+        initApiDomain().callApiLogin(initHeaderForRequestAuth(context), loginRequest).enqueue((Callback<LoginResponse>) callback);
     }
 
-    synchronized public static void onUpgrade (UpgradeAccountRequest upgradeAccountRequest, Context context, Callback callback) {
-        initApiDomain().callApiUpgrade(initHeaderForRequest(context), upgradeAccountRequest).enqueue((Callback<UpgradeAccountResponse>) callback);
+    synchronized public static void onUpgrade(UpgradeAccountRequest upgradeAccountRequest, Context context, Callback callback) {
+        initApiDomain().callApiUpgrade(initHeaderForRequestAuth(context), upgradeAccountRequest).enqueue((Callback<UpgradeAccountResponse>) callback);
     }
 
-    //OTP VERIFICATION
-    synchronized public static void onOtpVerification(OtpVerificationRequest otpVerificationRequest, Callback callback) {
-        initApiDomain().callApiOtpVerification(initHeader(), otpVerificationRequest).enqueue((Callback<VerifyOtpResponse>) callback);
+    synchronized public static void onOtpVerification(OtpVerificationRequest otpVerificationRequest, Context context, Callback callback) {
+        initApiDomain().callApiOtpVerification(initHeaderForRequestAuth(context), otpVerificationRequest).enqueue((Callback<VerifyOtpResponse>) callback);
     }
 
-    //OTP REQUEST
-    synchronized public static void onOtpRequest(OtpRequest otpRequest, Callback callback) {
-        initApiDomain().callApiOtpRequest(initHeader(), otpRequest).enqueue((Callback<RequestOtpResponse>) callback);
+    synchronized public static void onOtpRequest(OtpRequest otpRequest, Context context, Callback callback) {
+        initApiDomain().callApiOtpRequest(initHeaderForRequestAuth(context), otpRequest).enqueue((Callback<RequestOtpResponse>) callback);
     }
 
     synchronized public static void onReviewCheckOut(ReviewCheckOutRequest reviewCheckOutRequest, Context context, Callback callback) {
-        initApiDomain().callApiReviewCheckOut(initHeaderForRequest(context), reviewCheckOutRequest).enqueue((Callback<ReviewCheckOutResponse>) callback);
+        initApiDomain().callApiReviewCheckOut(initHeaderForRequestAuth(context), reviewCheckOutRequest).enqueue((Callback<ReviewCheckOutResponse>) callback);
     }
 
     synchronized public static void onPaymentValidate(PaymentValidateRequest paymentValidateRequest, Context context, Callback callback) {
-        initApiDomain().callApiPaymentValidate(initHeaderForRequest(context), paymentValidateRequest).enqueue((Callback<PaymentValidateResponse>) callback);
+        initApiDomain().callApiPaymentValidate(initHeaderForRequestAuth(context), paymentValidateRequest).enqueue((Callback<PaymentValidateResponse>) callback);
     }
 
-    synchronized public static void onCheckPhoneNumber(CheckPhoneNumberRequest checkPhoneNumberRequest, Callback callback) {
-        initApiDomain().callApiCheckPhoneNumber(initHeader(), checkPhoneNumberRequest).enqueue((Callback<CheckPhoneNumberResponse>) callback);
+    synchronized public static void onCheckPhoneNumber(CheckPhoneNumberRequest checkPhoneNumberRequest, Context context, Callback callback) {
+        initApiDomain().callApiCheckPhoneNumber(initHeaderForRequestAuth(context), checkPhoneNumberRequest).enqueue((Callback<CheckPhoneNumberResponse>) callback);
     }
 
 //    synchronized public static void onClients(ClientsRequest clientsRequest, Context context, Callback callback) {
@@ -137,11 +118,11 @@ public class Api extends BaseApi {
     }
 
     synchronized public static void onGetHistories(Context context, TransactionHistoryRequest request, Callback callback) {
-        initApiDomain().callApiGetHistories(initHeaderForRequest(context), request).enqueue((Callback<TransactionHistoryResponse>) callback);
+        initApiDomain().callApiGetHistories(initHeaderForRequestAuth(context), request).enqueue((Callback<TransactionHistoryResponse>) callback);
     }
 
     synchronized public static void onTransferToFriend(TransferToFriendRequest request, Context context, Callback callback) {
-        initApiDomain().callApiTransferToFriend(initHeaderForRequest(context), request).enqueue((Callback<TransferToFriendResponse>) callback);
+        initApiDomain().callApiTransferToFriend(initHeaderForRequestAuth(context), request).enqueue((Callback<TransferToFriendResponse>) callback);
     }
 
 

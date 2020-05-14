@@ -36,7 +36,7 @@ public class SdkResourcePresenter extends BasePresenter implements CheckPhoneNum
                 CheckPhoneNumberResponse model = (CheckPhoneNumberResponse) br;
                 sdkView.handleCheckIsExistingPhoneNumber(model);
             }
-        }).onCheckPhoneNumber(requestModel);
+        }).onCheckPhoneNumber(requestModel, getContext());
     }
 
     @Override

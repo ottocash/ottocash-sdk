@@ -1,5 +1,7 @@
 package com.otto.sdk.model.dao;
 
+import android.content.Context;
+
 import com.otto.sdk.IConfig;
 import com.otto.sdk.model.api.Api;
 import com.otto.sdk.model.api.request.CheckPhoneNumberRequest;
@@ -35,8 +37,8 @@ public class CheckPhoneNumberDao extends BaseDao {
     }
 
 
-    public void onCheckPhoneNumber(CheckPhoneNumberRequest model) {
-        Api.onCheckPhoneNumber(model, BaseDao.getInstance(this, cdao.getPresenter(), IConfig.KEY_API_CHECK_PHONE_NUMBER).callback);
+    public void onCheckPhoneNumber(CheckPhoneNumberRequest model, Context context) {
+        Api.onCheckPhoneNumber(model, context, BaseDao.getInstance(this, cdao.getPresenter(), IConfig.KEY_API_CHECK_PHONE_NUMBER).callback);
     }
 
 

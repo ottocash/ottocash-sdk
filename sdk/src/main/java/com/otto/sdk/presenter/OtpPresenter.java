@@ -29,7 +29,7 @@ public class OtpPresenter extends BasePresenter implements OtpDao.IOtpDao {
                 RequestOtpResponse model = (RequestOtpResponse) br;
                 otpView.handleOtpRequest(model);
             }
-        }).onOtpRequest(requestModel);
+        }).onOtpRequest(requestModel, getContext());
     }
 
     @Override
@@ -40,7 +40,7 @@ public class OtpPresenter extends BasePresenter implements OtpDao.IOtpDao {
                 VerifyOtpResponse model = (VerifyOtpResponse) br;
                 otpView.handleOtpVerify(model);
             }
-        }).onOtpVerification(requestModel);
+        }).onOtpVerification(requestModel, getContext());
     }
 
     @Override
