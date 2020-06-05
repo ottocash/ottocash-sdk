@@ -16,6 +16,7 @@ public interface IConfig {
     String OC_SESSION_ACCOUNT_NUMBER = "account_number";
     String OC_SESSION_EMONEY_BALANCE = "emoney_balance";
     String OC_SESSION_IS_ACTIVE = "is_active";
+    String OC_SESSION_NEED_OTP = "is_need_otp";
     String OC_SESSION_TOTAL = "total";
     String OC_SESSION_PHONE = "phone";
     String OC_SESSION_NAME = "name";
@@ -24,6 +25,8 @@ public interface IConfig {
     String OC_SESSION_CLIENT_SECRET = "secret";
     String OC_SESSION_ACCESS_TOKEN = "access_token";
     String OC_NEED_OTP = "need_otp";
+    String OC_FORGOT_PIN = "forgot_pin";
+    String OC_SESSION_OTP = "session_otp";
 
 
     //KEY PAYMENT RECEIPT
@@ -51,7 +54,7 @@ public interface IConfig {
     String KEY_PIN_TRANSFER_TO_FRIEND = "pin_transfer_to_friend";
     String KEY_PIN_CHECKOUT = "pin_checkout";
 
-    boolean SESSION_CHECK_PHONE_NUMBER = false;
+    String OC_SESSION_CHECK_PHONE_NUMBER = "is_session_check_user";
     boolean SESSION_IS_LOGIN = false;
 
     //API 11 - ?
@@ -67,6 +70,7 @@ public interface IConfig {
     int KEY_API_HISTORIES = 20;
     int KEY_API_TRANSFER_TO_FRIEND = 21;
     int KEY_API_UPGRADE = 22;
+    int KEY_API_FORGOT_PIN = 23;
 
     //Document File foto
     String KEY_DATA = "data";

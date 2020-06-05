@@ -2,6 +2,7 @@ package com.otto.sdk.model.api;
 
 import com.otto.sdk.model.api.request.CheckPhoneNumberRequest;
 import com.otto.sdk.model.api.request.CreateTokenRequest;
+import com.otto.sdk.model.api.request.ForgotPinRequest;
 import com.otto.sdk.model.api.request.InquiryRequest;
 import com.otto.sdk.model.api.request.LoginRequest;
 import com.otto.sdk.model.api.request.OtpRequest;
@@ -28,6 +29,7 @@ import com.otto.sdk.model.api.response.UpgradeAccountResponse;
 
 import java.util.Map;
 
+import app.beelabs.com.codebase.base.response.BaseResponse;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -43,6 +45,10 @@ public interface ApiService {
     @POST("v1/auth/login")
     Call<LoginResponse> callApiLogin(@HeaderMap Map<String, String> headers,
                                      @Body LoginRequest loginRequest);
+
+    @POST("v1/change-pin")
+    Call<BaseResponse> callApiForgotPin(@HeaderMap Map<String, String> headers,
+                                    @Body ForgotPinRequest forgotPinRequest);
 
     @POST("v1/account/upgrade")
     Call<UpgradeAccountResponse> callApiUpgrade(@HeaderMap Map<String, String> headers,

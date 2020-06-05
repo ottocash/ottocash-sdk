@@ -23,6 +23,7 @@ import com.otto.sdk.model.api.request.OtpVerificationRequest;
 import com.otto.sdk.model.api.response.RequestOtpResponse;
 import com.otto.sdk.model.api.response.VerifyOtpResponse;
 import com.otto.sdk.presenter.OtpPresenter;
+import com.otto.sdk.ui.activity.account.forgotpin.ForgotPinActivity;
 import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
 import com.otto.sdk.ui.component.support.UiUtil;
 import com.poovam.pinedittextfield.LinePinField;
@@ -47,6 +48,7 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
     private OtpRequest modelOtpRequest;
     private boolean isCountdownFinish = false;
     private String phone;
+    private boolean forgotPin = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +69,9 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
             }
         });
 
+        forgotPin = Objects.requireNonNull(getIntent().getExtras()).getBoolean(IConfig.OC_FORGOT_PIN);
         boolean need_otp = Objects.requireNonNull(getIntent().getExtras()).getBoolean(IConfig.OC_NEED_OTP);
-        if (!need_otp){
+        if (!need_otp) {
             onCallApiOtpRequest();
         }
     }
@@ -117,7 +120,6 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
         });
 
     }
-
 
 
     /**
@@ -172,12 +174,18 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
      */
     @Override
     public void handleOtpVerify(VerifyOtpResponse model) {
-        if (model.getBaseMeta().getCode() == 200) {
-            Intent intent = new Intent(OtpLoginActivity.this, DashboardSDKActivity.class);
+        if ((model.getBaseMeta().getCode() == 200 && forgotPin)) {
+            Intent intent = new Intent(OtpLoginActivity.this, ForgotPinActivity.class);
+            intent.putExtra(IConfig.OC_SESSION_OTP, lineField.getText().toString());
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
             //saveSession();
+        } else if (model.getBaseMeta().getCode() == 200 && !forgotPin) {
+            Intent intent = new Intent(OtpLoginActivity.this, DashboardSDKActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
         } else {
             Toast.makeText(this, model.getBaseMeta().getMessage(), Toast.LENGTH_SHORT).show();
         }

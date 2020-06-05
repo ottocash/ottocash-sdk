@@ -13,8 +13,9 @@
     tools:showIn="@layout/activity_registration">
 
     <androidx.core.widget.NestedScrollView
+        android:layout_above="@id/layoutTnc"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:id="@+id/parent"
@@ -133,87 +134,6 @@
                     android:textColor="@color/Black_484848"
                     android:textSize="12sp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:orientation="horizontal">
-
-                    <CheckBox
-                        android:id="@+id/cbTACOttoCash"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:theme="@style/checkbox" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvTACOttoCash"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:autoLink="all"
-                        android:gravity="center_vertical"
-                        android:linksClickable="true"
-                        android:padding="5dp"
-                        android:text="@string/sign_up_label_tac_link"
-                        android:textAppearance="@style/BarlowMedium"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="50dp"
-                    android:orientation="horizontal">
-
-                    <CheckBox
-                        android:id="@+id/cbTACMitra"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:theme="@style/checkbox" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvTACMitra"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:autoLink="all"
-                        android:gravity="center_vertical"
-                        android:linksClickable="true"
-                        android:padding="5dp"
-                        android:text="@string/sign_up_label_tac_link_mitra"
-                        android:textAppearance="@style/BarlowMedium"
-                        android:textSize="14sp" />
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="invisible"
-                    android:layout_marginBottom="10dp"
-                    android:orientation="horizontal">
-
-                    <CheckBox
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:theme="@style/checkbox" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:autoLink="all"
-                        android:linksClickable="true"
-                        android:padding="5dp"
-                        android:text="ffffffffffffffffffffffffffffffffff"
-                        android:textAppearance="@style/BarlowMedium"
-                     />
-
-
-                </LinearLayout>
-
-
             </LinearLayout>
 
         </LinearLayout>
@@ -221,6 +141,72 @@
     </androidx.core.widget.NestedScrollView>
 
     <LinearLayout
+        android:id="@+id/layoutTnc"
+        android:layout_above="@id/bottom_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/cbTACOttoCash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:theme="@style/checkbox" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTACOttoCash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:autoLink="all"
+                android:gravity="center_vertical"
+                android:linksClickable="true"
+                android:padding="5dp"
+                android:text="@string/sign_up_label_tac_link"
+                android:textAppearance="@style/BarlowMedium"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/cbTACMitra"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:theme="@style/checkbox" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTACMitra"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:autoLink="all"
+                android:gravity="center_vertical"
+                android:linksClickable="true"
+                android:padding="5dp"
+                android:text="@string/sign_up_label_tac_link_mitra"
+                android:textAppearance="@style/BarlowMedium"
+                android:textSize="14sp" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
         android:id="@+id/bottom_layout"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"

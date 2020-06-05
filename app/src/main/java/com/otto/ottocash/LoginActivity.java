@@ -6,17 +6,16 @@ import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.crashlytics.android.Crashlytics;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.otto.sdk.IConfig;
-import com.otto.sdk.ui.activity.SdkActivity;
 
 import app.beelabs.com.codebase.support.util.CacheUtil;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.fabric.sdk.android.Fabric;
 
-public class LoginActivity extends SdkActivity {
+public class LoginActivity extends AppCompatActivity {
 
     @BindView(R.id.btnLogin)
     Button btnLogin;
