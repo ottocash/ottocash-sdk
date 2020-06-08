@@ -11,8 +11,9 @@ import com.otto.sdk.model.api.response.TransferToFriendResponse;
 import com.otto.sdk.presenter.PinVerificationPaymentPresenter;
 
 import app.beelabs.com.codebase.base.BaseDao;
-import app.beelabs.com.codebase.base.IDao;
-import app.beelabs.com.codebase.base.IDaoPresenter;
+
+import app.beelabs.com.codebase.base.contract.IDao;
+import app.beelabs.com.codebase.base.contract.IDaoPresenter;
 import app.beelabs.com.codebase.base.response.BaseResponse;
 import retrofit2.Response;
 

@@ -31,7 +31,7 @@ public class SdkActivity extends BaseActivity implements ISdkView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sdk);
+//        setContentView(R.layout.activity_sdk);
 
         checkIsExistingPhoneNumber();
     }

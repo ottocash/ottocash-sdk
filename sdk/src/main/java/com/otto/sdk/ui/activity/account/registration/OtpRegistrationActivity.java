@@ -225,9 +225,4 @@ public class OtpRegistrationActivity extends BaseActivity implements IOtpView {
         editor.putString("session", "aktivasi");
         editor.apply();
     }
-
-    @Override
-    public BaseActivity getBaseActivity() {
-        return OtpRegistrationActivity.this;
-    }
 }

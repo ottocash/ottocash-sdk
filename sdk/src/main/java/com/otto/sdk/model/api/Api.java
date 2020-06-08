@@ -2,6 +2,7 @@ package com.otto.sdk.model.api;
 
 import android.content.Context;
 
+import com.otto.sdk.BuildConfig;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCashSdk;
 import com.otto.sdk.model.api.request.CheckPhoneNumberRequest;
@@ -63,8 +64,8 @@ public class Api extends BaseApi {
                 .setupApiDomain(IConfig.API_BASE_URL, OttoCashSdk.getAppComponent(),
                         ApiService.class,
                         true,
-                        60);
-
+                        60,
+                        BuildConfig.DEBUG);
     }
 
 

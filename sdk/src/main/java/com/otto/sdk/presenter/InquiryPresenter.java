@@ -8,8 +8,10 @@ import com.otto.sdk.model.api.response.InquiryResponse;
 import com.otto.sdk.model.dao.InquiryDao;
 
 import app.beelabs.com.codebase.base.BasePresenter;
-import app.beelabs.com.codebase.base.IView;
+import app.beelabs.com.codebase.base.contract.IView;
 import app.beelabs.com.codebase.base.response.BaseResponse;
+
+import static com.otto.sdk.OttoCashSdk.getContext;
 
 public class InquiryPresenter extends BasePresenter implements InquiryDao.IInquiryDao {
 
@@ -36,10 +38,5 @@ public class InquiryPresenter extends BasePresenter implements InquiryDao.IInqui
     @Override
     public BasePresenter getPresenter() {
         return BasePresenter.getInstance(inquiryView, this);
-    }
-
-    @Override
-    public Context getContext() {
-        return inquiryView.getBaseActivity();
     }
 }

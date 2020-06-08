@@ -8,7 +8,7 @@ import com.otto.sdk.model.api.response.UpgradeAccountResponse;
 import com.otto.sdk.model.dao.UpgradeDao;
 
 import app.beelabs.com.codebase.base.BasePresenter;
-import app.beelabs.com.codebase.base.IView;
+import app.beelabs.com.codebase.base.contract.IView;
 import app.beelabs.com.codebase.base.response.BaseResponse;
 
 public class UpgradePresenter  extends BasePresenter implements UpgradeDao.IUpgradeDao {
@@ -27,16 +27,11 @@ public class UpgradePresenter  extends BasePresenter implements UpgradeDao.IUpgr
                 UpgradeAccountResponse model = (UpgradeAccountResponse) br;
                 iUpgrade.handleUpgrade(model);
             }
-        }).onUpgrade(upgradeAccountRequest, getContext());
+        }).onUpgrade(upgradeAccountRequest, iUpgrade.getCurrentActivity());
     }
 
     @Override
     public BasePresenter getPresenter() {
         return BasePresenter.getInstance(iUpgrade, this);
-    }
-
-    @Override
-    public Context getContext() {
-        return iUpgrade.getBaseActivity();
     }
 }

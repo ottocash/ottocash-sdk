@@ -9,6 +9,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.otto.ottocash.databinding.ActivityDashboardAppBinding;
+import com.otto.ottocash.databinding.PartialWidgetSdkBinding;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCash;
 import com.otto.sdk.OttoCashSdk;
@@ -22,6 +24,8 @@ import com.otto.sdk.ui.activity.SdkActivity;
 import com.otto.sdk.ui.activity.kycupgrade.IntroductionUpgradeActivity;
 import com.otto.sdk.ui.component.support.UiUtil;
 
+import org.jetbrains.annotations.NotNull;
+
 import app.beelabs.com.codebase.base.BasePresenter;
 import app.beelabs.com.codebase.support.util.CacheUtil;
 import butterknife.BindView;
@@ -30,8 +34,8 @@ import butterknife.OnClick;
 
 public class DashboardAppActivity extends SdkActivity implements ISdkView {
 
-    @BindView(R.id.tvSaldoOttoCash)
-    TextView tvSaldoOttoCash;
+//    @BindView(R.id.tvSaldoOttoCash)
+//    TextView tvSaldoOttoCash;
     @BindView(R.id.lyWidgetSdk)
     LinearLayout lyWidgetSdk;
     @BindView(R.id.btnCheckOut)
@@ -48,12 +52,19 @@ public class DashboardAppActivity extends SdkActivity implements ISdkView {
     private Boolean session_active = false;
     private Boolean sessionLogin = false;
     private SdkResourcePresenter sdkResourcePresenter;
+    private ActivityDashboardAppBinding binding;
+    private PartialWidgetSdkBinding childBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_beranda_app);
-        ButterKnife.bind(this);
+//        setContentView(R.layout.activity_beranda_app);
+        binding = ActivityDashboardAppBinding.inflate(getLayoutInflater());
+        childBinding = PartialWidgetSdkBinding.inflate(getLayoutInflater());
+
+        setContentView(binding.getRoot());
+//        ButterKnife.bind(this);
+
 
         onCreateToken();
         onGetSaldoOttoCash();
@@ -79,9 +90,9 @@ public class DashboardAppActivity extends SdkActivity implements ISdkView {
     private void onGetSaldoOttoCash() {
         saldo_ottocash = OttoCash.getBalance(this);
         if (saldo_ottocash.equals(isEmpty)) {
-            tvSaldoOttoCash.setText("Aktivasi Akun");
+            childBinding.tvSaldoOttoCash.setText("Aktivasi Akun");
         } else {
-            tvSaldoOttoCash.setText(UiUtil.formatMoneyIDRString(saldo_ottocash));
+            childBinding.tvSaldoOttoCash.setText(UiUtil.formatMoneyIDRString(saldo_ottocash));
         }
     }
 

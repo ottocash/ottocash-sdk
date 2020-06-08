@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCashSdk;
 import com.otto.sdk.R;
+import com.otto.sdk.databinding.ActivityDashboardSdkBinding;
 import com.otto.sdk.interfaces.IInquiryView;
 import com.otto.sdk.model.api.request.InquiryRequest;
 import com.otto.sdk.model.api.response.InquiryResponse;
@@ -42,7 +43,7 @@ import app.beelabs.com.codebase.support.util.CacheUtil;
 public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
 
     SwipeRefreshLayout lySwipeRefresh;
-    ImageView ivBack;
+//    ImageView ivBack;
     TextView tvTitleOttoCash;
     TextView tvEmoneyBalance;
     RecyclerView rvMainMenu;
@@ -54,13 +55,14 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
     private String user_name;
     private int verifyStatus;
     public static String nikmatinaja;
+    private ActivityDashboardSdkBinding binding;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard_sdk);
-
+//        setContentView(R.layout.activity_dashboard_sdk);
+        binding = ActivityDashboardSdkBinding.inflate(getLayoutInflater());
         CacheUtil.putPreferenceBoolean(IConfig.OC_SESSION_IS_ACTIVE, true, this);
         onCallApiInquiry();
 
@@ -86,7 +88,7 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
 
     public void initComponent() {
         lySwipeRefresh = findViewById(R.id.lySwipeRefresh);
-        ivBack = findViewById(R.id.ivBack);
+//        ivBack = findViewById(R.id.ivBack);
         tvTitleOttoCash = findViewById(R.id.tvTitleOttoCash);
         tvEmoneyBalance = findViewById(R.id.tvEmoneyBalance);
         rvMainMenu = findViewById(R.id.rvMainMenu);
@@ -116,7 +118,7 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
             startActivity(intent);
         });
 
-        ivBack.setOnClickListener(v -> onBackPressed());
+        binding.ivBack.setOnClickListener(v -> onBackPressed());
 
 
         lySwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -327,11 +329,6 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-    }
-
-    @Override
-    public BaseActivity getBaseActivity() {
-        return DashboardSDKActivity.this;
     }
 
 }
