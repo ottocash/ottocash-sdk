@@ -120,7 +120,7 @@
 
     <!--DIALOG-->
     <string name="dialog_tittle_coming_soon">Akan Segera Hadir!</string>
-    <string name="dialog_message_coming_soon">Request money akan hadir untuk kemudahan Anda dalam transaksi menggunakan OttoCash</string>
+    <string name="dialog_message_coming_soon">Fitur akan segera hadir untuk kemudahan Anda dalam transaksi menggunakan OttoCash</string>
     <string name="dialog_button_coming_soon">Tutup</string>
 
     <string name="dialog_title">Khusus Pengguna OttoCash Plus</string>
