@@ -8,8 +8,9 @@ import com.otto.sdk.model.api.request.ForgotPinRequest;
 import com.otto.sdk.presenter.ForgotPinPresenter;
 
 import app.beelabs.com.codebase.base.BaseDao;
-import app.beelabs.com.codebase.base.IDao;
-import app.beelabs.com.codebase.base.IDaoPresenter;
+
+import app.beelabs.com.codebase.base.contract.IDao;
+import app.beelabs.com.codebase.base.contract.IDaoPresenter;
 import app.beelabs.com.codebase.base.response.BaseResponse;
 import retrofit2.Response;
 

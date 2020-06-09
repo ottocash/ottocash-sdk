@@ -1,21 +1,15 @@
 package com.otto.sdk.presenter;
 
-import android.content.Context;
-import android.widget.Toast;
-
-import com.otto.sdk.IConfig;
 import com.otto.sdk.interfaces.IAuthView;
 import com.otto.sdk.model.api.request.LoginRequest;
 import com.otto.sdk.model.api.request.RegisterRequest;
 import com.otto.sdk.model.api.response.LoginResponse;
 import com.otto.sdk.model.api.response.RegisterResponse;
 import com.otto.sdk.model.dao.AuthDao;
-import com.otto.sdk.presenter.manager.SessionManager;
 
 import app.beelabs.com.codebase.base.BasePresenter;
 import app.beelabs.com.codebase.base.contract.IView;
 import app.beelabs.com.codebase.base.response.BaseResponse;
-import app.beelabs.com.codebase.support.util.CacheUtil;
 
 public class AuthPresenter extends BasePresenter implements AuthDao.ILoginDao {
 
@@ -49,7 +43,7 @@ public class AuthPresenter extends BasePresenter implements AuthDao.ILoginDao {
 
     @Override
     public BasePresenter getPresenter() {
-        return getInstance(authView,this);
+        return getInstance(authView, this);
     }
 
 }

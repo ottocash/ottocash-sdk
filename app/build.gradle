@@ -5,7 +5,7 @@ apply plugin: 'com.google.firebase.crashlytics'
 
 android {
     compileSdkVersion 28
-    buildToolsVersion "28.0.3"
+    buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.otto.ottocash"
         minSdkVersion 19

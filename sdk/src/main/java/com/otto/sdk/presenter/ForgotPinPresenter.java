@@ -7,7 +7,8 @@ import com.otto.sdk.model.api.request.ForgotPinRequest;
 import com.otto.sdk.model.dao.ForgotPinDao;
 
 import app.beelabs.com.codebase.base.BasePresenter;
-import app.beelabs.com.codebase.base.IView;
+
+import app.beelabs.com.codebase.base.contract.IView;
 import app.beelabs.com.codebase.base.response.BaseResponse;
 
 public class ForgotPinPresenter extends BasePresenter implements ForgotPinDao.IForgotPinDao {
@@ -26,16 +27,11 @@ public class ForgotPinPresenter extends BasePresenter implements ForgotPinDao.IF
                 BaseResponse model = (BaseResponse) br;
                 forgotPinView.handleForgotPin(model);
             }
-        }).onForgotPin(requestModel, getContext());
+        }).onForgotPin(requestModel, forgotPinView.getCurrentActivity());
     }
 
     @Override
     public BasePresenter getPresenter() {
         return getInstance(forgotPinView, this);
-    }
-
-    @Override
-    public Context getContext() {
-        return forgotPinView.getBaseActivity();
     }
 }
