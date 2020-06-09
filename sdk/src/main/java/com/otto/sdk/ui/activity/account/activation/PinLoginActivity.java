@@ -34,7 +34,7 @@ import app.beelabs.com.codebase.support.util.CacheUtil;
 public class PinLoginActivity extends AppActivity implements IAuthView {
 
     ImageView ivBack;
-    TextView errorMessage;
+    TextView errorMessage, forgotPin;
     LinePinField lineField;
     String messagePIN;
     private LoginRequest model;
@@ -58,6 +58,7 @@ public class PinLoginActivity extends AppActivity implements IAuthView {
         ivBack = findViewById(R.id.ivBack);
         errorMessage = findViewById(R.id.errorMessage);
         lineField = findViewById(R.id.lineField);
+        forgotPin = findViewById(R.id.lupaPin);
 
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,6 +137,16 @@ public class PinLoginActivity extends AppActivity implements IAuthView {
     private void errorMessagePinInvalid() {
         errorMessage.setText(getString(R.string.invalid_pin));
         errorMessage.setTextColor(ContextCompat.getColor(this, R.color.Blue_2E70B1));
+
+        //forgotPin.setVisibility(View.VISIBLE);
+        /*forgotPin.setOnClickListener(view -> {
+            Intent intent = new Intent(PinLoginActivity.this, OtpLoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.putExtra(IConfig.OC_SESSION_PHONE, phone);
+            intent.putExtra(IConfig.OC_FORGOT_PIN, true);
+            startActivity(intent);
+            finish();
+        });*/
     }
 
     private void errorMessageBlock() {

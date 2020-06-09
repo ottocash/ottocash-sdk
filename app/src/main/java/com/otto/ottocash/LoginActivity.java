@@ -6,36 +6,31 @@ import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.crashlytics.android.Crashlytics;
-import com.otto.ottocash.databinding.ActivityMainBinding;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.otto.sdk.IConfig;
-import com.otto.sdk.ui.activity.SdkActivity;
 
 import app.beelabs.com.codebase.support.util.CacheUtil;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.fabric.sdk.android.Fabric;
 
-public class LoginActivity extends SdkActivity {
+public class LoginActivity extends AppCompatActivity {
 
-//    @BindView(R.id.btnLogin)
-//    Button btnLogin;
-//    @BindView(R.id.edt_phone)
-//    EditText edt_phone;
+    @BindView(R.id.btnLogin)
+    Button btnLogin;
+    @BindView(R.id.edt_phone)
+    EditText edt_phone;
 
     String phone_number;
     String client_id;
     String client_secret;
-    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-
-//        setContentView(R.layout.activity_main);
-//        ButterKnife.bind(this);
+        setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         initCredentialsHostApp();
     }
@@ -64,11 +59,11 @@ public class LoginActivity extends SdkActivity {
 
     @OnClick(R.id.btnLogin)
     public void onNumberPhone() {
-        phone_number = binding.edtPhone.getText().toString();
+        phone_number = edt_phone.getText().toString();
         CacheUtil.putPreferenceString(IConfig.OC_SESSION_PHONE, phone_number, LoginActivity.this);
 
         if (TextUtils.isEmpty(phone_number)) {
-            binding.edtPhone.setError("Input Phone Number");
+            edt_phone.setError("Input Phone Number");
         } else {
             Intent intent = new Intent(LoginActivity.this, DashboardAppActivity.class);
             startActivity(intent);

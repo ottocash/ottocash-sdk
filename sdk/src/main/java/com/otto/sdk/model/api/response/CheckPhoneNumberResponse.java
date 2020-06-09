@@ -37,6 +37,7 @@ public class CheckPhoneNumberResponse extends BaseResponse {
          */
 
         private boolean is_existing;
+        private boolean need_otp;
 
         public boolean isIs_existing() {
             return is_existing;
@@ -44,6 +45,14 @@ public class CheckPhoneNumberResponse extends BaseResponse {
 
         public void setIs_existing(boolean is_existing) {
             this.is_existing = is_existing;
+        }
+
+        public boolean isNeed_otp() {
+            return need_otp;
+        }
+
+        public void setNeed_otp(boolean need_otp) {
+            this.need_otp = need_otp;
         }
     }
 

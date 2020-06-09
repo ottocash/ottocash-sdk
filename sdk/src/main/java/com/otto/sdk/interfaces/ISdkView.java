@@ -12,3 +12,5 @@ public interface ISdkView extends IView {
     void handleCheckIsExistingPhoneNumber(CheckPhoneNumberResponse model);
     void handleToken(CreateTokenResponse model);
 }
+
+

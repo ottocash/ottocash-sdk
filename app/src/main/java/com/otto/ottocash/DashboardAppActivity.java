@@ -14,14 +14,12 @@ import com.otto.ottocash.databinding.PartialWidgetSdkBinding;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCash;
 import com.otto.sdk.OttoCashSdk;
-import com.otto.sdk.interfaces.ISdkView;
 import com.otto.sdk.model.api.request.CheckPhoneNumberRequest;
 import com.otto.sdk.model.api.request.CreateTokenRequest;
 import com.otto.sdk.model.api.response.CheckPhoneNumberResponse;
 import com.otto.sdk.model.api.response.CreateTokenResponse;
 import com.otto.sdk.presenter.SdkResourcePresenter;
 import com.otto.sdk.ui.activity.SdkActivity;
-import com.otto.sdk.ui.activity.kycupgrade.IntroductionUpgradeActivity;
 import com.otto.sdk.ui.component.support.UiUtil;
 
 import org.jetbrains.annotations.NotNull;
@@ -32,7 +30,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class DashboardAppActivity extends SdkActivity implements ISdkView {
+public class DashboardAppActivity extends SdkActivity {
 
 //    @BindView(R.id.tvSaldoOttoCash)
 //    TextView tvSaldoOttoCash;
@@ -50,6 +48,7 @@ public class DashboardAppActivity extends SdkActivity implements ISdkView {
     boolean checkIsExistingPhoneNumber = false;
 
     private Boolean session_active = false;
+    private Boolean session_need_otp = false;
     private Boolean sessionLogin = false;
     private SdkResourcePresenter sdkResourcePresenter;
     private ActivityDashboardAppBinding binding;
@@ -76,14 +75,6 @@ public class DashboardAppActivity extends SdkActivity implements ISdkView {
         onCreateToken();
         onGetSaldoOttoCash();
         super.onResume();
-    }
-
-
-    @Override
-    protected void onStart() {
-        onCreateToken();
-        onGetSaldoOttoCash();
-        super.onStart();
     }
 
 
@@ -140,11 +131,11 @@ public class DashboardAppActivity extends SdkActivity implements ISdkView {
     @Override
     public void handleCheckIsExistingPhoneNumber(CheckPhoneNumberResponse model) {
         if (model.getMeta().getCode() == 200) {
-            //onCreateToken();
 
             checkIsExistingPhoneNumber = model.getData().isIs_existing();
             sessionLogin = CacheUtil.getPreferenceBoolean(IConfig.OC_SESSION_LOGIN_KEY, DashboardAppActivity.this);
             session_active = CacheUtil.getPreferenceBoolean(IConfig.OC_SESSION_IS_ACTIVE, DashboardAppActivity.this);
+            session_need_otp = CacheUtil.getPreferenceBoolean(IConfig.OC_SESSION_NEED_OTP, DashboardAppActivity.this);
 
 
             lyWidgetSdk.setOnClickListener(new View.OnClickListener() {
@@ -172,14 +163,13 @@ public class DashboardAppActivity extends SdkActivity implements ISdkView {
     @Override
     public void handleToken(CreateTokenResponse model) {
         if (model.getMeta().getCode() == 200) {
-            onCheckPhoneNumber();
 
             String accessToken = model.getData().getClient().getAccessToken();
             CacheUtil.putPreferenceString(IConfig.OC_SESSION_ACCESS_TOKEN, accessToken, DashboardAppActivity.this);
 
+            onCheckPhoneNumber();
         } else {
-            //Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
-            //        Toast.LENGTH_LONG).show();
+            Toast.makeText(this, model.getMeta().getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -197,16 +187,9 @@ public class DashboardAppActivity extends SdkActivity implements ISdkView {
         //OttoCash.onCallPayment(this, account_number, 1);
     }
 
-//    @OnClick(R.id.btnUpgrade)
-//    public void onUpgrade() {
-//        startActivity(new Intent(this, IntroductionUpgradeActivity.class));
-//        //Toast.makeText(DashboardAppActivity.this, "Pembayaran OttoCash", Toast.LENGTH_SHORT).show();
-//        //OttoCash.onCallPayment(this, account_number, 1);
-//    }
-
     @OnClick(R.id.btnClearCache)
     public void onClearCache() {
-        CacheUtil.putPreferenceBoolean(String.valueOf(IConfig.SESSION_CHECK_PHONE_NUMBER), false, DashboardAppActivity.this);
+        CacheUtil.putPreferenceBoolean(String.valueOf(IConfig.OC_SESSION_CHECK_PHONE_NUMBER), false, DashboardAppActivity.this);
         CacheUtil.putPreferenceBoolean(IConfig.OC_SESSION_LOGIN_KEY, false, DashboardAppActivity.this);
         CacheUtil.clearPreference(this);
 
@@ -215,6 +198,14 @@ public class DashboardAppActivity extends SdkActivity implements ISdkView {
         startActivity(intent);
         finish();
     }
+
+//    @OnClick(R.id.btnUpgrade)
+//    public void onUpgrade() {
+//        startActivity(new Intent(this, IntroductionUpgradeActivity.class));
+//        //Toast.makeText(DashboardAppActivity.this, "Pembayaran OttoCash", Toast.LENGTH_SHORT).show();
+//        //OttoCash.onCallPayment(this, account_number, 1);
+//    }
+
 
     @Override
     public void onBackPressed() {

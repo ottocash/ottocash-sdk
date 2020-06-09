@@ -93,6 +93,8 @@
         <attr name="title" />
         <attr name="typeface" />
         <attr name="customLayout" />
+        <!--<attr name="customSpinnerLayout" />
+        <attr name="customDropdownLayout" />-->
         <attr name="isHidden" format="boolean" />
         <attr name="hideKeyboard" format="boolean" />
     </declare-styleable>

@@ -36,6 +36,9 @@
     <string name="confirm_pin_ottocash">Konfirmasi PIN OttoCash</string>
     <string name="save_ottocash">Simpan</string>
 
+    <string name="title_set_new_pin">Set PIN baru Anda</string>
+
+
 
     <!--OTP-->
     <string name="input_otp_ottocash">Masukkan 6 Digit Kode OTP</string>
@@ -117,11 +120,11 @@
 
     <!--DIALOG-->
     <string name="dialog_tittle_coming_soon">Akan Segera Hadir!</string>
-    <string name="dialog_message_coming_soon">Request money akan hadir untuk kemudahan Anda dalam transaksi menggunakan OttoCash</string>
+    <string name="dialog_message_coming_soon">Fitur akan segera hadir untuk kemudahan Anda dalam transaksi menggunakan OttoCash</string>
     <string name="dialog_button_coming_soon">Tutup</string>
 
     <string name="dialog_title">Khusus Pengguna OttoCash Plus</string>
-    <string name="dialog_msg">Fitur ini hanya tersedia bagi pengguna OttoCash Plus. Lakukan upgrade di aplikasi OttoCash</string>
+    <string name="dialog_msg">Fitur akan segera hadir untuk kemudahan Anda dalam transaksi menggunakan OttoCash</string>
     <string name="dialog_btn_close">Tutup</string>
 
     <string name="dialog_btn_back">Kembali</string>

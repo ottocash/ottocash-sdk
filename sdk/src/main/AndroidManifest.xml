@@ -14,6 +14,7 @@
     <uses-permission android:name="android.permission.FLASHLIGHT" />
 
     <application android:name=".OttoCashSdk">
+        <activity android:name=".ui.activity.account.forgotpin.ForgotPinActivity"></activity>
         <activity
             android:name=".ui.activity.kycupgrade.takeFotoSelfie.PreviewFotoSelfieActivity"
             android:screenOrientation="portrait" />

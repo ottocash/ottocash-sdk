@@ -2,7 +2,7 @@ package com.otto.sdk.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.widget.Toast;
 
 import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCashSdk;
@@ -27,13 +27,20 @@ public class SdkActivity extends BaseActivity implements ISdkView {
     private SdkResourcePresenter presenterSDK;
     private CheckPhoneNumberResponse checkPhoneNumberResponse;
     boolean is_existing = false;
+    boolean is_need_otp = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_sdk);
 
-        checkIsExistingPhoneNumber();
+        onCreateToken();
+    }
+
+    @Override
+    protected void onResume() {
+        onCreateToken();
+        super.onResume();
     }
 
 
@@ -55,7 +62,6 @@ public class SdkActivity extends BaseActivity implements ISdkView {
         SdkActivity.this.startActivity(intent);
     }
 
-
     /**
      * CHECK PHONE NUMBER IS EXISTING IN OTTOCASH
      */
@@ -66,7 +72,7 @@ public class SdkActivity extends BaseActivity implements ISdkView {
         account_number = CacheUtil.getPreferenceString(IConfig.OC_SESSION_PHONE, SdkActivity.this);
         model.setPhone(account_number);
 
-        //new InquiryPresenter(this).getInquiry(new InquiryRequest());
+
         showApiProgressDialog(OttoCashSdk.getAppComponent(), new SdkResourcePresenter(SdkActivity.this) {
             @Override
             public void call() {
@@ -103,13 +109,12 @@ public class SdkActivity extends BaseActivity implements ISdkView {
         checkPhoneNumberResponse = model;
         if (model.getMeta().getCode() == 200) {
             is_existing = model.getData().isIs_existing();
-            CacheUtil.putPreferenceBoolean(String.valueOf(IConfig.SESSION_CHECK_PHONE_NUMBER), is_existing, SdkActivity.this);
-
-            onCreateToken();
+            is_need_otp = model.getData().isNeed_otp();
+            CacheUtil.putPreferenceBoolean(IConfig.OC_SESSION_CHECK_PHONE_NUMBER, is_existing, SdkActivity.this);
+            CacheUtil.putPreferenceBoolean(IConfig.OC_SESSION_NEED_OTP, is_need_otp, SdkActivity.this);
 
         } else {
-            //Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
-            //       Toast.LENGTH_LONG).show();
+            Toast.makeText(this, model.getMeta().getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -124,9 +129,10 @@ public class SdkActivity extends BaseActivity implements ISdkView {
             String accessToken = model.getData().getClient().getAccessToken();
             CacheUtil.putPreferenceString(IConfig.OC_SESSION_ACCESS_TOKEN, accessToken, SdkActivity.this);
 
+            checkIsExistingPhoneNumber();
+
         } else {
-            //Toast.makeText(this, model.getMeta().getCode() + ":" + model.getMeta().getMessage(),
-            //        Toast.LENGTH_LONG).show();
+            Toast.makeText(this, model.getMeta().getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
