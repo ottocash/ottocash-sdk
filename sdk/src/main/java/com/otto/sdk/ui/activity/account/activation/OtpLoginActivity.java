@@ -174,14 +174,7 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
      */
     @Override
     public void handleOtpVerify(VerifyOtpResponse model) {
-        if ((model.getBaseMeta().getCode() == 200 && forgotPin)) {
-            Intent intent = new Intent(OtpLoginActivity.this, ForgotPinActivity.class);
-            intent.putExtra(IConfig.OC_SESSION_OTP, lineField.getText().toString());
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-            finish();
-            //saveSession();
-        } else if (model.getBaseMeta().getCode() == 200 && !forgotPin) {
+        if (model.getBaseMeta().getCode() == 200) {
             Intent intent = new Intent(OtpLoginActivity.this, DashboardSDKActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
@@ -201,9 +194,16 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (charSequence.toString().length() == 6) {
+                if (charSequence.toString().length() == 6 && !forgotPin) {
                     hideSoftKeyboard(lineField);
                     onCallApiOtpVerify();
+                } else if (charSequence.toString().length() == 6 && forgotPin) {
+                    hideSoftKeyboard(lineField);
+                    Intent intent = new Intent(OtpLoginActivity.this, ForgotPinActivity.class);
+                    intent.putExtra(IConfig.OC_SESSION_OTP, lineField.getText().toString());
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    finish();
                 }
             }
 

@@ -27,6 +27,7 @@ public interface IConfig {
     String OC_NEED_OTP = "need_otp";
     String OC_FORGOT_PIN = "forgot_pin";
     String OC_SESSION_OTP = "session_otp";
+    String OC_SESSION_PIN = "session_pin";
 
 
     //KEY PAYMENT RECEIPT
@@ -91,5 +92,8 @@ public interface IConfig {
     String KEY_BASE64_SELFIE = "value_base64_selfie";
     String FILE_NAME_MAIN_FOTO_SELFIE = "foto_selfie";
     String FILE_NAME_FOTO_SELFIE = FOLDER_FOTO + File.separator + FILE_NAME_MAIN_FOTO_SELFIE + IConfig.FILE_SEPARATOR;
+
+    String FILE_NAME_MAIN_FOTO_RECEIPT = "foto_receipt";
+    String FILE_NAME_FOTO_RECEIPT = FOLDER_FOTO + File.separator + FILE_NAME_MAIN_FOTO_RECEIPT + IConfig.FILE_SEPARATOR;
 
 }

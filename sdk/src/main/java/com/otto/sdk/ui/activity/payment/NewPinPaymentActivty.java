@@ -30,7 +30,6 @@ import com.otto.sdk.presenter.InquiryPresenter;
 import com.otto.sdk.presenter.PinVerificationPaymentPresenter;
 import com.otto.sdk.presenter.ReviewCheckoutPresenter;
 import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
-import com.otto.sdk.ui.activity.payment.otto.PaymentSuccessOttoActivity;
 import com.otto.sdk.ui.activity.payment.pede.PaymentSuccessPedeActivity;
 import com.otto.sdk.ui.adapter.PinAdapter;
 import com.otto.sdk.ui.component.support.DeviceId;

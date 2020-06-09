@@ -18,6 +18,7 @@ import com.otto.sdk.OttoCashSdk;
 import com.otto.sdk.R;
 import com.otto.sdk.interfaces.IForgotPinView;
 import com.otto.sdk.model.api.request.ForgotPinRequest;
+import com.otto.sdk.model.api.request.LoginRequest;
 import com.otto.sdk.model.api.request.RegisterRequest;
 import com.otto.sdk.presenter.AuthPresenter;
 import com.otto.sdk.presenter.ForgotPinPresenter;
@@ -41,7 +42,6 @@ public class ForgotPinActivity extends AppActivity implements IForgotPinView {
     ImageView ivBack;
 
     private boolean isFormValidationSuccess = false;
-    private ForgotPinRequest model;
     private String phone_number;
     private String session_otp;
 
@@ -66,8 +66,8 @@ public class ForgotPinActivity extends AppActivity implements IForgotPinView {
         addTextWatcher(edtPin);
         addTextWatcher(edtConfirmPin);
 
-        phone_number = CacheUtil.getPreferenceString(OC_SESSION_PHONE, ForgotPinActivity.this);
-        session_otp  = Objects.requireNonNull(getIntent().getExtras()).getString(IConfig.OC_SESSION_OTP);
+        //phone_number = CacheUtil.getPreferenceString(OC_SESSION_PHONE, ForgotPinActivity.this);
+        session_otp = Objects.requireNonNull(getIntent().getExtras()).getString(IConfig.OC_SESSION_OTP);
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,19 +90,19 @@ public class ForgotPinActivity extends AppActivity implements IForgotPinView {
 
 
     private void onCallApiForgotPin() {
-        if (Connectivity.isNetworkAvailable(this)) {
-            model.setPhone_number(phone_number);
-            model.setPin(edtPin.getText().toString());
-            model.setOtp(session_otp);
+        final ForgotPinRequest model = new ForgotPinRequest();
 
-            showApiProgressDialog(OttoCashSdk.getAppComponent(), new ForgotPinPresenter(ForgotPinActivity.this) {
-                @Override
-                public void call() {
-                    getForgotPin(model);
+        model.setPhone_number(CacheUtil.getPreferenceString(OC_SESSION_PHONE, ForgotPinActivity.this));
+        model.setPin(edtPin.getText().toString());
+        model.setOtp(session_otp);
 
-                }
-            }, "Loading");
-        }
+        showApiProgressDialog(OttoCashSdk.getAppComponent(), new ForgotPinPresenter(ForgotPinActivity.this) {
+            @Override
+            public void call() {
+                getForgotPin(model);
+
+            }
+        }, "Loading");
     }
 
 

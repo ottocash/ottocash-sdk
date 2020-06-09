@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCash;
 import com.otto.sdk.OttoCashSdk;
+import com.otto.sdk.interfaces.ISdkView;
 import com.otto.sdk.model.api.request.CheckPhoneNumberRequest;
 import com.otto.sdk.model.api.request.CreateTokenRequest;
 import com.otto.sdk.model.api.response.CheckPhoneNumberResponse;
@@ -26,7 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class DashboardAppActivity extends SdkActivity {
+public class DashboardAppActivity extends SdkActivity implements ISdkView {
 
     @BindView(R.id.tvSaldoOttoCash)
     TextView tvSaldoOttoCash;
@@ -36,6 +37,9 @@ public class DashboardAppActivity extends SdkActivity {
     Button btnCheckOut;
     @BindView(R.id.btnClearCache)
     Button btnClearCache;
+
+//    @BindView(R.id.btnUpgrade)
+//    Button btnUpgrade;
 
     private String account_number;
     String saldo_ottocash;

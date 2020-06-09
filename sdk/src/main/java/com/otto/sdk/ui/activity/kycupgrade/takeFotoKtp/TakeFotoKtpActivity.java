@@ -2,6 +2,7 @@ package com.otto.sdk.ui.activity.kycupgrade.takeFotoKtp;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -35,12 +36,11 @@ public class TakeFotoKtpActivity extends AppActivity {
     private String TAG = TakeFotoKtpActivity.class.getSimpleName();
     private boolean isSuccess = false;
 
-    CameraKitView cameraKitView;
+    CameraKitView cameraView;
     ImageView imgCamera;
     ImageView ivBack;
     ImageView imgFlash;
     private String fileName;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,44 +62,44 @@ public class TakeFotoKtpActivity extends AppActivity {
             }
         });
 
-        cameraKitView.setFacing(CameraKit.FACING_BACK);
+        cameraView.setFacing(CameraKit.FACING_BACK);
 
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        cameraKitView.onStart();
+        cameraView.onStart();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        cameraKitView.onResume();
+        cameraView.onResume();
     }
 
     @Override
     protected void onPause() {
-        cameraKitView.onPause();
+        cameraView.onPause();
         super.onPause();
     }
 
     @Override
     protected void onStop() {
-        cameraKitView.onStop();
+        cameraView.onStop();
         super.onStop();
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        cameraKitView.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        cameraView.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
 
     private void initContentUI() {
 
-        cameraKitView = findViewById(R.id.cameraKitView);
+        cameraView = findViewById(R.id.cameraKitView);
         imgCamera = findViewById(R.id.imgCamera);
         ivBack = findViewById(R.id.ivBack);
         imgFlash = findViewById(R.id.imgFlash);
@@ -107,20 +107,28 @@ public class TakeFotoKtpActivity extends AppActivity {
         ivBack.setOnClickListener(view -> {
             setResult(Activity.RESULT_CANCELED);
             onBackPressed();
-            //finish();
         });
+
+        cameraView.setFlash(CameraKit.FLASH_TORCH);
 
         imgFlash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cameraKitView.setFlash(CameraKit.FLASH_ON);
+                if (cameraView.getFlash() != CameraKit.FLASH_ON) {
+                    cameraView.setFlash(CameraKit.FLASH_ON);
+                    Toast.makeText(TakeFotoKtpActivity.this, "Flash ON", Toast.LENGTH_SHORT).show();
+
+                } else if (cameraView.getFlash() != CameraKit.FLASH_OFF) {
+                    cameraView.setFlash(CameraKit.FLASH_OFF);
+                    Toast.makeText(TakeFotoKtpActivity.this, "Flash OF", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
 
         imgCamera.setOnClickListener(view -> {
             showProgress(TakeFotoKtpActivity.this);
-            cameraKitView.captureImage((cameraKitView, bytes) -> {
+            cameraView.captureImage((cameraKitView, bytes) -> {
 
                 // process save file
                 fileName = IConfig.FILE_NAME_FOTO_KTP + DateUtil.getTimestamp() + IConfig.EXTENSION_FILE_FOTO;
