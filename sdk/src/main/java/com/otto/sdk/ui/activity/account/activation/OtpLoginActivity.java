@@ -145,10 +145,10 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
      * Call Api Otp Verify
      */
     private void onCallApiOtpVerify() {
-        int user_id = CacheUtil.getPreferenceInteger(IConfig.OC_SESSION_USER_ID, OtpLoginActivity.this);
+        String phone_number = CacheUtil.getPreferenceString(OC_SESSION_PHONE, OtpLoginActivity.this);
         final OtpVerificationRequest otpVerificationRequest = new OtpVerificationRequest();
 
-        otpVerificationRequest.setUser_id(user_id);
+        otpVerificationRequest.setPhone_number(phone_number);
         otpVerificationRequest.setOtp_code(lineField.getText().toString());
 
         showApiProgressDialog(OttoCashSdk.getAppComponent(), new OtpPresenter(OtpLoginActivity.this) {

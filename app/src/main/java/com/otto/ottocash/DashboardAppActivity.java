@@ -194,7 +194,7 @@ public class DashboardAppActivity extends SdkActivity implements ISdkView {
 
 //    @OnClick(R.id.btnUpgrade)
 //    public void onUpgrade() {
-//        startActivity(new Intent(this, IntroductionUpgradeActivity.class));
+//        startActivity(new Intent(this, TopUpActivity.class));
 //        //Toast.makeText(DashboardAppActivity.this, "Pembayaran OttoCash", Toast.LENGTH_SHORT).show();
 //        //OttoCash.onCallPayment(this, account_number, 1);
 //    }

@@ -8,15 +8,15 @@ public class OtpVerificationRequest {
      * otp_code : 918139
      */
 
-    private int user_id;
+    private String phone_number;
     private String otp_code;
 
-    public int getUser_id() {
-        return user_id;
+    public String getPhone_number() {
+        return phone_number;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
     }
 
     public String getOtp_code() {

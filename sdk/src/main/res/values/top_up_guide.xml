@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    //TRANSFER BANK
+    <string name="top_up_with_transfer_to_bank_title">Transfer Bank</string>
+    <string name="top_up_with_transfer_to_bank_desc">ATM, i-Banking, m-banking</string>
+
+    <string name="top_up_via_atm_title">Via ATM</string>
+    <string name="top_up_via_atm_1">Datang ke mesin ATM, masukkan kartu dan PIN ATM kamu</string>
+    <string name="top_up_via_atm_2">Pilih menu Transfer Pilih</string>
+    <string name="top_up_via_atm_3">Pilih transfer ke Bank Lain</string>
+    <string name="top_up_via_atm_4">Masukkan kode Bank INA Perdana (513)</string>
+    <string name="top_up_via_atm_5">Masukkan nomor Virtual Account kamu : 99055%1$s</string>
+    <string name="top_up_via_atm_6">Masukkan Nominal Top Up</string>
+    <string name="top_up_via_atm_7">Konfirmasi Transaksi Telah Berhasil</string>
+
+
+    //MANDIRI
+    <string name="top_up_with_transfer_to_mandiri_title">Melalui Transfer Bank Mandiri</string>
+    <string name="top_up_with_transfer_to_mandiri_desc">ATM, i-Banking, m-banking</string>
+    <string name="note_bank_mandiri">Catatan:\nBiaya top-up Rp 1.500\nMinimal top up Rp 10.000\n</string>
+
+    <string name="top_up_via_atm_mandiri_title">Via ATM</string>
+    <string name="top_up_via_atm_mandiri_1">Datang ke mesin ATM, masukkan kartu dan PIN ATM kamu</string>
+    <string name="top_up_via_atm_mandiri_2">Pilih menu Bayar/Beli</string>
+    <string name="top_up_via_atm_mandiri_3">Pilih Lainnya</string>
+    <string name="top_up_via_atm_mandiri_4">Pilih Multi Payment</string>
+    <string name="top_up_via_atm_mandiri_5">Masukkan Kode Perusahaan 71001 (OttoCash) Masukkan nomor Akun OC Kamu (%1$s)</string>
+    <string name="top_up_via_atm_mandiri_6">Masukkan nominal top up</string>
+    <string name="top_up_via_atm_mandiri_7">Pastikkan nama akun dan nominal sudah benar</string>
+    <string name="top_up_via_atm_mandiri_8">Pilih nomor 1 dan tekan “Ya”</string>
+    <string name="top_up_via_atm_mandiri_9">Konfirmasi transaksi telah berhasil</string>
+
+    <string name="top_up_via_mobile_mandiri_title">Via Mobile Banking Bank Mandiri</string>
+    <string name="top_up_via_mobile_mandiri_1">Login ke akun Mandiri Online kamu</string>
+    <string name="top_up_via_mobile_mandiri_2">Pada menu utama pilih menu “Pembayaran”</string>
+    <string name="top_up_via_mobile_mandiri_3">Pilih Multi Payment</string>
+    <string name="top_up_via_mobile_mandiri_4">Pilih penyedia jasa OttoCash (71001)</string>
+    <string name="top_up_via_mobile_mandiri_5">Masukkan nomor Akun OC kamu (%1$s)</string>
+    <string name="top_up_via_mobile_mandiri_6">Masukkan nominal top up</string>
+    <string name="top_up_via_mobile_mandiri_7">Pastikkan nama akun dan nominal sudah benar</string>
+    <string name="top_up_via_mobile_mandiri_8">Ikuti instruksi untuk menyelesaikan transaksi</string>
+
+    <string name="top_up_via_internet_mandiri_title">Via Internet Banking Bank Mandiri</string>
+    <string name="top_up_via_internet_mandiri_1">Login ke akun Internet Banking Mandiri kamu.</string>
+    <string name="top_up_via_internet_mandiri_2">Pada menu utama pilih menu “Pembayaran”</string>
+    <string name="top_up_via_internet_mandiri_3">Pilih Multi Payment</string>
+    <string name="top_up_via_internet_mandiri_4">Pilih penyedia jasa OttoCash (71001)</string>
+    <string name="top_up_via_internet_mandiri_5">Masukkan nomor Akun OC kamu (%1$s)</string>
+    <string name="top_up_via_internet_mandiri_6">Masukkan nominal top up</string>
+    <string name="top_up_via_internet_mandiri_7">Pastikkan nama akun dan nominal sudah benar</string>
+    <string name="top_up_via_internet_mandiri_8">Ikuti instruksi untuk menyelesaikan transaksi</string>
+
+
+    //BCA
+    <string name="top_up_with_transfer_to_bca_title">Melalu Transfer VA BCA</string>
+    <string name="top_up_with_transfer_to_bca_desc">ATM, i-Banking, m-banking</string>
+
+    <string name="top_up_via_mobile_bca_title">Via MBCA</string>
+    <string name="top_up_via_mobile_bca_1">Login ke akun MBCA anda</string>
+    <string name="top_up_via_mobile_bca_2">Pilih menu m-Transfer</string>
+    <string name="top_up_via_mobile_bca_3">Pilih BCA Virtual Account</string>
+    <string name="top_up_via_mobile_bca_4">Masukkan 21033 + nomor ponsel anda : 20133%1$s</string>
+    <string name="top_up_via_mobile_bca_5">Pastikan nama akun OC anda sudah sesuai</string>
+    <string name="top_up_via_mobile_bca_6">Masukkan nominal top up (Biaya Admin Rp 1,000 akan memotong dari nominal top up)</string>
+    <string name="top_up_via_mobile_bca_7">Masukkan PIN &amp; Konfirmasi transfer</string>
+    <string name="top_up_via_mobile_bca_8">Konfirmasi transaksi berhasil dilakukan</string>
+
+
+    <string name="top_up_via_atm_bca_title">Via ATM BCA </string>
+    <string name="top_up_via_atm_bca_1">Masukkan kartu ATM dan PIN BCA Anda</string>
+    <string name="top_up_via_atm_bca_2">Pilih Menu Transaksi Lainnya</string>
+    <string name="top_up_via_atm_bca_3">Pilih Menu Transfer</string>
+    <string name="top_up_via_atm_bca_4">Pilih Menu ke Rek BCA Virtual Account</string>
+    <string name="top_up_via_atm_bca_5">Masukkan 21033 + nomor ponsel anda : 20133%1$s</string>
+    <string name="top_up_via_atm_bca_6">Masukkan nominal top up (Biaya Admin Rp 1,000 akan memotong dari nominal top up)</string>
+    <string name="top_up_via_atm_bca_7">Ikuti instruksi untuk menyelesaikan transaksi</string>
+    <string name="top_up_via_atm_bca_8">Konfirmasi transaksi berhasil dilakukan</string>
+
+
+    <string name="top_up_via_klik_bca_title">Via Klik BCA</string>
+    <string name="top_up_via_klik_bca_1">Login ke akun Klik BCA Anda</string>
+    <string name="top_up_via_klik_bca_2">Pilih Menu Transfer Dana</string>
+    <string name="top_up_via_klik_bca_3">Pilih Transfer ke BCA Virtual Account</string>
+    <string name="top_up_via_klik_bca_4">Masukkan 21033 + nomor ponsel anda : 20133%1$s</string>
+    <string name="top_up_via_klik_bca_5">Masukkan nominal top up (Biaya Admin Rp 1,000 akan memotong dari nominal top up)</string>
+    <string name="top_up_via_klik_bca_6">Ikuti instruksi untuk menyelesaikan transaksi</string>
+    <string name="top_up_via_klik_bca_7">Konfirmasi transaksi berhasil dilakukan</string>
+
+</resources>
