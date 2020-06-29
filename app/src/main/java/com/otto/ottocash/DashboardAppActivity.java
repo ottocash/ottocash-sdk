@@ -1,5 +1,6 @@
 package com.otto.ottocash;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -38,6 +39,8 @@ public class DashboardAppActivity extends SdkActivity implements ISdkView {
     @BindView(R.id.btnClearCache)
     Button btnClearCache;
 
+    Context context;
+
 //    @BindView(R.id.btnUpgrade)
 //    Button btnUpgrade;
 
@@ -58,14 +61,15 @@ public class DashboardAppActivity extends SdkActivity implements ISdkView {
         setContentView(R.layout.activity_beranda_app);
         ButterKnife.bind(this);
 
-        onCreateToken();
+        //onCreateToken();
+        actionWidgetSdk(this);
         onGetSaldoOttoCash();
     }
 
 
     @Override
     protected void onResume() {
-        onCreateToken();
+        //onCreateToken();
         onGetSaldoOttoCash();
         super.onResume();
     }
@@ -80,91 +84,102 @@ public class DashboardAppActivity extends SdkActivity implements ISdkView {
         }
     }
 
+    private void actionWidgetSdk(Context context) {
 
-    /**
-     * CHECK PHONE NUMBER IS EXISTING IN OTTOCASH
-     */
-    public void onCheckPhoneNumber() {
-
-        final CheckPhoneNumberRequest model = new CheckPhoneNumberRequest();
-        account_number = CacheUtil.getPreferenceString(IConfig.OC_SESSION_PHONE, DashboardAppActivity.this);
-        model.setPhone(account_number);
-
-        showApiProgressDialog(OttoCashSdk.getAppComponent(), new SdkResourcePresenter(DashboardAppActivity.this) {
+        lyWidgetSdk.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void call() {
-                getCheckPhone(model);
+            public void onClick(View view) {
 
+                OttoCash.onCallOttoCashDashboard(context);
             }
-        }, "Loading");
+        });
     }
 
 
-    /**
-     * CCREATE TOKEN
-     */
-    public void onCreateToken() {
-
-        String client_id = CacheUtil.getPreferenceString(IConfig.OC_SESSION_CLIENT_ID, DashboardAppActivity.this);
-        String client_secret = CacheUtil.getPreferenceString(IConfig.OC_SESSION_CLIENT_SECRET, DashboardAppActivity.this);
-
-        final CreateTokenRequest token = new CreateTokenRequest();
-        token.setGrant_type("client_credentials");
-        token.setClient_id(client_id);
-        token.setClient_secret(client_secret);
-
-        sdkResourcePresenter = ((SdkResourcePresenter) BasePresenter.getInstance(DashboardAppActivity.this, new SdkResourcePresenter(DashboardAppActivity.this)));
-        sdkResourcePresenter.doCreateToken(token);
-    }
-
-
-    /**
-     * RESPONSE REQUEST FROM CALL API CHECK PHONE NUMBER
-     */
-    @Override
-    public void handleCheckIsExistingPhoneNumber(CheckPhoneNumberResponse model) {
-        if (model.getMeta().getCode() == 200) {
-
-            checkIsExistingPhoneNumber = model.getData().isIs_existing();
-            sessionLogin = CacheUtil.getPreferenceBoolean(IConfig.OC_SESSION_LOGIN_KEY, DashboardAppActivity.this);
-            session_active = CacheUtil.getPreferenceBoolean(IConfig.OC_SESSION_IS_ACTIVE, DashboardAppActivity.this);
-            session_need_otp = CacheUtil.getPreferenceBoolean(IConfig.OC_SESSION_NEED_OTP, DashboardAppActivity.this);
-
-
-            lyWidgetSdk.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (checkIsExistingPhoneNumber) {
-                        if (sessionLogin && session_active) {
-                            goDashboardSDK();
-                        } else {
-                            goActivation();
-                        }
-                    } else {
-                        goRegistration();
-                    }
-                }
-            });
-
-        }
-    }
-
-
-    /**
-     * RESPONSE REQUEST FROM CALL API CREATE TOKEN
-     */
-    @Override
-    public void handleToken(CreateTokenResponse model) {
-        if (model.getMeta().getCode() == 200) {
-
-            String accessToken = model.getData().getClient().getAccessToken();
-            CacheUtil.putPreferenceString(IConfig.OC_SESSION_ACCESS_TOKEN, accessToken, DashboardAppActivity.this);
-
-            onCheckPhoneNumber();
-        } else {
-            Toast.makeText(this, model.getMeta().getMessage(), Toast.LENGTH_SHORT).show();
-        }
-    }
+//    /**
+//     * CHECK PHONE NUMBER IS EXISTING IN OTTOCASH
+//     */
+//    public void onCheckPhoneNumber() {
+//
+//        final CheckPhoneNumberRequest model = new CheckPhoneNumberRequest();
+//        account_number = CacheUtil.getPreferenceString(IConfig.OC_SESSION_PHONE, DashboardAppActivity.this);
+//        model.setPhone(account_number);
+//
+//        showApiProgressDialog(OttoCashSdk.getAppComponent(), new SdkResourcePresenter(DashboardAppActivity.this) {
+//            @Override
+//            public void call() {
+//                getCheckPhone(model);
+//
+//            }
+//        }, "Loading");
+//    }
+//
+//
+//    /**
+//     * CCREATE TOKEN
+//     */
+//    public void onCreateToken() {
+//
+//        String client_id = CacheUtil.getPreferenceString(IConfig.OC_SESSION_CLIENT_ID, DashboardAppActivity.this);
+//        String client_secret = CacheUtil.getPreferenceString(IConfig.OC_SESSION_CLIENT_SECRET, DashboardAppActivity.this);
+//
+//        final CreateTokenRequest token = new CreateTokenRequest();
+//        token.setGrant_type("client_credentials");
+//        token.setClient_id(client_id);
+//        token.setClient_secret(client_secret);
+//
+//        sdkResourcePresenter = ((SdkResourcePresenter) BasePresenter.getInstance(DashboardAppActivity.this, new SdkResourcePresenter(DashboardAppActivity.this)));
+//        sdkResourcePresenter.doCreateToken(token);
+//    }
+//
+//
+//    /**
+//     * RESPONSE REQUEST FROM CALL API CHECK PHONE NUMBER
+//     */
+//    @Override
+//    public void handleCheckIsExistingPhoneNumber(CheckPhoneNumberResponse model) {
+//        if (model.getMeta().getCode() == 200) {
+//
+//            checkIsExistingPhoneNumber = model.getData().isIs_existing();
+//            sessionLogin = CacheUtil.getPreferenceBoolean(IConfig.OC_SESSION_LOGIN_KEY, DashboardAppActivity.this);
+//            session_active = CacheUtil.getPreferenceBoolean(IConfig.OC_SESSION_IS_ACTIVE, DashboardAppActivity.this);
+//            session_need_otp = CacheUtil.getPreferenceBoolean(IConfig.OC_SESSION_NEED_OTP, DashboardAppActivity.this);
+//
+//
+//            lyWidgetSdk.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    if (checkIsExistingPhoneNumber) {
+//                        if (sessionLogin && session_active) {
+//                            goDashboardSDK();
+//                        } else {
+//                            goActivation();
+//                        }
+//                    } else {
+//                        goRegistration();
+//                    }
+//                }
+//            });
+//
+//        }
+//    }
+//
+//
+//    /**
+//     * RESPONSE REQUEST FROM CALL API CREATE TOKEN
+//     */
+//    @Override
+//    public void handleToken(CreateTokenResponse model) {
+//        if (model.getMeta().getCode() == 200) {
+//
+//            String accessToken = model.getData().getClient().getAccessToken();
+//            CacheUtil.putPreferenceString(IConfig.OC_SESSION_ACCESS_TOKEN, accessToken, DashboardAppActivity.this);
+//
+//            onCheckPhoneNumber();
+//        } else {
+//            Toast.makeText(this, model.getMeta().getMessage(), Toast.LENGTH_SHORT).show();
+//        }
+//    }
 
 
     @OnClick(R.id.btnCheckOut)

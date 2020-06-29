@@ -18,6 +18,7 @@ import com.otto.sdk.model.api.response.InquiryResponse;
 import com.otto.sdk.presenter.InquiryPresenter;
 import com.otto.sdk.presenter.SdkResourcePresenter;
 import com.otto.sdk.presenter.manager.SessionManager;
+import com.otto.sdk.ui.activity.SdkActivity;
 import com.otto.sdk.ui.activity.account.activation.ActivationActivity;
 import com.otto.sdk.ui.activity.account.registration.RegistrationActivity;
 import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
@@ -43,13 +44,13 @@ public class OttoCash extends BaseActivity implements IInquiryView, ISdkView {
         return saldo_ottocash;
     }
 
-    public static void onCallPayment(Activity activity, String phoneNumber , int amount) {
+    public static void onCallPayment(Activity activity, String phoneNumber, int amount) {
         if (onCheckIsActive(activity)) {
             Intent intent = new Intent(activity, ReviewCheckoutActivity.class);
             intent.putExtra(BILL_PAYMENT, String.valueOf(amount));
             activity.startActivityForResult(intent, REQ_OTTOCASH_PAYMENT);
         } else {
-            onCheckPhoneNumber(activity,phoneNumber);
+            onCheckPhoneNumber(activity, phoneNumber);
         }
     }
 
@@ -91,7 +92,7 @@ public class OttoCash extends BaseActivity implements IInquiryView, ISdkView {
                     boolean is_existing = model.getData().isIs_existing();
                     CacheUtil.putPreferenceBoolean(String.valueOf(Boolean.valueOf(IConfig.OC_SESSION_CHECK_PHONE_NUMBER)),
                             is_existing, context);
-                    onActivateAccount(is_existing,context);
+                    onActivateAccount(is_existing, context);
 
                     Log.i("ISEX", "isExisting" + is_existing);
 
@@ -122,22 +123,47 @@ public class OttoCash extends BaseActivity implements IInquiryView, ISdkView {
         new InquiryPresenter(this).getInquiry(new InquiryRequest());
     }
 
-    public static void onCallOttoCashDashboard(Context context,String phoneNumber) {
-        CacheUtil.putPreferenceString(IConfig.OC_SESSION_PHONE, phoneNumber,context);
+    /*public static void onCallOttoCashDashboard(Context context, String phoneNumber) {
+        CacheUtil.putPreferenceString(IConfig.OC_SESSION_PHONE, phoneNumber, context);
         if (onCheckIsActive(context)) {
             context.startActivity(new Intent(context, DashboardSDKActivity.class));
         } else {
 //            onActivateAccount(context);
-            onCheckPhoneNumber(context,phoneNumber);
+            onCheckPhoneNumber(context, phoneNumber);
+        }
+    }*/
+
+
+    public static void onCallOttoCashDashboard(Context context) {
+        Boolean checkIsExistingPhoneNumber = CacheUtil.getPreferenceBoolean(IConfig.OC_SESSION_CHECK_PHONE_NUMBER, context);
+        Boolean sessionLogin = CacheUtil.getPreferenceBoolean(IConfig.OC_SESSION_LOGIN_KEY, context);
+        Boolean session_active = CacheUtil.getPreferenceBoolean(IConfig.OC_SESSION_IS_ACTIVE, context);
+        Boolean session_need_otp = CacheUtil.getPreferenceBoolean(IConfig.OC_SESSION_NEED_OTP, context);
+
+        if (checkIsExistingPhoneNumber) {
+            if (sessionLogin && session_active) {
+                context.startActivity(new Intent(context, DashboardSDKActivity.class));
+            } else {
+                context.startActivity(new Intent(context, ActivationActivity.class));
+            }
+        } else {
+            context.startActivity(new Intent(context, RegistrationActivity.class));
         }
     }
+
+    public void goDashboardSDK() {
+        Intent intent = new Intent(this, DashboardSDKActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+
 
     private static Boolean onCheckIsActive(Context context) {
         return CacheUtil.getPreferenceBoolean(IConfig.OC_SESSION_IS_ACTIVE, context);
     }
 
     public static void onLogoutOttoCash(Activity activity) {
-        CacheUtil.putPreferenceBoolean(IConfig.OC_SESSION_IS_ACTIVE, false,activity);
+        CacheUtil.putPreferenceBoolean(IConfig.OC_SESSION_IS_ACTIVE, false, activity);
         SharedPreferences.Editor editor = activity.getSharedPreferences("dataSesi", Context.MODE_PRIVATE).edit();
         editor.clear();
         editor.commit();
