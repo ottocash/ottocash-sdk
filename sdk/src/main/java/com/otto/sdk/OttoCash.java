@@ -48,13 +48,13 @@ public class OttoCash extends BaseActivity implements ISdkView {
 //    }
 
 
-//    /**
-//     * Function Log Out
-//     */
-//    public static void onLogoutOttoCash(Context context) {
-//        CacheUtil.putPreferenceBoolean(IConfig.OC_SESSION_LOGIN_KEY, false, context);
-//        CacheUtil.clearPreference(context);
-//    }
+    /**
+     * Function Log Out
+     */
+    public static void onLogoutOttoCash(Context context) {
+        CacheUtil.putPreferenceBoolean(IConfig.OC_SESSION_LOGIN_KEY, false, context);
+        CacheUtil.clearPreference(context);
+    }
 
     /**
      * Call Api Check Account Number
