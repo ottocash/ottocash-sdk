@@ -330,7 +330,7 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
     }
 
     @Override
-    public BaseActivity getBaseActivity() {
+    public BaseActivity getCurrentActivity() {
         return DashboardSDKActivity.this;
     }
 

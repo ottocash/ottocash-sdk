@@ -65,7 +65,8 @@ public class Api extends BaseApi {
                 .setupApiDomain(IConfig.API_BASE_URL, OttoCashSdk.getAppComponent(),
                         ApiService.class,
                         true,
-                        60);
+                        60,
+                        true);
 
     }
 

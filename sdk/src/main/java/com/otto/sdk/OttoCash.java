@@ -60,7 +60,7 @@ public class OttoCash extends BaseActivity implements ISdkView {
      * Call Api Check Account Number
      */
     public static void onCreateToken(final Context context) {
-        String client_id = CacheUtil.getPreferenceString(IConfig.OC_SESSION_CLIENT_ID, context);
+        /*String client_id = CacheUtil.getPreferenceString(IConfig.OC_SESSION_CLIENT_ID, context);
         String client_secret = CacheUtil.getPreferenceString(IConfig.OC_SESSION_CLIENT_SECRET, context);
 
         final CreateTokenRequest token = new CreateTokenRequest();
@@ -96,14 +96,14 @@ public class OttoCash extends BaseActivity implements ISdkView {
                 return null;
             }
 
-        }).doCreateToken(token);
+        }).doCreateToken(token);*/
     }
 
     /**
      * Call Api Check Account Number
      */
     private static void onCheckPhoneNumber(final Context context) {
-        final CheckPhoneNumberRequest model = new CheckPhoneNumberRequest();
+        /*final CheckPhoneNumberRequest model = new CheckPhoneNumberRequest();
         model.setPhone(CacheUtil.getPreferenceString(IConfig.OC_SESSION_PHONE, context));
 
         new SdkResourcePresenter(new ISdkView() {
@@ -134,7 +134,7 @@ public class OttoCash extends BaseActivity implements ISdkView {
             public BaseActivity getBaseActivity() {
                 return null;
             }
-        }).getCheckPhone(model);
+        }).getCheckPhone(model);*/
     }
 
 

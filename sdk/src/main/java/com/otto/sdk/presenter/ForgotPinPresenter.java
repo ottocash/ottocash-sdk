@@ -36,6 +36,6 @@ public class ForgotPinPresenter extends BasePresenter implements ForgotPinDao.IF
 
     @Override
     public Context getContext() {
-        return forgotPinView.getBaseActivity();
+        return forgotPinView.getCurrentActivity();
     }
 }

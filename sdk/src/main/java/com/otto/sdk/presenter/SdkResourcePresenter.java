@@ -57,6 +57,6 @@ public class SdkResourcePresenter extends BasePresenter implements CheckPhoneNum
 
     @Override
     public Context getContext() {
-        return (sdkView.getBaseActivity()==null)?context : sdkView.getBaseActivity();
+        return (sdkView.getCurrentActivity()==null)?context : sdkView.getCurrentActivity();
     }
 }
