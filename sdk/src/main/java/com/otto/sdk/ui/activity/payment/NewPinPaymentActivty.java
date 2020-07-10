@@ -306,17 +306,15 @@ public class NewPinPaymentActivty extends AppActivity implements PinAdapter.Call
     public void handleReviewCheckout(ReviewCheckOutResponse model) {
         if (model.getMeta().getCode() == 200) {
 
-            onCallApiInquiry();
-
-
             Intent intent = new Intent();
             intent.putExtra(OTTOCASH_PAYMENT_DATA, model.getData());
-            CacheUtil.putPreferenceString(OTTOCASH_PAYMENT_DATA_STATUS, model.getData().getResponseDescription(), this);
-            CacheUtil.putPreferenceString(OTTOCASH_PAYMENT_DATA_REFERENCE_NUMBER, model.getData().getReferenceNumber(), this);
-            CacheUtil.putPreferenceString(OTTOCASH_PAYMENT_DATA_TRANSACTION_DATE, model.getData().getTransactionDate(), this);
-            setResult(Activity.RESULT_OK, intent);
+            setResult(RESULT_OK, intent);
             finish();
 
+            onCallApiInquiry();
+            /*Intent intent = new Intent(this, DashboardSDKActivity.class);
+            startActivity(intent);
+            finish();*/
         } else {
             Toast.makeText(this, model.getMeta().getMessage(), Toast.LENGTH_SHORT).show();
         }

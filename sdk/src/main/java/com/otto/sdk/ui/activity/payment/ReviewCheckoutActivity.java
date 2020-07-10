@@ -64,7 +64,7 @@ public class ReviewCheckoutActivity extends AppActivity {
         ivBack = findViewById(R.id.ivBack);
 
         Bundle extras = getIntent().getExtras();
-        billPayment = Integer.parseInt(CacheUtil.getPreferenceString(IConfig.TOTAL_BILL_PAYMENT, ReviewCheckoutActivity.this)); //Integer.parseInt(extras.getString(BILL_PAYMENT));
+        billPayment = Integer.parseInt(extras.getString(BILL_PAYMENT));
         tvBill.setText(UiUtil.formatMoneyIDR((billPayment)));
         tvPembayaranMitra.setText(UiUtil.formatMoneyIDR((billPayment)));
         tvTotalBayar.setText(UiUtil.formatMoneyIDR((billPayment)));
@@ -95,11 +95,17 @@ public class ReviewCheckoutActivity extends AppActivity {
         if (saldoEmoneyOttocash < billPayment) {
             saldoDialog();
         } else {
+
+            //String account_number = CacheUtil.getPreferenceString(IConfig.OC_SESSION_PHONE, ReviewCheckoutActivity.this);
+
+            //OttoCash.onCallPayment(ReviewCheckoutActivity.this, account_number, billPayment);
+
             Intent intent = new Intent(ReviewCheckoutActivity.this, NewPinPaymentActivty.class);
             intent.putExtra(IConfig.TOTAL_BILL_PAYMENT, billPayment);
             intent.putExtra(IConfig.KEY_PIN_CHECKOUT, reviewCheckout);
             startActivity(intent);
             finish();
+            //startActivityForResult(intent,REQ_OTTOCASH_PAYMENT);
         }
     }
 
@@ -108,4 +114,18 @@ public class ReviewCheckoutActivity extends AppActivity {
         saldoDialog = new SaldoDialog(this, R.style.AppDialogFullScreen);
         saldoDialog.show();
     }
+
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if(resultCode == RESULT_OK && requestCode == REQ_OTTOCASH_PAYMENT){
+//            Intent intent = new Intent();
+//            //assert data != null;
+//            if((data != null ? data.getParcelableExtra(OTTOCASH_PAYMENT_DATA) : null) !=null){
+//                intent.putExtra(OTTOCASH_PAYMENT_DATA, (Bundle) data.getParcelableExtra(OTTOCASH_PAYMENT_DATA));
+//                setResult(RESULT_OK,intent);
+//            }
+//            finish();
+//        }
+//    }
 }
