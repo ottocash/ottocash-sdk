@@ -121,7 +121,7 @@ public class ReviewCheckoutActivity extends AppActivity {
         saldoDialog.show();
     }
 
-    @Override
+    /*@Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == OttoCash.REQ_OTTOCASH_PAYMENT) {
@@ -132,6 +132,20 @@ public class ReviewCheckoutActivity extends AppActivity {
 
                 String referenceNumber = paymentData.getReferenceNumber();
                 CacheUtil.putPreferenceString(OTTOCASH_PAYMENT_DATA_REFERENCE_NUMBER, referenceNumber, this);
+            }
+        }
+    }*/
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == OttoCash.REQ_OTTOCASH_PAYMENT) {
+            Intent intent = new Intent();
+            if (data.getParcelableExtra(OttoCash.OTTOCASH_PAYMENT_DATA) != null) {
+                PaymentData paymentData = data.getParcelableExtra(OttoCash.OTTOCASH_PAYMENT_DATA);
+                intent.putExtra(OTTOCASH_PAYMENT_DATA, paymentData);
+                setResult(RESULT_OK, intent);
+                finish();
             }
         }
     }

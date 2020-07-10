@@ -24,6 +24,8 @@ import app.beelabs.com.codebase.support.util.CacheUtil;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.otto.sdk.IConfig.OTTOCASH_PAYMENT_DATA_REFERENCE_NUMBER;
+import static com.otto.sdk.OttoCash.OTTOCASH_PAYMENT_DATA;
 import static com.otto.sdk.OttoCash.REQ_OTTOCASH_PAYMENT;
 
 
@@ -114,6 +116,23 @@ public class CheckOutActivity extends AppActivity {
             }
         }
     }*/
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == OttoCash.REQ_OTTOCASH_PAYMENT) {
+            Intent intent = new Intent();
+            if (data.getParcelableExtra(OttoCash.OTTOCASH_PAYMENT_DATA) != null) {
+                PaymentData paymentData = data.getParcelableExtra(OttoCash.OTTOCASH_PAYMENT_DATA);
+                intent.putExtra(OTTOCASH_PAYMENT_DATA, paymentData);
+
+                Toast.makeText(this, paymentData.getReferenceNumber(), Toast.LENGTH_LONG).show();
+
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        }
+    }
 
 
     @Override
