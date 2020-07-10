@@ -44,13 +44,16 @@ public class OttoCash extends BaseActivity implements IInquiryView, ISdkView {
         return saldo_ottocash;
     }
 
-    public static void onCallPayment(Activity activity, String phoneNumber, int amount) {
-        if (onCheckIsActive(activity)) {
+
+    public static void onCallPayment(Activity activity,String phoneNumber ,int amount) {
+        if (SessionManager.getSessionLogin(activity)) {
+//            activity.startActivity(new Intent(activity, DashboardSDKActivity.class));
             Intent intent = new Intent(activity, ReviewCheckoutActivity.class);
             intent.putExtra(BILL_PAYMENT, String.valueOf(amount));
             activity.startActivityForResult(intent, REQ_OTTOCASH_PAYMENT);
         } else {
-            onCheckPhoneNumber(activity, phoneNumber);
+//            onActivateAccount(activity);
+            onCheckPhoneNumber(activity,phoneNumber);
         }
     }
 

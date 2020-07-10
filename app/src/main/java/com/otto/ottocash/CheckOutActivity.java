@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import com.otto.sdk.AppActivity;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCash;
+import com.otto.sdk.model.api.response.PaymentData;
 import com.otto.sdk.ui.component.support.UiUtil;
 
 import app.beelabs.com.codebase.support.util.CacheUtil;
@@ -98,6 +99,22 @@ public class CheckOutActivity extends AppActivity {
         });
     }
 
+    /*@Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQ_OTTOCASH_PAYMENT && resultCode == RESULT_OK) {
+
+            String referenceNumber = CacheUtil.getPreferenceString(IConfig.OTTOCASH_PAYMENT_DATA_REFERENCE_NUMBER, this);
+            Toast.makeText(this, referenceNumber, Toast.LENGTH_LONG).show();
+
+            Intent intent = new Intent();
+            if (data.getParcelableExtra(OttoCash.OTTOCASH_PAYMENT_DATA) != null) {
+                PaymentData paymentData = data.getParcelableExtra(OttoCash.OTTOCASH_PAYMENT_DATA);
+                Toast.makeText(this, paymentData.getReferenceNumber(), Toast.LENGTH_LONG).show();
+            }
+        }
+    }*/
+
 
     @Override
     protected void onResume() {
@@ -147,7 +164,7 @@ public class CheckOutActivity extends AppActivity {
 //    }
 
 
-    @Override
+    /*@Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == REQ_OTTOCASH_PAYMENT) {
@@ -161,7 +178,7 @@ public class CheckOutActivity extends AppActivity {
 
             Toast.makeText(CheckOutActivity.this, transactionStatus, Toast.LENGTH_LONG).show();
         }
-    }
+    }*/
 
     public void addTextWatcher(EditText input) {
         mTextWatcher = new TextWatcher() {

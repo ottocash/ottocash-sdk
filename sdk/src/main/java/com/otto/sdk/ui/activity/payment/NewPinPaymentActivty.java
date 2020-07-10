@@ -311,6 +311,10 @@ public class NewPinPaymentActivty extends AppActivity implements PinAdapter.Call
             setResult(RESULT_OK, intent);
             finish();
 
+
+            String referenceNumber = model.getData().getReferenceNumber();
+            CacheUtil.putPreferenceString(OTTOCASH_PAYMENT_DATA_REFERENCE_NUMBER, referenceNumber, this);
+
             onCallApiInquiry();
             /*Intent intent = new Intent(this, DashboardSDKActivity.class);
             startActivity(intent);
