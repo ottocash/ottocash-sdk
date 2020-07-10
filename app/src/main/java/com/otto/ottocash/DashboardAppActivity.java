@@ -84,6 +84,7 @@ public class DashboardAppActivity extends SdkActivity implements ISdkView {
         }
     }
 
+
     private void actionWidgetSdk(Context context) {
 
         lyWidgetSdk.setOnClickListener(new View.OnClickListener() {
@@ -184,6 +185,9 @@ public class DashboardAppActivity extends SdkActivity implements ISdkView {
 
     @OnClick(R.id.btnCheckOut)
     public void onCheckOut() {
+
+        sessionLogin = CacheUtil.getPreferenceBoolean(IConfig.OC_SESSION_LOGIN_KEY, DashboardAppActivity.this);
+        session_active = CacheUtil.getPreferenceBoolean(IConfig.OC_SESSION_IS_ACTIVE, DashboardAppActivity.this);
 
         if (sessionLogin && session_active) {
             startActivity(new Intent(this, CheckOutActivity.class));

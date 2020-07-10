@@ -48,6 +48,12 @@ public interface IConfig {
     String REFERENCE_NUMBER_TRANSACTION = "reference_number_transaction";
     String STATUS_TRANSACTION = "status_transaction";
 
+    //callback payment data
+    String OTTOCASH_PAYMENT_DATA_STATUS = "data_transaction_status";
+    String OTTOCASH_PAYMENT_DATA_REFERENCE_NUMBER = "data_reference_number";
+    String OTTOCASH_PAYMENT_DATA_TRANSACTION_DATE = "data_transaction_date";
+
+
     //KEY REVIEW CHECKOUT
     String TOTAL_BILL_PAYMENT = "total_bill_checkout";
 
