@@ -45,7 +45,7 @@ public class OttoCash extends BaseActivity implements IInquiryView, ISdkView {
     }
 
 
-    public static void onCallPayment(Activity activity,String phoneNumber ,int amount) {
+    public static void onCallPayment(Activity activity, String phoneNumber, int amount) {
         if (SessionManager.getSessionLogin(activity)) {
 //            activity.startActivity(new Intent(activity, DashboardSDKActivity.class));
             Intent intent = new Intent(activity, ReviewCheckoutActivity.class);
@@ -53,7 +53,7 @@ public class OttoCash extends BaseActivity implements IInquiryView, ISdkView {
             activity.startActivityForResult(intent, REQ_OTTOCASH_PAYMENT);
         } else {
 //            onActivateAccount(activity);
-            onCheckPhoneNumber(activity,phoneNumber);
+            onCheckPhoneNumber(activity, phoneNumber);
         }
     }
 
@@ -165,12 +165,11 @@ public class OttoCash extends BaseActivity implements IInquiryView, ISdkView {
         return CacheUtil.getPreferenceBoolean(IConfig.OC_SESSION_IS_ACTIVE, context);
     }
 
-    public static void onLogoutOttoCash(Activity activity) {
-        CacheUtil.putPreferenceBoolean(IConfig.OC_SESSION_IS_ACTIVE, false, activity);
-        SharedPreferences.Editor editor = activity.getSharedPreferences("dataSesi", Context.MODE_PRIVATE).edit();
-        editor.clear();
-        editor.commit();
-        SessionManager.putSessionLogin(false, activity);
+    public static void onLogoutOttoCash(Context context) {
+        CacheUtil.clearPreference(context);
+        CacheUtil.putPreferenceBoolean(IConfig.OC_SESSION_IS_ACTIVE, false, context);
+        CacheUtil.putPreferenceBoolean(IConfig.OC_SESSION_LOGIN_KEY, false, context);
+        SessionManager.putSessionLogin(false, context);
     }
 
     @Override

@@ -201,14 +201,20 @@ public class DashboardAppActivity extends SdkActivity implements ISdkView {
 
     @OnClick(R.id.btnClearCache)
     public void onClearCache() {
-        CacheUtil.putPreferenceBoolean(String.valueOf(IConfig.OC_SESSION_CHECK_PHONE_NUMBER), false, DashboardAppActivity.this);
+        OttoCash.onLogoutOttoCash(this);
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
+
+        /*CacheUtil.putPreferenceBoolean(String.valueOf(IConfig.OC_SESSION_CHECK_PHONE_NUMBER), false, DashboardAppActivity.this);
         CacheUtil.putPreferenceBoolean(IConfig.OC_SESSION_LOGIN_KEY, false, DashboardAppActivity.this);
         CacheUtil.clearPreference(this);
 
         Intent intent = new Intent(this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
-        finish();
+        finish();*/
     }
 
 //    @OnClick(R.id.btnUpgrade)

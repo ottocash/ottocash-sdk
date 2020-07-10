@@ -121,15 +121,11 @@ public class CheckOutActivity extends AppActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == OttoCash.REQ_OTTOCASH_PAYMENT) {
-            Intent intent = new Intent();
+
             if (data.getParcelableExtra(OttoCash.OTTOCASH_PAYMENT_DATA) != null) {
                 PaymentData paymentData = data.getParcelableExtra(OttoCash.OTTOCASH_PAYMENT_DATA);
-                intent.putExtra(OTTOCASH_PAYMENT_DATA, paymentData);
 
                 Toast.makeText(this, paymentData.getReferenceNumber(), Toast.LENGTH_LONG).show();
-
-                setResult(RESULT_OK, intent);
-                finish();
             }
         }
     }
