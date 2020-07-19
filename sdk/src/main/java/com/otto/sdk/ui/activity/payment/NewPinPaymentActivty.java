@@ -46,6 +46,12 @@ import app.beelabs.com.codebase.support.util.CacheUtil;
 import static com.otto.sdk.IConfig.OTTOCASH_PAYMENT_DATA_REFERENCE_NUMBER;
 import static com.otto.sdk.IConfig.OTTOCASH_PAYMENT_DATA_STATUS;
 import static com.otto.sdk.IConfig.OTTOCASH_PAYMENT_DATA_TRANSACTION_DATE;
+import static com.otto.sdk.IConfig.PAYMENT_BILLER_ID;
+import static com.otto.sdk.IConfig.PAYMENT_CUSTOMER_RN;
+import static com.otto.sdk.IConfig.PAYMENT_FEE;
+import static com.otto.sdk.IConfig.PAYMENT_PARTNER_CODE;
+import static com.otto.sdk.IConfig.PAYMENT_PRODUCT_CODE;
+import static com.otto.sdk.IConfig.PAYMENT_PRODUCT_NAME;
 import static com.otto.sdk.OttoCash.OTTOCASH_PAYMENT_DATA;
 
 
@@ -152,12 +158,12 @@ public class NewPinPaymentActivty extends AppActivity implements PinAdapter.Call
 
         reviewCheckOutRequest.setAccount_number(account_number);
         reviewCheckOutRequest.setAmount(amount);
-        reviewCheckOutRequest.setFee(0);
-        reviewCheckOutRequest.setProduct_name("Pembayaran");
-        reviewCheckOutRequest.setBiller_id("PURCHASE_ELEVENIA");
-        reviewCheckOutRequest.setCustomer_reference_number("UPN" + generateRandom(9) + "");
-        reviewCheckOutRequest.setProduct_code("PYMNT");
-        reviewCheckOutRequest.setPartner_code("P000001");
+        reviewCheckOutRequest.setFee(CacheUtil.getPreferenceInteger(PAYMENT_FEE, this));
+        reviewCheckOutRequest.setProduct_name(CacheUtil.getPreferenceString(PAYMENT_PRODUCT_NAME, this));
+        reviewCheckOutRequest.setBiller_id(CacheUtil.getPreferenceString(PAYMENT_BILLER_ID, this));
+        reviewCheckOutRequest.setCustomer_reference_number(CacheUtil.getPreferenceString(PAYMENT_CUSTOMER_RN, this));
+        reviewCheckOutRequest.setProduct_code(CacheUtil.getPreferenceString(PAYMENT_PRODUCT_CODE, this));
+        reviewCheckOutRequest.setPartner_code(CacheUtil.getPreferenceString(PAYMENT_PARTNER_CODE, this));
         reviewCheckOutRequest.setLatitude(String.valueOf(getMyLastLocation().getLatitude()));
         reviewCheckOutRequest.setLongitude(String.valueOf(getMyLastLocation().getLongitude()));
         reviewCheckOutRequest.setDevice_id(DeviceId.getDeviceID(this));

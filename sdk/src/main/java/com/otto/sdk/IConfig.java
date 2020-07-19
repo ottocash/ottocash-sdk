@@ -49,6 +49,14 @@ public interface IConfig {
     String STATUS_TRANSACTION = "status_transaction";
 
     //callback payment data
+    String PAYMENT_FEE = "payment_fee";
+    String PAYMENT_PRODUCT_NAME = "product_name";
+    String PAYMENT_BILLER_ID = "biller_id";
+    String PAYMENT_CUSTOMER_RN = "customer_reference_number";
+    String PAYMENT_PRODUCT_CODE = "product_code";
+    String PAYMENT_PARTNER_CODE = "partner_code";
+
+
     String OTTOCASH_PAYMENT_DATA_STATUS = "data_transaction_status";
     String OTTOCASH_PAYMENT_DATA_REFERENCE_NUMBER = "data_reference_number";
     String OTTOCASH_PAYMENT_DATA_TRANSACTION_DATE = "data_transaction_date";

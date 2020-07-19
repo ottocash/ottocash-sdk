@@ -45,14 +45,34 @@ public class OttoCash extends BaseActivity implements IInquiryView, ISdkView {
     }
 
 
-    public static void onCallPayment(Activity activity, String phoneNumber, int amount) {
+    /**
+     * account_number : 085880507999
+     * amount : 55000
+     * fee : 500
+     * product_name : Pembayaran
+     * biller_id : PURCHASE_ELEVENIA
+     * customer_reference_number : UPN00d000458
+     * product_code : PYMNT
+     * partner_code : P000001
+     * latitude : 10.232444
+     * longitude : -6.4312323
+     * device_id : 213123123123123
+     */
+
+    public static void onCallPayment(Activity activity, String phoneNumber, int amount, int fee, String productName, String billerId,
+                                     String customerReferenceNumber, String productCode, String partnerCode) {
         if (SessionManager.getSessionLogin(activity)) {
-//            activity.startActivity(new Intent(activity, DashboardSDKActivity.class));
+
             Intent intent = new Intent(activity, ReviewCheckoutActivity.class);
             intent.putExtra(BILL_PAYMENT, String.valueOf(amount));
+            intent.putExtra(IConfig.PAYMENT_FEE, fee);
+            intent.putExtra(IConfig.PAYMENT_PRODUCT_NAME, productName);
+            intent.putExtra(IConfig.PAYMENT_BILLER_ID, billerId);
+            intent.putExtra(IConfig.PAYMENT_CUSTOMER_RN, customerReferenceNumber);
+            intent.putExtra(IConfig.PAYMENT_PRODUCT_CODE, productCode);
+            intent.putExtra(IConfig.PAYMENT_PARTNER_CODE, partnerCode);
             activity.startActivityForResult(intent, REQ_OTTOCASH_PAYMENT);
         } else {
-//            onActivateAccount(activity);
             onCheckPhoneNumber(activity, phoneNumber);
         }
     }

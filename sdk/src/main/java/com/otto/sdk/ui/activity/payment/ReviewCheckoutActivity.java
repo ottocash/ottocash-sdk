@@ -21,6 +21,12 @@ import com.otto.sdk.ui.component.support.UiUtil;
 import app.beelabs.com.codebase.support.util.CacheUtil;
 
 import static com.otto.sdk.IConfig.OTTOCASH_PAYMENT_DATA_REFERENCE_NUMBER;
+import static com.otto.sdk.IConfig.PAYMENT_BILLER_ID;
+import static com.otto.sdk.IConfig.PAYMENT_CUSTOMER_RN;
+import static com.otto.sdk.IConfig.PAYMENT_FEE;
+import static com.otto.sdk.IConfig.PAYMENT_PARTNER_CODE;
+import static com.otto.sdk.IConfig.PAYMENT_PRODUCT_CODE;
+import static com.otto.sdk.IConfig.PAYMENT_PRODUCT_NAME;
 import static com.otto.sdk.OttoCash.OTTOCASH_PAYMENT_DATA;
 import static com.otto.sdk.OttoCash.REQ_OTTOCASH_PAYMENT;
 
@@ -80,6 +86,33 @@ public class ReviewCheckoutActivity extends AppActivity {
 
         int total = billPayment;
         CacheUtil.putPreferenceInteger(IConfig.OC_SESSION_TOTAL, total, ReviewCheckoutActivity.this);
+
+        /**
+         * account_number : 085880507999
+         * amount : 55000
+         * fee : 500
+         * product_name : Pembayaran
+         * biller_id : PURCHASE_ELEVENIA
+         * customer_reference_number : UPN00d000458
+         * product_code : PYMNT
+         * partner_code : P000001
+         * latitude : 10.232444
+         * longitude : -6.4312323
+         * device_id : 213123123123123
+         */
+        int fee = extras.getInt(PAYMENT_FEE);
+        String product_name = extras.getString(PAYMENT_PRODUCT_NAME);
+        String biller_id = extras.getString(PAYMENT_BILLER_ID);
+        String customer_reference_number = extras.getString(PAYMENT_CUSTOMER_RN);
+        String product_code = extras.getString(PAYMENT_PRODUCT_CODE);
+        String partner_code = extras.getString(PAYMENT_PARTNER_CODE);
+
+        CacheUtil.putPreferenceInteger(PAYMENT_FEE, fee, this);
+        CacheUtil.putPreferenceString(PAYMENT_PRODUCT_NAME, product_name, this);
+        CacheUtil.putPreferenceString(PAYMENT_BILLER_ID, biller_id, this);
+        CacheUtil.putPreferenceString(PAYMENT_CUSTOMER_RN, customer_reference_number, this);
+        CacheUtil.putPreferenceString(PAYMENT_PRODUCT_CODE, product_code, this);
+        CacheUtil.putPreferenceString(PAYMENT_PARTNER_CODE, partner_code, this);
     }
 
 

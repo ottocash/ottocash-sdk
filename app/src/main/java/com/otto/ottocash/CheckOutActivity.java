@@ -20,6 +20,8 @@ import com.otto.sdk.OttoCash;
 import com.otto.sdk.model.api.response.PaymentData;
 import com.otto.sdk.ui.component.support.UiUtil;
 
+import java.util.Random;
+
 import app.beelabs.com.codebase.support.util.CacheUtil;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -76,6 +78,20 @@ public class CheckOutActivity extends AppActivity {
         });
     }
 
+
+    /**
+     * account_number : 085880507999
+     * amount : 55000
+     * fee : 500
+     * product_name : Pembayaran
+     * biller_id : PURCHASE_ELEVENIA
+     * customer_reference_number : UPN00d000458
+     * product_code : PYMNT
+     * partner_code : P000001
+     * latitude : 10.232444
+     * longitude : -6.4312323
+     * device_id : 213123123123123
+     */
     private void initComponent() {
         PaymentOttoCash.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,7 +106,9 @@ public class CheckOutActivity extends AppActivity {
                     billPayment = UiUtil.removeCurrencyFormat(edtSubTotal.getText().toString());
                     CacheUtil.putPreferenceString(IConfig.TOTAL_BILL_PAYMENT, billPayment, CheckOutActivity.this);
 
-                    OttoCash.onCallPayment(CheckOutActivity.this, account_number, Integer.parseInt(billPayment));
+                    String customer_reference_number = ("UPN" + generateRandom(9) + "");
+                    OttoCash.onCallPayment(CheckOutActivity.this, account_number, Integer.parseInt(billPayment), 0, "Pembayaran",
+                            "PURCHASE_ELEVENIA", customer_reference_number, "PYMNT", "P000001");
                     /*Intent intent = new Intent(CheckOutActivity.this, ReviewCheckoutActivity.class);
                     intent.putExtra(BILL_PAYMENT, billPayment);
                     intent.putExtra(SERVICES_FEE, servicesFee);
@@ -99,6 +117,16 @@ public class CheckOutActivity extends AppActivity {
                 }
             }
         });
+    }
+
+    public static long generateRandom(int length) {
+        Random random = new Random();
+        char[] digits = new char[length];
+        digits[0] = (char) (random.nextInt(9) + '1');
+        for (int i = 1; i < length; i++) {
+            digits[i] = (char) (random.nextInt(10) + '0');
+        }
+        return Long.parseLong(new String(digits));
     }
 
     /*@Override
