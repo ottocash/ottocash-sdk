@@ -22,6 +22,7 @@ public class DemoApp extends BaseApp {
         OttoCashSdk.setupComponent(
                 "b7f45e6bf8091a16107f9b524fe498fae1201c8d412fb61be380177eb383d4a7",
                 "c1b79f3316cd0f4f6240c75644d84a7de574be713ceaf8a8dd8a33f27c9f3594",
+                "ELEVENIA",
                 this);
     }
 
