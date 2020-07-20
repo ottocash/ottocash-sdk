@@ -23,6 +23,7 @@ public interface IConfig {
     String OC_SESSION_EMAIL = "email";
     String OC_SESSION_CLIENT_ID = "id";
     String OC_SESSION_CLIENT_SECRET = "secret";
+    String OC_SESSION_PARTNER_ID = "partner_id";
     String OC_SESSION_ACCESS_TOKEN = "access_token";
     String OC_NEED_OTP = "need_otp";
     String OC_FORGOT_PIN = "forgot_pin";

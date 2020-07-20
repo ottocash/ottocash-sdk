@@ -59,6 +59,16 @@ public class Api extends BaseApi {
         return map;
     }
 
+    private static Map<String, String> initHeaderForRequestPartner(Context context) {
+        Map<String, String> map = new HashMap<>();
+        map.put("Authorization", "Bearer " + CacheUtil.getPreferenceString(IConfig.OC_SESSION_ACCESS_TOKEN, context));
+        map.put("Accept", "application/json");
+        map.put("Content-Type", "application/json");
+        map.put("Partner-ID", CacheUtil.getPreferenceString(IConfig.OC_SESSION_PARTNER_ID, context));
+
+        return map;
+    }
+
 
     synchronized private static ApiService initApiDomain() {
         return (ApiService) getInstance()
@@ -101,7 +111,7 @@ public class Api extends BaseApi {
     }
 
     synchronized public static void onReviewCheckOut(ReviewCheckOutRequest reviewCheckOutRequest, Context context, Callback callback) {
-        initApiDomain().callApiReviewCheckOut(initHeaderForRequestAuth(context), reviewCheckOutRequest).enqueue((Callback<ReviewCheckOutResponse>) callback);
+        initApiDomain().callApiReviewCheckOut(initHeaderForRequestPartner(context), reviewCheckOutRequest).enqueue((Callback<ReviewCheckOutResponse>) callback);
     }
 
     synchronized public static void onPaymentValidate(PaymentValidateRequest paymentValidateRequest, Context context, Callback callback) {

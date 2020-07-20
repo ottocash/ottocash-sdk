@@ -90,6 +90,8 @@ public class SdkActivity extends BaseActivity implements ISdkView {
 
         String client_id = CacheUtil.getPreferenceString(IConfig.OC_SESSION_CLIENT_ID, SdkActivity.this);
         String client_secret = CacheUtil.getPreferenceString(IConfig.OC_SESSION_CLIENT_SECRET, SdkActivity.this);
+        String partner_id = CacheUtil.getPreferenceString(IConfig.OC_SESSION_PARTNER_ID, SdkActivity.this);
+
 
         final CreateTokenRequest token = new CreateTokenRequest();
         token.setGrant_type("client_credentials");

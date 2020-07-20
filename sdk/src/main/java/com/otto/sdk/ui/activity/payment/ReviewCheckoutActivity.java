@@ -103,14 +103,14 @@ public class ReviewCheckoutActivity extends AppActivity {
         int fee = extras.getInt(PAYMENT_FEE);
         String product_name = extras.getString(PAYMENT_PRODUCT_NAME);
         String biller_id = extras.getString(PAYMENT_BILLER_ID);
-        String customer_reference_number = extras.getString(PAYMENT_CUSTOMER_RN);
+        //String customer_reference_number = extras.getString(PAYMENT_CUSTOMER_RN);
         String product_code = extras.getString(PAYMENT_PRODUCT_CODE);
         String partner_code = extras.getString(PAYMENT_PARTNER_CODE);
 
         CacheUtil.putPreferenceInteger(PAYMENT_FEE, fee, this);
         CacheUtil.putPreferenceString(PAYMENT_PRODUCT_NAME, product_name, this);
         CacheUtil.putPreferenceString(PAYMENT_BILLER_ID, biller_id, this);
-        CacheUtil.putPreferenceString(PAYMENT_CUSTOMER_RN, customer_reference_number, this);
+        //CacheUtil.putPreferenceString(PAYMENT_CUSTOMER_RN, customer_reference_number, this);
         CacheUtil.putPreferenceString(PAYMENT_PRODUCT_CODE, product_code, this);
         CacheUtil.putPreferenceString(PAYMENT_PARTNER_CODE, partner_code, this);
     }

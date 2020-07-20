@@ -33,6 +33,7 @@ import com.otto.sdk.presenter.ReviewCheckoutPresenter;
 import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
 import com.otto.sdk.ui.activity.payment.pede.PaymentSuccessPedeActivity;
 import com.otto.sdk.ui.adapter.PinAdapter;
+import com.otto.sdk.ui.component.support.DateUtil;
 import com.otto.sdk.ui.component.support.DeviceId;
 import com.otto.sdk.ui.component.support.Logging;
 import com.otto.sdk.ui.component.support.UiUtil;
@@ -161,7 +162,7 @@ public class NewPinPaymentActivty extends AppActivity implements PinAdapter.Call
         reviewCheckOutRequest.setFee(CacheUtil.getPreferenceInteger(PAYMENT_FEE, this));
         reviewCheckOutRequest.setProduct_name(CacheUtil.getPreferenceString(PAYMENT_PRODUCT_NAME, this));
         reviewCheckOutRequest.setBiller_id(CacheUtil.getPreferenceString(PAYMENT_BILLER_ID, this));
-        reviewCheckOutRequest.setCustomer_reference_number(CacheUtil.getPreferenceString(PAYMENT_CUSTOMER_RN, this));
+        reviewCheckOutRequest.setCustomer_reference_number(DateUtil.getTimestamp());
         reviewCheckOutRequest.setProduct_code(CacheUtil.getPreferenceString(PAYMENT_PRODUCT_CODE, this));
         reviewCheckOutRequest.setPartner_code(CacheUtil.getPreferenceString(PAYMENT_PARTNER_CODE, this));
         reviewCheckOutRequest.setLatitude(String.valueOf(getMyLastLocation().getLatitude()));

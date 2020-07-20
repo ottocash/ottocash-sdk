@@ -25,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     String phone_number;
     String client_id;
     String client_secret;
+    String partner_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +48,15 @@ public class LoginActivity extends AppCompatActivity {
         super.onStart();
     }
 
-    private void initCredentialsHostApp(){
+    private void initCredentialsHostApp() {
         client_id = "b7f45e6bf8091a16107f9b524fe498fae1201c8d412fb61be380177eb383d4a7";
         client_secret = "c1b79f3316cd0f4f6240c75644d84a7de574be713ceaf8a8dd8a33f27c9f3594";
+        partner_id = "SAMPLE-ID";
+
 
         CacheUtil.putPreferenceString(IConfig.OC_SESSION_CLIENT_ID, client_id, this);
         CacheUtil.putPreferenceString(IConfig.OC_SESSION_CLIENT_SECRET, client_secret, this);
+        CacheUtil.putPreferenceString(IConfig.OC_SESSION_PARTNER_ID, partner_id, this);
 
     }
 

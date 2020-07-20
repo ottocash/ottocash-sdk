@@ -60,7 +60,7 @@ public class OttoCash extends BaseActivity implements IInquiryView, ISdkView {
      */
 
     public static void onCallPayment(Activity activity, String phoneNumber, int amount, int fee, String productName, String billerId,
-                                     String customerReferenceNumber, String productCode, String partnerCode) {
+                                     String productCode, String partnerCode) {
         if (SessionManager.getSessionLogin(activity)) {
 
             Intent intent = new Intent(activity, ReviewCheckoutActivity.class);
@@ -68,7 +68,7 @@ public class OttoCash extends BaseActivity implements IInquiryView, ISdkView {
             intent.putExtra(IConfig.PAYMENT_FEE, fee);
             intent.putExtra(IConfig.PAYMENT_PRODUCT_NAME, productName);
             intent.putExtra(IConfig.PAYMENT_BILLER_ID, billerId);
-            intent.putExtra(IConfig.PAYMENT_CUSTOMER_RN, customerReferenceNumber);
+            //intent.putExtra(IConfig.PAYMENT_CUSTOMER_RN, customerReferenceNumber);
             intent.putExtra(IConfig.PAYMENT_PRODUCT_CODE, productCode);
             intent.putExtra(IConfig.PAYMENT_PARTNER_CODE, partnerCode);
             activity.startActivityForResult(intent, REQ_OTTOCASH_PAYMENT);
