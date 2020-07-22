@@ -73,13 +73,15 @@ public class SdkActivity extends BaseActivity implements ISdkView {
         model.setPhone(account_number);
 
 
-        showApiProgressDialog(OttoCashSdk.getAppComponent(), new SdkResourcePresenter(SdkActivity.this) {
+        /*showApiProgressDialog(OttoCashSdk.getAppComponent(), new SdkResourcePresenter(SdkActivity.this) {
             @Override
             public void call() {
                 getCheckPhone(model);
 
             }
-        }, "Loading");
+        }, "Loading");*/
+        presenterSDK = ((SdkResourcePresenter) BasePresenter.getInstance(SdkActivity.this, new SdkResourcePresenter(SdkActivity.this)));
+        presenterSDK.getCheckPhone(model);
     }
 
 
