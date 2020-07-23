@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -18,15 +17,16 @@ import com.otto.sdk.model.api.response.PaymentData;
 import com.otto.sdk.ui.component.dialog.SaldoDialog;
 import com.otto.sdk.ui.component.support.UiUtil;
 
+import java.util.Objects;
+
 import app.beelabs.com.codebase.support.util.CacheUtil;
 
-import static com.otto.sdk.IConfig.OTTOCASH_PAYMENT_DATA_REFERENCE_NUMBER;
 import static com.otto.sdk.IConfig.PAYMENT_BILLER_ID;
-import static com.otto.sdk.IConfig.PAYMENT_CUSTOMER_RN;
-import static com.otto.sdk.IConfig.PAYMENT_FEE;
+import static com.otto.sdk.IConfig.PAYMENT_SERVICES_FEE;
 import static com.otto.sdk.IConfig.PAYMENT_PARTNER_CODE;
 import static com.otto.sdk.IConfig.PAYMENT_PRODUCT_CODE;
 import static com.otto.sdk.IConfig.PAYMENT_PRODUCT_NAME;
+import static com.otto.sdk.IConfig.PAYMENT_TOTAL;
 import static com.otto.sdk.OttoCash.OTTOCASH_PAYMENT_DATA;
 import static com.otto.sdk.OttoCash.REQ_OTTOCASH_PAYMENT;
 
@@ -48,11 +48,9 @@ public class ReviewCheckoutActivity extends AppActivity {
     private String reviewCheckout = "ReviewCheckout";
 
 
-    private String BILL_PAYMENT = "bill_payment";
     private int billPayment;
-
-    private String SERVICES_FEE = "services_fee";
-    private String servicesFee;
+    private int servicesFee;
+    private int totalBillPayment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,13 +77,16 @@ public class ReviewCheckoutActivity extends AppActivity {
         ivBack = findViewById(R.id.ivBack);
 
         Bundle extras = getIntent().getExtras();
-        billPayment = Integer.parseInt(extras.getString(BILL_PAYMENT));
+        assert extras != null;
+        billPayment = Integer.parseInt(Objects.requireNonNull(extras.getString(IConfig.PAYMENT_TOTAL)));
+        servicesFee = extras.getInt(PAYMENT_SERVICES_FEE);
+        totalBillPayment = billPayment + servicesFee;
+
         tvBill.setText(UiUtil.formatMoneyIDR((billPayment)));
         tvPembayaranMitra.setText(UiUtil.formatMoneyIDR((billPayment)));
-        tvTotalBayar.setText(UiUtil.formatMoneyIDR((billPayment)));
+        tvBiayaLayanan.setText(UiUtil.formatMoneyIDR((servicesFee)));
+        tvTotalBayar.setText(UiUtil.formatMoneyIDR((totalBillPayment)));
 
-        int total = billPayment;
-        CacheUtil.putPreferenceInteger(IConfig.OC_SESSION_TOTAL, total, ReviewCheckoutActivity.this);
 
         /**
          * account_number : 085880507999
@@ -100,14 +101,15 @@ public class ReviewCheckoutActivity extends AppActivity {
          * longitude : -6.4312323
          * device_id : 213123123123123
          */
-        int fee = extras.getInt(PAYMENT_FEE);
         String product_name = extras.getString(PAYMENT_PRODUCT_NAME);
         String biller_id = extras.getString(PAYMENT_BILLER_ID);
         //String customer_reference_number = extras.getString(PAYMENT_CUSTOMER_RN);
         String product_code = extras.getString(PAYMENT_PRODUCT_CODE);
         String partner_code = extras.getString(PAYMENT_PARTNER_CODE);
 
-        CacheUtil.putPreferenceInteger(PAYMENT_FEE, fee, this);
+        CacheUtil.putPreferenceInteger(PAYMENT_TOTAL, billPayment, this);
+        CacheUtil.putPreferenceInteger(PAYMENT_SERVICES_FEE, servicesFee, this);
+        CacheUtil.putPreferenceInteger(PAYMENT_SERVICES_FEE, servicesFee, this);
         CacheUtil.putPreferenceString(PAYMENT_PRODUCT_NAME, product_name, this);
         CacheUtil.putPreferenceString(PAYMENT_BILLER_ID, biller_id, this);
         //CacheUtil.putPreferenceString(PAYMENT_CUSTOMER_RN, customer_reference_number, this);
@@ -139,11 +141,10 @@ public class ReviewCheckoutActivity extends AppActivity {
         } else {
 
             Intent intent = new Intent(ReviewCheckoutActivity.this, NewPinPaymentActivty.class);
+            intent.putExtra(PAYMENT_SERVICES_FEE, servicesFee);
             intent.putExtra(IConfig.TOTAL_BILL_PAYMENT, billPayment);
             intent.putExtra(IConfig.KEY_PIN_CHECKOUT, reviewCheckout);
             startActivityForResult(intent, REQ_OTTOCASH_PAYMENT);
-            //startActivity(intent);
-            //finish();
 
         }
     }
@@ -154,20 +155,6 @@ public class ReviewCheckoutActivity extends AppActivity {
         saldoDialog.show();
     }
 
-    /*@Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == OttoCash.REQ_OTTOCASH_PAYMENT) {
-            Intent intent = new Intent();
-            if (data.getParcelableExtra(OttoCash.OTTOCASH_PAYMENT_DATA) != null) {
-                PaymentData paymentData = data.getParcelableExtra(OttoCash.OTTOCASH_PAYMENT_DATA);
-                Toast.makeText(this, paymentData.getReferenceNumber(), Toast.LENGTH_LONG).show();
-
-                String referenceNumber = paymentData.getReferenceNumber();
-                CacheUtil.putPreferenceString(OTTOCASH_PAYMENT_DATA_REFERENCE_NUMBER, referenceNumber, this);
-            }
-        }
-    }*/
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

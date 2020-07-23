@@ -3,7 +3,6 @@ package com.otto.sdk;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -18,7 +17,6 @@ import com.otto.sdk.model.api.response.InquiryResponse;
 import com.otto.sdk.presenter.InquiryPresenter;
 import com.otto.sdk.presenter.SdkResourcePresenter;
 import com.otto.sdk.presenter.manager.SessionManager;
-import com.otto.sdk.ui.activity.SdkActivity;
 import com.otto.sdk.ui.activity.account.activation.ActivationActivity;
 import com.otto.sdk.ui.activity.account.registration.RegistrationActivity;
 import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
@@ -30,7 +28,7 @@ import app.beelabs.com.codebase.support.util.CacheUtil;
 
 public class OttoCash extends BaseActivity implements IInquiryView, ISdkView {
 
-    private static final String BILL_PAYMENT = "bill_payment";
+    //private static final String BILL_PAYMENT = "bill_payment";
     public static final String OTTOCASH_PAYMENT_DATA = "paymentData";
     public static final int REQ_OTTOCASH_PAYMENT = 101;
 
@@ -64,8 +62,8 @@ public class OttoCash extends BaseActivity implements IInquiryView, ISdkView {
         if (SessionManager.getSessionLogin(activity)) {
 
             Intent intent = new Intent(activity, ReviewCheckoutActivity.class);
-            intent.putExtra(BILL_PAYMENT, String.valueOf(amount));
-            intent.putExtra(IConfig.PAYMENT_FEE, fee);
+            intent.putExtra(IConfig.PAYMENT_TOTAL, String.valueOf(amount));
+            intent.putExtra(IConfig.PAYMENT_SERVICES_FEE, fee);
             intent.putExtra(IConfig.PAYMENT_PRODUCT_NAME, productName);
             intent.putExtra(IConfig.PAYMENT_BILLER_ID, billerId);
             //intent.putExtra(IConfig.PAYMENT_CUSTOMER_RN, customerReferenceNumber);
@@ -77,11 +75,13 @@ public class OttoCash extends BaseActivity implements IInquiryView, ISdkView {
         }
     }
 
-    private static void onActivateAccount(Boolean hasPhoneNumber, Context context) {
-        if (hasPhoneNumber) {
+    private static void onActivateAccount(Boolean is_existing, Boolean is_need_otp, Context context) {
+        if (is_existing && is_need_otp) {
             context.startActivity(new Intent(context, ActivationActivity.class));
-        } else {
+        } else if (!is_existing && is_need_otp) {
             context.startActivity(new Intent(context, RegistrationActivity.class));
+        } else if (is_existing) {
+            context.startActivity(new Intent(context, DashboardSDKActivity.class));
         }
     }
 
@@ -113,9 +113,15 @@ public class OttoCash extends BaseActivity implements IInquiryView, ISdkView {
             public void handleCheckIsExistingPhoneNumber(CheckPhoneNumberResponse model) {
                 if (model.getMeta().getCode() == 200) {
                     boolean is_existing = model.getData().isIs_existing();
+                    boolean is_need_otp = model.getData().isNeed_otp();
+
                     CacheUtil.putPreferenceBoolean(String.valueOf(Boolean.valueOf(IConfig.OC_SESSION_CHECK_PHONE_NUMBER)),
                             is_existing, context);
-                    onActivateAccount(is_existing, context);
+
+                    CacheUtil.putPreferenceBoolean(String.valueOf(Boolean.valueOf(IConfig.OC_SESSION_NEED_OTP)),
+                            is_need_otp, context);
+
+                    onActivateAccount(is_existing, is_need_otp, context);
 
                     Log.i("ISEX", "isExisting" + is_existing);
 
@@ -165,6 +171,8 @@ public class OttoCash extends BaseActivity implements IInquiryView, ISdkView {
 
         if (checkIsExistingPhoneNumber) {
             if (sessionLogin && session_active) {
+                context.startActivity(new Intent(context, DashboardSDKActivity.class));
+            } else if (!session_need_otp) {
                 context.startActivity(new Intent(context, DashboardSDKActivity.class));
             } else {
                 context.startActivity(new Intent(context, ActivationActivity.class));

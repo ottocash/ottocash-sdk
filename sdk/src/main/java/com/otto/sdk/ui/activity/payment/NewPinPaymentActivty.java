@@ -1,6 +1,5 @@
 package com.otto.sdk.ui.activity.payment;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -30,7 +29,6 @@ import com.otto.sdk.model.api.response.TransferToFriendResponse;
 import com.otto.sdk.presenter.InquiryPresenter;
 import com.otto.sdk.presenter.PinVerificationPaymentPresenter;
 import com.otto.sdk.presenter.ReviewCheckoutPresenter;
-import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
 import com.otto.sdk.ui.activity.payment.pede.PaymentSuccessPedeActivity;
 import com.otto.sdk.ui.adapter.PinAdapter;
 import com.otto.sdk.ui.component.support.DateUtil;
@@ -44,12 +42,8 @@ import java.util.Random;
 import app.beelabs.com.codebase.base.BasePresenter;
 import app.beelabs.com.codebase.support.util.CacheUtil;
 
-import static com.otto.sdk.IConfig.OTTOCASH_PAYMENT_DATA_REFERENCE_NUMBER;
-import static com.otto.sdk.IConfig.OTTOCASH_PAYMENT_DATA_STATUS;
-import static com.otto.sdk.IConfig.OTTOCASH_PAYMENT_DATA_TRANSACTION_DATE;
 import static com.otto.sdk.IConfig.PAYMENT_BILLER_ID;
-import static com.otto.sdk.IConfig.PAYMENT_CUSTOMER_RN;
-import static com.otto.sdk.IConfig.PAYMENT_FEE;
+import static com.otto.sdk.IConfig.PAYMENT_SERVICES_FEE;
 import static com.otto.sdk.IConfig.PAYMENT_PARTNER_CODE;
 import static com.otto.sdk.IConfig.PAYMENT_PRODUCT_CODE;
 import static com.otto.sdk.IConfig.PAYMENT_PRODUCT_NAME;
@@ -82,6 +76,7 @@ public class NewPinPaymentActivty extends AppActivity implements PinAdapter.Call
     private String keyPinReviewCheckout;
 
     /*review checkout*/
+    private int servicesFee;
     private int amount;
     private String customerReferenceNumber;
     private ReviewCheckOutRequest reviewCheckOutRequest;
@@ -123,7 +118,7 @@ public class NewPinPaymentActivty extends AppActivity implements PinAdapter.Call
 
         emoneyBalance = Integer.parseInt(CacheUtil.getPreferenceString(IConfig.OC_SESSION_EMONEY_BALANCE,
                 NewPinPaymentActivty.this));
-        amount = CacheUtil.getPreferenceInteger(IConfig.OC_SESSION_TOTAL, NewPinPaymentActivty.this);
+        amount = CacheUtil.getPreferenceInteger(IConfig.PAYMENT_TOTAL, NewPinPaymentActivty.this);
 
         pinList.setLayoutManager(new GridLayoutManager(this, 3));
         pinList.setAdapter(new PinAdapter(this));
@@ -159,7 +154,7 @@ public class NewPinPaymentActivty extends AppActivity implements PinAdapter.Call
 
         reviewCheckOutRequest.setAccount_number(account_number);
         reviewCheckOutRequest.setAmount(amount);
-        reviewCheckOutRequest.setFee(CacheUtil.getPreferenceInteger(PAYMENT_FEE, this));
+        reviewCheckOutRequest.setFee(CacheUtil.getPreferenceInteger(PAYMENT_SERVICES_FEE, this));
         reviewCheckOutRequest.setProduct_name(CacheUtil.getPreferenceString(PAYMENT_PRODUCT_NAME, this));
         reviewCheckOutRequest.setBiller_id(CacheUtil.getPreferenceString(PAYMENT_BILLER_ID, this));
         reviewCheckOutRequest.setCustomer_reference_number(DateUtil.getTimestamp());

@@ -50,7 +50,8 @@ public interface IConfig {
     String STATUS_TRANSACTION = "status_transaction";
 
     //callback payment data
-    String PAYMENT_FEE = "payment_fee";
+    String PAYMENT_TOTAL = "payment_total";
+    String PAYMENT_SERVICES_FEE = "payment_service_fee";
     String PAYMENT_PRODUCT_NAME = "product_name";
     String PAYMENT_BILLER_ID = "biller_id";
     String PAYMENT_CUSTOMER_RN = "customer_reference_number";

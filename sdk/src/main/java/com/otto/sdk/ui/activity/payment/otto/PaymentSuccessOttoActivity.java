@@ -55,7 +55,7 @@ public class PaymentSuccessOttoActivity extends BaseActivity {
     }
 
     private void contentUI() {
-        total = CacheUtil.getPreferenceInteger(IConfig.OC_SESSION_TOTAL, PaymentSuccessOttoActivity.this);
+        total = CacheUtil.getPreferenceInteger(IConfig.PAYMENT_TOTAL, PaymentSuccessOttoActivity.this);
 
         Bundle extras = getIntent().getExtras();
         nominalTransaction = extras.getString(IConfig.NOMINAL_TRANSACTION);
