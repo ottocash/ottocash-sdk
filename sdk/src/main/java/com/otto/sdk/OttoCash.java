@@ -172,8 +172,6 @@ public class OttoCash extends BaseActivity implements IInquiryView, ISdkView {
         if (checkIsExistingPhoneNumber) {
             if (sessionLogin && session_active) {
                 context.startActivity(new Intent(context, DashboardSDKActivity.class));
-            } else if (!session_need_otp) {
-                context.startActivity(new Intent(context, DashboardSDKActivity.class));
             } else {
                 context.startActivity(new Intent(context, ActivationActivity.class));
             }
