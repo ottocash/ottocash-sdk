@@ -15,10 +15,7 @@
 
 
     <application
-        android:name=".OttoCashSdk"
-        android:supportsRtl="true"
-        android:networkSecurityConfig="@xml/security">
-
+        android:name=".OttoCashSdk">
 
         <activity
             android:name=".ui.activity.account.forgotpin.ForgotPinActivity"
