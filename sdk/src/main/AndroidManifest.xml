@@ -13,8 +13,16 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
 
-    <application android:name=".OttoCashSdk">
-        <activity android:name=".ui.activity.account.forgotpin.ForgotPinActivity"></activity>
+
+    <application
+        android:name=".OttoCashSdk"
+        android:supportsRtl="true"
+        android:networkSecurityConfig="@xml/security">
+
+
+        <activity
+            android:name=".ui.activity.account.forgotpin.ForgotPinActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.kycupgrade.takeFotoSelfie.PreviewFotoSelfieActivity"
             android:screenOrientation="portrait" />

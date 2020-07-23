@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <domain-config enforcePinning="true">
+        <domain includeSubdomains="true">ottocash-sdk.ptape.com</domain>
+        <pin-set>
+            <pin digest="SHA-256">wOyt1iBDaG8wu/SiPQIy/4HhZAf24fcLk3v/BmoaIxc=</pin>
+        </pin-set>
+    </domain-config>
+</network-security-config>
