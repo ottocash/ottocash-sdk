@@ -71,9 +71,10 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
 
         forgotPin = Objects.requireNonNull(getIntent().getExtras()).getBoolean(IConfig.OC_FORGOT_PIN);
         boolean need_otp = Objects.requireNonNull(getIntent().getExtras()).getBoolean(IConfig.OC_NEED_OTP);
-        if (!need_otp) {
+        /*if (!need_otp) {
             onCallApiOtpRequest();
-        }
+        }*/
+        onCallApiOtpRequest();
     }
 
 

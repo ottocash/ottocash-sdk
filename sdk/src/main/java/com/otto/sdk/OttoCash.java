@@ -78,9 +78,9 @@ public class OttoCash extends BaseActivity implements IInquiryView, ISdkView {
     private static void onActivateAccount(Boolean is_existing, Boolean is_need_otp, Context context) {
         if (is_existing && is_need_otp) {
             context.startActivity(new Intent(context, ActivationActivity.class));
-        } else if (!is_existing && is_need_otp) {
+        } else if (!is_existing) {
             context.startActivity(new Intent(context, RegistrationActivity.class));
-        } else if (is_existing) {
+        } else {
             context.startActivity(new Intent(context, DashboardSDKActivity.class));
         }
     }
@@ -115,11 +115,9 @@ public class OttoCash extends BaseActivity implements IInquiryView, ISdkView {
                     boolean is_existing = model.getData().isIs_existing();
                     boolean is_need_otp = model.getData().isNeed_otp();
 
-                    CacheUtil.putPreferenceBoolean(String.valueOf(Boolean.valueOf(IConfig.OC_SESSION_CHECK_PHONE_NUMBER)),
-                            is_existing, context);
+                    CacheUtil.putPreferenceBoolean(IConfig.OC_SESSION_CHECK_PHONE_NUMBER, is_existing, context);
 
-                    CacheUtil.putPreferenceBoolean(String.valueOf(Boolean.valueOf(IConfig.OC_SESSION_NEED_OTP)),
-                            is_need_otp, context);
+                    CacheUtil.putPreferenceBoolean(IConfig.OC_SESSION_NEED_OTP, is_need_otp, context);
 
                     onActivateAccount(is_existing, is_need_otp, context);
 
@@ -164,19 +162,15 @@ public class OttoCash extends BaseActivity implements IInquiryView, ISdkView {
 
 
     public static void onCallOttoCashDashboard(Context context) {
-        Boolean checkIsExistingPhoneNumber = CacheUtil.getPreferenceBoolean(IConfig.OC_SESSION_CHECK_PHONE_NUMBER, context);
-        Boolean sessionLogin = CacheUtil.getPreferenceBoolean(IConfig.OC_SESSION_LOGIN_KEY, context);
-        Boolean session_active = CacheUtil.getPreferenceBoolean(IConfig.OC_SESSION_IS_ACTIVE, context);
-        Boolean session_need_otp = CacheUtil.getPreferenceBoolean(IConfig.OC_SESSION_NEED_OTP, context);
+        Boolean existingFds = CacheUtil.getPreferenceBoolean(IConfig.OC_SESSION_CHECK_PHONE_NUMBER, context);
+        Boolean existingSdk = CacheUtil.getPreferenceBoolean(IConfig.OC_SESSION_NEED_OTP, context);
 
-        if (checkIsExistingPhoneNumber) {
-            if (sessionLogin && session_active) {
-                context.startActivity(new Intent(context, DashboardSDKActivity.class));
-            } else {
-                context.startActivity(new Intent(context, ActivationActivity.class));
-            }
-        } else {
+        if (existingFds && existingSdk) {
+            context.startActivity(new Intent(context, ActivationActivity.class));
+        } else if (!existingFds) {
             context.startActivity(new Intent(context, RegistrationActivity.class));
+        } else {
+            context.startActivity(new Intent(context, DashboardSDKActivity.class));
         }
     }
 
