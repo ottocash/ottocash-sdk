@@ -65,7 +65,7 @@ public class SetPinActivity extends AppActivity {
             public void onClick(View v) {
                 if (isFormValidationSuccess) {
                     Intent intent = new Intent(SetPinActivity.this, OtpRegistrationActivity.class);
-                    intent.putExtra(IConfig.OC_SESSION_PIN, edtPin.getText().toString());
+                    CacheUtil.putPreferenceString(IConfig.OC_SESSION_PIN, edtPin.getText().toString(), SetPinActivity.this);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     finish();
