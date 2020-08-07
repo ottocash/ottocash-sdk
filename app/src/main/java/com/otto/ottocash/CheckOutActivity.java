@@ -107,7 +107,7 @@ public class CheckOutActivity extends AppActivity {
                     CacheUtil.putPreferenceString(IConfig.TOTAL_BILL_PAYMENT, billPayment, CheckOutActivity.this);
 
                     String customer_reference_number = ("UPN" + generateRandom(9) + "");
-                    OttoCash.onCallPayment(CheckOutActivity.this, account_number, Integer.parseInt(billPayment), 500, "Pembayaran",
+                    OttoCash.onCallPayment(CheckOutActivity.this, account_number, Integer.parseInt(billPayment), 0, "Pembayaran",
                             "PURCHASE_ELEVENIA", "PYMNT", "P000001");
                     /*Intent intent = new Intent(CheckOutActivity.this, ReviewCheckoutActivity.class);
                     intent.putExtra(BILL_PAYMENT, billPayment);

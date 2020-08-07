@@ -60,7 +60,7 @@
                 android:layout_height="30dp"
                 android:layout_marginTop="20dp"
                 android:gravity="center_vertical"
-                android:hint="Gratis"
+                android:hint="Rp 0"
                 android:inputType="number"
                 android:paddingEnd="5dp"
                 android:textAlignment="textEnd"
