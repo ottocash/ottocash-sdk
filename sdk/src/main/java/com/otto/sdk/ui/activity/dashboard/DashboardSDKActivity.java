@@ -120,7 +120,13 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
 
 
         lySwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+
             @Override
+            public void onRefresh() {
+                onCallApiInquiry();
+            }
+
+            /*@Override
             public void onRefresh() {
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -129,7 +135,7 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
                         //lySwipeRefresh.setRefreshing(false);
                     }
                 }, 5000);
-            }
+            }*/
         });
 
     }
