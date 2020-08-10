@@ -48,11 +48,12 @@ public interface ApiService {
 
     @POST("v1/change-pin")
     Call<BaseResponse> callApiForgotPin(@HeaderMap Map<String, String> headers,
-                                    @Body ForgotPinRequest forgotPinRequest);
+                                        @Body ForgotPinRequest forgotPinRequest);
 
     @POST("v1/account/upgrade")
     Call<UpgradeAccountResponse> callApiUpgrade(@HeaderMap Map<String, String> headers,
-                                              @Body UpgradeAccountRequest upgradeAccountRequest);
+                                                @Body UpgradeAccountRequest upgradeAccountRequest);
+
     @POST("v1/account")
     Call<InquiryResponse> callApiInquiry(@HeaderMap Map<String, String> headers,
                                          @Body InquiryRequest inquiryRequest);
@@ -60,6 +61,10 @@ public interface ApiService {
     @POST("v1/auth/otp-verification")
     Call<VerifyOtpResponse> callApiOtpVerification(@HeaderMap Map<String, String> headers,
                                                    @Body OtpVerificationRequest otpVerificationRequest);
+
+    @POST("v1/auth/otp-verification-register")
+    Call<VerifyOtpResponse> callApiOtpVerificationRegister(@HeaderMap Map<String, String> headers,
+                                                           @Body OtpVerificationRequest otpVerificationRequest);
 
     @POST("v1/auth/otp-request")
     Call<RequestOtpResponse> callApiOtpRequest(@HeaderMap Map<String, String> headers,

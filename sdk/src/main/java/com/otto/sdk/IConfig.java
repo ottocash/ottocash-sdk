@@ -79,6 +79,7 @@ public interface IConfig {
     int KEY_API_LOGIN = 12;
     int KEY_API_INQUIRY = 13;
     int KEY_API_OTP_VERIFICATION = 14;
+    int KEY_API_OTP_VERIFICATION_REGISTER = 24;
     int KEY_API_OTP_REQUEST = 15;
     int KEY_API_REVIEW_CHECK_OUT = 16;
     int KEY_API_PAYMENT_VALIDATE = 17;

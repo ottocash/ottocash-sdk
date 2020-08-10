@@ -44,6 +44,17 @@ public class OtpPresenter extends BasePresenter implements OtpDao.IOtpDao {
     }
 
     @Override
+    public void getOtpVerificationRegister(OtpVerificationRequest requestModel) {
+        new OtpDao(this, new OnPresenterResponseCallback() {
+            @Override
+            public void call(BaseResponse br) {
+                VerifyOtpResponse model = (VerifyOtpResponse) br;
+                otpView.handleOtpVerify(model);
+            }
+        }).onOtpVerificationRegister(requestModel, getContext());
+    }
+
+    @Override
     public BasePresenter getPresenter() {
         return BasePresenter.getInstance(otpView, this);
     }

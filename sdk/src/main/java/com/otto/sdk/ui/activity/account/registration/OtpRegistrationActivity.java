@@ -164,7 +164,7 @@ public class OtpRegistrationActivity extends AppActivity implements IOtpView, IA
         showApiProgressDialog(OttoCashSdk.getAppComponent(), new OtpPresenter(OtpRegistrationActivity.this) {
             @Override
             public void call() {
-                getOtpVerification(otpVerificationRequest);
+                getOtpVerificationRegister(otpVerificationRequest);
             }
         }, "Loading");
     }
@@ -293,4 +293,12 @@ public class OtpRegistrationActivity extends AppActivity implements IOtpView, IA
             Toast.makeText(this, model.getMeta().getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
+
+    @Override
+    public void handleError(String message) {
+        super.handleError(message);
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+
 }

@@ -106,6 +106,10 @@ public class Api extends BaseApi {
         initApiDomain().callApiOtpVerification(initHeaderForRequestAuth(context), otpVerificationRequest).enqueue((Callback<VerifyOtpResponse>) callback);
     }
 
+    synchronized public static void onOtpVerificationRegister(OtpVerificationRequest otpVerificationRequest, Context context, Callback callback) {
+        initApiDomain().callApiOtpVerificationRegister(initHeaderForRequestAuth(context), otpVerificationRequest).enqueue((Callback<VerifyOtpResponse>) callback);
+    }
+
     synchronized public static void onOtpRequest(OtpRequest otpRequest, Context context, Callback callback) {
         initApiDomain().callApiOtpRequest(initHeaderForRequestAuth(context), otpRequest).enqueue((Callback<RequestOtpResponse>) callback);
     }
