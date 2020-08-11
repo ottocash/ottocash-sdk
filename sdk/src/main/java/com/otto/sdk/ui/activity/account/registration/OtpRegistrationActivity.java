@@ -74,7 +74,7 @@ public class OtpRegistrationActivity extends AppActivity implements IOtpView, IA
             }
         });
 
-        onCallApiOTPRequest();
+        onCallApiOTPRequestRegister();
     }
 
 
@@ -109,7 +109,7 @@ public class OtpRegistrationActivity extends AppActivity implements IOtpView, IA
             public void onClick(View v) {
                 initDisableClickResendOtp();
                 setupCountdownview();
-                onCallApiOTPRequest();
+                onCallApiOTPRequestRegister();
             }
         });
 
@@ -136,7 +136,7 @@ public class OtpRegistrationActivity extends AppActivity implements IOtpView, IA
     /**
      * Call Api Request Otp
      */
-    private void onCallApiOTPRequest() {
+    private void onCallApiOTPRequestRegister() {
         String phone = CacheUtil.getPreferenceString(OC_SESSION_PHONE, OtpRegistrationActivity.this);
         final OtpRequest otpRequest = new OtpRequest();
         otpRequest.setPhone(phone);
@@ -144,7 +144,7 @@ public class OtpRegistrationActivity extends AppActivity implements IOtpView, IA
         showApiProgressDialog(OttoCashSdk.getAppComponent(), new OtpPresenter(OtpRegistrationActivity.this) {
             @Override
             public void call() {
-                getOtpRequest(otpRequest);
+                getOtpRequestRegister(otpRequest);
 
             }
         }, "Loading");

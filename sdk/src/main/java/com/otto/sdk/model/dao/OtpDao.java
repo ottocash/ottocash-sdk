@@ -27,6 +27,8 @@ public class OtpDao extends BaseDao {
     public interface IOtpDao extends IDaoPresenter {
         void getOtpRequest(OtpRequest requestModel);
 
+        void getOtpRequestRegister(OtpRequest requestModel);
+
         void getOtpVerification(OtpVerificationRequest requestModel);
 
         void getOtpVerificationRegister(OtpVerificationRequest requestModel);
@@ -46,6 +48,10 @@ public class OtpDao extends BaseDao {
         Api.onOtpRequest(model, context, BaseDao.getInstance(this, iOtpDao.getPresenter(), IConfig.KEY_API_OTP_REQUEST).callback);
     }
 
+    public void onOtpRequestRegister(OtpRequest model, Context context) {
+        Api.onOtpRequestRegister(model, context, BaseDao.getInstance(this, iOtpDao.getPresenter(), IConfig.KEY_API_OTP_REQUEST_REGISTER).callback);
+    }
+
 
     public void onOtpVerification(OtpVerificationRequest model, Context context) {
         Api.onOtpVerification(model, context, BaseDao.getInstance(this, iOtpDao.getPresenter(), IConfig.KEY_API_OTP_VERIFICATION).callback);
@@ -60,6 +66,9 @@ public class OtpDao extends BaseDao {
     public void onApiResponseCallback(BaseResponse br, int responseCode, Response response) {
         if (response.isSuccessful()) {
             if (responseCode == IConfig.KEY_API_OTP_REQUEST) {
+                RequestOtpResponse otpResponse = (RequestOtpResponse) br;
+                onPresenterResponseCallback.call(otpResponse);
+            } else if (responseCode == IConfig.KEY_API_OTP_REQUEST_REGISTER) {
                 RequestOtpResponse otpResponse = (RequestOtpResponse) br;
                 onPresenterResponseCallback.call(otpResponse);
             } else if (responseCode == IConfig.KEY_API_OTP_VERIFICATION) {

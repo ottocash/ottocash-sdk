@@ -66,6 +66,10 @@ public interface ApiService {
     Call<VerifyOtpResponse> callApiOtpVerificationRegister(@HeaderMap Map<String, String> headers,
                                                            @Body OtpVerificationRequest otpVerificationRequest);
 
+    @POST("v1/auth/otp-request-register")
+    Call<RequestOtpResponse> callApiOtpRequestRegister(@HeaderMap Map<String, String> headers,
+                                                       @Body OtpRequest otpRequest);
+
     @POST("v1/auth/otp-request")
     Call<RequestOtpResponse> callApiOtpRequest(@HeaderMap Map<String, String> headers,
                                                @Body OtpRequest otpRequest);
