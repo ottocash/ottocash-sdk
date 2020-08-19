@@ -2,6 +2,7 @@ package com.otto.sdk.model.api;
 
 import com.otto.sdk.model.api.request.CheckPhoneNumberRequest;
 import com.otto.sdk.model.api.request.CreateTokenRequest;
+import com.otto.sdk.model.api.request.ForgotPinInquiryRequest;
 import com.otto.sdk.model.api.request.ForgotPinRequest;
 import com.otto.sdk.model.api.request.InquiryRequest;
 import com.otto.sdk.model.api.request.LoginRequest;
@@ -45,6 +46,10 @@ public interface ApiService {
     @POST("v1/auth/login")
     Call<LoginResponse> callApiLogin(@HeaderMap Map<String, String> headers,
                                      @Body LoginRequest loginRequest);
+
+    @POST("v1/change-pin/inquiry")
+    Call<BaseResponse> callApiForgotPinInquiry(@HeaderMap Map<String, String> headers,
+                                               @Body ForgotPinInquiryRequest forgotPinInquiryRequest);
 
     @POST("v1/change-pin")
     Call<BaseResponse> callApiForgotPin(@HeaderMap Map<String, String> headers,

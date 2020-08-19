@@ -1,5 +1,6 @@
 package com.otto.sdk.ui.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -16,6 +17,7 @@ import com.otto.sdk.presenter.SdkResourcePresenter;
 import com.otto.sdk.ui.activity.account.activation.ActivationActivity;
 import com.otto.sdk.ui.activity.account.registration.RegistrationActivity;
 import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
+import com.otto.sdk.ui.activity.topup.TopUpActivity;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.base.BasePresenter;
@@ -28,6 +30,7 @@ public class SdkActivity extends BaseActivity implements ISdkView {
     private CheckPhoneNumberResponse checkPhoneNumberResponse;
     boolean is_existing = false;
     boolean is_need_otp = false;
+    boolean is_success_check_phone = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,12 @@ public class SdkActivity extends BaseActivity implements ISdkView {
     protected void onResume() {
         onCreateToken();
         super.onResume();
+    }
+
+    public void goTopUp() {
+        Intent intent = new Intent(SdkActivity.this, TopUpActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 
 
@@ -61,6 +70,44 @@ public class SdkActivity extends BaseActivity implements ISdkView {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         SdkActivity.this.startActivity(intent);
     }
+
+
+    /**
+     * CCREATE TOKEN
+     */
+    public void onCreateToken() {
+
+        String client_id = CacheUtil.getPreferenceString(IConfig.OC_SESSION_CLIENT_ID, SdkActivity.this);
+        String client_secret = CacheUtil.getPreferenceString(IConfig.OC_SESSION_CLIENT_SECRET, SdkActivity.this);
+        String partner_id = CacheUtil.getPreferenceString(IConfig.OC_SESSION_PARTNER_ID, SdkActivity.this);
+
+
+        final CreateTokenRequest token = new CreateTokenRequest();
+        token.setGrant_type("client_credentials");
+        token.setClient_id(client_id);
+        token.setClient_secret(client_secret);
+
+        presenterSDK = ((SdkResourcePresenter) BasePresenter.getInstance(SdkActivity.this, new SdkResourcePresenter(SdkActivity.this)));
+        presenterSDK.doCreateToken(token);
+    }
+
+    /**
+     * RESPONSE REQUEST FROM CALL API CREATE TOKEN
+     */
+    @Override
+    public void handleToken(CreateTokenResponse model) {
+        if (model.getMeta().getCode() == 200) {
+
+            String accessToken = model.getData().getClient().getAccessToken();
+            CacheUtil.putPreferenceString(IConfig.OC_SESSION_ACCESS_TOKEN, accessToken, SdkActivity.this);
+
+            checkIsExistingPhoneNumber();
+
+        } else {
+            Toast.makeText(this, model.getMeta().getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
     /**
      * CHECK PHONE NUMBER IS EXISTING IN OTTOCASH
@@ -86,32 +133,13 @@ public class SdkActivity extends BaseActivity implements ISdkView {
 
 
     /**
-     * CCREATE TOKEN
-     */
-    public void onCreateToken() {
-
-        String client_id = CacheUtil.getPreferenceString(IConfig.OC_SESSION_CLIENT_ID, SdkActivity.this);
-        String client_secret = CacheUtil.getPreferenceString(IConfig.OC_SESSION_CLIENT_SECRET, SdkActivity.this);
-        String partner_id = CacheUtil.getPreferenceString(IConfig.OC_SESSION_PARTNER_ID, SdkActivity.this);
-
-
-        final CreateTokenRequest token = new CreateTokenRequest();
-        token.setGrant_type("client_credentials");
-        token.setClient_id(client_id);
-        token.setClient_secret(client_secret);
-
-        presenterSDK = ((SdkResourcePresenter) BasePresenter.getInstance(SdkActivity.this, new SdkResourcePresenter(SdkActivity.this)));
-        presenterSDK.doCreateToken(token);
-    }
-
-
-    /**
      * RESPONSE REQUEST FROM CALL API CHECK PHONE NUMBER
      */
     @Override
     public void handleCheckIsExistingPhoneNumber(CheckPhoneNumberResponse model) {
         checkPhoneNumberResponse = model;
         if (model.getMeta().getCode() == 200) {
+            is_success_check_phone = model.getMeta().isStatus();
             is_existing = model.getData().isIs_existing();
             is_need_otp = model.getData().isNeed_otp();
             CacheUtil.putPreferenceBoolean(IConfig.OC_SESSION_CHECK_PHONE_NUMBER, is_existing, SdkActivity.this);
@@ -123,20 +151,18 @@ public class SdkActivity extends BaseActivity implements ISdkView {
     }
 
 
-    /**
-     * RESPONSE REQUEST FROM CALL API CREATE TOKEN
-     */
-    @Override
-    public void handleToken(CreateTokenResponse model) {
-        if (model.getMeta().getCode() == 200) {
+    public void onCallOttoCashDashboard(Context context) {
 
-            String accessToken = model.getData().getClient().getAccessToken();
-            CacheUtil.putPreferenceString(IConfig.OC_SESSION_ACCESS_TOKEN, accessToken, SdkActivity.this);
-
-            checkIsExistingPhoneNumber();
-
+        if (is_success_check_phone) {
+            if (is_existing && is_need_otp) {
+                context.startActivity(new Intent(context, ActivationActivity.class));
+            } else if (!is_existing) {
+                context.startActivity(new Intent(context, RegistrationActivity.class));
+            } else {
+                context.startActivity(new Intent(context, DashboardSDKActivity.class));
+            }
         } else {
-            Toast.makeText(this, model.getMeta().getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Tunggu beberapa saat lagi..", Toast.LENGTH_SHORT).show();
         }
     }
 

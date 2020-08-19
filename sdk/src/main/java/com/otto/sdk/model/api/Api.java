@@ -6,6 +6,7 @@ import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCashSdk;
 import com.otto.sdk.model.api.request.CheckPhoneNumberRequest;
 import com.otto.sdk.model.api.request.CreateTokenRequest;
+import com.otto.sdk.model.api.request.ForgotPinInquiryRequest;
 import com.otto.sdk.model.api.request.ForgotPinRequest;
 import com.otto.sdk.model.api.request.InquiryRequest;
 import com.otto.sdk.model.api.request.LoginRequest;
@@ -92,6 +93,10 @@ public class Api extends BaseApi {
 
     synchronized public static void onLogin(LoginRequest loginRequest, Context context, Callback callback) {
         initApiDomain().callApiLogin(initHeaderForRequestAuth(context), loginRequest).enqueue((Callback<LoginResponse>) callback);
+    }
+
+    synchronized public static void onForgotPinInquiry(ForgotPinInquiryRequest forgotPinInquiryRequest, Context context, Callback callback) {
+        initApiDomain().callApiForgotPinInquiry(initHeaderForRequestAuth(context), forgotPinInquiryRequest).enqueue((Callback<BaseResponse>) callback);
     }
 
     synchronized public static void onForgotPin(ForgotPinRequest forgotPinRequest, Context context, Callback callback) {

@@ -21,6 +21,7 @@ import com.otto.sdk.ui.activity.account.activation.ActivationActivity;
 import com.otto.sdk.ui.activity.account.registration.RegistrationActivity;
 import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
 import com.otto.sdk.ui.activity.payment.ReviewCheckoutActivity;
+import com.otto.sdk.ui.activity.topup.TopUpActivity;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.support.util.CacheUtil;
@@ -56,6 +57,10 @@ public class OttoCash extends BaseActivity implements IInquiryView, ISdkView {
      * longitude : -6.4312323
      * device_id : 213123123123123
      */
+
+    public static void goTopUpOttoCash(Context context) {
+        context.startActivity(new Intent(context, TopUpActivity.class));
+    }
 
     public static void onCallPayment(Activity activity, String phoneNumber, int amount, int fee, String productName, String billerId,
                                      String productCode, String partnerCode) {
@@ -162,8 +167,8 @@ public class OttoCash extends BaseActivity implements IInquiryView, ISdkView {
 
 
     public static void onCallOttoCashDashboard(Context context) {
-        Boolean existingFds = CacheUtil.getPreferenceBoolean(IConfig.OC_SESSION_CHECK_PHONE_NUMBER, context);
-        Boolean existingSdk = CacheUtil.getPreferenceBoolean(IConfig.OC_SESSION_NEED_OTP, context);
+        boolean existingFds = CacheUtil.getPreferenceBoolean(IConfig.OC_SESSION_CHECK_PHONE_NUMBER, context);
+        boolean existingSdk = CacheUtil.getPreferenceBoolean(IConfig.OC_SESSION_NEED_OTP, context);
 
         if (existingFds && existingSdk) {
             context.startActivity(new Intent(context, ActivationActivity.class));

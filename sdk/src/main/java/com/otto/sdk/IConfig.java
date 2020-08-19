@@ -5,10 +5,10 @@ import java.io.File;
 public interface IConfig {
 
     //Development
-    String API_BASE_URL = "https://ottocash-sdk.ptape.com/";
+    //String API_BASE_URL = "https://ottocash-sdk.ptape.com/";
 
     //Production
-    //String API_BASE_URL = "https://sdkmw.ottocash.id/";
+    String API_BASE_URL = "https://sdkmw.ottocash.id/";
 
     //Session
     String OC_SESSION_LOGIN_KEY = "Ottocash-SDK-Login";
@@ -90,6 +90,7 @@ public interface IConfig {
     int KEY_API_TRANSFER_TO_FRIEND = 21;
     int KEY_API_UPGRADE = 22;
     int KEY_API_FORGOT_PIN = 23;
+    int KEY_API_FORGOT_PIN_INQUIRY = 26;
 
     //Document File foto
     String KEY_DATA = "data";

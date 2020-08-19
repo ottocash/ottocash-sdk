@@ -91,7 +91,8 @@ public class DashboardAppActivity extends SdkActivity implements ISdkView {
             @Override
             public void onClick(View view) {
 
-                OttoCash.onCallOttoCashDashboard(context);
+                onCallOttoCashDashboard(context);
+                //OttoCash.onCallOttoCashDashboard(context);
             }
         });
     }
@@ -197,6 +198,11 @@ public class DashboardAppActivity extends SdkActivity implements ISdkView {
 
         //Toast.makeText(DashboardAppActivity.this, "Pembayaran OttoCash", Toast.LENGTH_SHORT).show();
         //OttoCash.onCallPayment(this, account_number, 1);
+    }
+
+    @OnClick(R.id.btnTopUp)
+    public void onTopUp() {
+        OttoCash.goTopUpOttoCash(this);
     }
 
     @OnClick(R.id.btnClearCache)

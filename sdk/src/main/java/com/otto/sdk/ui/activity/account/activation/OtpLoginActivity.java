@@ -56,7 +56,6 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
         setContentView(R.layout.activity_otp);
 
         initComponent();
-        setupCountdownview();
         addTextWatcher(lineField);
 
         phone = CacheUtil.getPreferenceString(IConfig.OC_SESSION_PHONE, OtpLoginActivity.this);
@@ -71,10 +70,11 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
 
         forgotPin = Objects.requireNonNull(getIntent().getExtras()).getBoolean(IConfig.OC_FORGOT_PIN);
         boolean need_otp = Objects.requireNonNull(getIntent().getExtras()).getBoolean(IConfig.OC_NEED_OTP);
-        /*if (!need_otp) {
+        if (forgotPin) {
+            setupCountdownview();
+        } else {
             onCallApiOtpRequest();
-        }*/
-        onCallApiOtpRequest();
+        }
     }
 
 
@@ -108,7 +108,6 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
             @Override
             public void onClick(View v) {
                 initDisableClickResendOtp();
-                setupCountdownview();
                 onCallApiOtpRequest();
             }
         });
@@ -166,6 +165,7 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
      */
     @Override
     public void handleOtpRequest(RequestOtpResponse model) {
+        setupCountdownview();
 
     }
 
@@ -199,6 +199,7 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
                     hideSoftKeyboard(lineField);
                     onCallApiOtpVerify();
                 } else if (charSequence.toString().length() == 6 && forgotPin) {
+                    //onCallApiOtpVerify();
                     hideSoftKeyboard(lineField);
                     Intent intent = new Intent(OtpLoginActivity.this, ForgotPinActivity.class);
                     intent.putExtra(IConfig.OC_SESSION_OTP, lineField.getText().toString());

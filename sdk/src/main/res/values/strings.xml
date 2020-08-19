@@ -39,7 +39,6 @@
     <string name="title_set_new_pin">Set PIN baru Anda</string>
 
 
-
     <!--OTP-->
     <string name="input_otp_ottocash">Masukkan 6 Digit Kode OTP</string>
     <string name="describe_otp_ottocash">6 Digit kode OTP telah dikirimkan ke nomor 0812 xxxx xx23, Silahkan cek HP Anda</string>

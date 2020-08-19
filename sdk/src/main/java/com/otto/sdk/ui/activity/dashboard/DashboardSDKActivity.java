@@ -203,7 +203,8 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
     private void mainMenuSelected(MainMenuModel mainMenu) {
         switch (mainMenu.getCode()) {
             case "mm_1":
-                goPaymentWithQR();
+                dialogComingSoon();
+                //goPaymentWithQR();
                 break;
             case "mm_2":
                 Intent intent = new Intent(this, TopUpActivity.class);
