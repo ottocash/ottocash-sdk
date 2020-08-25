@@ -49,9 +49,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void initCredentialsHostApp() {
-        client_id = "b7f45e6bf8091a16107f9b524fe498fae1201c8d412fb61be380177eb383d4a7";
-        client_secret = "c1b79f3316cd0f4f6240c75644d84a7de574be713ceaf8a8dd8a33f27c9f3594";
-        partner_id = "SAMPLE-ID";
+        client_id = "knYbtc84tAJQfWj28UPgqPsGirr4607KFvzIfKU2_HY";
+        client_secret = "ANwky-ms8rQQ_IyIIejiiTI91Mmx2g9IgRLa_mQaMQo";
+        partner_id = "AAT";
 
 
         CacheUtil.putPreferenceString(IConfig.OC_SESSION_CLIENT_ID, client_id, this);

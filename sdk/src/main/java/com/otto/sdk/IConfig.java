@@ -8,7 +8,7 @@ public interface IConfig {
     //String API_BASE_URL = "https://ottocash-sdk.ptape.com/";
 
     //Production
-    String API_BASE_URL = "https://sdkmw.ottocash.id/";
+    String API_BASE_URL = "https://sdkmw.ottocash.id:8443/";
 
     //Session
     String OC_SESSION_LOGIN_KEY = "Ottocash-SDK-Login";
