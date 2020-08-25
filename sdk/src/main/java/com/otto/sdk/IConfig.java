@@ -5,10 +5,10 @@ import java.io.File;
 public interface IConfig {
 
     //Development
-    String API_BASE_URL = "https://ottocash-sdk.ptape.com/";
+    //String API_BASE_URL = "https://ottocash-sdk.ptape.com/";
 
     //Production
-    //String API_BASE_URL = "https://sdkmw.ottocash.id/";
+    String API_BASE_URL = "https://sdkmw.ottocash.id/";
 
     //Session
     String OC_SESSION_LOGIN_KEY = "Ottocash-SDK-Login";
