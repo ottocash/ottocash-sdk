@@ -44,7 +44,7 @@ public class ForgotPinActivity extends AppActivity implements IForgotPinView {
     ImageView ivBack;
 
     private boolean isFormValidationSuccess = false;
-    private String phone_number;
+    private String phoneForgotPin;
     private String session_otp;
 
     @Override
@@ -69,6 +69,7 @@ public class ForgotPinActivity extends AppActivity implements IForgotPinView {
         addTextWatcher(edtConfirmPin);
 
         //phone_number = CacheUtil.getPreferenceString(OC_SESSION_PHONE, ForgotPinActivity.this);
+        phoneForgotPin = getIntent().getExtras().getString(OC_SESSION_PHONE);
         session_otp = Objects.requireNonNull(getIntent().getExtras()).getString(IConfig.OC_SESSION_OTP);
 
         btnSave.setOnClickListener(new View.OnClickListener() {
@@ -99,7 +100,7 @@ public class ForgotPinActivity extends AppActivity implements IForgotPinView {
     private void onCallApiForgotPin() {
         final ForgotPinRequest model = new ForgotPinRequest();
 
-        model.setPhone_number(CacheUtil.getPreferenceString(OC_SESSION_PHONE, ForgotPinActivity.this));
+        model.setPhone_number(phoneForgotPin);
         model.setPin(edtPin.getText().toString());
         model.setOtp(session_otp);
 
@@ -158,6 +159,7 @@ public class ForgotPinActivity extends AppActivity implements IForgotPinView {
     public void handleForgotPin(BaseResponse model) {
 
         if (model.getBaseMeta().getCode() == 200) {
+            Toast.makeText(this, model.getBaseMeta().getMessage(), Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(ForgotPinActivity.this, PinLoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);

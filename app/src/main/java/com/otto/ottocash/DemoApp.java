@@ -19,11 +19,19 @@ public class DemoApp extends BaseApp {
         setupBuilder(DaggerAppComponent.builder(), this);
         setupDefaultFont("fonts/Barlow-Regular.ttf");
 
+        // DEV
         OttoCashSdk.setupComponent(
                 "knYbtc84tAJQfWj28UPgqPsGirr4607KFvzIfKU2_HY",
                 "ANwky-ms8rQQ_IyIIejiiTI91Mmx2g9IgRLa_mQaMQo",
                 "AAT",
                 this);
+
+        //PROD
+        /*OttoCashSdk.setupComponent(
+                "wLdHRmQ-GPzU9IDXHxV-EneXMfciuf8W7noLCCR4xtk",
+                "KEphxvcZ6Lpeq9f-BJ7daA71-uYKn7t5sUByhnPozLo",
+                "AAT",
+                this);*/
     }
 
     public static AppComponent getAppComponent() {

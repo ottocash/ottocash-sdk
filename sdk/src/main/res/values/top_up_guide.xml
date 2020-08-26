@@ -60,7 +60,7 @@
     <string name="top_up_via_mobile_bca_1">Login ke akun MBCA anda</string>
     <string name="top_up_via_mobile_bca_2">Pilih menu m-Transfer</string>
     <string name="top_up_via_mobile_bca_3">Pilih BCA Virtual Account</string>
-    <string name="top_up_via_mobile_bca_4">Masukkan 21033 + nomor ponsel anda : 20133%1$s</string>
+    <string name="top_up_via_mobile_bca_4">Masukkan 20133 + nomor ponsel anda : 20133%1$s</string>
     <string name="top_up_via_mobile_bca_5">Pastikan nama akun OC anda sudah sesuai</string>
     <string name="top_up_via_mobile_bca_6">Masukkan nominal top up (Biaya Admin Rp 1,000 akan memotong dari nominal top up)</string>
     <string name="top_up_via_mobile_bca_7">Masukkan PIN &amp; Konfirmasi transfer</string>
@@ -72,7 +72,7 @@
     <string name="top_up_via_atm_bca_2">Pilih Menu Transaksi Lainnya</string>
     <string name="top_up_via_atm_bca_3">Pilih Menu Transfer</string>
     <string name="top_up_via_atm_bca_4">Pilih Menu ke Rek BCA Virtual Account</string>
-    <string name="top_up_via_atm_bca_5">Masukkan 21033 + nomor ponsel anda : 20133%1$s</string>
+    <string name="top_up_via_atm_bca_5">Masukkan 20133 + nomor ponsel anda : 20133%1$s</string>
     <string name="top_up_via_atm_bca_6">Masukkan nominal top up (Biaya Admin Rp 1,000 akan memotong dari nominal top up)</string>
     <string name="top_up_via_atm_bca_7">Ikuti instruksi untuk menyelesaikan transaksi</string>
     <string name="top_up_via_atm_bca_8">Konfirmasi transaksi berhasil dilakukan</string>
@@ -82,7 +82,7 @@
     <string name="top_up_via_klik_bca_1">Login ke akun Klik BCA Anda</string>
     <string name="top_up_via_klik_bca_2">Pilih Menu Transfer Dana</string>
     <string name="top_up_via_klik_bca_3">Pilih Transfer ke BCA Virtual Account</string>
-    <string name="top_up_via_klik_bca_4">Masukkan 21033 + nomor ponsel anda : 20133%1$s</string>
+    <string name="top_up_via_klik_bca_4">Masukkan 20133 + nomor ponsel anda : 20133%1$s</string>
     <string name="top_up_via_klik_bca_5">Masukkan nominal top up (Biaya Admin Rp 1,000 akan memotong dari nominal top up)</string>
     <string name="top_up_via_klik_bca_6">Ikuti instruksi untuk menyelesaikan transaksi</string>
     <string name="top_up_via_klik_bca_7">Konfirmasi transaksi berhasil dilakukan</string>

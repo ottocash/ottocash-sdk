@@ -18,7 +18,14 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            debuggable true
+            manifestPlaceholders = [app_name: "OC-SDK"]
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            //applicationIdSuffix ".debug"
+            manifestPlaceholders = [app_name: "OC-SDK-DEV"]
         }
     }
 

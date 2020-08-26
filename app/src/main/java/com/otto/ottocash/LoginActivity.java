@@ -49,9 +49,15 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void initCredentialsHostApp() {
+        // DEV
         client_id = "knYbtc84tAJQfWj28UPgqPsGirr4607KFvzIfKU2_HY";
         client_secret = "ANwky-ms8rQQ_IyIIejiiTI91Mmx2g9IgRLa_mQaMQo";
         partner_id = "AAT";
+
+        //PROD
+        /*client_id = "wLdHRmQ-GPzU9IDXHxV-EneXMfciuf8W7noLCCR4xtk";
+        client_secret = "KEphxvcZ6Lpeq9f-BJ7daA71-uYKn7t5sUByhnPozLo";
+        partner_id = "AAT";*/
 
 
         CacheUtil.putPreferenceString(IConfig.OC_SESSION_CLIENT_ID, client_id, this);
