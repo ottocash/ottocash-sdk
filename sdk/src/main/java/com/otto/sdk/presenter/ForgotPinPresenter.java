@@ -3,6 +3,7 @@ package com.otto.sdk.presenter;
 import android.content.Context;
 
 import com.otto.sdk.interfaces.IForgotPinView;
+import com.otto.sdk.model.api.request.ForgotPinInquiryRequest;
 import com.otto.sdk.model.api.request.ForgotPinRequest;
 import com.otto.sdk.model.dao.ForgotPinDao;
 
@@ -20,6 +21,17 @@ public class ForgotPinPresenter extends BasePresenter implements ForgotPinDao.IF
     }
 
     @Override
+    public void getForgotPinInquiry(ForgotPinInquiryRequest requestModel) {
+        new ForgotPinDao(this, new OnPresenterResponseCallback() {
+            @Override
+            public void call(BaseResponse br) {
+                BaseResponse model = (BaseResponse) br;
+                forgotPinView.handleForgotPinInquiry(model);
+            }
+        }).onForgotPinInquiry(requestModel, getContext());
+    }
+
+    @Override
     public void getForgotPin(ForgotPinRequest requestModel) {
         new ForgotPinDao(this, new OnPresenterResponseCallback() {
             @Override
@@ -33,5 +45,10 @@ public class ForgotPinPresenter extends BasePresenter implements ForgotPinDao.IF
     @Override
     public BasePresenter getPresenter() {
         return getInstance(forgotPinView, this);
+    }
+
+    @Override
+    public Context getContext() {
+        return forgotPinView.getCurrentActivity();
     }
 }

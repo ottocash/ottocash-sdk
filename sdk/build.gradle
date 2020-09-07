@@ -1,12 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion "29.0.2"
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
     defaultConfig {
 
         minSdkVersion 19
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -15,6 +15,7 @@ android {
 
     buildTypes {
         release {
+            debuggable true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -30,10 +31,6 @@ android {
             jcenter()
 
         }
-    }
-
-    buildFeatures {
-        viewBinding = true
     }
 
 }
@@ -61,7 +58,7 @@ dependencies {
     implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
     implementation 'com.poovam:pin-edittext-field:1.2.0'
     implementation 'org.greenrobot:eventbus:3.1.1'
-    implementation 'com.google.android.gms:play-services-location:11.8.0'
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
     implementation "com.github.tajchert:nammu:1.2.0"
 
     //QR
@@ -82,6 +79,7 @@ dependencies {
     implementation 'com.google.dagger:dagger:2.16'
     //implementation 'me.dm7.barcodescanner:zbar:1.9.8'
 
+    implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
     implementation 'io.github.inflationx:calligraphy3:3.1.1'
     implementation 'io.github.inflationx:viewpump:2.0.3'
 

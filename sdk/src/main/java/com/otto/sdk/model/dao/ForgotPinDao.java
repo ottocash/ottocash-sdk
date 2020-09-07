@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.otto.sdk.IConfig;
 import com.otto.sdk.model.api.Api;
+import com.otto.sdk.model.api.request.ForgotPinInquiryRequest;
 import com.otto.sdk.model.api.request.ForgotPinRequest;
 import com.otto.sdk.presenter.ForgotPinPresenter;
 
@@ -20,6 +21,8 @@ public class ForgotPinDao extends BaseDao {
     private IForgotPinDao forgotPinDao;
 
     public interface IForgotPinDao extends IDaoPresenter {
+        void getForgotPinInquiry(ForgotPinInquiryRequest requestModel);
+
         void getForgotPin(ForgotPinRequest requestModel);
     }
 
@@ -32,6 +35,10 @@ public class ForgotPinDao extends BaseDao {
         this.onPresenterResponseCallback = onPresenterResponseCallback;
     }
 
+    public void onForgotPinInquiry(ForgotPinInquiryRequest model, Context context) {
+        Api.onForgotPinInquiry(model, context, BaseDao.getInstance(this, forgotPinDao.getPresenter(), IConfig.KEY_API_FORGOT_PIN_INQUIRY).callback);
+    }
+
     public void onForgotPin(ForgotPinRequest model, Context context) {
         Api.onForgotPin(model, context, BaseDao.getInstance(this, forgotPinDao.getPresenter(), IConfig.KEY_API_FORGOT_PIN).callback);
     }
@@ -41,6 +48,9 @@ public class ForgotPinDao extends BaseDao {
         if (response.isSuccessful()) {
             if (responseCode == IConfig.KEY_API_FORGOT_PIN) {
                 BaseResponse baseResponse = (BaseResponse) br;
+                onPresenterResponseCallback.call(baseResponse);
+            } else if (responseCode == IConfig.KEY_API_FORGOT_PIN_INQUIRY) {
+                BaseResponse baseResponse = br;
                 onPresenterResponseCallback.call(baseResponse);
             }
         }

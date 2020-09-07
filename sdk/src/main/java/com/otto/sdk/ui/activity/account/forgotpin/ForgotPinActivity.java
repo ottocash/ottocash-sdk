@@ -17,10 +17,13 @@ import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCashSdk;
 import com.otto.sdk.R;
 import com.otto.sdk.interfaces.IForgotPinView;
+import com.otto.sdk.model.api.request.ForgotPinInquiryRequest;
 import com.otto.sdk.model.api.request.ForgotPinRequest;
+import com.otto.sdk.model.api.request.LoginRequest;
 import com.otto.sdk.model.api.request.RegisterRequest;
 import com.otto.sdk.presenter.AuthPresenter;
 import com.otto.sdk.presenter.ForgotPinPresenter;
+import com.otto.sdk.ui.activity.account.activation.PinLoginActivity;
 import com.otto.sdk.ui.activity.account.registration.SetPinActivity;
 import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
 import com.otto.sdk.ui.component.support.Connectivity;
@@ -41,8 +44,7 @@ public class ForgotPinActivity extends AppActivity implements IForgotPinView {
     ImageView ivBack;
 
     private boolean isFormValidationSuccess = false;
-    private ForgotPinRequest model;
-    private String phone_number;
+    private String phoneForgotPin;
     private String session_otp;
 
     @Override
@@ -66,8 +68,9 @@ public class ForgotPinActivity extends AppActivity implements IForgotPinView {
         addTextWatcher(edtPin);
         addTextWatcher(edtConfirmPin);
 
-        phone_number = CacheUtil.getPreferenceString(OC_SESSION_PHONE, ForgotPinActivity.this);
-        session_otp  = Objects.requireNonNull(getIntent().getExtras()).getString(IConfig.OC_SESSION_OTP);
+        //phone_number = CacheUtil.getPreferenceString(OC_SESSION_PHONE, ForgotPinActivity.this);
+        phoneForgotPin = getIntent().getExtras().getString(OC_SESSION_PHONE);
+        session_otp = Objects.requireNonNull(getIntent().getExtras()).getString(IConfig.OC_SESSION_OTP);
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,26 +86,31 @@ public class ForgotPinActivity extends AppActivity implements IForgotPinView {
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                //onBackPressed();
+                Intent intent = new Intent(ForgotPinActivity.this, PinLoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
             }
         });
     }
 
 
+
     private void onCallApiForgotPin() {
-        if (Connectivity.isNetworkAvailable(this)) {
-            model.setPhone_number(phone_number);
-            model.setPin(edtPin.getText().toString());
-            model.setOtp(session_otp);
+        final ForgotPinRequest model = new ForgotPinRequest();
 
-            showApiProgressDialog(OttoCashSdk.getAppComponent(), new ForgotPinPresenter(ForgotPinActivity.this) {
-                @Override
-                public void call() {
-                    getForgotPin(model);
+        model.setPhone_number(phoneForgotPin);
+        model.setPin(edtPin.getText().toString());
+        model.setOtp(session_otp);
 
-                }
-            }, "Loading");
-        }
+        showApiProgressDialog(OttoCashSdk.getAppComponent(), new ForgotPinPresenter(ForgotPinActivity.this) {
+            @Override
+            public void call() {
+                getForgotPin(model);
+
+            }
+        }, "Loading");
     }
 
 
@@ -141,12 +149,18 @@ public class ForgotPinActivity extends AppActivity implements IForgotPinView {
         });
     }
 
+    @Override
+    public void handleForgotPinInquiry(BaseResponse model) {
+
+    }
+
 
     @Override
     public void handleForgotPin(BaseResponse model) {
 
         if (model.getBaseMeta().getCode() == 200) {
-            Intent intent = new Intent(ForgotPinActivity.this, DashboardSDKActivity.class);
+            Toast.makeText(this, model.getBaseMeta().getMessage(), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(ForgotPinActivity.this, PinLoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();

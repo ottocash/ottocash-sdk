@@ -7,6 +7,7 @@ import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCashSdk;
 import com.otto.sdk.model.api.request.CheckPhoneNumberRequest;
 import com.otto.sdk.model.api.request.CreateTokenRequest;
+import com.otto.sdk.model.api.request.ForgotPinInquiryRequest;
 import com.otto.sdk.model.api.request.ForgotPinRequest;
 import com.otto.sdk.model.api.request.InquiryRequest;
 import com.otto.sdk.model.api.request.LoginRequest;
@@ -60,6 +61,16 @@ public class Api extends BaseApi {
         return map;
     }
 
+    private static Map<String, String> initHeaderForRequestPartner(Context context) {
+        Map<String, String> map = new HashMap<>();
+        map.put("Authorization", "Bearer " + CacheUtil.getPreferenceString(IConfig.OC_SESSION_ACCESS_TOKEN, context));
+        map.put("Accept", "application/json");
+        map.put("Content-Type", "application/json");
+        map.put("Partner-ID", CacheUtil.getPreferenceString(IConfig.OC_SESSION_PARTNER_ID, context));
+
+        return map;
+    }
+
 
     synchronized private static ApiService initApiDomain() {
         return (ApiService) getInstance()
@@ -84,6 +95,10 @@ public class Api extends BaseApi {
         initApiDomain().callApiLogin(initHeaderForRequestAuth(context), loginRequest).enqueue((Callback<LoginResponse>) callback);
     }
 
+    synchronized public static void onForgotPinInquiry(ForgotPinInquiryRequest forgotPinInquiryRequest, Context context, Callback callback) {
+        initApiDomain().callApiForgotPinInquiry(initHeaderForRequestAuth(context), forgotPinInquiryRequest).enqueue((Callback<BaseResponse>) callback);
+    }
+
     synchronized public static void onForgotPin(ForgotPinRequest forgotPinRequest, Context context, Callback callback) {
         initApiDomain().callApiForgotPin(initHeaderForRequestAuth(context), forgotPinRequest).enqueue((Callback<BaseResponse>) callback);
     }
@@ -96,12 +111,20 @@ public class Api extends BaseApi {
         initApiDomain().callApiOtpVerification(initHeaderForRequestAuth(context), otpVerificationRequest).enqueue((Callback<VerifyOtpResponse>) callback);
     }
 
+    synchronized public static void onOtpVerificationRegister(OtpVerificationRequest otpVerificationRequest, Context context, Callback callback) {
+        initApiDomain().callApiOtpVerificationRegister(initHeaderForRequestAuth(context), otpVerificationRequest).enqueue((Callback<VerifyOtpResponse>) callback);
+    }
+
+    synchronized public static void onOtpRequestRegister(OtpRequest otpRequest, Context context, Callback callback) {
+        initApiDomain().callApiOtpRequestRegister(initHeaderForRequestAuth(context), otpRequest).enqueue((Callback<RequestOtpResponse>) callback);
+    }
+
     synchronized public static void onOtpRequest(OtpRequest otpRequest, Context context, Callback callback) {
         initApiDomain().callApiOtpRequest(initHeaderForRequestAuth(context), otpRequest).enqueue((Callback<RequestOtpResponse>) callback);
     }
 
     synchronized public static void onReviewCheckOut(ReviewCheckOutRequest reviewCheckOutRequest, Context context, Callback callback) {
-        initApiDomain().callApiReviewCheckOut(initHeaderForRequestAuth(context), reviewCheckOutRequest).enqueue((Callback<ReviewCheckOutResponse>) callback);
+        initApiDomain().callApiReviewCheckOut(initHeaderForRequestPartner(context), reviewCheckOutRequest).enqueue((Callback<ReviewCheckOutResponse>) callback);
     }
 
     synchronized public static void onPaymentValidate(PaymentValidateRequest paymentValidateRequest, Context context, Callback callback) {

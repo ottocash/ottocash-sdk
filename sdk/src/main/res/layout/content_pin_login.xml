@@ -75,28 +75,26 @@
 
         <TextView
             android:gravity="center"
-            android:id="@+id/errorMessage"
+            android:id="@+id/lupaPin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="25dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/Red_d04a55"
+            android:text="Lupa PIN?"
+            android:padding="5dp"
+            android:visibility="visible"
             android:textAppearance="@style/RobotoRegular"
             android:textSize="12sp"
             android:textStyle="bold" />
 
         <TextView
             android:gravity="center"
-            android:id="@+id/lupaPin"
+            android:id="@+id/errorMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
-            android:textColor="@color/Red_d04a55"
-            android:text="Lupa PIN?"
-            android:padding="5dp"
-            android:visibility="gone"
             android:textAppearance="@style/RobotoRegular"
             android:textSize="12sp"
             android:textStyle="bold" />

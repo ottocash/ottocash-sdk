@@ -39,4 +39,9 @@ public class InquiryPresenter extends BasePresenter implements InquiryDao.IInqui
     public BasePresenter getPresenter() {
         return BasePresenter.getInstance(inquiryView, this);
     }
+
+    @Override
+    public Context getContext() {
+        return inquiryView.getBaseActivity();
+    }
 }

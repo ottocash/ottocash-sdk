@@ -1,32 +1,47 @@
 package com.otto.sdk.ui.activity.payment.pede;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
-
-import androidx.core.widget.NestedScrollView;
-
+import android.os.Environment;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.core.widget.NestedScrollView;
+
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.R;
 import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
-import com.otto.sdk.ui.activity.payment.otto.PaymentSuccessOttoActivity;
+import com.otto.sdk.ui.component.dialog.CustomDialog;
+import com.otto.sdk.ui.component.support.DateUtil;
 import com.otto.sdk.ui.component.support.UiUtil;
+import com.otto.sdk.ui.component.support.screnshoot.FileUtil;
+import com.otto.sdk.ui.component.support.screnshoot.ScreenshotUtil;
+
+import java.io.File;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.support.util.CacheUtil;
 
 public class PaymentSuccessPedeActivity extends BaseActivity {
 
+    private String fileName;
+    private File folderFoto;
+    private File savedPhoto;
+    private Bitmap bitmap;
+
+    CardView buktiTransaksi;
+    LinearLayout shareBuktiTransaksi;
+    LinearLayout downloadBuktiTransaksi;
     ImageView ivBack;
     TextView tvTransactionTujuan;
     TextView tvTransactionAmount;
@@ -102,6 +117,9 @@ public class PaymentSuccessPedeActivity extends BaseActivity {
 
     private void initComponent() {
         ivClose = findViewById(R.id.iv_close);
+        buktiTransaksi = findViewById(R.id.buktiTransaksi);
+        downloadBuktiTransaksi = findViewById(R.id.downloadBuktiTransaksi);
+        shareBuktiTransaksi = findViewById(R.id.shareBuktiTransaksi);
         ivCloseReceipt = findViewById(R.id.iv_close_receipt);
         nestedScrollView = findViewById(R.id.nestedScrollView);
 
@@ -141,26 +159,59 @@ public class PaymentSuccessPedeActivity extends BaseActivity {
             }
         });
 
-//        ivCloseReceipt.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(PaymentSuccessPedeActivity.this, DashboardSDKActivity.class);
-//                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                startActivity(intent);
-//                finish();
-//            }
-//        });
 
-//        ivClose.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(PaymentSuccessPedeActivity.this, DashboardSDKActivity.class);
-//                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                startActivity(intent);
-//                finish();
-//            }
-//        });
+        downloadBuktiTransaksi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bitmap = ScreenshotUtil.getInstance().takeScreenshotForView(buktiTransaksi);
+                if (bitmap != null) {
+                    fileName = IConfig.FILE_NAME_FOTO_RECEIPT + referenceNumberTransaction + IConfig.EXTENSION_FILE_FOTO;
 
+                    folderFoto = new File(Environment.getExternalStorageDirectory(), IConfig.FOLDER_FOTO);
+                    if (!folderFoto.exists()) folderFoto.mkdirs();
+
+                    savedPhoto = new File(Environment.getExternalStorageDirectory(), fileName);
+
+                    FileUtil.getInstance().storeBitmap(bitmap, savedPhoto.getPath());
+
+                    dialogReceiptDownload();
+                }
+            }
+        });
+
+        shareBuktiTransaksi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bitmap = ScreenshotUtil.getInstance().takeScreenshotForView(buktiTransaksi);
+                if (bitmap != null) {
+                    fileName = IConfig.FILE_NAME_FOTO_RECEIPT + referenceNumberTransaction + IConfig.EXTENSION_FILE_FOTO;
+
+                    folderFoto = new File(Environment.getExternalStorageDirectory(), IConfig.FOLDER_FOTO);
+                    if (!folderFoto.exists()) folderFoto.mkdirs();
+
+                    savedPhoto = new File(Environment.getExternalStorageDirectory(), fileName);
+
+                    FileUtil.getInstance().storeBitmap(bitmap, savedPhoto.getPath());
+
+                    //config share
+                    Intent share = new Intent(Intent.ACTION_SEND);
+                    share.setType("*/*");
+                    share.putExtra(Intent.EXTRA_STREAM, Uri.parse(savedPhoto.getPath()));
+                    share.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    startActivity(Intent.createChooser(share, "Share Receipt!"));
+                }
+
+            }
+        });
+
+    }
+
+    private void dialogReceiptDownload() {
+        String title = "Receipt Berhasil di Download";
+        String message = savedPhoto.getPath();
+        String btnLabel = getString(R.string.dialog_button_coming_soon);
+
+        CustomDialog.alertDialog(this, title, message, btnLabel, false);
     }
 
     private void contentUI() {

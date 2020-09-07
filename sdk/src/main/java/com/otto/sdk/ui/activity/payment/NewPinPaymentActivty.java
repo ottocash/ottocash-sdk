@@ -29,10 +29,9 @@ import com.otto.sdk.model.api.response.TransferToFriendResponse;
 import com.otto.sdk.presenter.InquiryPresenter;
 import com.otto.sdk.presenter.PinVerificationPaymentPresenter;
 import com.otto.sdk.presenter.ReviewCheckoutPresenter;
-import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
-import com.otto.sdk.ui.activity.payment.otto.PaymentSuccessOttoActivity;
 import com.otto.sdk.ui.activity.payment.pede.PaymentSuccessPedeActivity;
 import com.otto.sdk.ui.adapter.PinAdapter;
+import com.otto.sdk.ui.component.support.DateUtil;
 import com.otto.sdk.ui.component.support.DeviceId;
 import com.otto.sdk.ui.component.support.Logging;
 import com.otto.sdk.ui.component.support.UiUtil;
@@ -42,6 +41,13 @@ import java.util.Random;
 
 import app.beelabs.com.codebase.base.BasePresenter;
 import app.beelabs.com.codebase.support.util.CacheUtil;
+
+import static com.otto.sdk.IConfig.PAYMENT_BILLER_ID;
+import static com.otto.sdk.IConfig.PAYMENT_SERVICES_FEE;
+import static com.otto.sdk.IConfig.PAYMENT_PARTNER_CODE;
+import static com.otto.sdk.IConfig.PAYMENT_PRODUCT_CODE;
+import static com.otto.sdk.IConfig.PAYMENT_PRODUCT_NAME;
+import static com.otto.sdk.OttoCash.OTTOCASH_PAYMENT_DATA;
 
 
 public class NewPinPaymentActivty extends AppActivity implements PinAdapter.Callback, IPinVerificationPaymentView, IReviewCheckoutView, IInquiryView {
@@ -70,6 +76,7 @@ public class NewPinPaymentActivty extends AppActivity implements PinAdapter.Call
     private String keyPinReviewCheckout;
 
     /*review checkout*/
+    private int servicesFee;
     private int amount;
     private String customerReferenceNumber;
     private ReviewCheckOutRequest reviewCheckOutRequest;
@@ -111,7 +118,7 @@ public class NewPinPaymentActivty extends AppActivity implements PinAdapter.Call
 
         emoneyBalance = Integer.parseInt(CacheUtil.getPreferenceString(IConfig.OC_SESSION_EMONEY_BALANCE,
                 NewPinPaymentActivty.this));
-        amount = CacheUtil.getPreferenceInteger(IConfig.OC_SESSION_TOTAL, NewPinPaymentActivty.this);
+        amount = CacheUtil.getPreferenceInteger(IConfig.PAYMENT_TOTAL, NewPinPaymentActivty.this);
 
         pinList.setLayoutManager(new GridLayoutManager(this, 3));
         pinList.setAdapter(new PinAdapter(this));
@@ -147,12 +154,12 @@ public class NewPinPaymentActivty extends AppActivity implements PinAdapter.Call
 
         reviewCheckOutRequest.setAccount_number(account_number);
         reviewCheckOutRequest.setAmount(amount);
-        reviewCheckOutRequest.setFee(0);
-        reviewCheckOutRequest.setProduct_name("Pembayaran");
-        reviewCheckOutRequest.setBiller_id("PURCHASE_ELEVENIA");
-        reviewCheckOutRequest.setCustomer_reference_number("UPN" + generateRandom(9) + "");
-        reviewCheckOutRequest.setProduct_code("PYMNT");
-        reviewCheckOutRequest.setPartner_code("P000001");
+        reviewCheckOutRequest.setFee(CacheUtil.getPreferenceInteger(PAYMENT_SERVICES_FEE, this));
+        reviewCheckOutRequest.setProduct_name(CacheUtil.getPreferenceString(PAYMENT_PRODUCT_NAME, this));
+        reviewCheckOutRequest.setBiller_id(CacheUtil.getPreferenceString(PAYMENT_BILLER_ID, this));
+        reviewCheckOutRequest.setCustomer_reference_number(DateUtil.getTimestamp());
+        reviewCheckOutRequest.setProduct_code(CacheUtil.getPreferenceString(PAYMENT_PRODUCT_CODE, this));
+        reviewCheckOutRequest.setPartner_code(CacheUtil.getPreferenceString(PAYMENT_PARTNER_CODE, this));
         reviewCheckOutRequest.setLatitude(String.valueOf(getMyLastLocation().getLatitude()));
         reviewCheckOutRequest.setLongitude(String.valueOf(getMyLastLocation().getLongitude()));
         reviewCheckOutRequest.setDevice_id(DeviceId.getDeviceID(this));
@@ -301,15 +308,15 @@ public class NewPinPaymentActivty extends AppActivity implements PinAdapter.Call
     public void handleReviewCheckout(ReviewCheckOutResponse model) {
         if (model.getMeta().getCode() == 200) {
 
-            //Intent intent = new Intent();
-            //intent.putExtra(OTTOCASH_PAYMENT_DATA, model.getData());
-            //setResult(RESULT_OK, intent);
-            //finish();
-
-            //onCallApiInquiry();
-            Intent intent = new Intent(this, DashboardSDKActivity.class);
-            startActivity(intent);
+            Intent intent = new Intent();
+            intent.putExtra(OTTOCASH_PAYMENT_DATA, model.getData());
+            setResult(RESULT_OK, intent);
             finish();
+
+            onCallApiInquiry();
+            /*Intent intent = new Intent(this, DashboardSDKActivity.class);
+            startActivity(intent);
+            finish();*/
         } else {
             Toast.makeText(this, model.getMeta().getMessage(), Toast.LENGTH_SHORT).show();
         }

@@ -21,14 +21,11 @@ public class OttoCashSdk extends BaseApp {
         setupDefaultFont("fonts/Barlow-Regular.ttf");
     }
 
-    public static void setupComponent(String id, String Secret, Application application) {
+    public static void setupComponent(String Client_Id, String Secret_Id, String Partner_Id, Application application) {
         appComponent = getComponent();
-        CacheUtil.putPreferenceString(IConfig.OC_SESSION_CLIENT_ID, id, application);
-        CacheUtil.putPreferenceString(
-                IConfig.OC_SESSION_CLIENT_SECRET,
-                Secret,
-                application
-        );
+        CacheUtil.putPreferenceString(IConfig.OC_SESSION_CLIENT_ID, Client_Id, application);
+        CacheUtil.putPreferenceString(IConfig.OC_SESSION_CLIENT_SECRET, Secret_Id, application);
+        CacheUtil.putPreferenceString(IConfig.OC_SESSION_PARTNER_ID, Partner_Id, application);
 
         setupBuilder(DaggerAppComponent.builder(), application);
     }

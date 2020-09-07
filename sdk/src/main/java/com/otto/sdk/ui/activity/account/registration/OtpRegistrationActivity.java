@@ -14,15 +14,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.otto.sdk.AppActivity;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCashSdk;
 import com.otto.sdk.R;
+import com.otto.sdk.interfaces.IAuthView;
 import com.otto.sdk.interfaces.IOtpView;
 import com.otto.sdk.model.api.request.OtpRequest;
 import com.otto.sdk.model.api.request.OtpVerificationRequest;
+import com.otto.sdk.model.api.request.RegisterRequest;
+import com.otto.sdk.model.api.response.LoginResponse;
+import com.otto.sdk.model.api.response.RegisterResponse;
 import com.otto.sdk.model.api.response.RequestOtpResponse;
 import com.otto.sdk.model.api.response.VerifyOtpResponse;
+import com.otto.sdk.presenter.AuthPresenter;
 import com.otto.sdk.presenter.OtpPresenter;
+import com.otto.sdk.ui.component.support.Connectivity;
+import com.otto.sdk.ui.component.support.DeviceId;
 import com.otto.sdk.ui.component.support.UiUtil;
 import com.poovam.pinedittextfield.LinePinField;
 
@@ -30,9 +38,11 @@ import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.support.util.CacheUtil;
 import cn.iwgang.countdownview.CountdownView;
 
+import static com.otto.sdk.IConfig.OC_SESSION_EMAIL;
+import static com.otto.sdk.IConfig.OC_SESSION_NAME;
 import static com.otto.sdk.IConfig.OC_SESSION_PHONE;
 
-public class OtpRegistrationActivity extends BaseActivity implements IOtpView {
+public class OtpRegistrationActivity extends AppActivity implements IOtpView, IAuthView {
 
     ImageView ivBack;
     CountdownView countdownView;
@@ -50,6 +60,7 @@ public class OtpRegistrationActivity extends BaseActivity implements IOtpView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp);
 
+        getLastKnownLocation();
         initComponent();
         setupCountdownview();
         addTextWatcher(lineField);
@@ -63,7 +74,7 @@ public class OtpRegistrationActivity extends BaseActivity implements IOtpView {
             }
         });
 
-        //onCallApiOTPRequest();
+        onCallApiOTPRequestRegister();
     }
 
 
@@ -98,7 +109,7 @@ public class OtpRegistrationActivity extends BaseActivity implements IOtpView {
             public void onClick(View v) {
                 initDisableClickResendOtp();
                 setupCountdownview();
-                onCallApiOTPRequest();
+                onCallApiOTPRequestRegister();
             }
         });
 
@@ -125,15 +136,15 @@ public class OtpRegistrationActivity extends BaseActivity implements IOtpView {
     /**
      * Call Api Request Otp
      */
-    private void onCallApiOTPRequest() {
+    private void onCallApiOTPRequestRegister() {
         String phone = CacheUtil.getPreferenceString(OC_SESSION_PHONE, OtpRegistrationActivity.this);
-        final  OtpRequest otpRequest = new OtpRequest();
+        final OtpRequest otpRequest = new OtpRequest();
         otpRequest.setPhone(phone);
 
         showApiProgressDialog(OttoCashSdk.getAppComponent(), new OtpPresenter(OtpRegistrationActivity.this) {
             @Override
             public void call() {
-                getOtpRequest(otpRequest);
+                getOtpRequestRegister(otpRequest);
 
             }
         }, "Loading");
@@ -144,16 +155,16 @@ public class OtpRegistrationActivity extends BaseActivity implements IOtpView {
      * Call Api Otp Verify
      */
     private void onCallApiOtpVerify() {
-        int user_id = CacheUtil.getPreferenceInteger(IConfig.OC_SESSION_USER_ID, OtpRegistrationActivity.this);
+        String phone_number = CacheUtil.getPreferenceString(OC_SESSION_PHONE, OtpRegistrationActivity.this);
         final OtpVerificationRequest otpVerificationRequest = new OtpVerificationRequest();
 
-        otpVerificationRequest.setUser_id(user_id);
+        otpVerificationRequest.setPhone_number(phone_number);
         otpVerificationRequest.setOtp_code(lineField.getText().toString());
 
         showApiProgressDialog(OttoCashSdk.getAppComponent(), new OtpPresenter(OtpRegistrationActivity.this) {
             @Override
             public void call() {
-                getOtpVerification(otpVerificationRequest);
+                getOtpVerificationRegister(otpVerificationRequest);
             }
         }, "Loading");
     }
@@ -174,16 +185,12 @@ public class OtpRegistrationActivity extends BaseActivity implements IOtpView {
     @Override
     public void handleOtpVerify(VerifyOtpResponse model) {
         if (model.getBaseMeta().getCode() == 200) {
-            Intent intent = new Intent(OtpRegistrationActivity.this, RegistrationSuccessActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            finish();
+            onCallApiRegistration();
             saveSession();
         } else {
             Toast.makeText(this, model.getBaseMeta().getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
-
 
 
     public void addTextWatcher(EditText input) {
@@ -225,4 +232,73 @@ public class OtpRegistrationActivity extends BaseActivity implements IOtpView {
         editor.putString("session", "aktivasi");
         editor.apply();
     }
+
+    @Override
+    public BaseActivity getCurrentActivity() {
+        return OtpRegistrationActivity.this;
+    }
+
+
+    private void onCallApiRegistration() {
+        if (Connectivity.isNetworkAvailable(this)) {
+            final RegisterRequest model = new RegisterRequest(
+                    CacheUtil.getPreferenceString(OC_SESSION_PHONE, OtpRegistrationActivity.this),
+                    CacheUtil.getPreferenceString(OC_SESSION_NAME, OtpRegistrationActivity.this),
+                    CacheUtil.getPreferenceString(OC_SESSION_EMAIL, OtpRegistrationActivity.this));
+
+            model.setPin(CacheUtil.getPreferenceString(IConfig.OC_SESSION_PIN, OtpRegistrationActivity.this));
+            model.setSecurityQuestionId("1");
+            model.setAnswer("ˆ˜ÎØÅÒÒˆ");
+            model.setLatitude(String.valueOf(getMyLastLocation().getLatitude()));
+            model.setLongitude(String.valueOf(getMyLastLocation().getLongitude()));
+            model.setDeviceId(DeviceId.getDeviceID(this));
+            model.setPlatform("android");
+
+            showApiProgressDialog(OttoCashSdk.getAppComponent(), new AuthPresenter(OtpRegistrationActivity.this) {
+                @Override
+                public void call() {
+                    getRegister(model);
+
+                }
+            }, "Loading");
+        }
+    }
+
+    @Override
+    public void handleLogin(LoginResponse model) {
+
+    }
+
+    @Override
+    public void handleRegister(RegisterResponse model) {
+        if (model.getMeta().getCode() == 200) {
+
+            int user_id = model.getData().getId();
+            String phone = model.getData().getPhone();
+            String account_number = model.getData().getAccountNumber();
+            String name = model.getData().getName();
+            String email = model.getData().getEmail();
+
+            CacheUtil.putPreferenceInteger(IConfig.OC_SESSION_USER_ID, user_id, OtpRegistrationActivity.this);
+            CacheUtil.putPreferenceString(IConfig.OC_SESSION_PHONE, phone, OtpRegistrationActivity.this);
+            CacheUtil.putPreferenceString(IConfig.OC_SESSION_ACCOUNT_NUMBER, account_number, OtpRegistrationActivity.this);
+            CacheUtil.putPreferenceString(IConfig.OC_SESSION_NAME, name, OtpRegistrationActivity.this);
+            CacheUtil.putPreferenceString(IConfig.OC_SESSION_EMAIL, email, OtpRegistrationActivity.this);
+
+            Intent intent = new Intent(OtpRegistrationActivity.this, RegistrationSuccessActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        } else {
+            Toast.makeText(this, model.getMeta().getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void handleError(String message) {
+        super.handleError(message);
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+
 }

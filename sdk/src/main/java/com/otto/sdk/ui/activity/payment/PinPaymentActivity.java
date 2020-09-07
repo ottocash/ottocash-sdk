@@ -126,7 +126,7 @@ public class PinPaymentActivity extends AppActivity implements IPinVerificationP
         //total = CacheUtil.getPreferenceInteger(IConfig.OC_SESSION_TOTAL, PinPaymentActivity.this);
         emoneyBalance = Integer.parseInt(CacheUtil.getPreferenceString(IConfig.OC_SESSION_EMONEY_BALANCE,
                 PinPaymentActivity.this));
-        amount = CacheUtil.getPreferenceInteger(IConfig.OC_SESSION_TOTAL, PinPaymentActivity.this);
+        amount = CacheUtil.getPreferenceInteger(IConfig.PAYMENT_TOTAL, PinPaymentActivity.this);
 
         if (pinTransferToFriend.equals(keyPinTransferToFriend)) {
             tvPaymentValue.setText(nominalTransferToFriend);
@@ -200,6 +200,11 @@ public class PinPaymentActivity extends AppActivity implements IPinVerificationP
         if (customerReferenceNumber != null) {
             customerReferenceNumber = (generateRandom(12) + "");
         }
+    }
+
+    @Override
+    public BaseActivity getCurrentActivity() {
+        return PinPaymentActivity.this;
     }
 
     public static long generateRandom(int length) {

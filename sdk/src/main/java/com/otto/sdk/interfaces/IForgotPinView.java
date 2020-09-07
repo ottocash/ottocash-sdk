@@ -6,4 +6,5 @@ import app.beelabs.com.codebase.base.response.BaseResponse;
 public interface IForgotPinView extends IView {
 
     void handleForgotPin(BaseResponse model);
+    void handleForgotPinInquiry(BaseResponse model);
 }

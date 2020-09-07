@@ -30,7 +30,7 @@ import static com.otto.sdk.IConfig.OC_SESSION_EMAIL;
 import static com.otto.sdk.IConfig.OC_SESSION_NAME;
 import static com.otto.sdk.IConfig.OC_SESSION_PHONE;
 
-public class SetPinActivity extends AppActivity implements IAuthView {
+public class SetPinActivity extends AppActivity {
 
     EditText edtPin;
     EditText edtConfirmPin;
@@ -38,14 +38,12 @@ public class SetPinActivity extends AppActivity implements IAuthView {
     ImageView ivBack;
 
     private boolean isFormValidationSuccess = false;
-    private RegisterRequest model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_pin);
 
-        getLastKnownLocation();
         initComponent();
         initContent();
     }
@@ -66,7 +64,11 @@ public class SetPinActivity extends AppActivity implements IAuthView {
             @Override
             public void onClick(View v) {
                 if (isFormValidationSuccess) {
-                    onCallApiSetPin();
+                    Intent intent = new Intent(SetPinActivity.this, OtpRegistrationActivity.class);
+                    CacheUtil.putPreferenceString(IConfig.OC_SESSION_PIN, edtPin.getText().toString(), SetPinActivity.this);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    finish();
                 } else {
                     Toast.makeText(SetPinActivity.this, "Pin Tidak Sama", Toast.LENGTH_SHORT).show();
                 }
@@ -79,31 +81,6 @@ public class SetPinActivity extends AppActivity implements IAuthView {
                 onBackPressed();
             }
         });
-    }
-
-    private void onCallApiSetPin() {
-        if (Connectivity.isNetworkAvailable(this)) {
-            model = new RegisterRequest(
-                    CacheUtil.getPreferenceString(OC_SESSION_PHONE, SetPinActivity.this),
-                    CacheUtil.getPreferenceString(OC_SESSION_NAME, SetPinActivity.this),
-                    CacheUtil.getPreferenceString(OC_SESSION_EMAIL, SetPinActivity.this));
-
-            model.setPin(edtPin.getText().toString());
-            model.setSecurityQuestionId("1");
-            model.setAnswer("ˆ˜ÎØÅÒÒˆ");
-            model.setLatitude(String.valueOf(getMyLastLocation().getLatitude()));
-            model.setLongitude(String.valueOf(getMyLastLocation().getLongitude()));
-            model.setDeviceId(DeviceId.getDeviceID(this));
-            model.setPlatform("android");
-
-            showApiProgressDialog(OttoCashSdk.getAppComponent(), new AuthPresenter(SetPinActivity.this) {
-                @Override
-                public void call() {
-                    getRegister(model);
-
-                }
-            }, "Loading");
-        }
     }
 
     private void validateForm() {
@@ -139,36 +116,5 @@ public class SetPinActivity extends AppActivity implements IAuthView {
             }
 
         });
-    }
-
-
-    @Override
-    public void handleLogin(LoginResponse model) {
-
-    }
-
-    @Override
-    public void handleRegister(RegisterResponse model) {
-        if (model.getMeta().getCode() == 200) {
-
-            int user_id = model.getData().getId();
-            String phone = model.getData().getPhone();
-            String account_number = model.getData().getAccountNumber();
-            String name = model.getData().getName();
-            String email = model.getData().getEmail();
-
-            CacheUtil.putPreferenceInteger(IConfig.OC_SESSION_USER_ID, user_id, SetPinActivity.this);
-            CacheUtil.putPreferenceString(IConfig.OC_SESSION_PHONE, phone, SetPinActivity.this);
-            CacheUtil.putPreferenceString(IConfig.OC_SESSION_ACCOUNT_NUMBER, account_number, SetPinActivity.this);
-            CacheUtil.putPreferenceString(IConfig.OC_SESSION_NAME, name, SetPinActivity.this);
-            CacheUtil.putPreferenceString(IConfig.OC_SESSION_EMAIL, email, SetPinActivity.this);
-
-            Intent intent = new Intent(SetPinActivity.this, OtpRegistrationActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            finish();
-        } else {
-            Toast.makeText(this, model.getMeta().getMessage(), Toast.LENGTH_SHORT).show();
-        }
     }
 }

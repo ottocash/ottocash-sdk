@@ -17,11 +17,14 @@ import android.widget.Toast;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCashSdk;
 import com.otto.sdk.R;
+import com.otto.sdk.interfaces.IForgotPinView;
 import com.otto.sdk.interfaces.IOtpView;
+import com.otto.sdk.model.api.request.ForgotPinInquiryRequest;
 import com.otto.sdk.model.api.request.OtpRequest;
 import com.otto.sdk.model.api.request.OtpVerificationRequest;
 import com.otto.sdk.model.api.response.RequestOtpResponse;
 import com.otto.sdk.model.api.response.VerifyOtpResponse;
+import com.otto.sdk.presenter.ForgotPinPresenter;
 import com.otto.sdk.presenter.OtpPresenter;
 import com.otto.sdk.ui.activity.account.forgotpin.ForgotPinActivity;
 import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
@@ -31,12 +34,13 @@ import com.poovam.pinedittextfield.LinePinField;
 import java.util.Objects;
 
 import app.beelabs.com.codebase.base.BaseActivity;
+import app.beelabs.com.codebase.base.response.BaseResponse;
 import app.beelabs.com.codebase.support.util.CacheUtil;
 import cn.iwgang.countdownview.CountdownView;
 
 import static com.otto.sdk.IConfig.OC_SESSION_PHONE;
 
-public class OtpLoginActivity extends BaseActivity implements IOtpView {
+public class OtpLoginActivity extends BaseActivity implements IOtpView, IForgotPinView {
 
     ImageView ivBack;
     CountdownView countdownView;
@@ -48,6 +52,7 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
     private OtpRequest modelOtpRequest;
     private boolean isCountdownFinish = false;
     private String phone;
+    private String phoneForgotPin;
     private boolean forgotPin = false;
 
     @Override
@@ -56,11 +61,9 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
         setContentView(R.layout.activity_otp);
 
         initComponent();
-        setupCountdownview();
         addTextWatcher(lineField);
 
         phone = CacheUtil.getPreferenceString(IConfig.OC_SESSION_PHONE, OtpLoginActivity.this);
-        tvNoHpOtp.setText("6 Digit kode OTP telah dikirimkan ke nomor " + phone + ", Silahkan cek HP Anda");
 
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,8 +73,13 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
         });
 
         forgotPin = Objects.requireNonNull(getIntent().getExtras()).getBoolean(IConfig.OC_FORGOT_PIN);
+        phoneForgotPin = getIntent().getExtras().getString(OC_SESSION_PHONE);
         boolean need_otp = Objects.requireNonNull(getIntent().getExtras()).getBoolean(IConfig.OC_NEED_OTP);
-        if (!need_otp) {
+        if (forgotPin) {
+            tvNoHpOtp.setText("6 Digit kode OTP telah dikirimkan ke nomor " + phoneForgotPin + ", Silahkan cek HP Anda");
+            setupCountdownview();
+        } else {
+            tvNoHpOtp.setText("6 Digit kode OTP telah dikirimkan ke nomor " + phone + ", Silahkan cek HP Anda");
             onCallApiOtpRequest();
         }
     }
@@ -107,8 +115,11 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
             @Override
             public void onClick(View v) {
                 initDisableClickResendOtp();
-                setupCountdownview();
-                onCallApiOtpRequest();
+                if (forgotPin) {
+                    onCallApiForgotPinInquiry();
+                } else {
+                    onCallApiOtpRequest();
+                }
             }
         });
 
@@ -145,10 +156,10 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
      * Call Api Otp Verify
      */
     private void onCallApiOtpVerify() {
-        int user_id = CacheUtil.getPreferenceInteger(IConfig.OC_SESSION_USER_ID, OtpLoginActivity.this);
+        String phone_number = CacheUtil.getPreferenceString(OC_SESSION_PHONE, OtpLoginActivity.this);
         final OtpVerificationRequest otpVerificationRequest = new OtpVerificationRequest();
 
-        otpVerificationRequest.setUser_id(user_id);
+        otpVerificationRequest.setPhone_number(phone_number);
         otpVerificationRequest.setOtp_code(lineField.getText().toString());
 
         showApiProgressDialog(OttoCashSdk.getAppComponent(), new OtpPresenter(OtpLoginActivity.this) {
@@ -165,6 +176,7 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
      */
     @Override
     public void handleOtpRequest(RequestOtpResponse model) {
+        setupCountdownview();
 
     }
 
@@ -174,14 +186,7 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
      */
     @Override
     public void handleOtpVerify(VerifyOtpResponse model) {
-        if ((model.getBaseMeta().getCode() == 200 && forgotPin)) {
-            Intent intent = new Intent(OtpLoginActivity.this, ForgotPinActivity.class);
-            intent.putExtra(IConfig.OC_SESSION_OTP, lineField.getText().toString());
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-            finish();
-            //saveSession();
-        } else if (model.getBaseMeta().getCode() == 200 && !forgotPin) {
+        if (model.getBaseMeta().getCode() == 200) {
             Intent intent = new Intent(OtpLoginActivity.this, DashboardSDKActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
@@ -201,9 +206,18 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (charSequence.toString().length() == 6) {
+                if (charSequence.toString().length() == 6 && !forgotPin) {
                     hideSoftKeyboard(lineField);
                     onCallApiOtpVerify();
+                } else if (charSequence.toString().length() == 6 && forgotPin) {
+                    //onCallApiOtpVerify();
+                    hideSoftKeyboard(lineField);
+                    Intent intent = new Intent(OtpLoginActivity.this, ForgotPinActivity.class);
+                    intent.putExtra(OC_SESSION_PHONE, phoneForgotPin);
+                    intent.putExtra(IConfig.OC_SESSION_OTP, lineField.getText().toString());
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    finish();
                 }
             }
 
@@ -241,4 +255,33 @@ public class OtpLoginActivity extends BaseActivity implements IOtpView {
         editor.apply();
     }
 
+
+    /**
+     * Resend OTP Forgot Pin
+     */
+    private void onCallApiForgotPinInquiry() {
+        final ForgotPinInquiryRequest model = new ForgotPinInquiryRequest();
+
+        model.setPhone_number(phoneForgotPin);
+
+
+        showApiProgressDialog(OttoCashSdk.getAppComponent(), new ForgotPinPresenter(this) {
+            @Override
+            public void call() {
+                getForgotPinInquiry(model);
+
+            }
+        }, "Loading");
+    }
+
+    @Override
+    public void handleForgotPin(BaseResponse model) {
+
+    }
+
+    @Override
+    public void handleForgotPinInquiry(BaseResponse model) {
+        setupCountdownview();
+
+    }
 }

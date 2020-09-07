@@ -25,6 +25,8 @@ import com.otto.sdk.model.api.response.LoginResponse;
 import com.otto.sdk.model.api.response.RegisterResponse;
 import com.otto.sdk.presenter.AuthPresenter;
 import com.otto.sdk.presenter.manager.SessionManager;
+import com.otto.sdk.ui.activity.account.forgotpin.PhoneNumberForgotPinActivity;
+import com.otto.sdk.ui.activity.dashboard.DashboardSDKActivity;
 import com.otto.sdk.ui.component.support.DeviceId;
 import com.otto.sdk.ui.component.support.UiUtil;
 import com.poovam.pinedittextfield.LinePinField;
@@ -52,6 +54,7 @@ public class PinLoginActivity extends AppActivity implements IAuthView {
         getLastKnownLocation();
         initComponent();
         addTextWatcher(lineField);
+        forgotPin();
     }
 
     private void initComponent() {
@@ -115,7 +118,7 @@ public class PinLoginActivity extends AppActivity implements IAuthView {
             CacheUtil.putPreferenceString(IConfig.OC_SESSION_NAME, name, PinLoginActivity.this);
             CacheUtil.putPreferenceString(IConfig.OC_SESSION_PHONE, phone, PinLoginActivity.this);
 
-            Intent intent = new Intent(PinLoginActivity.this, OtpLoginActivity.class);
+            Intent intent = new Intent(PinLoginActivity.this, DashboardSDKActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             intent.putExtra(IConfig.OC_SESSION_PHONE, phone);
             intent.putExtra(IConfig.OC_NEED_OTP, need_otp);
@@ -133,23 +136,25 @@ public class PinLoginActivity extends AppActivity implements IAuthView {
         }
     }
 
+    private void forgotPin(){
+        forgotPin.setVisibility(View.VISIBLE);
+        forgotPin.setOnClickListener(view -> {
+            Intent intent = new Intent(PinLoginActivity.this, PhoneNumberForgotPinActivity.class);
+            //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.putExtra(IConfig.OC_SESSION_PHONE, phone);
+            intent.putExtra(IConfig.OC_FORGOT_PIN, true);
+            startActivity(intent);
+            //finish();
+        });
+    }
 
     private void errorMessagePinInvalid() {
         errorMessage.setText(getString(R.string.invalid_pin));
         errorMessage.setTextColor(ContextCompat.getColor(this, R.color.Blue_2E70B1));
-
-        //forgotPin.setVisibility(View.VISIBLE);
-        /*forgotPin.setOnClickListener(view -> {
-            Intent intent = new Intent(PinLoginActivity.this, OtpLoginActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            intent.putExtra(IConfig.OC_SESSION_PHONE, phone);
-            intent.putExtra(IConfig.OC_FORGOT_PIN, true);
-            startActivity(intent);
-            finish();
-        });*/
     }
 
     private void errorMessageBlock() {
+        forgotPin.setVisibility(View.GONE);
         errorMessage.setText(getString(R.string.account_block));
         errorMessage.setTextColor(ContextCompat.getColor(this, R.color.Blue_2E70B1));
     }

@@ -40,25 +40,36 @@
                 android:textAppearance="@style/BarlowRegular"
                 android:textColor="@color/white" />
 
-<!--            <Button-->
-<!--                android:id="@+id/btnUpgrade"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@color/Red_d04a55"-->
-<!--                android:padding="5dp"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:text="Upgrade Plus"-->
-<!--                android:textAppearance="@style/BarlowRegular"-->
-<!--                android:textColor="@color/white" />-->
+            <Button
+                android:id="@+id/btnTopUp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@color/Red_d04a55"
+                android:padding="5dp"
+                android:text="Top Up"
+                android:textAppearance="@style/BarlowRegular"
+                android:textColor="@color/white" />
+
+            <!--            <Button-->
+            <!--                android:id="@+id/btnUpgrade"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:background="@color/Red_d04a55"-->
+            <!--                android:padding="5dp"-->
+            <!--                android:layout_marginTop="10dp"-->
+            <!--                android:text="Upgrade Plus"-->
+            <!--                android:textAppearance="@style/BarlowRegular"-->
+            <!--                android:textColor="@color/white" />-->
 
 
             <Button
                 android:id="@+id/btnClearCache"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:background="@color/Red_d04a55"
                 android:padding="5dp"
-                android:layout_marginTop="20dp"
                 android:text="Log Out"
                 android:textAppearance="@style/BarlowRegular"
                 android:textColor="@color/white" />

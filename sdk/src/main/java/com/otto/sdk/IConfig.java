@@ -5,10 +5,10 @@ import java.io.File;
 public interface IConfig {
 
     //Development
-    String API_BASE_URL = "https://ottocash-sdk.ptape.com/";
+    //String API_BASE_URL = "https://ottocash-sdk.ptape.com/";
 
     //Production
-    //String API_BASE_URL = "https://sdkmw.ottocash.id/";
+    String API_BASE_URL = "https://sdkmw.ottocash.id:8443/";
 
     //Session
     String OC_SESSION_LOGIN_KEY = "Ottocash-SDK-Login";
@@ -23,10 +23,12 @@ public interface IConfig {
     String OC_SESSION_EMAIL = "email";
     String OC_SESSION_CLIENT_ID = "id";
     String OC_SESSION_CLIENT_SECRET = "secret";
+    String OC_SESSION_PARTNER_ID = "partner_id";
     String OC_SESSION_ACCESS_TOKEN = "access_token";
     String OC_NEED_OTP = "need_otp";
     String OC_FORGOT_PIN = "forgot_pin";
     String OC_SESSION_OTP = "session_otp";
+    String OC_SESSION_PIN = "session_pin";
 
 
     //KEY PAYMENT RECEIPT
@@ -47,6 +49,21 @@ public interface IConfig {
     String REFERENCE_NUMBER_TRANSACTION = "reference_number_transaction";
     String STATUS_TRANSACTION = "status_transaction";
 
+    //callback payment data
+    String PAYMENT_TOTAL = "payment_total";
+    String PAYMENT_SERVICES_FEE = "payment_service_fee";
+    String PAYMENT_PRODUCT_NAME = "product_name";
+    String PAYMENT_BILLER_ID = "biller_id";
+    String PAYMENT_CUSTOMER_RN = "customer_reference_number";
+    String PAYMENT_PRODUCT_CODE = "product_code";
+    String PAYMENT_PARTNER_CODE = "partner_code";
+
+
+    String OTTOCASH_PAYMENT_DATA_STATUS = "data_transaction_status";
+    String OTTOCASH_PAYMENT_DATA_REFERENCE_NUMBER = "data_reference_number";
+    String OTTOCASH_PAYMENT_DATA_TRANSACTION_DATE = "data_transaction_date";
+
+
     //KEY REVIEW CHECKOUT
     String TOTAL_BILL_PAYMENT = "total_bill_checkout";
 
@@ -62,7 +79,9 @@ public interface IConfig {
     int KEY_API_LOGIN = 12;
     int KEY_API_INQUIRY = 13;
     int KEY_API_OTP_VERIFICATION = 14;
+    int KEY_API_OTP_VERIFICATION_REGISTER = 24;
     int KEY_API_OTP_REQUEST = 15;
+    int KEY_API_OTP_REQUEST_REGISTER = 25;
     int KEY_API_REVIEW_CHECK_OUT = 16;
     int KEY_API_PAYMENT_VALIDATE = 17;
     int KEY_API_CHECK_PHONE_NUMBER = 18;
@@ -71,6 +90,7 @@ public interface IConfig {
     int KEY_API_TRANSFER_TO_FRIEND = 21;
     int KEY_API_UPGRADE = 22;
     int KEY_API_FORGOT_PIN = 23;
+    int KEY_API_FORGOT_PIN_INQUIRY = 26;
 
     //Document File foto
     String KEY_DATA = "data";
@@ -91,5 +111,8 @@ public interface IConfig {
     String KEY_BASE64_SELFIE = "value_base64_selfie";
     String FILE_NAME_MAIN_FOTO_SELFIE = "foto_selfie";
     String FILE_NAME_FOTO_SELFIE = FOLDER_FOTO + File.separator + FILE_NAME_MAIN_FOTO_SELFIE + IConfig.FILE_SEPARATOR;
+
+    String FILE_NAME_MAIN_FOTO_RECEIPT = "foto_receipt";
+    String FILE_NAME_FOTO_RECEIPT = FOLDER_FOTO + File.separator + FILE_NAME_MAIN_FOTO_RECEIPT + IConfig.FILE_SEPARATOR;
 
 }

@@ -27,7 +27,11 @@ public class OtpDao extends BaseDao {
     public interface IOtpDao extends IDaoPresenter {
         void getOtpRequest(OtpRequest requestModel);
 
+        void getOtpRequestRegister(OtpRequest requestModel);
+
         void getOtpVerification(OtpVerificationRequest requestModel);
+
+        void getOtpVerificationRegister(OtpVerificationRequest requestModel);
     }
 
 
@@ -44,9 +48,17 @@ public class OtpDao extends BaseDao {
         Api.onOtpRequest(model, context, BaseDao.getInstance(this, iOtpDao.getPresenter(), IConfig.KEY_API_OTP_REQUEST).callback);
     }
 
+    public void onOtpRequestRegister(OtpRequest model, Context context) {
+        Api.onOtpRequestRegister(model, context, BaseDao.getInstance(this, iOtpDao.getPresenter(), IConfig.KEY_API_OTP_REQUEST_REGISTER).callback);
+    }
+
 
     public void onOtpVerification(OtpVerificationRequest model, Context context) {
         Api.onOtpVerification(model, context, BaseDao.getInstance(this, iOtpDao.getPresenter(), IConfig.KEY_API_OTP_VERIFICATION).callback);
+    }
+
+    public void onOtpVerificationRegister(OtpVerificationRequest model, Context context) {
+        Api.onOtpVerificationRegister(model, context, BaseDao.getInstance(this, iOtpDao.getPresenter(), IConfig.KEY_API_OTP_VERIFICATION_REGISTER).callback);
     }
 
 
@@ -56,7 +68,13 @@ public class OtpDao extends BaseDao {
             if (responseCode == IConfig.KEY_API_OTP_REQUEST) {
                 RequestOtpResponse otpResponse = (RequestOtpResponse) br;
                 onPresenterResponseCallback.call(otpResponse);
+            } else if (responseCode == IConfig.KEY_API_OTP_REQUEST_REGISTER) {
+                RequestOtpResponse otpResponse = (RequestOtpResponse) br;
+                onPresenterResponseCallback.call(otpResponse);
             } else if (responseCode == IConfig.KEY_API_OTP_VERIFICATION) {
+                VerifyOtpResponse otpVerificationResponse = (VerifyOtpResponse) br;
+                onPresenterResponseCallback.call(otpVerificationResponse);
+            } else if (responseCode == IConfig.KEY_API_OTP_VERIFICATION_REGISTER) {
                 VerifyOtpResponse otpVerificationResponse = (VerifyOtpResponse) br;
                 onPresenterResponseCallback.call(otpVerificationResponse);
             }
