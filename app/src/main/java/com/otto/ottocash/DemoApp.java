@@ -20,18 +20,18 @@ public class DemoApp extends BaseApp {
         setupDefaultFont("fonts/Barlow-Regular.ttf");
 
         // DEV
-        OttoCashSdk.setupComponent(
+        /*OttoCashSdk.setupComponent(
                 "knYbtc84tAJQfWj28UPgqPsGirr4607KFvzIfKU2_HY",
                 "ANwky-ms8rQQ_IyIIejiiTI91Mmx2g9IgRLa_mQaMQo",
                 "AAT",
-                this);
+                this);*/
 
         //PROD
-        /*OttoCashSdk.setupComponent(
+        OttoCashSdk.setupComponent(
                 "wLdHRmQ-GPzU9IDXHxV-EneXMfciuf8W7noLCCR4xtk",
                 "KEphxvcZ6Lpeq9f-BJ7daA71-uYKn7t5sUByhnPozLo",
                 "AAT",
-                this);*/
+                this);
     }
 
     public static AppComponent getAppComponent() {
