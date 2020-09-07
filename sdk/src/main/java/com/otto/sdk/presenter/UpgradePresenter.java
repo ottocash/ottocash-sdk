@@ -9,8 +9,6 @@ import app.beelabs.com.codebase.base.BasePresenter;
 import app.beelabs.com.codebase.base.contract.IView;
 import app.beelabs.com.codebase.base.response.BaseResponse;
 
-import static com.otto.sdk.OttoCashSdk.getContext;
-
 public class UpgradePresenter  extends BasePresenter implements UpgradeDao.IUpgradeDao {
 
     private IUpgradeView iUpgrade;
@@ -27,7 +25,7 @@ public class UpgradePresenter  extends BasePresenter implements UpgradeDao.IUpgr
                 UpgradeAccountResponse model = (UpgradeAccountResponse) br;
                 iUpgrade.handleUpgrade(model);
             }
-        }).onUpgrade(upgradeAccountRequest, getContext());
+        }).onUpgrade(upgradeAccountRequest, iUpgrade.getCurrentActivity());
     }
 
     @Override

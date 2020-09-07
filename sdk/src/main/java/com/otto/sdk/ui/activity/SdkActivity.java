@@ -42,7 +42,7 @@ public class SdkActivity extends BaseActivity implements ISdkView {
 
     @Override
     protected void onResume() {
-        onCreateToken();
+//        onCreateToken();
         super.onResume();
     }
 

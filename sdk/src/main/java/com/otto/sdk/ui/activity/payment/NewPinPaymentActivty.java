@@ -107,6 +107,9 @@ public class NewPinPaymentActivty extends AppActivity implements PinAdapter.Call
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.Blue_4EA9F8));
         }
+
+        getLastKnownLocation();
+
         pinCodeTitle = findViewById(R.id.pinCodeTitle);
         desc = findViewById(R.id.desc);
         textViewForgotPin = findViewById(R.id.textViewForgotPin);
