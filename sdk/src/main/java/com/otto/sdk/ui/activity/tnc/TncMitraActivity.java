@@ -1,4 +1,4 @@
-package com.otto.sdk.ui.activity.tac;
+package com.otto.sdk.ui.activity.tnc;
 
 import android.os.Bundle;
 import android.view.View;
@@ -9,7 +9,7 @@ import com.otto.sdk.R;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 
-public class TACOttoCashActivity extends BaseActivity {
+public class TncMitraActivity extends BaseActivity {
 
     ImageView ivBack;
     WebView webView;
@@ -17,7 +17,8 @@ public class TACOttoCashActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tac_ottocash);
+        setContentView(R.layout.activity_tac_mitra);
+
         initView();
         displayTAC();
     }
@@ -32,13 +33,12 @@ public class TACOttoCashActivity extends BaseActivity {
                 onBackPressed();
             }
         });
+
     }
 
     private void displayTAC() {
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.loadUrl("https://ottocash.id/terms_and_condition");
-
+        webView.loadUrl("https://ottocash.id/syarat-dan-ketentuan-otorisasi-layanan-dengan-mitra");
     }
-
 
 }

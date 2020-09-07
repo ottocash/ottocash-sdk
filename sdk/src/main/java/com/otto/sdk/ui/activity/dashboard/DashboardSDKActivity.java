@@ -21,12 +21,11 @@ import com.otto.sdk.model.api.request.InquiryRequest;
 import com.otto.sdk.model.api.response.InquiryResponse;
 import com.otto.sdk.model.general.MainMenuModel;
 import com.otto.sdk.presenter.InquiryPresenter;
-import com.otto.sdk.ui.activity.account.activation.PinLoginActivity;
 import com.otto.sdk.ui.activity.history.HistoryActivity;
 import com.otto.sdk.ui.activity.kycupgrade.IntroductionUpgradeActivity;
 import com.otto.sdk.ui.activity.payment.QR.PayWithQr;
 import com.otto.sdk.ui.activity.payment.TransferToFriend.TransferToFriendActivity;
-import com.otto.sdk.ui.activity.tac.TACOttoCashActivity;
+import com.otto.sdk.ui.activity.tnc.TncOttoCashActivity;
 import com.otto.sdk.ui.activity.topup.TopUpActivity;
 import com.otto.sdk.ui.adapter.MainMenuAdapter;
 import com.otto.sdk.ui.component.dialog.CustomDialog;
@@ -111,7 +110,7 @@ public class DashboardSDKActivity extends BaseActivity implements IInquiryView {
         });
 
         tvTacOttocash.setOnClickListener(v -> {
-            Intent intent = new Intent(DashboardSDKActivity.this, TACOttoCashActivity.class);
+            Intent intent = new Intent(DashboardSDKActivity.this, TncOttoCashActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         });

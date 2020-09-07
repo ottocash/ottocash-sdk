@@ -21,14 +21,13 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.otto.sdk.AppActivity;
 import com.otto.sdk.IConfig;
 import com.otto.sdk.R;
-import com.otto.sdk.ui.activity.tac.TACMitraActivity;
-import com.otto.sdk.ui.activity.tac.TACOttoCashActivity;
+import com.otto.sdk.ui.activity.tnc.TncMitraActivity;
+import com.otto.sdk.ui.activity.tnc.TncOttoCashActivity;
 import com.otto.sdk.ui.component.support.FormValidation;
 import com.otto.sdk.ui.component.support.UiUtil;
 
 import java.util.List;
 
-import app.beelabs.com.codebase.base.BaseActivity;
 import app.beelabs.com.codebase.support.util.CacheUtil;
 
 public class RegistrationActivity extends AppActivity implements View.OnClickListener {
@@ -112,7 +111,7 @@ public class RegistrationActivity extends AppActivity implements View.OnClickLis
         tvTACOttoCash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RegistrationActivity.this, TACOttoCashActivity.class);
+                Intent intent = new Intent(RegistrationActivity.this, TncOttoCashActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }
@@ -121,7 +120,7 @@ public class RegistrationActivity extends AppActivity implements View.OnClickLis
         tvTACMitra.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RegistrationActivity.this, TACMitraActivity.class);
+                Intent intent = new Intent(RegistrationActivity.this, TncMitraActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }

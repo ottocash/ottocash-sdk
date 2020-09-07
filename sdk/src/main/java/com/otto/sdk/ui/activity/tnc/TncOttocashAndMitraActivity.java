@@ -1,4 +1,4 @@
-package com.otto.sdk.ui.activity.tac;
+package com.otto.sdk.ui.activity.tnc;
 
 import android.os.Bundle;
 import android.view.View;
@@ -9,7 +9,7 @@ import com.otto.sdk.R;
 
 import app.beelabs.com.codebase.base.BaseActivity;
 
-public class TACOttocashAndMitraActivity extends BaseActivity {
+public class TncOttocashAndMitraActivity extends BaseActivity {
 
     WebView webView;
     ImageView ivBack;

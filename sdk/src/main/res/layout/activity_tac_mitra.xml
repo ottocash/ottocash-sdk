@@ -7,7 +7,7 @@
     android:background="@color/White_ffffff"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".ui.activity.tac.TACMitraActivity"
+    tools:context=".ui.activity.tnc.TncMitraActivity"
     tools:ignore="MissingPrefix">
 
     <LinearLayout

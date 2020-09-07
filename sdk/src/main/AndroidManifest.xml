@@ -91,13 +91,13 @@
             android:name=".ui.activity.payment.PaymentSaldoMinusActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.tac.TACOttoCashActivity"
+            android:name=".ui.activity.tnc.TncOttoCashActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.tac.TACOttocashAndMitraActivity"
+            android:name=".ui.activity.tnc.TncOttocashAndMitraActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.tac.TACMitraActivity"
+            android:name=".ui.activity.tnc.TncMitraActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.payment.TransferToFriend.TransferToFriendActivity"

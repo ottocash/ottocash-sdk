@@ -7,7 +7,7 @@
     android:background="@color/White_ffffff"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".ui.activity.tac.TACOttoCashActivity"
+    tools:context=".ui.activity.tnc.TncOttoCashActivity"
     tools:ignore="MissingPrefix">
 
     <LinearLayout
