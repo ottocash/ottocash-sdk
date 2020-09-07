@@ -70,16 +70,19 @@ dependencies {
 
 **5.  Add MainActivity project extend SdkActivity**
 ```java
-   ...
-   <application
-           android:name=".<AppClassName>"
-           android:allowBackup="true"
-           android:icon="@mipmap/ic_launcher"
-           android:label="@string/app_name"
-           android:supportsRtl="true"
-           android:theme="@style/AppTheme"
-           tools:replace="android:name">
-  ...
+
+   public class MainActivity extends SdkActivity {
+
+       @Override
+       protected void onCreate(Bundle savedInstanceState) {
+           super.onCreate(savedInstanceState);
+           setContentView(R.layout.activity_main);
+           ButterKnife.bind(this);
+
+       }
+    ...
+   }
+
 
 ```
 
@@ -89,7 +92,7 @@ dependencies {
    ...
    onCallOttoCashDashboard(context);
    //OttoCash.onCallOttoCashDashboard(context);
-  ...
+   ...
 
 ```
 
@@ -97,7 +100,7 @@ dependencies {
 ```java
    ...
    OttoCash.goTopUpOttoCash(this);
-  ...
+   ...
 
 ```
 
@@ -125,24 +128,24 @@ dependencies {
                }
            }
        }
-  ...
-
-```
-
-**9.  Call this function for LogOut**
-```java
    ...
-   OttoCash.onLogoutOttoCash(this);
-  ...
 
 ```
 
-
-**10.  Call this function for Get Balance OttoCash**
+**9.  Call this function for Get Balance OttoCash**
 ```java
    ...
    String balanceOttoCash = OttoCash.getBalance(this);
-  ...
+   ...
+
+```
+
+
+**10.  Call this function for LogOut**
+```java
+   ...
+   OttoCash.onLogoutOttoCash(this);
+   ...
 
 ```
 
