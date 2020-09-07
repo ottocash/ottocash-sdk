@@ -1,7 +1,5 @@
 package com.otto.sdk.presenter;
 
-import android.content.Context;
-
 import com.otto.sdk.interfaces.IInquiryView;
 import com.otto.sdk.model.api.request.InquiryRequest;
 import com.otto.sdk.model.api.response.InquiryResponse;
@@ -10,8 +8,6 @@ import com.otto.sdk.model.dao.InquiryDao;
 import app.beelabs.com.codebase.base.BasePresenter;
 import app.beelabs.com.codebase.base.contract.IView;
 import app.beelabs.com.codebase.base.response.BaseResponse;
-
-import static com.otto.sdk.OttoCashSdk.getContext;
 
 public class InquiryPresenter extends BasePresenter implements InquiryDao.IInquiryDao {
 
@@ -32,7 +28,7 @@ public class InquiryPresenter extends BasePresenter implements InquiryDao.IInqui
             }
 
 
-        }).onInquiry(requestModel, getContext());
+        }).onInquiry(requestModel, inquiryView.getCurrentActivity());
     }
 
     @Override
@@ -40,8 +36,4 @@ public class InquiryPresenter extends BasePresenter implements InquiryDao.IInqui
         return BasePresenter.getInstance(inquiryView, this);
     }
 
-    @Override
-    public Context getContext() {
-        return inquiryView.getBaseActivity();
-    }
 }

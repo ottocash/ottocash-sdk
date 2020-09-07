@@ -1,14 +1,11 @@
 package com.otto.sdk.presenter;
 
-import android.content.Context;
-
 import com.otto.sdk.interfaces.IForgotPinView;
 import com.otto.sdk.model.api.request.ForgotPinInquiryRequest;
 import com.otto.sdk.model.api.request.ForgotPinRequest;
 import com.otto.sdk.model.dao.ForgotPinDao;
 
 import app.beelabs.com.codebase.base.BasePresenter;
-
 import app.beelabs.com.codebase.base.contract.IView;
 import app.beelabs.com.codebase.base.response.BaseResponse;
 
@@ -28,7 +25,7 @@ public class ForgotPinPresenter extends BasePresenter implements ForgotPinDao.IF
                 BaseResponse model = (BaseResponse) br;
                 forgotPinView.handleForgotPinInquiry(model);
             }
-        }).onForgotPinInquiry(requestModel, getContext());
+        }).onForgotPinInquiry(requestModel, forgotPinView.getCurrentActivity());
     }
 
     @Override
@@ -45,10 +42,5 @@ public class ForgotPinPresenter extends BasePresenter implements ForgotPinDao.IF
     @Override
     public BasePresenter getPresenter() {
         return getInstance(forgotPinView, this);
-    }
-
-    @Override
-    public Context getContext() {
-        return forgotPinView.getCurrentActivity();
     }
 }

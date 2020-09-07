@@ -1,7 +1,5 @@
 package com.otto.sdk.presenter;
 
-import android.content.Context;
-
 import com.otto.sdk.interfaces.IHistoryView;
 import com.otto.sdk.model.api.request.TransactionHistoryRequest;
 import com.otto.sdk.model.api.response.TransactionHistoryResponse;

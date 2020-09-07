@@ -1,7 +1,5 @@
 package com.otto.sdk.presenter;
 
-import android.content.Context;
-
 import com.otto.sdk.interfaces.IOtpView;
 import com.otto.sdk.model.api.request.OtpRequest;
 import com.otto.sdk.model.api.request.OtpVerificationRequest;
@@ -40,7 +38,7 @@ public class OtpPresenter extends BasePresenter implements OtpDao.IOtpDao {
                 RequestOtpResponse model = (RequestOtpResponse) br;
                 otpView.handleOtpRequest(model);
             }
-        }).onOtpRequestRegister(requestModel, getContext());
+        }).onOtpRequestRegister(requestModel, otpView.getCurrentActivity());
     }
 
     @Override
@@ -62,7 +60,7 @@ public class OtpPresenter extends BasePresenter implements OtpDao.IOtpDao {
                 VerifyOtpResponse model = (VerifyOtpResponse) br;
                 otpView.handleOtpVerify(model);
             }
-        }).onOtpVerificationRegister(requestModel, getContext());
+        }).onOtpVerificationRegister(requestModel, otpView.getCurrentActivity());
     }
 
     @Override
@@ -70,13 +68,4 @@ public class OtpPresenter extends BasePresenter implements OtpDao.IOtpDao {
         return BasePresenter.getInstance(otpView, this);
     }
 
-//    @Override
-//    public BasePresenter getPresenter() {
-//        return this;
-//    }
-//
-//    @Override
-//    public Context getContext() {
-//        return otpView.getBaseActivity();
-//    }
 }

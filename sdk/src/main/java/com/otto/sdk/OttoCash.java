@@ -105,10 +105,10 @@ public class OttoCash extends BaseActivity implements IInquiryView, ISdkView {
                 return null;
             }
 
-            @Override
+            /*@Override
             public View getContentView() {
                 return null;
-            }
+            }*/
 
             @Override
             public void handleRetryConnection() {

@@ -1,7 +1,5 @@
 package com.otto.sdk.presenter;
 
-import android.content.Context;
-
 import com.otto.sdk.interfaces.IPinVerificationPaymentView;
 import com.otto.sdk.model.api.request.PaymentValidateRequest;
 import com.otto.sdk.model.api.request.TransferToFriendRequest;
@@ -10,11 +8,9 @@ import com.otto.sdk.model.api.response.TransferToFriendResponse;
 import com.otto.sdk.model.dao.PinVerificationPaymentDao;
 
 import app.beelabs.com.codebase.base.BasePresenter;
-
 import app.beelabs.com.codebase.base.contract.IView;
 import app.beelabs.com.codebase.base.response.BaseResponse;
 
-import static com.otto.sdk.OttoCashSdk.getContext;
 
 public class PinVerificationPaymentPresenter extends BasePresenter implements PinVerificationPaymentDao.IPinVerificationPaymentDao {
 
@@ -36,7 +32,7 @@ public class PinVerificationPaymentPresenter extends BasePresenter implements Pi
                 TransferToFriendResponse model = (TransferToFriendResponse) br;
                 iPinVerificationPaymentView.handlePaymentTransferToFriend(model);
             }
-        }).onTransferToFriend(transferToFriendRequest, getContext());
+        }).onTransferToFriend(transferToFriendRequest, iPinVerificationPaymentView.getCurrentActivity());
     }
 
     @Override
@@ -48,7 +44,7 @@ public class PinVerificationPaymentPresenter extends BasePresenter implements Pi
                 iPinVerificationPaymentView.handlePaymentValidate(model);
                 iPinVerificationPaymentView.onSuccess(model);
             }
-        }).onPaymentValidate(paymentValidateRequest, getContext());
+        }).onPaymentValidate(paymentValidateRequest, iPinVerificationPaymentView.getCurrentActivity());
     }
 
     @Override

@@ -10,8 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.otto.ottocash.databinding.ActivityDashboardAppBinding;
-import com.otto.ottocash.databinding.PartialWidgetSdkBinding;
+
 import com.otto.sdk.IConfig;
 import com.otto.sdk.OttoCash;
 import com.otto.sdk.OttoCashSdk;
@@ -34,8 +33,8 @@ import butterknife.OnClick;
 
 public class DashboardAppActivity extends SdkActivity implements ISdkView {
 
-//    @BindView(R.id.tvSaldoOttoCash)
-//    TextView tvSaldoOttoCash;
+    @BindView(R.id.tvSaldoOttoCash)
+    TextView tvSaldoOttoCash;
     @BindView(R.id.lyWidgetSdk)
     LinearLayout lyWidgetSdk;
     @BindView(R.id.btnCheckOut)
@@ -43,10 +42,6 @@ public class DashboardAppActivity extends SdkActivity implements ISdkView {
     @BindView(R.id.btnClearCache)
     Button btnClearCache;
 
-    Context context;
-
-//    @BindView(R.id.btnUpgrade)
-//    Button btnUpgrade;
 
     private String account_number;
     String saldo_ottocash;
@@ -58,19 +53,12 @@ public class DashboardAppActivity extends SdkActivity implements ISdkView {
     private Boolean session_need_otp = false;
     private Boolean sessionLogin = false;
     private SdkResourcePresenter sdkResourcePresenter;
-    private ActivityDashboardAppBinding binding;
-    private PartialWidgetSdkBinding childBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_beranda_app);
-        binding = ActivityDashboardAppBinding.inflate(getLayoutInflater());
-        childBinding = PartialWidgetSdkBinding.inflate(getLayoutInflater());
-
-        setContentView(binding.getRoot());
-//        ButterKnife.bind(this);
-
+        setContentView(R.layout.activity_beranda_app);
+        ButterKnife.bind(this);
 
         //onCreateToken();
         actionWidgetSdk(this);
@@ -89,9 +77,9 @@ public class DashboardAppActivity extends SdkActivity implements ISdkView {
     private void onGetSaldoOttoCash() {
         saldo_ottocash = OttoCash.getBalance(this);
         if (saldo_ottocash.equals(isEmpty)) {
-            childBinding.tvSaldoOttoCash.setText("Aktivasi Akun");
+            tvSaldoOttoCash.setText("Aktivasi Akun");
         } else {
-            childBinding.tvSaldoOttoCash.setText(UiUtil.formatMoneyIDRString(saldo_ottocash));
+            tvSaldoOttoCash.setText(UiUtil.formatMoneyIDRString(saldo_ottocash));
         }
     }
 

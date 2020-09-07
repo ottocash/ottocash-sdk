@@ -1,7 +1,5 @@
 package com.otto.sdk.presenter;
 
-import android.content.Context;
-
 import com.otto.sdk.interfaces.IUpgradeView;
 import com.otto.sdk.model.api.request.UpgradeAccountRequest;
 import com.otto.sdk.model.api.response.UpgradeAccountResponse;
@@ -10,6 +8,8 @@ import com.otto.sdk.model.dao.UpgradeDao;
 import app.beelabs.com.codebase.base.BasePresenter;
 import app.beelabs.com.codebase.base.contract.IView;
 import app.beelabs.com.codebase.base.response.BaseResponse;
+
+import static com.otto.sdk.OttoCashSdk.getContext;
 
 public class UpgradePresenter  extends BasePresenter implements UpgradeDao.IUpgradeDao {
 
@@ -27,7 +27,7 @@ public class UpgradePresenter  extends BasePresenter implements UpgradeDao.IUpgr
                 UpgradeAccountResponse model = (UpgradeAccountResponse) br;
                 iUpgrade.handleUpgrade(model);
             }
-        }).onUpgrade(upgradeAccountRequest, iUpgrade.getCurrentActivity());
+        }).onUpgrade(upgradeAccountRequest, getContext());
     }
 
     @Override
@@ -35,8 +35,4 @@ public class UpgradePresenter  extends BasePresenter implements UpgradeDao.IUpgr
         return BasePresenter.getInstance(iUpgrade, this);
     }
 
-    @Override
-    public Context getContext() {
-        return iUpgrade.getBaseActivity();
-    }
 }
