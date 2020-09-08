@@ -82,7 +82,7 @@ public class ReviewCheckoutActivity extends AppActivity {
         servicesFee = extras.getInt(PAYMENT_SERVICES_FEE);
         totalBillPayment = billPayment + servicesFee;
 
-        tvBill.setText(UiUtil.formatMoneyIDR((billPayment)));
+        tvBill.setText(UiUtil.formatMoneyIDR((totalBillPayment)));
         tvPembayaranMitra.setText(UiUtil.formatMoneyIDR((billPayment)));
         tvBiayaLayanan.setText(UiUtil.formatMoneyIDR((servicesFee)));
         tvTotalBayar.setText(UiUtil.formatMoneyIDR((totalBillPayment)));
@@ -109,7 +109,7 @@ public class ReviewCheckoutActivity extends AppActivity {
 
         CacheUtil.putPreferenceInteger(PAYMENT_TOTAL, billPayment, this);
         CacheUtil.putPreferenceInteger(PAYMENT_SERVICES_FEE, servicesFee, this);
-        CacheUtil.putPreferenceInteger(PAYMENT_SERVICES_FEE, servicesFee, this);
+
         CacheUtil.putPreferenceString(PAYMENT_PRODUCT_NAME, product_name, this);
         CacheUtil.putPreferenceString(PAYMENT_BILLER_ID, biller_id, this);
         //CacheUtil.putPreferenceString(PAYMENT_CUSTOMER_RN, customer_reference_number, this);
