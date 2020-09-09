@@ -82,7 +82,7 @@ public class ReviewCheckoutActivity extends AppActivity {
         servicesFee = extras.getInt(PAYMENT_SERVICES_FEE);
         totalBillPayment = billPayment + servicesFee;
 
-        tvBill.setText(UiUtil.formatMoneyIDR((totalBillPayment)));
+        tvBill.setText(UiUtil.formatMoneyIDR((billPayment)));
         tvPembayaranMitra.setText(UiUtil.formatMoneyIDR((billPayment)));
         tvBiayaLayanan.setText(UiUtil.formatMoneyIDR((servicesFee)));
         tvTotalBayar.setText(UiUtil.formatMoneyIDR((totalBillPayment)));
