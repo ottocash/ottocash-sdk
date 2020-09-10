@@ -1,5 +1,6 @@
 package com.otto.sdk.ui.activity.account.activation;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -37,6 +38,7 @@ public class ActivationActivity extends AppActivity implements View.OnClickListe
     Button btnAktifkan;
     TextView tvDesc;
     ImageView ivBack;
+    String partner_id;
 
     private boolean isFormValidationSuccess = false;
     private String phone;
@@ -76,10 +78,11 @@ public class ActivationActivity extends AppActivity implements View.OnClickListe
         ivBack = findViewById(R.id.ivBack);
     }
 
+    @SuppressLint("SetTextI18n")
     private void initContent() {
-
+        partner_id = CacheUtil.getPreferenceString(IConfig.OC_SESSION_PARTNER_ID, this);
         phone = CacheUtil.getPreferenceString(IConfig.OC_SESSION_PHONE, ActivationActivity.this);
-        tvDesc.setText("Aktivasi Akun " + phone + " OttoCash Kamu di MITRAKU ?");
+        tvDesc.setText("Aktivasi Akun " + phone + " OttoCash Kamu di " + partner_id);
 
         tvTACOttoCash.setOnClickListener(new View.OnClickListener() {
             @Override
