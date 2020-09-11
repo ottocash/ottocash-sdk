@@ -1,9 +1,12 @@
 package com.otto.sdk.ui.activity.account.registration;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.widget.AppCompatTextView;
+
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -36,11 +39,13 @@ public class RegistrationActivity extends AppActivity implements View.OnClickLis
     TextView edtNoHp;
     EditText edtNameKtp;
     EditText edtEmail;
+    TextView tvWarningData;
     CheckBox cbTACOttoCash;
     CheckBox cbTACMitra;
     Button btnBottom;
     AppCompatTextView tvTACOttoCash;
     AppCompatTextView tvTACMitra;
+    String partner_id;
 
     private boolean isSignUpFormEnable = true;
     private boolean isFormValidationSuccess = false;
@@ -66,10 +71,12 @@ public class RegistrationActivity extends AppActivity implements View.OnClickLis
         });
     }
 
+    @SuppressLint("SetTextI18n")
     private void initComponent() {
         ivBack = findViewById(R.id.ivBack);
         edtNoHp = findViewById(R.id.edtNoHp);
         edtNameKtp = findViewById(R.id.edtNameKtp);
+        tvWarningData = findViewById(R.id.tvWarningData);
 
         edtEmail = findViewById(R.id.edtEmail);
         btnBottom = findViewById(R.id.btnBottom);
@@ -79,6 +86,8 @@ public class RegistrationActivity extends AppActivity implements View.OnClickLis
         tvTACMitra = findViewById(R.id.tvTACMitra);
         tvTACOttoCash.setText(UiUtil.getHTMLContent(getString(R.string.sign_up_label_tac_link)));
         tvTACMitra.setText(UiUtil.getHTMLContent(getString(R.string.sign_up_label_tac_link_mitra)));
+        partner_id = CacheUtil.getPreferenceString(IConfig.OC_SESSION_PARTNER_ID, this);
+        tvWarningData.setText("Jika ini bukan nomor kamu, segera kembali & perbaiki data kamu di " + partner_id);
 
         addTextWatcher(edtNameKtp);
         addTextWatcher(edtEmail);
@@ -193,7 +202,6 @@ public class RegistrationActivity extends AppActivity implements View.OnClickLis
 
         });
     }
-
 
 
 }

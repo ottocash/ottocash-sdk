@@ -234,20 +234,21 @@ public class NewPinPaymentActivty extends AppActivity implements PinAdapter.Call
     public void handlePaymentValidate(PaymentValidateResponse model) {
         if (model.getMeta().getCode() == 200) {
             if (pinTransferToFriend.equals(keyPinTransferToFriend)) {
-                grandTotal = UiUtil.removeAllCharacterNumbers(nominalTransferToFriend);
-                if (emoneyBalance < grandTotal) {
-//                    errorMessage.setText(R.string.saldo_minus);
-//                    btnBack.setVisibility(View.VISIBLE);
-//                    btnBack.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View view) {
-//                            onBackPressed();
-//                        }
-//                    });
-                    Toast.makeText(NewPinPaymentActivty.this, model.getMeta().getMessage(), Toast.LENGTH_SHORT).show();
-                } else {
-                    onCallApiTransferToFriend();
-                }
+                onCallApiTransferToFriend();
+//                grandTotal = UiUtil.removeAllCharacterNumbers(nominalTransferToFriend);
+//                if (emoneyBalance < grandTotal) {
+////                    errorMessage.setText(R.string.saldo_minus);
+////                    btnBack.setVisibility(View.VISIBLE);
+////                    btnBack.setOnClickListener(new View.OnClickListener() {
+////                        @Override
+////                        public void onClick(View view) {
+////                            onBackPressed();
+////                        }
+////                    });
+//                    Toast.makeText(NewPinPaymentActivty.this, "Saldo Anda tidak mencukupi", Toast.LENGTH_SHORT).show();
+//                } else {
+//                    onCallApiTransferToFriend();
+//                }
 
             } else if (pinReviewCheckout.equals(keyPinReviewCheckout)) {
                 onCallApiReviewCheckOut();
