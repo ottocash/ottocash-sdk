@@ -22,7 +22,7 @@ Ottocash-SDK
 ```
 dependencies {
 		 implementation 'com.github.acan12:coconut:2.3.0-rc.4'
-		 implementation 'com.github.ottocash:ottocash-sdk:1.0.83'
+		 implementation 'com.github.ottocash:ottocash-sdk:1.0.85'
 
 	}
 ```
