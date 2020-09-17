@@ -54,33 +54,25 @@ public class SetPinActivity extends AppActivity {
         btnSave = findViewById(R.id.btnSave);
         ivBack = findViewById(R.id.ivBack);
 
+        addTextWatcher(edtPin);
+        addTextWatcher(edtConfirmPin);
     }
 
     private void initContent() {
-        addTextWatcher(edtPin);
-        addTextWatcher(edtConfirmPin);
 
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isFormValidationSuccess) {
-                    Intent intent = new Intent(SetPinActivity.this, OtpRegistrationActivity.class);
-                    CacheUtil.putPreferenceString(IConfig.OC_SESSION_PIN, edtPin.getText().toString(), SetPinActivity.this);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    Toast.makeText(SetPinActivity.this, "Pin Tidak Sama", Toast.LENGTH_SHORT).show();
-                }
+        btnSave.setOnClickListener(v -> {
+            if (isFormValidationSuccess) {
+                Intent intent = new Intent(SetPinActivity.this, OtpRegistrationActivity.class);
+                CacheUtil.putPreferenceString(IConfig.OC_SESSION_PIN, edtPin.getText().toString(), SetPinActivity.this);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+            } else {
+                Toast.makeText(SetPinActivity.this, "Pin Tidak Sama", Toast.LENGTH_SHORT).show();
             }
         });
 
-        ivBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        ivBack.setOnClickListener(v -> onBackPressed());
     }
 
     private void validateForm() {
@@ -107,12 +99,12 @@ public class SetPinActivity extends AppActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                validateForm();
+
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-
+                validateForm();
             }
 
         });
