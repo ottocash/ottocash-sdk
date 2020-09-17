@@ -2,33 +2,21 @@ package com.otto.sdk.ui.activity.account.registration;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.core.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.core.content.ContextCompat;
+
 import com.otto.sdk.AppActivity;
 import com.otto.sdk.IConfig;
-import com.otto.sdk.OttoCashSdk;
 import com.otto.sdk.R;
-import com.otto.sdk.interfaces.IAuthView;
-import com.otto.sdk.model.api.request.RegisterRequest;
-import com.otto.sdk.model.api.response.LoginResponse;
-import com.otto.sdk.model.api.response.RegisterResponse;
-import com.otto.sdk.presenter.AuthPresenter;
-import com.otto.sdk.ui.component.support.Connectivity;
-import com.otto.sdk.ui.component.support.DeviceId;
 import com.otto.sdk.ui.component.support.FormValidation;
 
 import app.beelabs.com.codebase.support.util.CacheUtil;
-
-import static com.otto.sdk.IConfig.OC_SESSION_EMAIL;
-import static com.otto.sdk.IConfig.OC_SESSION_NAME;
-import static com.otto.sdk.IConfig.OC_SESSION_PHONE;
 
 public class SetPinActivity extends AppActivity {
 

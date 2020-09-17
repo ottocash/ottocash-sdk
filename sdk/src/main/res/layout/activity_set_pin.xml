@@ -7,7 +7,7 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     android:background="@color/White_ffffff"
-    tools:context=".ui.activity.account.registration.RegistrationActivity"
+    tools:context=".ui.activity.account.registration.SetPinActivity"
     tools:ignore="MissingPrefix">
 
 
